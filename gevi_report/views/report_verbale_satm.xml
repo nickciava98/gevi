@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="gevi_report.report_verbale_satm">       
+            <t t-name="gevi_report.report_verbale">
+                <t t-call="gevi_report.html_container">
+                    <t t-foreach="docs" t-as="doc">
+                        <t t-call="gevi_report.external_layout">
+                            <div class="page">                              
+                                <p style="text-align: center;">
+                                    <span style="font-weight:bold; font-size: 14pt;">VERBALE DI VERIFICA IMPIANTI DI PROTEZIONE CONTRO LE SCARICHE ATMOSFERICHE</span>
+                                    <br/>(ai sensi degli art. 4 e 7 DPR n. 462/01)     
+                                </p>
+                                <p><span style="font-weight:bold; font-size: 12pt;">VERBALE N.</span><span style="font-weight:bold; font-size: 12pt;" t-field="doc.name"/></p>
+                                <p style="text-align:justify"> 
+                                    Il sottoscritto <span style="font-weight:bold" t-field="doc.ispettore_id"/> ha provveduto in data 
+                                    <span style="font-weight:bold" t-field="doc.data_verbale"/><span style="font-weight:bold; margin-left:0.5%" t-field="doc.multi_data"/>
+                                    all'ispezione periodica 
+                                        <t t-if="doc.contratto_id.periodicita_verifica == '2'">
+                                            <span style="font-weight:bold">biennale</span>
+                                        </t>
+                                        <t t-if="doc.contratto_id.periodicita_verifica == '5'">
+                                            <span style="font-weight:bold">quinquennale</span>
+                                        </t>
+                                    dell'impianto di <strong>protezione contro le scariche atmosferiche</strong>  
+                                    ubicato a  
+                                    <span style="font-weight:bold" t-field="doc.impianto_id.citta"/>
+                                    <span style="font-weight:bold" t-field="doc.impianto_id.provincia"/>
+                                    in                                 
+                                    <span style="font-weight:bold" t-field="doc.impianto_id.indirizzo"/>
+                                    <span style="font-weight:bold" t-field="doc.impianto_id.indirizzo2"/>
+                                    nell'edificio di proprietà di                                 
+                                    <span style="font-weight:bold" t-field="doc.customer_id.name"/>
+									<!--esercente attività di <span style="font-weight:bold" t-field="doc.customer_id.tipo_attvità"/>-->									
+                                    con le seguenti caratteristiche: 
+                                </p>                                     
+                                <strong>Caratteristiche dell'impianto di protezione:</strong>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        Tipo di captatore:<br/>
+                                        Resistenza del dispersore:<br/>    
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="'Tipo di captatore' in x.name">
+                                                <span style="font-weight:bold;" t-field="x.valore_attributo"/>
+                                            </t> 
+                                        </t> 
+                                        <br/>
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="x.name == 'Resistenza del dispersore'">
+                                            <span style="font-weight:bold;" t-field="x.valore_attributo"/>
+                                            <span style="font-weight:bold" t-field="x.unita_di_misura_id"/>
+                                            </t> 
+                                        </t>
+                                        <br/>                                           
+                                    </div>
+                                </div>
+                                Realizzato ai sensi di:
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="'NR1' in x.name">
+                                                <t t-if="'si' in x.valore_attributo">
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                                </t>
+                                                <t t-if="'no' in x.valore_attributo">
+                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                                </t>
+                                            </t>   
+                                        </t>  
+                                        <span style="margin-left: 2%">art.38 lett.a) DPR n.547 (vedere DPR 689 del 26/5/59)</span><br/>
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="'NR2' in x.name">
+                                                <t t-if="'si' in x.valore_attributo">
+                                                    <span style="margin-left: 2%" class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                                </t>
+                                                <t t-if="'no' in x.valore_attributo">
+                                                    <span style="margin-left: 2%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                                </t>
+                                            </t>   
+                                        </t>
+                                        <span style="margin-left: 2%">azienda o lavorazione prevista dall'art.36 lett. a)</span><br/>
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="'NR3' in x.name">
+                                                <t t-if="'si' in x.valore_attributo">
+                                                    <span style="margin-left: 2%" class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                                </t>
+                                                <t t-if="'no' in x.valore_attributo">
+                                                    <span style="margin-left: 2%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                                </t>
+                                            </t>   
+                                        </t>
+                                        <span style="margin-left: 2%">azienda o lavorazione prevista dall'art.36 lett. b)</span><br/>
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="'NR4' in x.name">
+                                                <t t-if="'si' in x.valore_attributo">
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                                </t>
+                                                <t t-if="'no' in x.valore_attributo">
+                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                                </t>
+                                            </t>   
+                                        </t>
+                                        <span style="margin-left: 2%">art.38 lett.b) DPR n.547 (camini industriali)</span><br/>
+                                        <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                            <t t-if="'NR5' in x.name">
+                                                <t t-if="'si' in x.valore_attributo">
+                                                    <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                                </t>
+                                                <t t-if="'no' in x.valore_attributo">
+                                                    <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                                </t>
+                                            </t>   
+                                        </t>
+                                        <span style="margin-left: 2%">art.39 DPR n.547 (strutture metalliche degli edifici e delle opere provvisionali, grandi recipienti e apparecchi metallici situati all'aperto)</span><br/>
+                                    </div>
+                                </div>
+                                
+                                <br/>
+                                <strong>Impianto esterno:</strong>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="34%"> Captatori (materiale/sezione):</td>
+                                            <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                                <t t-if="x.name == 'Captatori (materiale/sezione)'">
+                                                    <t t-if="x.valore_attributo != 0">
+                                                        <td><span style="font-weight:bold;" t-field="x.valore_attributo"/></td>
+                                                    </t>
+                                                    <t t-if="x.valore_attributo == 0">
+                                                        <td><strong>N/A</strong></td>
+                                                    </t>
+                                                </t> 
+                                            </t>
+                                        </tr>
+                                        <tr>
+                                            <td width="34%">Calate (materiale/sezione):</td>                                       
+                                            <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                                <t t-if="x.name == 'Calate (materiale/sezione)'">    
+                                                    <t t-if="x.valore_attributo != 0">
+                                                        <td><span style="font-weight:bold;" t-field="x.valore_attributo"/></td>
+                                                    </t>
+                                                    <t t-if="x.valore_attributo == 0">
+                                                        <td><strong>N/A</strong></td>
+                                                    </t>
+                                                </t>
+                                            </t>                                           
+                                        </tr>
+                                        <tr>
+                                            <td width="34%">Dispersori (materiale/tipo):</td>                                           
+                                            <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                                <t t-if="x.name == 'Dispersori (materiale/tipo)'">
+                                                    <t t-if="x.valore_attributo != 0">
+                                                        <td><span style="font-weight:bold;" t-field="x.valore_attributo"/></td>
+                                                    </t>
+                                                    <t t-if="x.valore_attributo == 0">
+                                                        <td><strong>N/A</strong></td>
+                                                    </t>
+                                                </t>
+                                            </t>                                                                                    
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                                                        
+                                <br/>
+                                <strong>Impianto interno:</strong>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="52.7%">Conduttori equipotenziali (materiale/sezione):</td>
+                                            <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                                <t t-if="x.name == 'Conduttori equipotenziali (materiale/sezione)'">
+                                                    <t t-if="x.valore_attributo != 0">
+                                                        <td><span style="font-weight:bold;" t-field="x.valore_attributo"/></td>
+                                                    </t>
+                                                    <t t-if="x.valore_attributo == 0">
+                                                        <td><strong>N/A</strong></td>
+                                                    </t>
+                                                </t> 
+                                            </t>
+                                        </tr>
+                                        <tr>
+                                            <td width="52.7%">Limitatore di tensione (descrizione):</td>                                       
+                                            <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+                                                <t t-if="x.name == 'Limitatore di tensione (descrizione)'">    
+                                                    <t t-if="x.valore_attributo != 0">
+                                                        <td><span style="font-weight:bold;" t-field="x.valore_attributo"/></td>
+                                                    </t>
+                                                    <t t-if="x.valore_attributo == 0">
+                                                        <td><strong>N/A</strong></td>
+                                                    </t>
+                                                </t>
+                                            </t>                                           
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <br/>  
+                                <table>
+                                    <tbody>
+                                        <tr>                            
+                                            <td style="font-weight:bold">
+												Tipo e matricola strumento utilizzato nella presente verifica:
+												<span style="margin-left:0.5%" t-field="doc.mat_kit_utilizzato"/>
+											</td>
+                                        </tr>
+                                        <tr>                            
+                                            <td style="font-weight:bold">
+												Data validità taratura strumento utilizzato:
+												<span style="margin-left:0.5%" t-field="doc.data_validita_taratura_strumento"/>
+											</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <br/>                                                                               
+                                <strong>Dati Generali / Documentazione presente:</strong>
+                                <br/>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Anno installazione impianto:
+                                                <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
+													<t t-if="x.name == 'Anno installazione impianto'">
+														<span style="font-weight:bold" t-field="x.valore_attributo"/>
+													</t> 
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Progetto:
+												<t t-if="'si' in doc.mat_progetto">
+													<span class="glyphicon glyphicon-check" aria-hidden="true"/>
+													<span style="font-weight:bold" t-field="doc.mat_progetto"/>
+													<span style="margin-left:1%; font-weight:bold" t-field="doc.mat_progetto_note"/>
+													<span style="margin-left:1%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>NO
+													<span style="margin-left:1%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>Non Applicabile
+												</t>
+												<t t-if="'no' in doc.mat_progetto">
+													<span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
+													<span style="margin-left:1%" class="glyphicon glyphicon-check" aria-hidden="true"/>
+													<span style="font-weight:bold" t-field="doc.mat_progetto"/>
+													<span style="margin-left:1%; font-weight:bold" t-field="doc.mat_progetto_note"/>
+													<span style="margin-left:1%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>Non Applicabile
+												</t>
+												<t t-if="'na' in doc.mat_progetto">
+													<span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
+													<span style="margin-left:1%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>NO
+													<span style="margin-left:1%" class="glyphicon glyphicon-check" aria-hidden="true"/>Non Applicabile
+												</t>
+											</td>                                                                                                          
+                                        </tr>
+                                        <tr>
+                                            <td>Dichiarazione di conformità:
+												<t t-if="'si' in doc.mat_dichiarazione">
+													<span class="glyphicon glyphicon-check" aria-hidden="true"/>
+													<span style="font-weight:bold" t-field="doc.mat_dichiarazione"/>
+													<span style="margin-left:1%; font-weight:bold" t-field="doc.mat_dichiarazione_note"/>
+													<span style="margin-left:1%" class="glyphicon glyphicon-unchecked" aria-hidden="true"/>NO													
+												</t>
+												<t t-if="'no' in doc.mat_dichiarazione">
+													<span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
+													<span style="margin-left:1%" class="glyphicon glyphicon-check" aria-hidden="true"/>
+													<span style="font-weight:bold" t-field="doc.mat_dichiarazione"/>
+													<span style="margin-left:1%; font-weight:bold" t-field="doc.mat_dichiarazione_note"/>
+												</t>												
+											</td>                                             
+                                        </tr>
+                                        <tr>
+                                            <td>Omologazione Impianto:
+												<span style="font-weight:bold" t-field="doc.satm_omologazione"/>
+											</td>  
+                                        </tr>
+                                        <tr>
+                                            <td>Eventuali rilievi precedenti sono stati ottemperati:
+												<span style="font-weight:bold" t-field="doc.mat_verifiche_precedenti"/>
+											</td>  
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                                                
+                                <!-- Page break -->
+                                <p style="page-break-before:always;"> </p>
+
+                                <p>VERBALE N. <span style="font-weight:bold" t-field="doc.name"/></p>
+                                <br/><br/>
+                                <p>
+                                    <strong>Non Conformità:</strong>
+                                    <br/><span t-esc="doc.mat_non_conformita"/>
+                                </p>
+                                <p>
+                                    <strong>Raccomandazioni:</strong>
+                                    <br/>
+                                    <t t-foreach="doc.verbale_raccomandazione_riga_ids" t-as="x">                                          
+                                        - <span t-esc="x.name"/>
+                                        <br/>
+                                    </t>
+                                </p>
+                                <p>
+                                    <br/><br/>Esito della Verifica:   
+                                    <t t-if="'positivo' in doc.esito_verifica">
+                                        <strong>POSITIVO</strong>
+                                    </t>
+                                    <t t-if="'negativo' in doc.esito_verifica">
+                                        <strong>NEGATIVO</strong>
+                                    </t>
+                                    <span style="margin-left:40%; font-weight:bold">Ore impiegate </span><span style="font-weight:bold;" t-esc="doc.ore_lavorate" />
+                                </p>
+                                <p>La prossima verifica dovrà essere eseguita entro la data del <span style="font-weight:bold;" t-esc="doc.prossima_verifica"/></p>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <p style="text-align:left;">
+                                            Addì, <span t-field="doc.data_verbale"/>
+                                        </p> 
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <p style="text-align:center;"> 
+                                            Il Verificatore
+                                            <br/>
+                                            <span style="font-weight:bold" t-field="doc.ispettore_id"/>
+                                            <br/><br/><br/>
+                                            <span style="font-size: 6px">_______________________________________________________________________</span>
+                                            <br/><img t-if="doc.timbro_ispettore" t-att-src="'data:image/png;base64,%s' % doc.timbro_ispettore" style="max-height:180px; position:absolute; bottom: -60px; left: 30px; z-index:-1;"/>
+                                        </p>
+                                    </div>
+									<div class="col-xs-4">
+                                        <p style="text-align:center;"> 
+                                            <br/>
+                                            <br/>
+                                            <br/><br/><br/>
+											<br/>
+                                            <br/><img t-if="doc.timbro_responsabile_tecnico" t-att-src="'data:image/png;base64,%s' % doc.timbro_responsabile_tecnico" style="max-width:180px; position:absolute; bottom: 40px; left: 60px; z-index:-1;"/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p><br/><br/></p>                          
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </t>  
+        </template>  
+    </data>
+</openerp>        

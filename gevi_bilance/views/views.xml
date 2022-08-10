@@ -1,0 +1,96 @@
+<openerp>
+  <data>
+    <!-- explicit list view definition -->
+    
+	<!-- Verifica Tree -->
+    <record model="ir.ui.view" id="gevi_bilance.view_tree">
+      <field name="name">Verifica Bilancia Tree</field>
+      <field name="model">gevi_bilance.verifica</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nomeVerifica"/>
+          <field name="numVerifica"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+	
+	<!-- Verifica Form -->
+    <record model="ir.ui.view" id="gevi_bilance.view_form">
+      <field name="name">Verifica Bilancia Form</field>
+      <field name="model">gevi_bilance.verifica</field>
+      <field name="arch" type="xml">
+        <form string="Verifica Bilancia Form">
+		  <group>	
+			<field name="nomeVerifica"/>
+			<field name="numVerifica"/>
+			<field name="description"/>
+			<field name="anagrafica_id"/>
+		  </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="gevi_bilance.action_window">
+      <field name="name">gevi_bilance window</field>
+      <field name="res_model">gevi_bilance.gevi_bilance</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+	
+	<!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="gevi_bilance.action_window_applicazione_verifica">
+      <field name="name">Gevi Bilance Verifica Window</field>
+      <field name="res_model">gevi_bilance.verifica</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+	
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="gevi_bilance.action_server">
+      <field name="name">gevi_bilance server</field>
+      <field name="model_id" ref="model_gevi_bilance_gevi_bilance"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!--  *********************MENU********************* -->
+    <!-- Top menu item: no parent - MENU BILANCE - -->
+    <menuitem name="Bilance" id="gevi_bilance.menu_root" sequence="5"/>
+    <!-- menu categories -->
+    
+	<!-- Side Menu - Applicazione -->
+    <menuitem name="Applicazione" id="gevi_bilance.applicazione" parent="gevi_bilance.menu_root" sequence="6"/>
+	<!-- Side Menu - Configurazione -->
+    <menuitem name="Configurazione" id="gevi_bilance.configurazione" parent="gevi_bilance.menu_root" sequence="7"/>
+    
+    <!-- actions  Applicazione Verifica -->
+    <menuitem name="Verifiche" id="gevi_bilance.applicazione_list" parent="gevi_bilance.applicazione" sequence="8"
+              action="gevi_bilance.action_window_applicazione_verifica"/>
+			  
+	<!-- actions  Applicazione Anagrefica -->
+    <menuitem name="Anagrafica" id="gevi_bilance.applicazione_anagrafica_action" parent="gevi_bilance.applicazione" sequence="11"
+              action="gevi_bilance.action_window_applicazione_anagrafica"/>		  
+			  
+    <!-- actions  Configurazione Classe -->
+    <menuitem name="Classe" id="gevi_bilance.configurazione_classe_tree_form" parent="gevi_bilance.configurazione" sequence="9"
+              action="gevi_bilance.action_window_configurazione_classe"/>
+			  
+	<!-- actions  Configurazione Tipo Bilancia -->
+    <menuitem name="Tipo Bilancia" id="gevi_bilance.configurazione_tipobilancia_tree_form" parent="gevi_bilance.configurazione" sequence="10"
+              action="gevi_bilance.action_window_configurazione_TipoBilancia"/>		  
+	<!--		  
+    <menuitem name="Server to list" id="gevi_bilance" parent="gevi_bilance.configurazione"
+              action="gevi_bilance.action_server"/>
+	-->		  
+  </data>
+</openerp>

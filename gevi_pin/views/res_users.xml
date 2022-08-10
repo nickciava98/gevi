@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+      <!-- Form Utenti -->
+      <record model="ir.ui.view" id="gevi_pin_user_form_view">
+        <field name="name">gevi_pin.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Modifica su indirizzo-->
+            <xpath expr="//field[@name='partner_id']" position="after">
+              <separator string="Preferenze Verbali"/>
+              <group>
+                <field name="timbro_isp" widget="image"/>
+                <field name="timbro_rt" widget="image"/>
+              </group>
+              <group>
+              <group>
+                <field name="pin" password="True"/>
+              </group>
+              <group>
+                <button name="290" type="action" string="Cambia PIN"/>
+              </group>
+              </group>
+              <!--<button name="preferenze_cambio_pin" type="object" string="Cambia Pin" class="oe_highlight"/>-->
+              <separator string="Preferenze Utente"/>
+            </xpath>       
+        </field>
+      </record>
+
+<!--
+        <record model="ir.actions.act_window" id="gevi_pin_users_list_action">
+          <field name="name">Contatti</field>
+          <field name="res_model">res.partner</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+-->
+
+    </data>
+</openerp>

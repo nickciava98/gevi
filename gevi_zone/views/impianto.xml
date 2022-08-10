@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Form impianto -->
+        <record model="ir.ui.view" id="gevi_zone_impianto_form_view">
+            <field name="name">gevi_zone.impianto.form</field>
+            <field name="model">gevi.impianti.impianto</field>
+            <field name="inherit_id" ref="gevi_impianti.view_gevi_impianti_impianto_form"/>
+            <field name="arch" type="xml">
+                <!-- inserimento campo zona -->
+                <xpath expr="//field[@name='impianto_categoria_id']" position="after">
+                    <field name="zona_impianto_id" placeholder="Scegli la zona Impianto"/>
+                </xpath>            
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="gevi_zone_impianto_tree_view">
+            <field name="name">gevi_zone.impianto.tree</field>
+            <field name="model">gevi.impianti.impianto</field>
+            <field name="inherit_id" ref="gevi_impianti.view_gevi_impianti_impianto_tree"/>
+            <field name="arch" type="xml">
+                <!-- inserimento campo zona -->
+                <xpath expr="///field[@name='provincia']" position="after">
+                    <field name="zona_impianto_id" placeholder="Scegli la zona Impianto"/>
+                </xpath>            
+            </field>
+        </record>
+
+      <record id="view_zone_gevi_impianto_filter" model="ir.ui.view">
+        <field name="name">gevi_zone.impianto.search</field>
+        <field name="model">gevi.impianti.impianto</field>
+        <field name="inherit_id" ref="gevi_impianti.search_gevi_impianti_categoria_view" />
+        <field name="arch" type="xml">
+            <!-- Filtra per zona -->
+            <xpath expr="///field[@name='provincia']" position="after">
+                  <field name="zona_impianto_id"/>
+            </xpath>
+
+            <!-- Raggruppa per zona -->
+            <xpath expr="//filter[@name='group_by_categoria_impianto_id']" position="after">
+                <filter string="Zona Impianto"
+                        name="group_by_zona"
+                        context="{'group_by':'zona_impianto_id'}"
+                        help="Raggruppa per Zona Impianto" />
+            </xpath>                                    
+        </field>
+      </record>
+    </data>
+</openerp>

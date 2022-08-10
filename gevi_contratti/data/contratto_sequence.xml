@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+    <!--
+        # Sequences per gevi_contratti       
+    -->
+
+        
+        <!--<record id="seq_type_gevi_contratti" model="ir.sequence.type">
+            <field name="name">Codice Contratto</field>
+            <field name="code">gevi_contratti.contratto</field>
+        </record>        -->
+        <record id="seq_gevi_contratti_contratto" model="ir.sequence">
+            <field name="name">GEVI Codice Contratto</field>
+            <field name="code">gevi_contratti.contratto</field>
+            <field name="prefix">C/%(year)s/</field>
+        </record>
+        
+    </data>
+</openerp>

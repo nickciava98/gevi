@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_assegna_isp_form_view">
+            <field name="name">gevi_verbali.assegna_isp.form</field>
+            <field name="model">gevi_verbali.wizard_assegna_isp</field>
+            <field name="arch" type="xml">
+                <form string="Assegna Ispettore">
+                    <div>Scegliere l'ispettore da assegnare ai verbali selezionati. Eventuali verbali con stato diverso da "bozza" verranno ignorati!</div>
+                    <group>
+                        <field name="ispettore_id" options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                    </group>
+                    <footer>
+                        <button name="assegna_isp" type="object"
+                                string="Assegna" class="oe_highlight"/>
+                        <button special="cancel" string="Cancella"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_lancia_wizard_assegna_isp">
+            <field name="name">Assegna Ispettore</field>
+            <field name="res_model">gevi_verbali.wizard_assegna_isp</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+    <!--        <field name="src_model">gevi_verbali.verbale</field>-->
+        </record>
+
+<!--        <act_window id="action_lancia_wizard_assegna_isp"-->
+<!--                    name="Assegna Ispettore"-->
+<!--                    src_model="gevi_verbali.verbale"-->
+<!--                    res_model="gevi_verbali.wizard_assegna_isp"-->
+<!--                    view_mode="form"-->
+<!--                    target="new"-->
+<!--                    key2="client_action_multi"/>-->
+    </data>
+</odoo>

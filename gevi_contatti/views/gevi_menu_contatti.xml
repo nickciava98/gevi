@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    <!-- MENU CONTATTI -->
+        <!-- Top Menu -->
+		<menuitem id="gevi_contatti_top_menu" name="Rubrica"/> 
+
+        <!-- Side Menu - Applicazione -->
+        <menuitem id="gevi_contatti_side_menu_contatti" name="Contatti" parent="gevi_contatti_top_menu"/>
+        <menuitem id="gevi_contatti_customer_menu" name="Clienti" parent="gevi_contatti_side_menu_contatti" action="action_gevi_contatti_partner_customer_form"/>
+        <menuitem id="gevi_contatti_referente_menu" name="Amministratori" parent="gevi_contatti_side_menu_contatti" action="action_gevi_contatti_referente_list"/>
+        <menuitem id="gevi_contatti_manutentore_menu" name="Manutentori" parent="gevi_contatti_side_menu_contatti" action="action_gevi_contatti_manutentore_list"/>
+
+        <!-- Side Menu - Configurazione -->
+        <menuitem id="gevi_contatti_side_menu_configurazione" name="Configurazione" parent="gevi_contatti_top_menu"/>
+        <menuitem id="gevi_contatti_categoria_menu" name="Categoria Contatto" parent="gevi_contatti_side_menu_configurazione" action="action_gevi_contatti_contatto_categoria_form"/>
+        <menuitem id="gevi_contatti_categoria_comuni_italiani_menu" name="Comuni Italiani" parent="gevi_contatti_side_menu_configurazione" action="comuni_italiani.action_comuni_italiani_form"/>
+
+    <!-- FINE CONTATTI -->
+
+    </data>
+</openerp>

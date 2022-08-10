@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_gevi_commerciale_comunicazione_form">
+			<field name="name">gevi_commerciale.comunicazione.form</field>
+			<field name="model">gevi_commerciale.comunicazione</field>
+			<field name="arch" type="xml">
+				<form string="Comunicazione">
+					<sheet>
+                        <group>
+                            <group>
+                                <field name="referente_id"/>
+                                <field name="tipo_comunicazione"/>
+                            </group>
+                            <group>
+                                <field string="Impiegato" name="commerciale_id" domain="[('user_id', '=', uid)]"/>
+                                <field name="data_comunicazione"/>
+                            </group>
+                         </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="view_gevi_commerciale_comunicazione_tree">
+			<field name="name">gevi_commerciale.comunicazione.tree</field>
+			<field name="model">gevi_commerciale.comunicazione</field>
+			<field name="arch" type="xml">
+                      <tree string="Comunicazioni">
+                        <field name="referente_id"/>
+                        <field name="commerciale_id" readonly="1"/>
+                        <field name="tipo_comunicazione"/>
+                        <field name="data_comunicazione"/>
+                        <field name="note"/>
+                      </tree>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="search_gevi_commerciale_comunicazione_view">
+			<field name="name">gevi_commerciale.comunicazione.search</field>
+			<field name="model">gevi_commerciale.comunicazione</field>
+			<field name="arch" type="xml">
+				<search>
+						<field name="referente_id"/>
+                        <field name="commerciale_id"/>
+                        <field name="tipo_comunicazione"/>
+						<field name="data_comunicazione"/>
+                        <field name="note"/>
+
+                        <filter name="callin" string="Chiamata Ingresso" domain="[('tipo_comunicazione','=','callin')]"/>
+                        <filter name="callout" string="Chiamata Uscita" domain="[('tipo_comunicazione','=','callout')]"/>
+                        <filter name="payin" string="Pagamento Ricevuto" domain="[('tipo_comunicazione','=','payin')]"/>
+
+                       <group string="Raggruppa">							
+						    <filter string="Nome"
+								name="by_commerciale_id"
+								context="{'group_by':'commerciale_id'}"
+								help="Raggruppa per commerciale" />
+						</group>
+                </search>
+			</field>
+		</record>
+
+        <!-- action gevi_commerciale form -->
+        <record model="ir.actions.act_window" id="action_gevi_commerciale_mie_comunicazioni_list">
+            <field name="name">Mie Comunicazioni</field>
+            <field name="res_model">gevi_commerciale.comunicazione</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('commerciale_id.user_id', '=', uid)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una comunicazione
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_commerciale form -->
+        <record model="ir.actions.act_window" id="action_gevi_commerciale_comunicazione_list">
+            <field name="name">Comunicazioni Commerciali</field>
+            <field name="res_model">gevi_commerciale.comunicazione</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una comunicazione
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

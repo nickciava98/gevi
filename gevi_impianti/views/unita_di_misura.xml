@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--Form Unità di misura-->
+       	<record model="ir.ui.view" id="view_gevi_unita_di_misura_form">
+			<field name="name">Unità di misura</field>
+			<field name="model">gevi.impianti.unita_di_misura</field>
+			<field name="arch" type="xml">
+				<form string="Unità di misura">
+					<sheet>
+                        <group>
+                            <field name="name" default_focus="1" string="Unità di misura" />
+                            <field name="descrizione" string="Descrizione" />
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <!--Action Unità di misura-->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_unita_di_misura_form">
+            <field name="name">Unità di misura</field>
+            <field name="res_model">gevi.impianti.unita_di_misura</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Inserisci Unità di misura
+                </p>
+            </field>
+        </record>
+
+        <!--Tree Unità di misura -->
+        <record model="ir.ui.view" id="gevi_unita_di_misura_tree">
+            <field name="name">Unità di misura</field>
+            <field name="model">gevi.impianti.unita_di_misura</field>
+            <field name="arch" type="xml">
+                <tree string="Lista Valori Attributo">
+                    <field name="name" default_focus="1" string="Unità di misura" />
+                    <field name="descrizione" string="Descrizione" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

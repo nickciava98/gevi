@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Form referente -->
+        <record model="ir.ui.view" id="gevi_zone_referente_form_view">
+            <field name="name">gevi_zone.referente.form</field>
+            <field name="model">gevi_contatti.referente</field>
+            <field name="inherit_id" ref="gevi_contatti.view_gevi_contatti_referente_form"/>
+            <field name="arch" type="xml">
+                <!-- inserimento campo zona -->
+                <xpath expr="//field[@name='tipo_referente_id']" position="after">
+                    <field name="zona_commerciale_id" placeholder="Scegli la zona Commerciale"/>
+                    <!--<field name="zona_agente_id" placeholder="Scegli la zona Agente"/>-->
+                </xpath>            
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="gevi_zone_referente_tree_view">
+            <field name="name">gevi_zone.referente.tree</field>
+            <field name="model">gevi_contatti.referente</field>
+            <field name="inherit_id" ref="gevi_contatti.view_gevi_contatti_referente_tree"/>
+            <field name="arch" type="xml">
+                <!-- inserimento campo zona -->
+                <xpath expr="///field[@name='provincia']" position="after">
+                    <field name="zona_commerciale_id" placeholder="Scegli la zona Commerciale"/>
+                    <!--<field name="zona_agente_id" placeholder="Scegli la zona Agente"/>-->
+                </xpath>            
+            </field>
+        </record>
+
+        <record id="view_zone_gevi_referente_filter" model="ir.ui.view">
+            <field name="name">gevi_zone.referente.search</field>
+            <field name="model">gevi_contatti.referente</field>
+            <field name="inherit_id" ref="gevi_contatti.search_gevi_contatti_referente_view" />
+            <field name="arch" type="xml">
+                <!-- Filtra per zona -->
+                <xpath expr="///field[@name='provincia']" position="after">
+                    <field name="zona_commerciale_id"/>
+                    <!--<field name="zona_agente_id"/>-->
+                </xpath>
+
+                <!-- Raggruppa per zona -->
+                <xpath expr="//filter[@name='by_name']" position="after">
+                    <filter string="Zona Commerciale"
+                            name="group_by_zona_commerciale_id"
+                            context="{'group_by':'zona_commerciale_id'}"
+                            help="Raggruppa per Zona Commerciale" />
+                    <!--<filter string="Zona Agente"
+                            name="group_by_zona_agente_id"
+                            context="{'group_by':'zona_agente_id'}"
+                            help="Raggruppa per Zona Agente" />-->
+                </xpath>                             
+            </field>
+        </record>
+    </data>
+</openerp>

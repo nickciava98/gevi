@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="seq_gevi_contatti_partner" model="ir.sequence">
+            <field name="name">GEVI Codice Cliente</field>
+            <field name="code">gevi_contatti.partner</field>
+            <field name="prefix">CL</field>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="seq_gevi_contatti_referente" model="ir.sequence">
+            <field name="name">GEVI Codice Amministratore</field>
+            <field name="code">gevi_contatti.referente</field>
+            <field name="prefix">AM</field>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="seq_gevi_contatti_manutentore" model="ir.sequence">
+            <field name="name">GEVI Codice Manutentore</field>
+            <field name="code">gevi_contatti.manutentore</field>
+            <field name="prefix">MA</field>
+            <field name="padding">6</field>
+        </record>
+        
+    </data>
+</openerp>

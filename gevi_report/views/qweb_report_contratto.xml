@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            id="report_gevi_contratti_contratto"
+            string="Accettazione Incarico"
+            model="gevi_contratti.contratto" 
+            report_type="qweb-pdf"
+            file="gevi_report.report_contratto" 
+            name="gevi_report.report_contratto" 
+        />
+    </data>
+</openerp>

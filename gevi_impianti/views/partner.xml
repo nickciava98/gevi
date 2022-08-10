@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+      <record model="ir.ui.view" id="gevi_impianti_partner_form_view">
+        <field name="name">gevi.impianti.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+          <notebook position="inside">
+              <page string="Impianti">
+                <group>
+                  <field name="impianto_ids" nolabel="1"/>
+                </group>
+              </page>
+          </notebook>
+        </field>
+      </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="wizard_assegna_rt_form_view">
+        <field name="name">gevi_verbali.assegna_rt.form</field>
+        <field name="model">gevi_verbali.wizard_assegna_rt</field>
+        <field name="arch" type="xml">
+            <form string="Assegna Responsabile Tecnico">
+                <div>Scegli il Responsabile Tecnico da assegnare ai verbali selezionati:</div>
+                <group>
+                    <field name="responsabile_tecnico_id" options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="assegna_rt" type="object"
+                            string="Assegna" class="oe_highlight"/>
+                    <button special="cancel" string="Cancella"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_lancia_wizard_assegna_rt">
+        <field name="name">Assegna Responsabile Tecnico</field>
+        <field name="res_model">gevi_verbali.wizard_assegna_rt</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+<!--        <field name="src_model">gevi_verbali.verbale</field>-->
+    </record>
+
+<!--    <act_window id="action_lancia_wizard_assegna_rt"-->
+<!--                name="Assegna Responsabile Tecnico"-->
+<!--                res_model="gevi_verbali.wizard_assegna_rt"-->
+<!--                view_mode="form"-->
+<!--                target="new"-->
+<!--                binding_model="gevi_verbali.verbale"/>-->
+<!--    key2="client_action_multi"-->
+</odoo>

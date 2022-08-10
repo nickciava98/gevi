@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- view tree gevi_zone_zona_agente -->
+        <record model="ir.ui.view" id="view_gevi_zone_zona_agente_tree">
+			<field name="name">gevi_zone.zona_agente.tree</field>
+			<field name="model">gevi_zone.zona_agente</field>
+			<field name="arch" type="xml">
+				<tree string="Zona Agente" editable="bottom">
+                    <field name="parent_id"/>
+					<field name="name"/>
+                    <field name="agente_id"/>
+				</tree>		
+			</field>
+		</record>
+
+        <!--Action -->
+        <record model="ir.actions.act_window" id="action_gevi_zone_zona_agente_tree">
+            <field name="name">Zona Agente</field>
+            <field name="res_model">gevi_zone.zona_agente</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Inserisci una Zona Agente
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

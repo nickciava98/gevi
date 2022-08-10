@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+      <!-- Form Clienti -->
+      <record model="ir.ui.view" id="gevi_zupdate20170525_partner_form_view">
+        <field name="name">gevi_zupdate20170525.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//group[@name='indirizzo']" position="before">
+              <field name="tipo_attivita" string="Tipo attivita" placeholder="esercente attivita di"/>              
+            </xpath>
+        </field>
+      </record>
+
+    </data>
+</openerp>

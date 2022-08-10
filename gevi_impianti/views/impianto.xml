@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- view form gevi_impianti -->
+		<record model="ir.ui.view" id="view_gevi_impianti_impianto_form">
+			<field name="name">gevi.impianti.impianto.form</field>
+			<field name="model">gevi.impianti.impianto</field>
+			<field name="arch" type="xml">
+				<form string="Impianto">
+                    <sheet>
+                        <h1><span class="oe_inline oe_form_field">SCHEDA IMPIANTO-</span><field name="codice_impianto" class="oe_inline" /></h1>
+                        <h1> 
+                            <field name="name" string="Nome Impianto" invisible="1"/>
+                        </h1>
+                        <h2><label for="customer_id" string="Cliente"/>
+                            <field name="customer_id" placeholder="Cliente Fatturazione"/>
+                        </h2>
+                        <group>
+                            <group>                               
+                                <field name="etichetta" default_focus="1" placeholder="Ad esempio: SCALA A"/>
+                                <field name="impianto_categoria_id" widget="selection" />
+                                <field name="manutentore_id" widget="selection" />
+                                <field name="data_ultima_verifica" />
+                            </group>
+                            <group>
+                             <label for="indirizzo" string="Indirizzo"/>
+                                <div>
+                                    <field name="indirizzo" placeholder="Indirizzo"/>
+                                    <field name="indirizzo2" invisible="1" placeholder="Estensione indirizzo" attrs="{'invisible': [('indirizzo2', '=', False)]}"/>
+                                    <field name="comuni_italiani_id" class="oe_edit_only" placeholder="Scegli il comune"/>
+                                    <field name="citta" placeholder="Città"/>
+                                    <field name="localita" placeholder="Località" attrs="{'invisible': [('localita', '=', False)]}"/>
+                                    <div class="address_format">
+                                        <field name="cap" placeholder="CAP"/>
+                                        <field name="provincia" placeholder="Provincia"/>
+                                    </div>
+                                </div>
+                            </group>
+                         </group>
+                        <notebook>
+                            <page string="Attributi" class="oe_page_" accesskey="">
+                                <group>
+                                    <field name="impianto_riga_descrizione_ids" nolabel="1">
+                                        <tree string="Attributi" editable="bottom" create="false" delete="false">
+                                            <field name="name" readonly="1"/>
+                                            <field name="valore_attributo"/>
+                                            <field name="unita_di_misura_id" readonly="1"/>
+                                        </tree>                           
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Note Interne">
+								<field name="note_interne" placeholder="Ulteriori informazioni..." />
+							</page>
+                            <page string="Informazioni Correlate" class="oe_page_" invisible="1">
+                                <group>
+                                    <field name="cf_cliente"/>
+                                    <field name="piva_cliente"/>
+                                </group>
+                            </page>
+                        </notebook>
+					</sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+				</form>
+			</field>
+		</record>
+
+
+        <!-- view tree gevi_impianti -->
+        <record model="ir.ui.view" id="view_gevi_impianti_impianto_tree">
+			<field name="name">gevi.impianti.impianto.tree</field>
+			<field name="model">gevi.impianti.impianto</field>
+			<field name="arch" type="xml">
+				<tree string="Lista Impianti">
+                    <field name="codice_impianto"/>
+                    <field name="customer_id" />
+					<field name="etichetta"/>
+                    <field name="impianto_categoria_id" />
+                    <field name="indirizzo"/>
+                    <field name="citta"/>
+                    <field name="provincia" string="Prov"/>
+                    <field name="manutentore_id" string="Manutentore" />
+				</tree>		
+			</field>
+		</record>
+
+        <!-- action gevi_impianti form -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_list">
+            <field name="name">Impianti</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- search gevi_impianti filter -->
+        <record model="ir.ui.view" id="search_gevi_impianti_categoria_view">
+			<field name="name">gevi.impianti.impianto.search</field>
+			<field name="model">gevi.impianti.impianto</field>
+			<field name="arch" type="xml">
+				<search>
+						<field name="name"/>
+						<field name="codice_impianto"/>
+                        <field name="customer_id"/>
+                        <field name="referente_name"/>
+                        <field name="cf_cliente"/>
+                        <field name="piva_cliente"/>
+                        <field name="impianto_categoria_id"/>
+                        <field name="citta"/>
+                        <field name="provincia"/>
+						
+						<filter string="Ascensori Oleodinamici"
+							name="ascensori_oleo"
+							domain="[('impianto_categoria_id','=','Ascensore Oleodinamico')]"
+							help="Filtra per Ascensore Oleodinamico" />
+
+						<filter string="Ascensori Elettromeccanici"
+							name="ascensori_elet"
+							domain="[('impianto_categoria_id','=','Ascensore Elettromeccanico')]"
+							help="Filtra per Ascensore Elettromeccanico" />
+
+						<filter string="Messa a terra"
+							name="impianto_mat"
+							domain="[('impianto_categoria_id','=','Messa a Terra')]"
+							help="Filtra per Messa a Terra" />
+
+						<filter string="Scariche Atmosferiche"
+							name="impianto_satm"
+							domain="[('impianto_categoria_id','=','Scariche Atmosferiche')]"
+							help="Filtra per Scariche Atmosferiche" />
+
+                        <filter string="Piattaforma Elevatrice"
+							name="piattaforma_elevatrice"
+							domain="[('impianto_categoria_id','=','Piattaforma Elevatrice')]"
+							help="Filtra per Piattaforma Elevatrice" />
+                        
+                        <filter string="Montacarichi"
+							name="montacarichi"
+							domain="[('impianto_categoria_id','=','Montacarichi')]"
+							help="Filtra per Montacarichi" />
+
+                        <filter string="Ascensore Generico"
+							name="ascensore_generico"
+							domain="[('impianto_categoria_id','=','Ascensore Generico')]"
+							help="Filtra per Ascensore Generico" />
+
+                        <group string="Raggruppa">
+                            <filter string="Categoria Impianto"
+                                name="group_by_categoria_impianto_id"
+                                context="{'group_by':'impianto_categoria_id'}"
+                                help="Raggruppa per Categoria Impianto" />
+                            
+                            <filter string="Manutentore"
+                                name="group_by_manutentore_id"
+                                context="{'group_by':'manutentore_id'}"
+                                help="Raggruppa per Manutentore" />
+						</group>
+				</search>
+			</field>
+		</record>
+
+        <!-- action gevi_impianti filter Oleodinamici -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_ascensori_oleo">
+            <field name="name">Ascensori Oleodinamici</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_ascensori_oleo': 'Ascensore Oleodinamico'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_impianti filter Elettromeccanici -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_ascensori_elet">
+            <field name="name">Ascensori Elettromeccanici</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_ascensori_elet': 'Ascensore Elettromeccanico'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_impianti filter Messa a terra -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_impianto_mat">
+            <field name="name">Messa a Terra</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_impianto_mat': 'Messa a Terra'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_impianti filter Scariche atmosferiche -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_impianto_satm">
+            <field name="name">Scariche Atmosferiche</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_impianto_satm': 'Scariche Atmosferiche'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_impianti filter Piattaforma Elevatrice -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_piattaforma_elevatrice">
+            <field name="name">Piattaforma Elevatrice</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_piattaforma_elevatrice': 'Piattaforma Elevatrice'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_impianti filter Montacarichi -->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_montacarichi">
+            <field name="name">Montacarichi</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_montacarichi': 'Montacarichi'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_impianti filter Ascensore Generico-->
+        <record model="ir.actions.act_window" id="action_gevi_impianti_impianto_ascensore_generico">
+            <field name="name">Ascensore Generico</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_ascensore_generico': 'Ascensore Generico'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

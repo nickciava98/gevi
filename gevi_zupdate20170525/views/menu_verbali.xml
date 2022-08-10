@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>   
+    <!-- MENU VERBALI -->
+      
+        <!-- Side Menu - Applicazione -->
+        <menuitem id="gevi_zupdate20170525_verbale_da_assegnare_menu" name="Verifiche da assegnare (RT)" parent="gevi_verbali.gevi_verbali_side_menu" action="action_gevi_zupdate20170525_verbale_da_assegnare" sequence="9"/>
+        <menuitem id="gevi_zupdate20170525_verbale_assegnato_menu" name="Verifiche assegnate (RT)" parent="gevi_verbali.gevi_verbali_side_menu" action="action_gevi_zupdate20170525_verbale_assegnato" sequence="10"/>
+        <menuitem id="gevi_zupdate20170525_verbale_assegnato_isp_menu" name="Verifiche assegnate (ISP)" parent="gevi_verbali.gevi_verbali_side_menu" action="action_gevi_zupdate20170525_verbale_assegnato_isp" sequence="11"/>
+        <menuitem id="gevi_zupdate20170525_verbale_miei_amministratori_menu" name="Verbali Miei Amministratori" parent="gevi_verbali.gevi_verbali_side_menu" action="action_gevi_zupdate20170525_verbale_miei_amministratori" sequence="12"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+      <!-- Form Clienti -->
+      <record model="ir.ui.view" id="gevi_zone_partner_form_view">
+        <field name="name">gevi_zone.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="gevi_contatti.gevi_contatti_partner_form_view"/>
+        <field name="arch" type="xml">
+            <!-- inserimento campo zona -->
+            <xpath expr="//field[@name='tipo_cliente_id']" position="after">
+              <field name="zona_commerciale_id" placeholder="Scegli la zona commerciale"/>
+            </xpath>            
+        </field>
+      </record>
+
+      <record id="view_zone_res_partner_filter" model="ir.ui.view">
+        <field name="name">gevi_zone.partner.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="gevi_contatti.search_gevi_contatti_cliente_view" />
+        <field name="arch" type="xml">
+            <!-- Filtra per zona -->
+            <xpath expr="///filter[@name='customer']" position="before">
+                <field name="zona_commerciale_id"/>
+            </xpath>
+
+            <!-- Raggruppa per zona -->
+            <xpath expr="//filter[@name='group_by_referente']" position="after">
+                <filter string="Zona Commerciale"
+                        name="group_by_zona_commerciale"
+                        context="{'group_by':'zona_commerciale_id'}"
+                        help="Raggruppa per Zona Commerciale" />
+            </xpath>                                    
+        </field>
+      </record>
+
+        <!-- Tree View Clienti -->
+        <record model="ir.ui.view" id="view_gevi_contatti_cliente_tree">
+          <field name="name">gevi_zone.partner.tree</field>
+          <field name="model">res.partner</field>
+          <field name="inherit_id" ref="gevi_contatti.view_gevi_contatti_cliente_tree"/>
+          <field name="arch" type="xml">
+            <xpath expr="//field[@name='referente_id']" position="after">
+                <field name="zona_commerciale_id"/>
+            </xpath> 
+          </field>
+        </record>
+
+    </data>
+</openerp>

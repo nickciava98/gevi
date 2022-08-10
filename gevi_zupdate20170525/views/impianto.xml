@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+      <!-- Form Impianto -->
+
+        <record model="ir.ui.view" id="gevi_zupdate20170525_impianto_form_view">
+            <field name="name">gevi_zupdate20170525.impianto</field>
+            <field name="model">gevi.impianti.impianto</field>
+            <field name="inherit_id" ref="gevi_impianti.view_gevi_impianti_impianto_form"/>
+            <field name="arch" type="xml">
+                <!-- Intestazione scheda -->
+                <xpath expr="//group[@name='blocco1']" position="before">
+                    <group>
+                        <field name="proprietario_diverso" string="Proprietario diverso dal cliente"/>  
+                    </group>            
+                    <h2 attrs="{'invisible': [('proprietario_diverso', '=', False)]}"><label for="proprietario_id" string="Proprietario"/>
+                        <field name="proprietario_id" placeholder="Cliente Proprietario" options="{'no_create_edit': True,'no_quick_create': True}"/>
+                    </h2>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

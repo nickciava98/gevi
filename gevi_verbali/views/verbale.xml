@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- view form gevi_verbali -->
+        <record model="ir.ui.view" id="view_gevi_verbali_verbale_form">
+            <field name="name">gevi_verbali.verbale.form</field>
+            <field name="model">gevi_verbali.verbale</field>
+            <field name="arch" type="xml">
+                <form string="Verbale di verifica" create="false">
+                    <header>
+                        <!-- START SDC EDIT 12/12/2016
+                                         modifica type="object" in type="workflow"
+                                         rimosso action dal name del button
+                                         modificato name per essere usato nelle transition -->
+                        <!--<button name="bozza" type="workflow"
+                                string="Recupera in Eseguito"
+                                states="cancellato"
+                                class="oe_highlight"/>
+                        <button name="assegna" type="workflow"
+                                string="Assegna" 
+                                states="bozza"
+                                class="oe_highlight"/>
+                        <button name="esegui" type="workflow"
+                                string="Eseguito" 
+                                states="assegnato"
+                                class="oe_highlight"
+                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
+                        <button name="conferma" type="workflow"
+                                string="Conferma Verbale" 
+                                states="eseguito"
+                                class="oe_highlight"
+                                confirm="Se la categoria dell'impianto è 'Ascensore Generico' non sarà possibile andare avanti. Vuoi continuare?"/>
+                        <button name="valida" type="workflow"
+                                string="Valida Definitivamente" 
+                                states="confermato"
+                                class="oe_highlight"/>-->
+                        <button name="action_bozza" type="object"
+                                string="Recupera in bozza"
+                                states="annullato"
+                                class="oe_highlight"
+                        />
+                        <!-- <button name="action_assegnato" type="object"
+                                string="Assegna" 
+                                states="bozza"
+                                class="oe_highlight"
+                                /> -->
+                        <button name="action_eseguito" type="object"
+                                string="Eseguito"
+                                states="assegnato"
+                                class="oe_highlight"
+                        />
+
+                        <button name="action_confermato" type="object"
+                                string="Conferma Verbale"
+                                states="eseguito"
+                                class="oe_highlight"
+                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?\n
+                                Se la categoria dell'impianto è 'Ascensore Generico' non sarà possibile andare avanti."
+                        />
+                        <button name="action_validato" type="object"
+                                string="Valida Definitivamente"
+                                states="confermato"
+                                class="oe_highlight"
+                        />
+
+                        <button name="303" type="action"
+                                string="Conferma Verbale (PIN)"
+                                states="eseguito" class="oe_highlight"
+                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
+                        <button name="303" type="action"
+                                string="Valida Definitivamente (PIN)"
+                                states="confermato"
+                                class="oe_highlight"/>
+
+                        <button name="action_annullato" type="object" string="Annulla Verbale" states="bozza,assegnato"
+                                confirm="Sei sicuro di voler ANNULLARE la verifica?"/>
+
+                        <button name="send_mail" type="object"
+                                string="Invia per email"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', 'validato')]}"
+                                confirm="Verrà inviata una email all'amministratore ed eventualmente al manutentore.
+                                La casella info@icoversrl.it riceverà una Copia Conforme del messaggio. Continuare?"/>
+
+                        <!-- STOP SDC  EDIT -->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1 decoration-danger="1" attrs="{'invisible': [('blocco_amministrativo', '=', False)]}">
+                                BLOCCO AMMINISTRATIVO IN CORSO
+                            </h1>
+                            <h1>
+                                <label for="name" string="Verifica N." attrs="{'invisible': [('state','not in',('bozza','assegnato'))]}"/>
+                                <label for="name" string="Verbale N." attrs="{'invisible': [('state','not in',('eseguito','confermato','validato'))]}"/>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                                <label for="name" string=" - Straordinaria" attrs="{'invisible': [('periodica', '=', True)]}"/>
+                                <label for="name" string=" - Periodica" attrs="{'invisible': [('periodica', '=', False)]}"/>
+
+                            </h1>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="impianto_categoria_id" string="Tipo Impianto" options="{'no_open': True}"/>
+                                <field name="customer_id" string="Cliente" attrs="{'readonly': [('name', '!=', '/')]}" options="{'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="ispettore_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                <field name="responsabile_tecnico_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <label for="impianto_id" string="Ubicazione"/>
+                                <div>
+                                    <field name="impianto_id" attrs="{'readonly': [('name', '!=', '/')]}"/>
+                                    <field name="impianto_etichetta"/>
+                                    <field name="impianto_indirizzo"/>
+                                    <field name="impianto_indirizzo2" attrs="{'invisible': [('impianto_indirizzo2', '=', False)]}"/>
+                                    <field name="impianto_citta"/>
+                                    <div class="address_format">
+                                        <field name="impianto_cap"/>
+                                        <field name="impianto_provincia"/>
+                                    </div>
+                                </div>
+                            </group>
+                            <group>
+                                <!--<field name="data_assegnazione"/>-->
+                                <field name="data_programmazione"/>
+                                <!--<field name="data_esecuzione"/>-->
+                                <field name="data_verbale"/>
+                                <field name="multi_data" placeholder="Es.06/01/2017,07/01/2017.."
+                                       attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                       ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                                <field name="data_validazione" attrs="{'invisible': [('state', 'not in', 'validato')]}"/>
+                            </group>
+                            <group>
+                                <field name="data_ultima_verifica"/>
+
+                                <field name="prossima_verifica" string="Prossima Verifica"
+                                       attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="manutentore_id" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            <field name="referente_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                        </group>
+
+                        <group>
+                            <h1>Entrare nell'impianto per modificare gli attributi descrittivi</h1>
+                        </group>
+
+                        <group>
+                            <field name="impianto_categoria_name" invisible="1"/>
+                            <field name="rilievi_precedenti" string="Eventuali rilievi precedenti ottemperati"
+                                   attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}"/>
+                            <field name="norma_riferimento" string="Norma/e di Riferimento"
+                                   attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}"/>
+                            <field name="mat_verifiche_precedenti" string="Eventuali verifiche precedenti"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="satm_omologazione" string="Omologazione Impianto"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="note_di_registro" string="Note al registro degli esiti"
+                                   attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}" />
+                            <!-- Campi MAT -->
+                            <field name="mat_prot_lettere" string="N.Prot. e data lettera Az.Erogatrice"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
+                            <field name="mat_con_cabina" string="Con Propria Cabina"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
+                            <field name="mat_protezione_propria_cabina" string="Verifica Protezione Cabina"
+                                   attrs="{'invisible': [('mat_con_cabina', '=', False)]}"/>
+                            <field name="mat_formula_protezione_propria_cabina" string="Formula"
+                                   attrs="{'invisible': [('mat_con_cabina', '=', False)]}"/>
+                            <field name="mat_formula_verificata_note" string="Nota Formula"
+                                   placeholder="Es. La relazione non è verificata quindi è necessario..."
+                                   attrs="{'invisible': [('mat_con_cabina', '=', False)]}"/>
+                            <!-- Fine Campi MAT -->
+                            <field name="mat_kit_utilizzato" string="Strumento Utilizzato"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="data_validita_taratura_strumento" string="Data Validità Taratura"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                        </group>
+
+                        <group>
+                            <field name="mat_progetto" string="Progetto" widget="radio"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="mat_progetto_note" string="Note Progetto"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="mat_dichiarazione" string="Dichiarazione di Conformità" widget="radio"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="mat_progetto_note" string="Note Dichiarazione"
+                                   attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                        </group>
+
+                        <!-- Riscontri Ascensore, PEM -->
+                        <group attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),
+                        ('impianto_categoria_name', 'in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                            <field name="verbale_riscontro_riga_ids">
+                                <tree string="Riscontri" editable="bottom" create="false" delete="false">
+                                    <field name="verbale_id" invisible="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="valore_attributo_id"
+                                           options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <!-- Rilievi Ascensore, PEM -->
+                        <group attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),
+                        ('impianto_categoria_name', 'in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                            <field name="verbale_rilievo_riga_ids">
+                                <tree string="Rilievi" editable="bottom" create="false" delete="false">
+                                    <field name="verbale_id" invisible="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="valore_attributo_id"
+                                           options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    <field name="valore_rilievo" />
+                                    <field name="unita_di_misura_id" string="UdM" readonly="1" />
+                                    <field name="note_rilievo" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <!-- Rilievi MAT, SATM -->
+                        <group attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),('impianto_categoria_name', 'not in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                            <field name="verbale_rilievo_mat_riga_ids">
+                                <tree string="Rilievi" editable="bottom" create="false" delete="false">
+                                    <field name="verbale_id" invisible="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="valore_attributo_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    <field name="note_rilievo" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group>
+                            <field name="kit_utilizzato" string="Kit utilizzato N."
+                                   attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),
+                                   ('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}"/>
+                        </group>
+                        <!-- Osservazioni Ascensore, PEM -->
+                        <group  attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),
+                        ('impianto_categoria_name', 'in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                            <field name="verbale_osservazione_riga_ids">
+                                <tree decoration-danger="vincolante" string="Osservazioni" editable="bottom">
+                                    <field name="verbale_id" invisible="1"/>
+                                    <field name="osservazione_id"
+                                           options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    <field name="name"/>
+                                    <field name="vincolante" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <!-- Osservazioni MAT, SATM -->
+                        <group  attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),
+                        ('impianto_categoria_name', 'not in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                            <field name="verbale_osservazione_mat_riga_ids">
+                                <tree decoration-danger="vincolante" string="Osservazioni" editable="bottom">
+                                    <field name="verbale_id" invisible="1"/>
+                                    <field name="osservazione_id"
+                                           options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    <field name="name"/>
+                                    <field name="vincolante" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group>
+                            <field name="non_conformita" string="Non Conformità"
+                                   attrs="{'invisible': [('impianto_categoria_name', 'not in', ('Messa a Terra','Scariche Atmosferiche'))]}"/>
+                        </group>
+
+                        <!-- Raccomandazioni MAT, SATM -->
+                        <group attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),
+                        ('impianto_categoria_name', 'not in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                            <field name="verbale_raccomandazione_riga_ids" string="Raccomandazioni">
+                                <tree string="Raccomandazioni" editable="bottom" create="false" delete="false">
+                                    <field name="verbale_id" invisible="1"/>
+                                    <field name="raccomandazione_id"
+                                           options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    <field name="name"/>
+                                    <field name="vincolante" invisible="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="ore_lavorate" string="Ore Lavorate"
+                                   attrs="{'invisible': [('impianto_categoria_name','!=','Messa a Terra'),
+                                   ('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
+                            <field name="esito_verifica" string="Esito della Verifica" decoration-success="esito_verifica=='Positivo'"/>
+                        </group>
+                        <notebook>
+                            <page string="Altro" class="oe_page_">
+                                <group>
+                                    <field name="note_interne"/>
+                                </group>
+                                <group>
+                                    <!--
+                                                                        <field name="impianto_riga_descrizione_ids" nolabel="1">
+                                                                            <tree string="Attributi" editable="bottom" create="false" delete="false">
+                                                                                <field name="name" readonly="1"/>
+                                                                                <field name="valore_attributo"/>
+                                                                                <field name="unita_di_misura_id" readonly="1"/>
+                                                                            </tree>
+                                                                        </field>
+                                    -->
+                                </group>
+                            </page>
+
+                            <!-- START BJ_edit-->
+                            <page string="Informazioni Correlate" class="oe_page_" attrs="{'invisible': True}">
+                                <group>
+                                    <field name="contratto_id" options="{'no_open': True}"/>
+                                    <field name="periodica"/>
+                                    <field name="fattura_anticipata"/>
+                                    <field name="pagato" readonly="1"/>
+                                    <field name="cf_cliente"/>
+                                    <field name="piva_cliente"/>
+                                    <field name="blocco_amministrativo"/>
+                                    <field name="is_ispettore" invisible="1"/>
+                                    <field name="is_responsabile_tecnico" invisible="1"/>
+                                </group>
+                            </page>
+                            <!-- STOP BJ_edit-->
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- calendar view -->
+        <record model="ir.ui.view" id="calendar_gevi_verbali_verbale_view">
+            <field name="name">Assegnazione Verifica</field>
+            <field name="model">gevi_verbali.verbale</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario Verbali" date_start="data_programmazione">
+<!--                          color="ispettore_id">-->
+                    <field name="customer_id"/>
+                    <field name="impianto_etichetta"/>
+                    <field name="impianto_citta"/>
+                    <field name="manutentore_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- view tree gevi_verbali -->
+        <record model="ir.ui.view" id="view_gevi_verbali_verbale_tree">
+            <field name="name">gevi_verbali.verbale.tree</field>
+            <field name="model">gevi_verbali.verbale</field>
+            <field name="arch" type="xml">
+                <tree string="Lista Verifiche e Verbali" create="false"
+                      decoration-muted="state=='annullato'"
+                      decoration-info="state=='assegnato'"
+                      decoration-success="state in ('eseguito','pagamento_parziale')">
+                    <field name="name" />
+                    <field name="data_verbale" attrs="{'invisible': [('state','not in',('confermato','validato'))]}"/>
+                    <field name="customer_id" />
+                    <field name="impianto_id"/>
+                    <field name="periodica"/>
+                    <field name="impianto_categoria_id" />
+                    <field name="ispettore_id"/>
+                    <!--<field name="data_assegnazione" attrs="{'nolabel': [('state','not in','assegnato')]}"/>-->
+                    <field name="data_programmazione"/>
+                    <field name="data_ultima_verifica"/>
+                    <!--<field name="data_esecuzione" attrs="{'invisible': [('state','not in','eseguito')]}"/>-->
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali action -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_list">
+            <field name="name">Verifiche e Verbali</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+        <!-- search gevi_verbali filter -->
+        <record model="ir.ui.view" id="search_gevi_verbali_verbale_view">
+            <field name="name">gevi_verbali.verbale.search</field>
+            <field name="model">gevi_verbali.verbale</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="data_verbale"/>
+                    <field name="customer_id" />
+                    <field name="impianto_id"/>
+                    <field name="impianto_categoria_id" />
+                    <field name="ispettore_id"/>
+                    <field name="cf_cliente"/>
+                    <field name="piva_cliente"/>
+                    <field name="referente_id"/>
+                    <!--<field name="data_assegnazione" attrs="{'nolabel': [('state','not in','assegnato')]}"/>-->
+                    <field name="data_programmazione"/>
+                    <field name="data_ultima_verifica"/>
+                    <!--<field name="data_esecuzione" attrs="{'invisible': [('state','not in','eseguito')]}"/>-->
+                    <field name="state" />
+
+                    <filter string="Bozza"
+                            name="bozza"
+                            domain="[('state','=','bozza')]"
+                            help="Filtra per Bozza" />
+                    <filter string="Assegnato"
+                            name="assegnato"
+                            domain="[('state','=','assegnato')]"
+                            help="Filtra per Assegnato" />
+                    <filter string="Eseguito"
+                            name="eseguito"
+                            domain="[('state','=','eseguito')]"
+                            help="Filtra per Eseguito" />
+                    <filter string="Confermato"
+                            name="confermato"
+                            domain="[('state','=','confermato')]"
+                            help="Filtra per Confermato" />
+                    <filter string="Validato"
+                            name="validato"
+                            domain="[('state','=','validato')]"
+                            help="Filtra per Validato" />
+                    <filter string="Annullato"
+                            name="annullato"
+                            domain="[('state','=','annullato')]"
+                            help="Filtra per Annullato" />
+
+                    <group string="Raggruppa">
+                        <filter string="Stato"
+                                name="group_by_state"
+                                context="{'group_by':'state'}"
+                                help="filtro per Stato" />
+                        <filter string="Cliente"
+                                name="group_by_customer_id"
+                                context="{'group_by':'customer_id'}"
+                                help="filtro per Cliente" />
+                        <filter string="Amministratore"
+                                name="group_by_referente_id"
+                                context="{'group_by':'referente_id'}"
+                                help="filtro per Amministratore" />
+                        <filter string="Manutentore"
+                                name="group_by_manutentore_id"
+                                context="{'group_by':'manutentore_id'}"
+                                help="filtro per Manutentore" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter bozza -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_bozza">
+            <field name="name">Bozza</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_state': 'bozza'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una Verifica
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter assegnato -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_assegnato">
+            <field name="name">Assegnato</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_state': 'assegnato'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una Verifica
+                </p>
+            </field>
+        </record>
+        <!-- action gevi_verbali filter eseguito -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_eseguito">
+            <field name="name">Eseguito</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_state': 'eseguito'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una Verifica
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter confermato -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_confermato">
+            <field name="name">Confermato</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_state': 'confermato'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter validato -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_validato">
+            <field name="name">Validato</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_state': 'validato'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter annullato -->
+        <record model="ir.actions.act_window" id="action_gevi_verbali_verbale_annullato">
+            <field name="name">Annullato</field>
+            <field name="res_model">gevi_verbali.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_state': 'annullato'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

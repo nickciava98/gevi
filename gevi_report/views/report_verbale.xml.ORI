@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="gevi_report.report_verbale">       
+            <t t-name="gevi_report.report_verbale">  
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="doc.state != 'eseguito' and doc.state != 'validato' and doc.state != 'confermato'">
+                        <t t-call="gevi_report.report_no_stampa" />
+                    </t>
+                    <t t-if="doc.state == 'eseguito' or doc.state == 'confermato' or doc.state == 'in_revisione' or doc.state == 'validato'">                                       
+                        <t t-if="'Ascensore' in doc.impianto_categoria_id.name">
+                            <t t-if="doc.periodica == True">
+                                <t t-call="gevi_report.report_verbale_ascensore_periodica" />     
+                            </t>
+                            <t t-if="doc.periodica == False">
+                                <t t-call="gevi_report.report_verbale_ascensore_straordinaria" />     
+                            </t>
+                        </t>                            
+                        <t t-if="'Messa' in doc.impianto_categoria_id.name">
+                            <t t-call="gevi_report.report_verbale_mat" />                                                                                        
+                        </t>    
+                        <t t-if="'Scariche' in doc.impianto_categoria_id.name">
+                            <t t-call="gevi_report.report_verbale_satm" />                                                                                        
+                        </t>
+                        <t t-if="'Piattaforma' in doc.impianto_categoria_id.name">
+                            <t t-if="doc.periodica == True">
+                                <t t-call="gevi_report.report_verbale_pem_periodica" />     
+                            </t>
+                            <t t-if="doc.periodica == False">
+                                <t t-call="gevi_report.report_verbale_pem_straordinaria" />     
+                            </t>                                                                                    
+                        </t>
+                        <t t-if="'Montacarichi' in doc.impianto_categoria_id.name">
+                            <t t-if="doc.periodica == True">
+                                <t t-call="gevi_report.report_verbale_pem_periodica" />     
+                            </t>
+                            <t t-if="doc.periodica == False">
+                                <t t-call="gevi_report.report_verbale_pem_straordinaria" />     
+                            </t>                                                                                    
+                        </t>
+                    </t>           
+                </t>
+            </t>  
+        </template>  
+    </data>
+</openerp>        

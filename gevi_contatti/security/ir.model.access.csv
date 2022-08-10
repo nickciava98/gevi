@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gevi_contatti_referente,access_gevi_contatti_referente,model_gevi_contatti_referente,base.group_user,1,1,1,1
+access_gevi_contatti_manutentore,access_gevi_contatti_manutentore,model_gevi_contatti_manutentore,base.group_user,1,1,1,1
+access_gevi_contatti_contatto_categoria,access_gevi_contatti_contatto_categoria,model_gevi_contatti_contatto_categoria,base.group_user,1,1,1,1

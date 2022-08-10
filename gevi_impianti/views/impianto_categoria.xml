@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--Form Categoria Impianto-->
+       	<record model="ir.ui.view" id="view_gevi_impianto_categoria_form">
+			<field name="name">Categoria Impianto</field>
+			<field name="model">gevi.impianti.impianto_categoria</field>
+			<field name="arch" type="xml">
+				<form string="Impianto Form">
+					<sheet>
+                        <h1>Categoria Impianto</h1>
+                        <group>
+                            <group>
+                                <field name="codice_categoria" string="Codice Categoria" style="width: 15%%" />
+                                <field name="name" string="Categoria Impianto" />
+                            </group>
+                            <group>
+                            </group>                            
+                        </group>
+                        <group>
+                            <field name="descrizione" string="Descrizione" /> 
+                        </group>   
+                        <notebook>
+                            <page string="Attributi Generici" class="oe_page_">
+                                <group>
+                                    <field name="impianto_attributo_descrittivo_ids">
+                                        <tree string="Attributi Generici" editable="bottom">
+                                            <field name="impianto_categoria_id" invisible="1"/>
+                                            <field name="name"/>
+                                            <field name="unita_di_misura_id"/>
+                                        </tree>                           
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Attributi Riscontro" class="oe_page_">
+                                <group>
+                                    <field name="impianto_attributo_riscontro_ids">
+                                        <tree string="Attributi Riscontro" editable="bottom">
+                                            <field name="impianto_categoria_id" invisible="1"/>
+                                            <field name="name"/>
+                                        </tree>                           
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Attributi Rilievo" class="oe_page_">
+                                <group>
+                                    <field name="impianto_attributo_rilievo_ids">
+                                        <tree string="Attributi Rilievo" editable="bottom">
+                                            <field name="impianto_categoria_id" invisible="1"/>
+                                            <field name="name"/>
+                                            <field name="unita_di_misura_id"/>
+                                        </tree>                           
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>                  
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <!--Action Categoria Impianto-->
+        <record model="ir.actions.act_window" id="action_gevi_impianto_categoria_form">
+            <field name="name">Categoria Impianto</field>
+            <field name="res_model">gevi.impianti.impianto_categoria</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Inserisci Categoria Impianto
+                </p>
+            </field>
+        </record>
+
+        <!-- Tree Categoria Impianto -->
+        <record model="ir.ui.view" id="gevi_impianto_categoria_tree">
+            <field name="name">Categoria Impianto</field>
+            <field name="model">gevi.impianti.impianto_categoria</field>
+            <field name="arch" type="xml">
+                <tree string="Lista Categoria Impianto">
+                    <field name="codice_categoria"/>
+                    <field name="name"/>
+                    <field name="descrizione"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

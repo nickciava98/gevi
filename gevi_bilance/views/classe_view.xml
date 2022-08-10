@@ -1,0 +1,38 @@
+<openerp>
+  <data>
+  
+    <!-- actions opening views on classe -->
+    <record model="ir.actions.act_window" id="gevi_bilance.action_window_configurazione_classe">
+      <field name="name">Gevi Bilance Classe Window</field>
+      <field name="res_model">gevi_bilance.classe</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+	
+	<!-- Classe Tree -->
+    <record model="ir.ui.view" id="gevi_bilance.classe_view_tree">
+      <field name="name">Classe Bilancia Tree</field>
+      <field name="model">gevi_bilance.classe</field>
+      <field name="arch" type="xml">
+        <tree>
+          <!--field name="classeBilancia"/-->
+		  <field name="name"/>
+        </tree>
+      </field>
+    </record>
+	
+	<!-- Classe Form -->
+    <record model="ir.ui.view" id="gevi_bilance.classe_view_form">
+      <field name="name">Classe Bilancia Form</field>
+      <field name="model">gevi_bilance.classe</field>
+      <field name="arch" type="xml">
+        <form string="Classe Bilancia Form">
+		  <group>	
+			<!--field name="classeBilancia"/-->
+			<field name="name" string="Classe Bilancia string" placeholder="Classe Bilancia..."/>
+		  </group>
+        </form>
+      </field>
+    </record>
+	
+  </data>
+</openerp>

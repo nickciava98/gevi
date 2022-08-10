@@ -1,0 +1,8 @@
+"id","codice_categoria","name","descrizione"
+"__export__.gevi_impianti_impianto_categoria_1","01","Ascensore Oleodinamico","AI"
+"__export__.gevi_impianti_impianto_categoria_2","02","Ascensore Elettromeccanico","AE"
+"__export__.gevi_impianti_impianto_categoria_3","03","Messa a Terra","MAT"
+"__export__.gevi_impianti_impianto_categoria_4","04","Scariche Atmosferiche","SAT"
+"__export__.gevi_impianti_impianto_categoria_5","05","Piattaforma Elevatrice","PEM"
+"__export__.gevi_impianti_impianto_categoria_6","06","Montacarichi","PEM"
+"__export__.gevi_impianti_impianto_categoria_7","07","Ascensore Generico","AG"

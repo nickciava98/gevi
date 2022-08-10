@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Form normeascensori-->
+    <record model="ir.ui.view" id="view_gevi_verbali_normeascensori_form">
+        <field name="name">Norme Ascensori</field>
+        <field name="model">gevi_verbali.normeascensori</field>
+        <field name="arch" type="xml">
+            <form string="Form Norme Ascensori">
+                <sheet>
+                    <h1>Norma</h1>
+                    <group>
+                        <field name="name" string="Nome" />
+                        <field name="impianto_categoria_id"/>
+                        <field name="anno_inizio"/>
+                        <field name="anno_fine"/>
+                        <field name="norma_collaudo" />
+                        <field name="norma_straordinaria"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action normeascensori -->
+    <record model="ir.actions.act_window" id="action_gevi_verbali_normeascensori_form">
+        <field name="name">Norme Ascensori</field>
+        <field name="res_model">gevi_verbali.normeascensori</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Norma
+            </p>
+        </field>
+    </record>
+
+    <!-- Tree normeascensori -->
+    <record model="ir.ui.view" id="gevi_verbali_normeascensori_tree">
+        <field name="name">Norme Ascensori</field>
+        <field name="model">gevi_verbali.normeascensori</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Norme">
+                <field name="name" string="Nome" />
+                <field name="impianto_categoria_id"/>
+                <field name="anno_inizio"/>
+                <field name="anno_fine"/>
+                <field name="norma_collaudo" />
+                <field name="norma_straordinaria"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

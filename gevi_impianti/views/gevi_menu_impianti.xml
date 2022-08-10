@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>   
+    <!-- MENU IMPIANTI -->
+        <!-- Top Menu -->
+		<menuitem id="gevi_impianti_top_menu" name="Impianti"/>    
+
+        <!-- Side Menu - Applicazione -->
+        <menuitem id="gevi_impianti_side_menu_categoria" name="Impianti" parent="gevi_impianti_top_menu"/>
+        <menuitem id="gevi_impianti_tutti_menu" name="Tutte le categorie" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_list" sequence="1"/>
+        <menuitem id="oleo_menu" name="Ascensori Oleodinamici" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_ascensori_oleo" sequence="2"/>
+        <menuitem id="elet_menu" name="Ascensori Elettromeccanici" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_ascensori_elet" sequence="3"/>
+        <menuitem id="terra_menu" name="Messa a Terra" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_impianto_mat" sequence="4"/>
+        <menuitem id="atmo_menu" name="Scariche Atmosferiche" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_impianto_satm" sequence="5"/>
+        <menuitem id="pelev_gen_menu" name="Piattaforma Elevatrice" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_piattaforma_elevatrice" sequence="6"/>
+        <menuitem id="monta_gen_menu" name="Montacarichi" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_montacarichi" sequence="7"/>
+        <menuitem id="asc_gen_menu" name="Ascensore Generico" parent="gevi_impianti_side_menu_categoria" action="action_gevi_impianti_impianto_ascensore_generico" sequence="8"/>
+
+        <menuitem id="gevi_impianti_side_menu_configurazione" name="Configurazione" parent="gevi_impianti_top_menu"/>
+        <menuitem id="gevi_impianti_categoria_menu" name="Categoria Impianto" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianto_categoria_form"/>
+        <menuitem id="gevi_impianto_attributo_descrittivo_menu" name="Attributo Descrittivo" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianto_attributo_descrittivo_form"/>
+        <menuitem id="gevi_impianto_attributo_riscontro_menu" name="Attributo Riscontro" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianto_attributo_riscontro_form"/>
+        <menuitem id="gevi_impianto_attributo_rilievo_menu" name="Attributo Rilievo" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianto_attributo_rilievo_form"/>
+        <menuitem id="gevi_impianto_attributo_rilievo_mat_menu" name="Attributo Rilievo MAT" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianto_attributo_rilievo_mat_form"/>
+        <menuitem id="gevi_impianto_valore_attributo_menu" name="Valore Attributo" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianti_valore_attributo_form"/>
+        <menuitem id="gevi_impianto_unita_di_misura_menu" name="Unità di Misura" parent="gevi_impianti_side_menu_configurazione" action="action_gevi_impianti_unita_di_misura_form"/>
+
+    </data>
+</openerp>
