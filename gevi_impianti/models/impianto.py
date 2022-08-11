@@ -83,11 +83,11 @@ class Impianto(models.Model):
         self.provincia = record.customer_id.provincia
         self.regione = record.customer_id.regione
 
-    #  
-    # def write(self, values):
-    #     if 'impianto_categoria_id' in values:
-    #         self.carica_attributi_descrittivi()
-    #     return super(Impianto, self).write(values)
+
+    def write(self, values):
+        if 'impianto_categoria_id' in values:
+            self.carica_attributi_descrittivi()
+        return super(Impianto, self).write(values)
 
     @api.model
     def create(self, values):
@@ -107,13 +107,13 @@ class Impianto(models.Model):
      
     def carica_attributi_descrittivi(self):
         for r in self:
-            if (r.attributi_caricati is False):
+            if (not r.attributi_caricati):
                 new_linee_attributo = []
                 for linea in r.impianto_categoria_id.impianto_attributo_descrittivo_ids:
-                    new_linee_attributo.append([0, 0, {
+                    new_linee_attributo.append((0, 0, {
                         'name': linea.name,
-                        'unita_di_misura_id': linea.unita_di_misura_id,
-                        }])
+                        'unita_di_misura_id': linea.unita_di_misura_id.id,
+                        }))
                 r.attributi_caricati = True
                 self.impianto_riga_descrizione_ids = new_linee_attributo
 
@@ -135,14 +135,14 @@ class Impianto(models.Model):
             self.piva_cliente = record.customer_id.piva
             self.referente_name = record.customer_id.referente_id.name
 
-    def _delete_attributi_impianto(self):
-        for linea in self.impianto_riga_descrizione_ids:
-            linea.unlink()
-
-     
-    def ricarica_attributi_impianto(self):
-        self.attributi_caricati = False
-        # riga sottostante cancella tutti gli attributi descrittivi dell'impianto
-        self._delete_attributi_impianto()
-        self.carica_attributi_descrittivi()
+    # def _delete_attributi_impianto(self):
+    #     for linea in self.impianto_riga_descrizione_ids:
+    #         linea.unlink()
+    #
+    #
+    # def ricarica_attributi_impianto(self):
+    #     self.attributi_caricati = False
+    #     # riga sottostante cancella tutti gli attributi descrittivi dell'impianto
+    #     self._delete_attributi_impianto()
+    #     self.carica_attributi_descrittivi()
 

@@ -7,11 +7,11 @@ class ImpiantoRigaDescrizione(models.Model):
     name = fields.Char('Nome')
     impianto_id = fields.Many2one(
         'gevi.impianti.impianto',
-        ondelete='cascade',
+        #ondelete='cascade',
         string="Riferimento Impianto")
 
     valore_attributo = fields.Char(string="Valore")
     unita_di_misura_id = fields.Many2one(
         'gevi.impianti.unita_di_misura',
-        ondelete='set null',
+        #ondelete='cascade',
         string="Unità di misura")
