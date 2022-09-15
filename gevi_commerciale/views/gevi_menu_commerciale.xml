@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
+<odoo>
+    <menuitem id="gevi_commerciale_top_menu" name="Commerciale" sequence="9"/>
 
-    <!-- MENU CONTATTI -->
-         <!-- Top Menu -->
-		<menuitem id="gevi_commerciale_top_menu" name="Commerciale" sequence="9"/>
-        
-        <menuitem id="gevi_commerciale_appuntamento_side_menu" name="Appuntamenti" parent="gevi_commerciale_top_menu"  sequence="1"/>
-        <menuitem id="gevi_commerciale_appuntamento_appuntamenti_menu" name="Appuntamenti" parent="gevi_commerciale_appuntamento_side_menu" action="action_gevi_commerciale_appuntamento_list" sequence="2"/>
-        <menuitem id="gevi_commerciale_appuntamento_miei_appuntamenti_menu" name="Miei Appuntamenti" parent="gevi_commerciale_appuntamento_side_menu" action="action_gevi_commerciale_miei_appuntamenti_list" sequence="3"/>
-    
-        <menuitem id="gevi_commerciale_comunicazione_side_menu" name="Comunicazioni" parent="gevi_commerciale_top_menu"  sequence="4"/>
-        <menuitem id="gevi_commerciale_comunicazione_comunicazioni_menu" name="Comunicazioni" parent="gevi_commerciale_comunicazione_side_menu" action="action_gevi_commerciale_comunicazione_list" sequence="5"/>
-        <menuitem id="gevi_commerciale_comunicazione_mie_comunicazioni_menu" name="Mie Comunicazioni" parent="gevi_commerciale_comunicazione_side_menu" action="action_gevi_commerciale_mie_comunicazioni_list" sequence="6"/>
-    <!-- FINE CONTATTI -->
+    <menuitem id="gevi_commerciale_appuntamento_side_menu" name="Appuntamenti"
+              parent="gevi_commerciale_top_menu"  sequence="1"/>
+    <menuitem id="gevi_commerciale_appuntamento_appuntamenti_menu" name="Appuntamenti"
+              parent="gevi_commerciale_appuntamento_side_menu"
+              action="action_gevi_commerciale_appuntamento_list" sequence="2"/>
+    <menuitem id="gevi_commerciale_appuntamento_miei_appuntamenti_menu" name="Miei Appuntamenti"
+              parent="gevi_commerciale_appuntamento_side_menu"
+              action="action_gevi_commerciale_miei_appuntamenti_list" sequence="3"/>
 
-    </data>
-</openerp>
+    <menuitem id="gevi_commerciale_comunicazione_side_menu" name="Comunicazioni"
+              parent="gevi_commerciale_top_menu"  sequence="4"/>
+    <menuitem id="gevi_commerciale_comunicazione_comunicazioni_menu" name="Comunicazioni"
+              parent="gevi_commerciale_comunicazione_side_menu"
+              action="action_gevi_commerciale_comunicazione_list" sequence="5"/>
+    <menuitem id="gevi_commerciale_comunicazione_mie_comunicazioni_menu" name="Mie Comunicazioni"
+              parent="gevi_commerciale_comunicazione_side_menu"
+              action="action_gevi_commerciale_mie_comunicazioni_list" sequence="6"/>
+</odoo>

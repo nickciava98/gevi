@@ -1,23 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <report 
+<odoo>
+    <report
             id="report_gevi_estrattoconto_scoperto"
             string="Estratto Conto Scoperto"
-            model="gevi_contatti.referente" 
+            model="gevi_contatti.referente"
             report_type="qweb-pdf"
-            file="gevi_estrattocontoscoperto.report_scoperto" 
+            file="gevi_estrattocontoscoperto.report_scoperto"
             name="gevi_estrattocontoscoperto.report_scoperto"
-        />
-<!--
-        <report 
-            id="action_report_elenco_prelievi"
-            string="Elenco Prelievi Super"
-            model="res.partner"
-            report_type="qweb-pdf"
-            name="gelab_report.elenco_prelievi"
-            file="gelab_report.elenco_prelievi"
-            />
--->
-    </data>
-</openerp>
+    />
+    <!--
+            <report
+                id="action_report_elenco_prelievi"
+                string="Elenco Prelievi Super"
+                model="res.partner"
+                report_type="qweb-pdf"
+                name="gelab_report.elenco_prelievi"
+                file="gelab_report.elenco_prelievi"
+                />
+    -->
+</odoo>

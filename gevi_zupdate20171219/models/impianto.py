@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 
 
 class Impianto(models.Model):
@@ -11,7 +11,6 @@ class Impianto(models.Model):
         inverse_name='impianto_id',
     )
 
-    @api.multi
     def apri_verbale(self):
         return {
             'type': 'ir.actions.act_window',

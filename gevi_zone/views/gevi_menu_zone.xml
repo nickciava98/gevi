@@ -1,17 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-    <!-- MENU CONTATTI -->
-        <!-- Side Menu - Configurazione -->
-        <!--<menuitem id="gevi_contatti_zona_agente" name="Zona Agente" parent="gevi_contatti.gevi_contatti_side_menu_configurazione" action="action_gevi_zone_zona_agente_tree"/>-->
-        <menuitem id="gevi_contatti_zona_commerciale" name="Zona Commerciale" parent="gevi_contatti.gevi_contatti_side_menu_configurazione" action="action_gevi_zone_zona_commerciale_tree"/>
-    
+<odoo>
+    <menuitem id="gevi_contatti_zona_commerciale" name="Zona Commerciale" parent="gevi_contatti.gevi_contatti_side_menu_configurazione" action="action_gevi_zone_zona_commerciale_tree"/>
+
     <!-- FINE CONTATTI -->
 
     <!-- MENU IMPIANTI -->
-        <menuitem id="gevi_impianto_zona_impianto" name="Zona Impianto" parent="gevi_impianti.gevi_impianti_side_menu_configurazione" action="action_gevi_zone_zona_impianto_tree"/>
-    
-    <!-- FINE IMPIANTI -->
+    <menuitem id="gevi_impianto_zona_impianto" name="Zona Impianto" parent="gevi_impianti.gevi_impianti_side_menu_configurazione" action="action_gevi_zone_zona_impianto_tree"/>
 
-    </data>
-</openerp>
+    <!-- FINE IMPIANTI -->
+</odoo>

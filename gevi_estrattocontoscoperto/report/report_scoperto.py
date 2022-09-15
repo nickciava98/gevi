@@ -3,7 +3,7 @@
 
 from datetime import datetime
 import time
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -13,7 +13,6 @@ class ReportScoperto(models.AbstractModel):
     _name = 'report.gevi_estrattocontoscoperto.report_scoperto'
     _description = 'Estratto Conto Scoperto'
 
-    @api.multi
     def render_html(self, data=None):
         amministratore = self.env['gevi_contatti.referente'].search([('id', '=', self.id)], limit=1)
         report_obj = self.env['report']

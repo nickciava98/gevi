@@ -1,351 +1,367 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_contratti_contratto_form">
+        <field name="name">gevi_contratti.contratto.form</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="arch" type="xml">
+            <form string="Contratto">
+                <header>
 
-        <!-- view form gevi_contratti -->
-		<record model="ir.ui.view" id="view_gevi_contratti_contratto_form">
-			<field name="name">gevi_contratti.contratto.form</field>
-			<field name="model">gevi_contratti.contratto</field>
-			<field name="arch" type="xml">
-				<form string="Contratto">
-                    <header>
+                    <button name="action_first_attivo" type="object" states="bozza" string="Attiva"
+                            class="oe_highlight"/>
 
-                        <button name="action_first_attivo" type="object" states="bozza" string="Attiva" class="oe_highlight"/>
-
-                        <button name="action_attivo" type="object" string="Riattiva Contratto" states="annullato,rescisso,scaduto,disdetta_uv" confirm="Attenzione: le verifiche annullate non saranno ripristinate!
+                    <button name="action_attivo" type="object" string="Riattiva Contratto"
+                            states="annullato,rescisso,scaduto,disdetta_uv" confirm="Attenzione: le verifiche annullate non saranno ripristinate!
 Riportare in bozza manualmente solo le verifiche necessarie."/>
 
-                        <button name="action_disdetta_uv" type="object" string="Disdetta U. V." states="attivo" class="oe_highlight" help="Un contratto in Disdetta UV chiuderà il contratto dopo l'esecuzione dell'ultima verifica periodica"/>
+                    <button name="action_disdetta_uv" type="object" string="Disdetta U. V." states="attivo"
+                            class="oe_highlight"
+                            help="Un contratto in Disdetta UV chiuderà il contratto dopo l'esecuzione dell'ultima verifica periodica"/>
 
-                        <button name="action_rescisso" type="object" string="Rescindi Contratto" states="attivo" class="oe_highlight"/>
-
-
-                        <button name="action_crea_verifica_periodica" type="object"
-                                string="Crea Periodica SPOT"
-                                groups="base.group_no_one"
-                                states="attivo"/>
+                    <button name="action_rescisso" type="object" string="Rescindi Contratto" states="attivo"
+                            class="oe_highlight"/>
 
 
-                        <button name="action_annullato" type="object" string="Annulla" states="attivo" confirm="L'annullamento del contratto comporterà l'annullamento di tutte le verifiche associate che si trovano nello stato bozza o assegnato. Vuoi continuare?"/>
-
-<!-- per impostare la visibilità del button action_crea_verifica_straordinaria non si è utilizzata la clausola states in combinazione con la clausola attrsperché andrebbe in AND invece di OR -->
-
-                        <button name="action_crea_verifica_straordinaria" type="object" confirm="Sarà generata la verifica straordinaria per questo contratto. Vuoi continuare?" string="Crea Verifica Straordinaria" attrs="{'invisible':['|',('state', 'not in', ('attivo','disdetta_uv')),('verifica_straordinaria', '=', False)]}"/>
+                    <button name="action_crea_verifica_periodica" type="object"
+                            string="Crea Periodica SPOT"
+                            states="attivo"/>
 
 
-                        <field name="state" widget="statusbar"/>
+                    <button name="action_annullato" type="object" string="Annulla"
+                            states="attivo"
+                            confirm="L'annullamento del contratto comporterà l'annullamento di tutte le verifiche associate che si trovano nello stato bozza o assegnato. Vuoi continuare?"/>
 
-                    </header>
-                        <sheet>
-                            <h1>
-                                <span class="oe_inline oe_form_field">SCHEDA CONTRATTO- </span> <field name="codice_contratto" class="oe_inline" readonly="1"/>
-                            </h1>
+                    <!-- per impostare la visibilità del button action_crea_verifica_straordinaria non si è utilizzata la clausola states in combinazione con la clausola attrsperché andrebbe in AND invece di OR -->
 
-                            <!-- Sezione Cliente-->
-                            <group string="Cliente di Fatturazione">
-                                <label for="customer_id" string="Nome Cliente"/>
-                                <div>
-                                    <field name="customer_id" attrs="{'readonly': [('codice_contratto', '!=', '/')]}" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-<!--
-<field name="customer_id" attrs="{'readonly': [('codice_contratto', '!=', '/')]}" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
--->
-                                </div>
-                            </group>
-                            <group>
-                                <label for="cliente_street" string="Dati Cliente"/>
-                                <div>
-                                    <field name="cliente_tipo"/>
-                                    <field name="cliente_street"/>
-                                    <field name="cliente_street2" invisible="1"/>
-                                    <field name="cliente_localita" attrs="{'invisible': [('cliente_localita', '=', False)]}"/>
-                                    <field name="cliente_city"/>
-                                    <div class="address_format">
-                                        <field name="cliente_zip" style="width: 19%"/>
-                                        <field name="cliente_provincia" style="width: 19%"/>
-                                    </div>
-                                </div>
-                            </group>
-
-                            <!-- Sezione Amministratore -->
-                            <group string="Amministratore">
-                                <label for="referente_id" string="Nome Amministratore"/>
-                                <div>
-                                    <field name="referente_id" string="Amministratore" placeholder="Nome Amministratore"/>
-<!--
-                                    <field name="referente_id" string="Amministratore" attrs="{'readonly': [('codice_contratto', '!=', '/')]}" placeholder="Nome Amministratore"/>
--->
-                                </div>
-                            </group>
-                            <group>
-                                <label for="referente_indirizzo" string="Indirizzo"/>
-                                <div>
-                                    <field name="referente_indirizzo"/>
-                                    <field name="referente_indirizzo2" invisible="1"/>
-                                    <field name="referente_localita" attrs="{'invisible': [('cliente_localita', '=', False)]}"/>
-                                    <field name="referente_citta"/>
-                                    <div class="address_format">
-                                        <field name="referente_cap" style="width: 19%"/>
-                                        <field name="referente_provincia" style="width: 19%"/>
-                                    </div>
-                                </div>
-                                <field name="referente_tel" string="Telefono"/>
-                                <field name="referente_cell" string="Cellulare"/>
-                                <field name="referente_fax" string="Fax"/>
-                                <field name="referente_email" string="Email"/>
-                                <field name="referente_interlocutore" string="Interlocutore"/>
-                            </group>
-
-                            <!-- Sezione Impianto -->
-                            <group string="Impianto">
-                                <label for="impianto_id" string="Nome Impianto"/>
-                                <div>
-                                    <field name="impianto_id" placeholder="Nome Impianto" attrs="{'readonly': [('state', '!=', 'bozza')]}" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
-                                </div>
-                            </group>
-                            <group>
-                                <field name="impianto_categoria_name" string="Categoria Impianto" readonly="1"/>
-                                <label for="impianto_etichetta" string="Ubicazione Impianto"/>
-                                <div>
-                                    <field name="impianto_etichetta" invisible="1"/>
-                                    <field name="impianto_indirizzo"/>
-                                    <field name="impianto_indirizzo2" invisible="1"/>
-                                    <field name="impianto_localita" attrs="{'invisible': [('impianto_localita', '=', False)]}"/>
-                                    <field name="impianto_citta"/>
-                                    <div class="address_format">
-                                        <field name="impianto_cap" style="width: 19%"/>
-                                        <field name="impianto_provincia" style="width: 19%"/>
-                                    </div>
-                                </div>
-                                <field name="data_ultima_verifica" placeholder="Data Ultima Verifica"/>
-                                <field name="data_prossima_verifica" placeholder="Data Prossima Verifica"/>
-                            </group>
-
-                            <!-- Sezione Impianto -->
-                            <group string="Manutentore">
-                                <label for="manutentore_id" string="Nome Manutentore"/>
-                                <div>
-                                    <field name="manutentore_id" string="Manutentore" placeholder="Nome Manutentore"/>
-                                </div>
-                            </group>
-                            <group>
-                                <field name="manutentore_citta" string="Città"/>
-                                <field name="manutentore_tel" string="Telefono"/>
-                                <field name="manutentore_cell" string="Cellulare"/>
-                                <field name="manutentore_fax" string="Fax"/>
-                                <field name="manutentore_email" string="Email"/>
-                                <field name="manutentore_interlocutore" string="Interlocutore"/>
-                            </group>
+                    <button name="action_crea_verifica_straordinaria" type="object"
+                            confirm="Sarà generata la verifica straordinaria per questo contratto. Vuoi continuare?"
+                            string="Crea Verifica Straordinaria"
+                            attrs="{'invisible':['|',('state', 'not in', ('attivo','disdetta_uv')),('verifica_straordinaria', '=', False)]}"/>
 
 
-                            <group string="Dati Verifica">
-                                <group>
-                                    <field name="impianto_categoria_id" placeholder="Categoria Impianto" invisible="1" options="{'no_open': True}"/>
-                                    <field name="periodicita_verifica" placeholder="Periodicità Verifica" attrs="{'readonly': [('impianto_categoria_name','not in',('Scariche Atmosferiche', 'Messa a Terra'))]}"/>
-                                    <label for="verifica_periodica" string="Verifica Periodica e Costo (€)"/>
-                                    <div>
-                                        <field name="verifica_periodica" style="width: 20%"/>
-                                        <field name="costo_verifica_periodica" style="width: 79%" attrs="{'readonly':[('verifica_periodica', '=', False)]}" placeholder="Costo Verifica Periodica (€)"/>
-                                    </div>
-                                    <label for="verifica_periodica" string="Verifica Straordinaria e Costo (€)"/>
-                                    <div>
-                                        <field name="verifica_straordinaria" style="width: 20%"/>
-                                        <field name="costo_verifica_straordinaria" style="width: 79%" attrs="{'readonly':[('verifica_straordinaria', '=', False)]}" placeholder="Costo Verifica Straordinaria (€)"/>
-                                    </div>
-                                    <field name="altre_norme" placeholder="Altre norme"/>
-                                    <field name="campi_validati" invisible="1"/>
-                                </group>
-                                <group>
-                                </group>
-                            </group>
-                            <group>
-                            </group>
+                    <field name="state" widget="statusbar"/>
 
-                            <group string="Dati Contabili">                               
-                                <group>
-                                    <field name="cliente_mod_pagamento" string="Modalità di pagamento Attuale"/>                                          
-                                    <field name="modalita_pagamento_id" placeholder="Modalità di Pagamento" options="{'no_open': True}"/>
-                                    <field name="durata_contratto"/>
-                                    <field name="codice_cig" string="Codice Identificativo Gara (CIG)" attrs="{'invisible': [('cliente_tipo', 'not in', 'Ente Pubblico')]}"/>
-                                    <field name="data_stipula" placeholder="Data di Stipula"/>
-                                    <field name="data_ultima_verifica_effettuata" invisible="1"/>  
-                                    <field name="n_verifiche_contratto" invisible="1"/>  
-                                    <field name="n_verifiche_effettuate" invisible="1"/>                          
-                                </group>
-                                <group>
-                                    <field name="blocco_amministrativo"/>
-                                    <field name="causale_blocco" attrs="{'readonly': [('blocco_amministrativo', '=', False)]}"/>
-                                </group>
-                            </group>
-                            <group>
-                            </group>
+                </header>
+                <sheet>
+                    <h1>
+                        <span class="oe_inline oe_form_field">SCHEDA CONTRATTO-</span>
+                        <field name="codice_contratto" class="oe_inline" readonly="1"/>
+                    </h1>
 
-                        <notebook>
-                            
-                        </notebook>
-					</sheet>
-				</form>
-			</field>
-		</record>
+                    <!-- Sezione Cliente-->
+                    <group string="Cliente di Fatturazione">
+                        <label for="customer_id" string="Nome Cliente"/>
+                        <div>
+                            <field name="customer_id" attrs="{'readonly': [('codice_contratto', '!=', '/')]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            <!--
+                            <field name="customer_id" attrs="{'readonly': [('codice_contratto', '!=', '/')]}" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                            -->
+                        </div>
+                    </group>
+                    <group>
+                        <label for="cliente_street" string="Dati Cliente"/>
+                        <div>
+                            <field name="cliente_tipo"/>
+                            <field name="cliente_street"/>
+                            <field name="cliente_street2" invisible="1"/>
+                            <field name="cliente_localita" attrs="{'invisible': [('cliente_localita', '=', False)]}"/>
+                            <field name="cliente_city"/>
+                            <div class="address_format">
+                                <field name="cliente_zip"/>
+                                <field name="cliente_provincia"/>
+                            </div>
+                        </div>
+                    </group>
+
+                    <!-- Sezione Amministratore -->
+                    <group string="Amministratore">
+                        <label for="referente_id" string="Nome Amministratore"/>
+                        <div>
+                            <field name="referente_id" string="Amministratore" placeholder="Nome Amministratore"/>
+                            <!--
+                                                                <field name="referente_id" string="Amministratore" attrs="{'readonly': [('codice_contratto', '!=', '/')]}" placeholder="Nome Amministratore"/>
+                            -->
+                        </div>
+                    </group>
+                    <group>
+                        <label for="referente_indirizzo" string="Indirizzo"/>
+                        <div>
+                            <field name="referente_indirizzo"/>
+                            <field name="referente_indirizzo2" invisible="1"/>
+                            <field name="referente_localita"
+                                   attrs="{'invisible': [('cliente_localita', '=', False)]}"/>
+                            <field name="referente_citta"/>
+                            <div class="address_format">
+                                <field name="referente_cap"/>
+                                <field name="referente_provincia"/>
+                            </div>
+                        </div>
+                        <field name="referente_tel" string="Telefono"/>
+                        <field name="referente_cell" string="Cellulare"/>
+                        <field name="referente_fax" string="Fax"/>
+                        <field name="referente_email" string="Email"/>
+                        <field name="referente_interlocutore" string="Interlocutore"/>
+                    </group>
+
+                    <!-- Sezione Impianto -->
+                    <group string="Impianto">
+                        <label for="impianto_id" string="Nome Impianto"/>
+                        <div>
+                            <field name="impianto_id" placeholder="Nome Impianto"
+                                   attrs="{'readonly': [('state', '!=', 'bozza')]}"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="impianto_categoria_name" string="Categoria Impianto" readonly="1"/>
+                        <label for="impianto_etichetta" string="Ubicazione Impianto"/>
+                        <div>
+                            <field name="impianto_etichetta" invisible="1"/>
+                            <field name="impianto_indirizzo"/>
+                            <field name="impianto_indirizzo2" invisible="1"/>
+                            <field name="impianto_localita"
+                                   attrs="{'invisible': [('impianto_localita', '=', False)]}"/>
+                            <field name="impianto_citta"/>
+                            <div class="address_format">
+                                <field name="impianto_cap"/>
+                                <field name="impianto_provincia"/>
+                            </div>
+                        </div>
+                        <field name="data_ultima_verifica" placeholder="Data Ultima Verifica"/>
+                        <field name="data_prossima_verifica" placeholder="Data Prossima Verifica"/>
+                    </group>
+
+                    <!-- Sezione Impianto -->
+                    <group string="Manutentore">
+                        <label for="manutentore_id" string="Nome Manutentore"/>
+                        <div>
+                            <field name="manutentore_id" string="Manutentore" placeholder="Nome Manutentore"/>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="manutentore_citta" string="Città"/>
+                        <field name="manutentore_tel" string="Telefono"/>
+                        <field name="manutentore_cell" string="Cellulare"/>
+                        <field name="manutentore_fax" string="Fax"/>
+                        <field name="manutentore_email" string="Email"/>
+                        <field name="manutentore_interlocutore" string="Interlocutore"/>
+                    </group>
 
 
-        <!-- view tree gevi_contratti -->
-        <record model="ir.ui.view" id="view_gevi_contratti_contratto_tree">
-			<field name="name">gevi_contratti.contratto.tree</field>
-			<field name="model">gevi_contratti.contratto</field>
-			<field name="arch" type="xml">
-				<tree string="Lista Contratti">
-                    <field name="name" default_focus="1" placeholder="Nome contratto"/>
-                    <field name="impianto_categoria_name"/> 
-                    <field name="referente_id" placeholder="Referente"/>
-                    <field name="customer_id" placeholder="Cliente Fatturazione"/>
-                    <field name="costo_verifica_periodica" string="Valore Periodica"/>
-                    <field name="state" /> 
-				</tree>		
-			</field>
-		</record>
+                    <group string="Dati Verifica">
+                        <group>
+                            <field name="impianto_categoria_id" placeholder="Categoria Impianto" invisible="1"
+                                   options="{'no_open': True}"/>
+                            <field name="periodicita_verifica" placeholder="Periodicità Verifica"
+                                   attrs="{'readonly': [('impianto_categoria_name','not in',('Scariche Atmosferiche', 'Messa a Terra'))]}"/>
+                            <label for="verifica_periodica" string="Verifica Periodica e Costo (€)"/>
+                            <div>
+                                <field name="verifica_periodica"/>
+                                <field name="costo_verifica_periodica"
+                                       attrs="{'readonly':[('verifica_periodica', '=', False)]}"
+                                       placeholder="Costo Verifica Periodica (€)"/>
+                            </div>
+                            <label for="verifica_periodica" string="Verifica Straordinaria e Costo (€)"/>
+                            <div>
+                                <field name="verifica_straordinaria"/>
+                                <field name="costo_verifica_straordinaria"
+                                       attrs="{'readonly':[('verifica_straordinaria', '=', False)]}"
+                                       placeholder="Costo Verifica Straordinaria (€)"/>
+                            </div>
+                            <field name="altre_norme" placeholder="Altre norme"/>
+                            <field name="campi_validati" invisible="1"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group>
+                    </group>
 
-        <!-- action gevi_contratti form -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_list">
-            <field name="name">Contratti</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
-        
-        <record model="ir.actions.act_window" id="action_gevi_contratti_miei_contratti_list">
-            <field name="name">I Miei Contratti</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('referente_id.utente_assegnato_id', '=', uid)]</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
+                    <group string="Dati Contabili">
+                        <group>
+                            <field name="cliente_mod_pagamento" string="Modalità di pagamento Attuale"/>
+                            <field name="modalita_pagamento_id" placeholder="Modalità di Pagamento"
+                                   options="{'no_open': True}"/>
+                            <field name="durata_contratto"/>
+                            <field name="codice_cig" string="Codice Identificativo Gara (CIG)"
+                                   attrs="{'invisible': [('cliente_tipo', 'not in', 'Ente Pubblico')]}"/>
+                            <field name="data_stipula" placeholder="Data di Stipula"/>
+                            <field name="data_ultima_verifica_effettuata" invisible="1"/>
+                            <field name="n_verifiche_contratto" invisible="1"/>
+                            <field name="n_verifiche_effettuate" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="blocco_amministrativo"/>
+                            <field name="causale_blocco" attrs="{'readonly': [('blocco_amministrativo', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group>
+                    </group>
 
-        <!-- search gevi_contratti filter -->
-        <record model="ir.ui.view" id="search_gevi_contratti_contratto_view">
-			<field name="name">gevi_contratti.contratto.search</field>
-			<field name="model">gevi_contratti.contratto</field>
-			<field name="arch" type="xml">
-				<search>
-					<field name="name" />
-                    <field name="codice_contratto" />
-                    <field name="impianto_categoria_name" /> 
-                    <field name="referente_id" />
-                    <field name="customer_id" />
-						
-                    <filter string="Ascensori"
+                    <notebook>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- view tree gevi_contratti -->
+    <record model="ir.ui.view" id="view_gevi_contratti_contratto_tree">
+        <field name="name">gevi_contratti.contratto.tree</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Contratti">
+                <field name="name" default_focus="1" placeholder="Nome contratto"/>
+                <field name="impianto_categoria_name"/>
+                <field name="referente_id" placeholder="Referente"/>
+                <field name="customer_id" placeholder="Cliente Fatturazione"/>
+                <field name="costo_verifica_periodica" string="Valore Periodica"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- action gevi_contratti form -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_list">
+        <field name="name">Contratti</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_gevi_contratti_miei_contratti_list">
+        <field name="name">I Miei Contratti</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('referente_id.utente_assegnato_id', '=', uid)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
+
+    <!-- search gevi_contratti filter -->
+    <record model="ir.ui.view" id="search_gevi_contratti_contratto_view">
+        <field name="name">gevi_contratti.contratto.search</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="codice_contratto"/>
+                <field name="impianto_categoria_name"/>
+                <field name="referente_id"/>
+                <field name="customer_id"/>
+
+                <filter string="Ascensori"
                         name="ascensori"
                         domain="[('impianto_categoria_name','ilike','Ascensore')]"
-                        help="Filtra per Ascensore" />
+                        help="Filtra per Ascensore"/>
 
-                    <filter string="Messa a terra"
+                <filter string="Messa a terra"
                         name="impianto_mat"
                         domain="[('impianto_categoria_name','=','Messa a Terra')]"
-                        help="Filtra per Messa a Terra" />
+                        help="Filtra per Messa a Terra"/>
 
-                    <filter string="Scariche Atmosferiche"
+                <filter string="Scariche Atmosferiche"
                         name="impianto_satm"
                         domain="[('impianto_categoria_name','=','Scariche Atmosferiche')]"
-                        help="Filtra per Scariche Atmosferiche" />                    
-                    
-                    <group string="Raggruppa">							
-                        <filter string="Tipo Impianto"
+                        help="Filtra per Scariche Atmosferiche"/>
+
+                <group string="Raggruppa">
+                    <filter string="Tipo Impianto"
                             name="group_by_impianto_categoria_name"
                             context="{'group_by':'impianto_categoria_name'}"
-                            help="filtro per tipo di impianto" />
-                        
-                        <filter string="Referente"
+                            help="filtro per tipo di impianto"/>
+
+                    <filter string="Referente"
                             name="group_by_referente_id"
                             context="{'group_by':'referente_id'}"
-                            help="filtro per Referente" />
+                            help="filtro per Referente"/>
 
-                        <filter string="Cliente Fatturazione"
+                    <filter string="Cliente Fatturazione"
                             name="group_by_customer_id"
                             context="{'group_by':'customer_id'}"
-                            help="filtro per Cliente Fatturazione" />
+                            help="filtro per Cliente Fatturazione"/>
 
-                    </group>				
-				</search>
-            </field>
-        </record>
+                </group>
+            </search>
+        </field>
+    </record>
 
-        <!-- action gevi_contratti filter Ascensore -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_ascensori">
-            <field name="name">Ascensore</field>
-            <field name="res_model">gevi_contratti.contratto</field>
+    <!-- action gevi_contratti filter Ascensore -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_ascensori">
+        <field name="name">Ascensore</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_ascensori': 'Ascensore'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
 
-            <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_ascensori': 'Ascensore'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_contratti filter Messa a Terra -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_impianto_mat">
+        <field name="name">Messa a Terra</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_impianto_mat': 'Messa a terra'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_contratti filter Messa a Terra -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_impianto_mat">
-            <field name="name">Messa a Terra</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_impianto_mat': 'Messa a terra'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_contratti filter Scariche Atmosferiche -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_impianto_satm">
+        <field name="name">Scariche Atmosferiche</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_impianto_satm': 'Scariche Atmosferiche'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_contratti filter Scariche Atmosferiche -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_impianto_satm">
-            <field name="name">Scariche Atmosferiche</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_impianto_satm': 'Scariche Atmosferiche'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_contratti Gruop by Referente -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_group_by_referente_id">
+        <field name="name">Raggruppamento per Referente</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_group_by_referente_id': 'Per Referente'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_contratti Gruop by Referente -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_group_by_referente_id">
-            <field name="name">Raggruppamento per Referente</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_group_by_referente_id': 'Per Referente'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_contratti Gruop by Cliente -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_group_by_customer_id">
+        <field name="name">Raggruppamento per Cliente</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_group_by_customer_id': 'Per Cliente'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_contratti Gruop by Cliente -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_group_by_customer_id">
-            <field name="name">Raggruppamento per Cliente</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_group_by_customer_id': 'Per Cliente'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
-
-        <!-- action gevi_contratti Gruop by Tipo Contratto -->
-        <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_group_by_impianto_categoria_id">
-            <field name="name">Raggruppamento per Tipo Impianto</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_group_by_impianto_categoria_id': 'Per Tipo Impianto'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Crea un contratto
-                </p>
-            </field>
-        </record>
-      
-    </data>
-</openerp>
+    <!-- action gevi_contratti Gruop by Tipo Contratto -->
+    <record model="ir.actions.act_window" id="action_gevi_contratti_contratto_group_by_impianto_categoria_id">
+        <field name="name">Raggruppamento per Tipo Impianto</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context" eval="{'search_default_group_by_impianto_categoria_id': 'Per Tipo Impianto'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un contratto
+            </p>
+        </field>
+    </record>
+</odoo>

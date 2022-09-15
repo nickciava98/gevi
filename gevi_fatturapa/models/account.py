@@ -4,10 +4,10 @@
 
 import logging
 
-from openerp import fields, models, api
-import openerp.addons.decimal_precision as dp
-from openerp.exceptions import UserError
-from openerp.tools.translate import _
+from odoo import fields, models, api
+import odoo.addons.decimal_precision as dp
+from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 
 RELATED_DOCUMENT_TYPES = {
@@ -430,7 +430,6 @@ class AccountInvoice(models.Model):
         # hook for preventive checks. Override and raise exception, in case
         return
 
-    @api.multi
     def fattura_pa(self):
         wiz_pa = self.env['fatturapa.wizard.export'].with_context(active_ids=[self.id]).create({})
         return wiz_pa.exportFatturaPA()

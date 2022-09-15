@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<openerp>
+<odoo>
 	<data noupdate="1">
 
 		<!--#
@@ -17,4 +16,4 @@
 			<field name="padding">6</field>
 		</record>
 	</data>
-</openerp>
+</odoo>

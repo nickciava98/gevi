@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import http
+from odoo import http
 
 
 class FatturaElettronicaController(http.Controller):

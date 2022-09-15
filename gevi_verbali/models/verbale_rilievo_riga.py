@@ -41,6 +41,6 @@ class VerbaleRilievoRiga(models.Model):
 
     @api.depends('impianto_categoria_id')
     def _compute_impianto_categoria_id(self):
-        record = self
-        self.impianto_categoria_name = record.impianto_categoria_id.name
+        for line in self:
+            line.impianto_categoria_name = line.impianto_categoria_id.name
 

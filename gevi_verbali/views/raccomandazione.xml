@@ -1,49 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <!--Form raccomandazione-->
-       	<record model="ir.ui.view" id="view_gevi_verbali_raccomandazione_form">
-			<field name="name">Raccomandazione</field>
-			<field name="model">gevi_verbali.raccomandazione</field>
-			<field name="arch" type="xml">
-				<form string="Form Raccomandazione">
-					<sheet>
-                        <h1>Raccomandazione</h1>
-                        <group>
-                            <field name="indice_osservazione" string="Indice"/>
-                            <field name="name" string="Nome" />
-                            <field name="vincolante" string="Vincolante" />
-                            <field name="tipo" string="Tipo" />
-                        </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+    <record model="ir.ui.view" id="view_gevi_verbali_raccomandazione_form">
+        <field name="name">Raccomandazione</field>
+        <field name="model">gevi_verbali.raccomandazione</field>
+        <field name="arch" type="xml">
+            <form string="Form Raccomandazione">
+                <sheet>
+                    <h1>Raccomandazione</h1>
+                    <group>
+                        <field name="indice_osservazione" string="Indice"/>
+                        <field name="name" string="Nome" />
+                        <field name="vincolante" string="Vincolante" />
+                        <field name="tipo" string="Tipo" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <!-- Action raccomandazione -->
-        <record model="ir.actions.act_window" id="action_gevi_verbali_raccomandazione_form">
-            <field name="name">Raccomandazione</field>
-            <field name="res_model">gevi_verbali.raccomandazione</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Inserisci Raccomandazione
-                </p>
-            </field>
-        </record>
+    <!-- Action raccomandazione -->
+    <record model="ir.actions.act_window" id="action_gevi_verbali_raccomandazione_form">
+        <field name="name">Raccomandazione</field>
+        <field name="res_model">gevi_verbali.raccomandazione</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Raccomandazione
+            </p>
+        </field>
+    </record>
 
-        <!-- Tree raccomandazione -->
-        <record model="ir.ui.view" id="gevi_verbali_raccomandazione_tree">
-            <field name="name">Raccomandazione</field>
-            <field name="model">gevi_verbali.raccomandazione</field>
-            <field name="arch" type="xml">
-                <tree string="Lista Raccomandazioni">
-                    <field name="indice_osservazione" string="Indice"/>
-                    <field name="name" string="Nome" />
-                    <field name="vincolante" string="Vincolante" />
-                    <field name="tipo" string="Tipo" />
-                </tree>
-            </field>
-        </record>
-
-    </data>
+    <!-- Tree raccomandazione -->
+    <record model="ir.ui.view" id="gevi_verbali_raccomandazione_tree">
+        <field name="name">Raccomandazione</field>
+        <field name="model">gevi_verbali.raccomandazione</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Raccomandazioni">
+                <field name="indice_osservazione" string="Indice"/>
+                <field name="name" string="Nome" />
+                <field name="vincolante" string="Vincolante" />
+                <field name="tipo" string="Tipo" />
+            </tree>
+        </field>
+    </record>
 </odoo>

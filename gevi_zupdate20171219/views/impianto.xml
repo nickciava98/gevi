@@ -1,37 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-      <!-- Form Impianto -->
+<odoo>
+    <record model="ir.ui.view" id="gevi_zupdate20171219_impianto_form_view">
+        <field name="name">gevi_zupdate20171219.impianto</field>
+        <field name="model">gevi.impianti.impianto</field>
+        <field name="inherit_id" ref="gevi_impianti.view_gevi_impianti_impianto_form"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
 
-        <record model="ir.ui.view" id="gevi_zupdate20171219_impianto_form_view">
-            <field name="name">gevi_zupdate20171219.impianto</field>
-            <field name="model">gevi.impianti.impianto</field>
-            <field name="inherit_id" ref="gevi_impianti.view_gevi_impianti_impianto_form"/>
-            <field name="arch" type="xml">
-                <!-- Intestazione scheda -->
-                
-                <notebook position="inside">
-                    
-                    <page name="verbali" string="Verbali e Verifiche" >
-                        <field name="verbali_ids">
-                            <tree string="Verbali" create="false" delete="false">
-                                <field name="name" style="width: 10%%"/>
-                                <field name="data_verbale"/>
-                                <field name="customer_id" />
-                                <field name="impianto_id"/>
-                                <field name="periodica"/>
-                                <field name="impianto_categoria_id" />
-                                <field name="ispettore_id"/>
-                                <field name="state" style="width: 10%%"/>
-                                <button name="apri_verbale" type="object" state="validato" string="Apri" class="oe_highlight"/>
-                            </tree>                           
-                        </field>
-                    </page>
-                    
-                </notebook>
-                                
-            </field>
-        </record>
+            <notebook position="inside">
 
-    </data>
-</openerp>
+                <page name="verbali" string="Verbali e Verifiche">
+                    <field name="verbali_ids">
+                        <tree string="Verbali" create="false" delete="false">
+                            <field name="name"/>
+                            <field name="data_verbale"/>
+                            <field name="customer_id"/>
+                            <field name="impianto_id"/>
+                            <field name="periodica"/>
+                            <field name="impianto_categoria_id"/>
+                            <field name="ispettore_id"/>
+                            <field name="state" style="width: 10%%"/>
+                            <button name="apri_verbale" type="object" state="validato" string="Apri"
+                                    class="oe_highlight"/>
+                        </tree>
+                    </field>
+                </page>
+
+            </notebook>
+
+        </field>
+    </record>
+</odoo>

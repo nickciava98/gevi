@@ -1,45 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <!--Form Valore Attributo-->
-       	<record model="ir.ui.view" id="view_gevi_valore_attributo_form">
-			<field name="name">Valore Attributo</field>
-			<field name="model">gevi.impianti.valore_attributo</field>
-			<field name="arch" type="xml">
-				<form string="Valore Attributo">
-					<sheet>
-                        <group>
-                            <field name="name" default_focus="1" string="Valore Attributo" />
-                            <field name="tipo" string="Tipo Attributo" />
-                        </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_valore_attributo_form">
+        <field name="name">Valore Attributo</field>
+        <field name="model">gevi.impianti.valore_attributo</field>
+        <field name="arch" type="xml">
+            <form string="Valore Attributo">
+                <sheet>
+                    <group>
+                        <field name="name" default_focus="1" string="Valore Attributo" />
+                        <field name="tipo" string="Tipo Attributo" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <!--Action Valore Attributo-->
-        <record model="ir.actions.act_window" id="action_gevi_impianti_valore_attributo_form">
-            <field name="name">Valore Attributo</field>
-            <field name="res_model">gevi.impianti.valore_attributo</field>
-            <field name="view_mode">tree,form</field>
-            <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Inserisci Valore Attributo
-                </p>
-            </field>
-        </record>
+    <!--Action Valore Attributo-->
+    <record model="ir.actions.act_window" id="action_gevi_impianti_valore_attributo_form">
+        <field name="name">Valore Attributo</field>
+        <field name="res_model">gevi.impianti.valore_attributo</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Valore Attributo
+            </p>
+        </field>
+    </record>
 
-        <!--Tree Valore Attributo -->
-        <record model="ir.ui.view" id="gevi_valore_attributo_tree">
-            <field name="name">Valore Attributo</field>
-            <field name="model">gevi.impianti.valore_attributo</field>
-            <field name="arch" type="xml">
-                <tree string="Lista Valori Attributo">
-                    <field name="name" default_focus="1" string="Valore Attributo" />
-                    <field name="tipo" string="Tipo Attributo" />
-                </tree>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+    <!--Tree Valore Attributo -->
+    <record model="ir.ui.view" id="gevi_valore_attributo_tree">
+        <field name="name">Valore Attributo</field>
+        <field name="model">gevi.impianti.valore_attributo</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Valori Attributo">
+                <field name="name" default_focus="1" string="Valore Attributo" />
+                <field name="tipo" string="Tipo Attributo" />
+            </tree>
+        </field>
+    </record>
+</odoo>

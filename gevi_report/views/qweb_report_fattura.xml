@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <report 
-            id="report_gevi_fatture_fattura"
-            string="Fattura da Emettere"
-            model="account.invoice" 
-            report_type="qweb-pdf"
-            file="gevi_report.report_fattura" 
-            name="gevi_report.report_fattura"
-            attachment_use="True"
-            attachment="(object.state in ('open','paid')) and
-                ('INV'+(object.number or '').replace('/','')+'.pdf')" 
-        />
-    </data>
-</openerp>
+<odoo>
+    <report
+        id="report_gevi_fatture_fattura"
+        string="Fattura da Emettere"
+        model="account.invoice"
+        report_type="qweb-pdf"
+        file="gevi_report.report_fattura"
+        name="gevi_report.report_fattura"
+        attachment_use="True"
+        attachment="(object.state in ('open','paid')) and
+            ('INV'+(object.number or '').replace('/','')+'.pdf')"
+    />
+</odoo>

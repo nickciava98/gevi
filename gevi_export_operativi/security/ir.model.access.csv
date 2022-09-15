@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gevi_export_operativi_export_operativo,access_gevi_export_operativi_export_operativo,model_gevi_export_operativi_export_operativo,base.group_user,1,0,0,0
+access_gevi_export_operativi_elenco_esportazioni,access_gevi_export_operativi_elenco_esportazioni,model_gevi_export_operativi_elenco_esportazioni,base.group_user,1,0,0,0

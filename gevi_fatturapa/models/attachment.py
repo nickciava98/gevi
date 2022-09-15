@@ -3,8 +3,8 @@
 # Copyright 2016-2018 Lorenzo Battistini - Agile Business Group
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from openerp import fields, models, api, _
-from openerp.exceptions import UserError
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 
 
 class FatturaPAAttachment(models.Model):
@@ -27,7 +27,6 @@ class FatturaPAAttachment(models.Model):
         'res.partner', string='Customer', store=True,
         compute='_compute_invoice_partner_id')
 
-    @api.multi
     @api.depends('out_invoice_ids')
     def _compute_invoice_partner_id(self):
         for att in self:
@@ -35,7 +34,6 @@ class FatturaPAAttachment(models.Model):
             if len(partners) == 1:
                 att.invoice_partner_id = partners.id
 
-    @api.multi
     @api.constrains('datas_fname')
     def _check_datas_fname(self):
         for att in self:
@@ -63,7 +61,6 @@ class FatturaPAAttachment(models.Model):
                 # one attachment having is_pdf_invoice_print = True
 #                attachment_out.has_pdf_invoice_print = True
 
-    @api.multi
     def write(self, vals):
         res = super(FatturaPAAttachment, self).write(vals)
         if 'datas' in vals and 'message_ids' not in vals:

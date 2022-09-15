@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gevi_commerciale_appuntamento,access_gevi_commerciale_appuntamento,model_gevi_commerciale_appuntamento,base.group_user,1,1,1,1
+access_gevi_commerciale_comunicazione,access_gevi_commerciale_comunicazione,model_gevi_commerciale_comunicazione,base.group_user,1,1,1,1
+access_gevi_commerciale_wizard_assegna_com,access_gevi_commerciale_wizard_assegna_com,model_gevi_commerciale_wizard_assegna_com,base.group_user,1,1,1,1

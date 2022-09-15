@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class ResPartnerBank(models.Model):
     _inherit = 'res.partner.bank'
 
-    @api.multi
     def name_get(self):
         result = super(ResPartnerBank, self).name_get()
         res = []

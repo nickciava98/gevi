@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 
 
 class CambioCategoriaImpiantoVerbale(models.TransientModel):
@@ -8,7 +8,6 @@ class CambioCategoriaImpiantoVerbale(models.TransientModel):
     impianto_categoria_id = fields.Many2one(
         'gevi.impianti.impianto_categoria', string='Categoria Impianto')
 
-    @api.multi
     def cambio_categoria_impianto(self):
         verbali_obj = self.env['gevi_verbali.verbale'].browse(
             self._context.get('active_ids', []))
@@ -18,7 +17,6 @@ class CambioCategoriaImpiantoVerbale(models.TransientModel):
         return {'type': 'ir.actions.act_window_close'}
 
 
-    @api.multi
     def aggiorna_manutentore(self):
         verbali_obj = self.env['gevi_verbali.verbale'].browse(
             self._context.get('active_ids', []))

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--Form normeascensori-->
     <record model="ir.ui.view" id="view_gevi_verbali_normeascensori_form">
         <field name="name">Norme Ascensori</field>
         <field name="model">gevi_verbali.normeascensori</field>

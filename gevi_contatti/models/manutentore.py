@@ -40,7 +40,6 @@ class Manutentore(models.Model):
     #     if self.campo != '0':
     #         self.message_post(body="Variazione del campo", type='comment')
 
-
     def name_get(self):
         result = super(Manutentore, self).name_get()
         res = []

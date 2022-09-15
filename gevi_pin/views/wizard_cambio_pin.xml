@@ -1,47 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <record id="gevi_pin_wizard_cambiopin_form_view" model="ir.ui.view">
-            <field name="name">Cambio PIN</field>
-            <field name="model">gevi_pin.wizard.cambiopin</field>
-            <field name="arch" type="xml">
-                <form string="Cambio PIN">
-                    <group>
-                        <label for="vecchio_pin" string="Pin Attuale"/>
-                        <div>
-                            <field name="vecchio_pin" password="True"/>
-                        </div>
-                        <label for="nuovo_pin" string="Nuovo Pin"/>
-                        <div>
-                            <field name="nuovo_pin" password="True"/>
-                        </div>
-                        <label for="conferma_pin" string="Conferma Nuovo Pin"/>
-                        <div>
-                            <field name="conferma_pin" password="True"/>
-                        </div>
-                    </group>
-                    <footer>
-                        <button string="Cambia PIN" name="cambia_pin" type="object" class="oe_highlight"/>
-                        <button string="Annulla" special="cancel" />
-                    </footer>
-                </form>
-            </field>
-        </record>
+<odoo>
+    <record id="gevi_pin_wizard_cambiopin_form_view" model="ir.ui.view">
+        <field name="name">Cambio PIN</field>
+        <field name="model">gevi_pin.wizard.cambiopin</field>
+        <field name="arch" type="xml">
+            <form string="Cambio PIN">
+                <group style="width: 50%; align: center;">
+                    <label for="vecchio_pin" string="Pin Attuale"/>
+                    <div>
+                        <field name="vecchio_pin" password="True"/>
+                    </div>
+                    <label for="nuovo_pin" string="Nuovo Pin"/>
+                    <div>
+                        <field name="nuovo_pin" password="True"/>
+                    </div>
+                    <label for="conferma_pin" string="Conferma Nuovo Pin"/>
+                    <div>
+                        <field name="conferma_pin" password="True"/>
+                    </div>
+                </group>
+                <footer>
+                    <button string="Cambia PIN" name="cambia_pin" type="object" class="oe_highlight"/>
+                    <button string="Annulla" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <record model="ir.actions.act_window" id="gevi_pin_wizard_cambio_pin_action">
-            <field name="name">Cambio PIN</field>
-            <field name="res_model">gevi_pin.wizard.cambiopin</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-    <!--        <field name="src_model">gevi_verbali.verbale</field>-->
-        </record>
-
-<!--        <act_window id="gevi_pin_wizard_cambio_pin_action"-->
-<!--            name="Cambio PIN"-->
-<!--            src_model="res.users"-->
-<!--            res_model="gevi_pin.wizard.cambiopin"-->
-<!--            view_type="form" view_mode="form"-->
-<!--            target="new"/>-->
-
-    </data>
-</openerp>
+    <record id="gevi_pin_wizard_cambio_pin_action" model="ir.actions.act_window">
+        <field name="name">Cambio PIN</field>
+        <field name="res_model">gevi_pin.wizard.cambiopin</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

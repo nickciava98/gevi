@@ -1,4 +1,4 @@
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 
 
 class Contratto(models.Model):

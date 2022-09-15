@@ -1,74 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record model="workflow" id="wkf_verbale">
-            <field name="name">Gevi Verbale workflow</field>
-            <field name="osv">gevi_verbali.verbale</field>
-            <field name="on_create">True</field>
-        </record>
+    <record model="workflow" id="wkf_verbale">
+        <field name="name">Gevi Verbale workflow</field>
+        <field name="osv">gevi_verbali.verbale</field>
+        <field name="on_create">True</field>
+    </record>
 
-        <!-- Activities -->
+    <!-- Activities -->
 
-        <record model="workflow.activity" id="bozza">
-            <field name="name">Bozza</field>
-            <field name="wkf_id" ref="wkf_verbale"/>
-            <field name="flow_start" eval="True"/>
-            <field name="kind">function</field>
-            <field name="action">action_bozza()</field>
-        </record>
-        <record model="workflow.activity" id="assegnato">
-            <field name="name">Assegnato</field>
-            <field name="wkf_id" ref="wkf_verbale"/>
-            <field name="kind">function</field>
-            <field name="action">action_assegnato()</field>
-        </record>
-        <record model="workflow.activity" id="eseguito">
-            <field name="name">Eseguito</field>
-            <field name="wkf_id" ref="wkf_verbale"/>
-            <field name="kind">function</field>
-            <field name="action">action_eseguito()</field>
-        </record>
-        <record model="workflow.activity" id="confermato">
-            <field name="name">Confermato</field>
-            <field name="wkf_id" ref="wkf_verbale"/>
-            <field name="kind">function</field>
-            <field name="action">action_confermato()</field>
-        </record>
-        <record model="workflow.activity" id="validato">
-            <field name="name">Validato</field>
-            <field name="wkf_id" ref="wkf_verbale"/>
-            <field name="kind">function</field>
-            <field name="action">action_validato()</field>
-        </record>
-        <record model="workflow.activity" id="annullato">
-            <field name="name">Annullato</field>
-            <field name="wkf_id" ref="wkf_verbale"/>
-            <field name="kind">function</field>
-            <field name="action">action_annullato()</field>
-        </record>
+    <record model="workflow.activity" id="bozza">
+        <field name="name">Bozza</field>
+        <field name="wkf_id" ref="wkf_verbale"/>
+        <field name="flow_start" eval="True"/>
+        <field name="kind">function</field>
+        <field name="action">action_bozza()</field>
+    </record>
+    <record model="workflow.activity" id="assegnato">
+        <field name="name">Assegnato</field>
+        <field name="wkf_id" ref="wkf_verbale"/>
+        <field name="kind">function</field>
+        <field name="action">action_assegnato()</field>
+    </record>
+    <record model="workflow.activity" id="eseguito">
+        <field name="name">Eseguito</field>
+        <field name="wkf_id" ref="wkf_verbale"/>
+        <field name="kind">function</field>
+        <field name="action">action_eseguito()</field>
+    </record>
+    <record model="workflow.activity" id="confermato">
+        <field name="name">Confermato</field>
+        <field name="wkf_id" ref="wkf_verbale"/>
+        <field name="kind">function</field>
+        <field name="action">action_confermato()</field>
+    </record>
+    <record model="workflow.activity" id="validato">
+        <field name="name">Validato</field>
+        <field name="wkf_id" ref="wkf_verbale"/>
+        <field name="kind">function</field>
+        <field name="action">action_validato()</field>
+    </record>
+    <record model="workflow.activity" id="annullato">
+        <field name="name">Annullato</field>
+        <field name="wkf_id" ref="wkf_verbale"/>
+        <field name="kind">function</field>
+        <field name="action">action_annullato()</field>
+    </record>
 
-        <!-- Transitions -->
+    <!-- Transitions -->
 
-        <record model="workflow.transition" id="verbale_bozza_assegnato">
-            <field name="act_from" ref="bozza"/>
-            <field name="act_to" ref="assegnato"/>
-            <field name="signal">assegna</field>
-        </record>
-        <record model="workflow.transition" id="verbale_assegnato_eseguito">
-            <field name="act_from" ref="assegnato"/>
-            <field name="act_to" ref="eseguito"/>
-            <field name="signal">esegui</field>
-        </record>
-        <record model="workflow.transition" id="verbale_eseguito_confermato">
-            <field name="act_from" ref="eseguito"/>
-            <field name="act_to" ref="confermato"/>
-            <field name="signal">conferma</field>
-        </record>
-        <record model="workflow.transition" id="verbale_confermato_validato">
-            <field name="act_from" ref="confermato"/>
-            <field name="act_to" ref="validato"/>
-            <field name="signal">valida</field>
-        </record>
-
-    </data>
+    <record model="workflow.transition" id="verbale_bozza_assegnato">
+        <field name="act_from" ref="bozza"/>
+        <field name="act_to" ref="assegnato"/>
+        <field name="signal">assegna</field>
+    </record>
+    <record model="workflow.transition" id="verbale_assegnato_eseguito">
+        <field name="act_from" ref="assegnato"/>
+        <field name="act_to" ref="eseguito"/>
+        <field name="signal">esegui</field>
+    </record>
+    <record model="workflow.transition" id="verbale_eseguito_confermato">
+        <field name="act_from" ref="eseguito"/>
+        <field name="act_to" ref="confermato"/>
+        <field name="signal">conferma</field>
+    </record>
+    <record model="workflow.transition" id="verbale_confermato_validato">
+        <field name="act_from" ref="confermato"/>
+        <field name="act_to" ref="validato"/>
+        <field name="signal">valida</field>
+    </record>
 </odoo>

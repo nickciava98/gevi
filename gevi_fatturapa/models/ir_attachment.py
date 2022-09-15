@@ -6,10 +6,10 @@ import shlex
 import subprocess
 import logging
 from io import BytesIO
-from openerp import models, api, fields
-from openerp.modules import get_module_resource
-from openerp.exceptions import UserError
-from openerp.tools.translate import _
+from odoo import models, api, fields
+from odoo.modules import get_module_resource
+from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 

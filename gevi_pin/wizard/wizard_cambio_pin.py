@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 
 
 class WizardCambioPin(models.TransientModel):
@@ -16,5 +16,6 @@ class WizardCambioPin(models.TransientModel):
             raise exceptions.ValidationError('Assicurati che il pin attuale sia corretto e che il nuovo pin coincida con la conferma!')
 
     def cambia_pin(self):
-        if self.controlla_pin():
-            self.env.user.pin = self.nuovo_pin
+        for line in self:
+            if line.controlla_pin():
+                self.env.user.pin = line.nuovo_pin

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <record model="ir.ui.view" id="gevi_verbali_contratto_form_view">
         <field name="name">gevi.verbali.contratto.form</field>

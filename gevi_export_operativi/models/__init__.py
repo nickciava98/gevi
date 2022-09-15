@@ -1,1 +1,1 @@
-import elenco_export
+from . import elenco_export

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api
+from odoo import fields, models, api
 
 
 class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     referente_id = fields.Many2one(
         string='Amministratore',

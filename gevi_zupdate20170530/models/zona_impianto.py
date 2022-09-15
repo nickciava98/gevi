@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api
+from odoo import fields, models, api
 
 
 class ZonaImpianto(models.Model):
@@ -9,7 +9,6 @@ class ZonaImpianto(models.Model):
         'gevi_zone.zona_impianto', 'parent_id',
         string="Figli")
 
-    @api.one
     def get_child(self):
-        record = self
-        return self.child_ids
+        for line in self:
+            return line.child_ids

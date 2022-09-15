@@ -1,68 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <record model="ir.ui.view" id="impianti_carica_attributi_descrittivi_form">
-            <field name="name">gevi_wizard_operativi.carica_attributi_descrittivi.form</field>
-            <field name="model">gevi_wizard_operativi.carica_attributi_descrittivi</field>
-            <field name="arch" type="xml">
-                <form string="Carica Attributi Descrittivi">
-                    <div>Attenzione! Verranno caricati gli attributi descrittivi per gli impianti selezionati.<br/>
+<odoo>
+    <record model="ir.ui.view" id="impianti_carica_attributi_descrittivi_form">
+        <field name="name">gevi_wizard_operativi.carica_attributi_descrittivi.form</field>
+        <field name="model">gevi_wizard_operativi.carica_attributi_descrittivi</field>
+        <field name="arch" type="xml">
+            <form string="Carica Attributi Descrittivi">
+                <div>Attenzione! Verranno caricati gli attributi descrittivi per gli impianti selezionati.<br/>
                     Quindi, in caso di attributi caricati, verrano AGGIUNTI gli attributi a quelli già esistenti!</div>
-                    <div>Il bottone "Carica per PEM", è pensato per gli impianti di tipo ascensore/PEM per i quali non sono stati <br/>
+                <div>Il bottone "Carica per PEM", è pensato per gli impianti di tipo ascensore/PEM per i quali non sono stati <br/>
                     caricati gli attributi descrittivi e quindi è necessario eseguire le seguenti operazioni:
                     <li>Cambio della categoria in Ascensore generico</li>
                     <li>Caricamento degli attributi descrittivi</li>
                     <li>Cambio della categoria a quella precedentemente impostata</li><br/>
                     Uomo avvisato mezzo salvato!
-                     </div>
-                    <footer>
-                        <button name="carica_attributi_descrittivi" type="object"
-                                string="Carica gli attributi, mi fido!" class="oe_highlight"/>
+                </div>
+                <footer>
+                    <button name="carica_attributi_descrittivi" type="object"
+                            string="Carica gli attributi, mi fido!" class="oe_highlight"/>
 
-                        <button name="carica_attributi_descrittivi_pem" type="object"
-                                string="Carica per PEM" class="oe_highlight"/>
+                    <button name="carica_attributi_descrittivi_pem" type="object"
+                            string="Carica per PEM" class="oe_highlight"/>
 
-                        <button special="cancel" string="Cancella"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
+                    <button special="cancel" string="Cancella"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <act_window id="action_wizard_operativi_carica_attributi_descrittivi"
-                    name="Carica attributi descrittivi"
-                    src_model="gevi.impianti.impianto"
-                    res_model="gevi_wizard_operativi.carica_attributi_descrittivi"
-                    view_mode="form"
-                    target="new"
-                    key2="client_action_multi"/>
+    <record id="action_wizard_operativi_carica_attributi_descrittivi" model="ir.actions.act_window">
+        <field name="name">Carica attributi descrittivi</field>
+        <field name="res_model">gevi_wizard_operativi.carica_attributi_descrittivi</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
-        <record model="ir.ui.view" id="impianti_cambio_categoria_impianto_form">
-            <field name="name">gevi_wizard_operativi.cambio_categoria_impianto.form</field>
-            <field name="model">gevi_wizard_operativi.cambio_categoria_impianto</field>
-            <field name="arch" type="xml">
-                <form string="Cambio categoria Impianto">
-                    <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.<br/></div>
+    <record model="ir.ui.view" id="impianti_cambio_categoria_impianto_form">
+        <field name="name">gevi_wizard_operativi.cambio_categoria_impianto.form</field>
+        <field name="model">gevi_wizard_operativi.cambio_categoria_impianto</field>
+        <field name="arch" type="xml">
+            <form string="Cambio categoria Impianto">
+                <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.<br/></div>
+                <group>
                     <group>
-                        <group>
-                            <field name="impianto_categoria_id" widget="selection" />
-                        </group>
+                        <field name="impianto_categoria_id" widget="selection" />
                     </group>
-                    <footer>
-                        <button name="cambio_categoria_impianto" type="object"
-                                string="Mi fido!" class="oe_highlight"/>
-                        <button special="cancel" string="Cancella"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
+                </group>
+                <footer>
+                    <button name="cambio_categoria_impianto" type="object"
+                            string="Mi fido!" class="oe_highlight"/>
+                    <button special="cancel" string="Cancella"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <act_window id="action_wizard_operativi_cambio_categoria_impianto"
-                    name="Cambio categoria Impianto"
-                    src_model="gevi.impianti.impianto"
-                    res_model="gevi_wizard_operativi.cambio_categoria_impianto"
-                    view_mode="form"
-                    target="new"
-                    key2="client_action_multi"/>
-
-    </data>
-</openerp>
+    <record id="action_wizard_operativi_cambio_categoria_impianto" model="ir.actions.act_window">
+        <field name="name">Cambio categoria Impianto</field>
+        <field name="res_model">gevi_wizard_operativi.cambio_categoria_impianto</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,47 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <!--Form Attributo Rilievo-->
-       	<record model="ir.ui.view" id="view_gevi_impianto_attributo_rilievo_form">
-			<field name="name">Attributo Rilievo</field>
-			<field name="model">gevi.impianti.impianto_attributo_rilievo</field>
-			<field name="arch" type="xml">
-				<form string="Rilievo Form">
-					<sheet>
-                        <group>
-                            <field name="name" default_focus="1" string="Attributo Rilievo" placeholder="Rilievo" />
-                            <field name="impianto_categoria_id" string="Categoria Impianto"/>
-                            <field name="unita_di_misura_id" string="Unità di misura"/>
-                        </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_impianto_attributo_rilievo_form">
+        <field name="name">Attributo Rilievo</field>
+        <field name="model">gevi.impianti.impianto_attributo_rilievo</field>
+        <field name="arch" type="xml">
+            <form string="Rilievo Form">
+                <sheet>
+                    <group>
+                        <field name="name" default_focus="1" string="Attributo Rilievo" placeholder="Rilievo" />
+                        <field name="impianto_categoria_id" string="Categoria Impianto"/>
+                        <field name="unita_di_misura_id" string="Unità di misura"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <!--Action Attributo Rilievo-->
-        <record model="ir.actions.act_window" id="action_gevi_impianto_attributo_rilievo_form">
-            <field name="name">Attributo Rilievo</field>
-            <field name="res_model">gevi.impianti.impianto_attributo_rilievo</field>
-            <field name="view_mode">tree,form</field>
-            <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Inserisci Attributo Rilievo
-                </p>
-            </field>
-        </record>
+    <!--Action Attributo Rilievo-->
+    <record model="ir.actions.act_window" id="action_gevi_impianto_attributo_rilievo_form">
+        <field name="name">Attributo Rilievo</field>
+        <field name="res_model">gevi.impianti.impianto_attributo_rilievo</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Attributo Rilievo
+            </p>
+        </field>
+    </record>
 
-        <!--Tree Attributo Riscontro-->
-        <record model="ir.ui.view" id="gevi_impianto_attributo_rilievo_tree">
-            <field name="name">Attributo Rilievo</field>
-            <field name="model">gevi.impianti.impianto_attributo_rilievo</field>
-            <field name="arch" type="xml">
-                <tree string="Lista Attributi Rilievo">
-                    <field name="name" string="Attributo Rilievo"/>
-                    <field name="impianto_categoria_id" string="Categoria Impianto"/>
-                    <field name="unita_di_misura_id" string="Unità di misura"/>
-                </tree>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+    <!--Tree Attributo Riscontro-->
+    <record model="ir.ui.view" id="gevi_impianto_attributo_rilievo_tree">
+        <field name="name">Attributo Rilievo</field>
+        <field name="model">gevi.impianti.impianto_attributo_rilievo</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Attributi Rilievo">
+                <field name="name" string="Attributo Rilievo"/>
+                <field name="impianto_categoria_id" string="Categoria Impianto"/>
+                <field name="unita_di_misura_id" string="Unità di misura"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

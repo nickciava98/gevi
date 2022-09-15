@@ -2,8 +2,8 @@
 # Copyright 2014 Davide Corio <davide.corio@abstract.it>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from openerp import fields, models, api, _
-from openerp.exceptions import ValidationError
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 
 class ResCompany(models.Model):
@@ -58,7 +58,6 @@ class ResCompany(models.Model):
              'residente, con stabile organizzazione in Italia'
         )
 
-    @api.multi
     @api.constrains(
         'fatturapa_sequence_id'
     )

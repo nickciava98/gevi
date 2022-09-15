@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import report_scoperto
+from . import report_scoperto

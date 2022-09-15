@@ -1,49 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <!--Form Osservazione MAT-->
-       	<record model="ir.ui.view" id="view_gevi_verbali_osservazione_mat_form">
-			<field name="name">Osservazione MAT</field>
-			<field name="model">gevi_verbali.osservazione_mat</field>
-			<field name="arch" type="xml">
-				<form string="Form Osservazione MAT">
-					<sheet>
-                        <h1>Raccomandazione</h1>
-                        <group>
-                            <field name="indice_osservazione" string="Indice"/>
-                            <field name="name" string="Nome" />
-                            <field name="vincolante" string="Vincolante" />
-                            <field name="tipo" string="Tipo" />
-                        </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+    <record model="ir.ui.view" id="view_gevi_verbali_osservazione_mat_form">
+        <field name="name">Osservazione MAT</field>
+        <field name="model">gevi_verbali.osservazione_mat</field>
+        <field name="arch" type="xml">
+            <form string="Form Osservazione MAT">
+                <sheet>
+                    <h1>Raccomandazione</h1>
+                    <group>
+                        <field name="indice_osservazione" string="Indice"/>
+                        <field name="name" string="Nome" />
+                        <field name="vincolante" string="Vincolante" />
+                        <field name="tipo" string="Tipo" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <!-- Action Osservazione MAT -->
-        <record model="ir.actions.act_window" id="action_gevi_verbali_osservazione_mat_form">
-            <field name="name">Osservazione MAT</field>
-            <field name="res_model">gevi_verbali.osservazione_mat</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Inserisci Osservazione MAT
-                </p>
-            </field>
-        </record>
+    <!-- Action Osservazione MAT -->
+    <record model="ir.actions.act_window" id="action_gevi_verbali_osservazione_mat_form">
+        <field name="name">Osservazione MAT</field>
+        <field name="res_model">gevi_verbali.osservazione_mat</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Osservazione MAT
+            </p>
+        </field>
+    </record>
 
-        <!-- Tree Osservazione MAT -->
-        <record model="ir.ui.view" id="gevi_verbali_osservazione_mat_tree">
-            <field name="name">Osservazione MAT</field>
-            <field name="model">gevi_verbali.osservazione_mat</field>
-            <field name="arch" type="xml">
-                <tree string="Lista Osservazioni MAT">
-                    <field name="indice_osservazione" string="Indice" />
-                    <field name="name" string="Nome" />
-                    <field name="vincolante" string="Vincolante" />
-                    <field name="tipo" string="Tipo" />
-                </tree>
-            </field>
-        </record>
-
-    </data>
+    <!-- Tree Osservazione MAT -->
+    <record model="ir.ui.view" id="gevi_verbali_osservazione_mat_tree">
+        <field name="name">Osservazione MAT</field>
+        <field name="model">gevi_verbali.osservazione_mat</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Osservazioni MAT">
+                <field name="indice_osservazione" string="Indice"/>
+                <field name="name" string="Nome" />
+                <field name="vincolante" string="Vincolante" />
+                <field name="tipo" string="Tipo" />
+            </tree>
+        </field>
+    </record>
 </odoo>

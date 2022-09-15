@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 from lxml import etree
 
 import logging
@@ -46,7 +46,7 @@ class Contratto(models.Model):
     customer_id = fields.Many2one(
         'res.partner',
         ondelete='cascade',
-        domain=[('customer', '=', True)],
+        #domain=[('customer', '=', True)],
         string='Cliente Fatturazione',
         required=True)
 
@@ -61,9 +61,7 @@ class Contratto(models.Model):
     manutentore_id = fields.Many2one(
         'gevi_contatti.manutentore', string="Manutentore")
 
-    campi_validati = fields.Boolean(
-        # compute='_valida_campi',
-        string="Verifica Periodica/Straordinaria", store=False, default=False, required=True)
+    campi_validati = fields.Boolean(compute='_valida_campi', string="Verifica Periodica/Straordinaria", store=False, default=False, required=True)
 
     data_ultima_verifica = fields.Date('Data Ultima Verifica')
 
@@ -199,23 +197,18 @@ class Contratto(models.Model):
             ],
             string="Causale Blocco")
 
-     
     def action_attivo(self):
         self.state = 'attivo'
 
-     
     def action_scaduto(self):
         self.state = 'scaduto'
 
-     
     def action_rescisso(self):
         self.state = 'rescisso'
 
-     
     def action_disdetta_uv(self):
         self.state = 'disdetta_uv'
 
-     
     def action_first_attivo(self):
         if not self.impianto_id:
             raise exceptions.ValidationError("Associare l'impianto prima di attivare il contratto.")
@@ -223,19 +216,17 @@ class Contratto(models.Model):
         self.state = 'attivo'
         self._crea_verifica_periodica()
 
-     
     def action_annullato(self):
         self.state = 'annullato'
         verbale_obj = self.env['gevi_verbali.verbale'].search(['&',('contratto_id', '=', self.id),('state','in',('bozza','assegnato'))])
         for verbale in verbale_obj:
             verbale.action_annullato()
 
-     
     @api.onchange('durata_contratto')
     def _onchange_durata_contratto(self):
-        self.n_verifiche_contratto = int(self.durata_contratto)
+        for line in self:
+            line.n_verifiche_contratto = int(line.durata_contratto)
 
-     
     @api.depends('customer_id')
     def _compute_dati_cliente(self):
         for record in self:
@@ -250,7 +241,6 @@ class Contratto(models.Model):
             self.cliente_provincia = record.customer_id.provincia
             self.cliente_mod_pagamento = record.customer_id.property_payment_term_id.name
 
-     
     @api.depends('referente_id')
     def _compute_dati_referente(self):
         for record in self:
@@ -266,7 +256,6 @@ class Contratto(models.Model):
             self.referente_email = record.referente_id.email
             self.referente_interlocutore = record.referente_id.interlocutore
 
-     
     @api.depends('impianto_id')
     def _compute_impianto_ubicazione(self):
         for record in self:
@@ -280,7 +269,6 @@ class Contratto(models.Model):
             self.cliente_name = record.impianto_id.customer_id.name
             self.impianto_categoria_name = record.impianto_id.impianto_categoria_id.name
 
-     
     @api.depends('manutentore_id')
     def _compute_dati_mautentore(self):
         for record in self:
@@ -292,7 +280,7 @@ class Contratto(models.Model):
             self.manutentore_interlocutore = record.manutentore_id.interlocutore
 
     # Azione riferita al button filtra_cliente 
-    #  
+    # @api.one
     # @api.onchange('cliente_cf_piva')
     # def _onchange_cliente_cf_piva(self):
     #     # cliente_obj = self.env['res.partner']
@@ -305,7 +293,7 @@ class Contratto(models.Model):
     #         }
     #     }
 
-    #  
+    # @api.one
     # @api.onchange('impianto_id')
     # def _onchange_impianto_id(self):
     #     for record in self:
@@ -313,43 +301,37 @@ class Contratto(models.Model):
     #         self.customer_id = record.impianto_id.customer_id.id
     #         self.referente_id = record.impianto_id.customer_id.referente_id.id
 
-     
     def carica_riferimenti(self):
         for record in self:
             self.impianto_categoria_id = record.impianto_id.impianto_categoria_id.id
             self.customer_id = record.impianto_id.customer_id.id
             self.referente_id = record.impianto_id.customer_id.referente_id.id
 
-     
     @api.depends('verifica_periodica','verifica_straordinaria','costo_verifica_periodica','costo_verifica_straordinaria')
-    @api.onchange("costo_verifica_straordinaria")
     def _valida_campi(self):
+        self.campi_validati = False
         if (self.verifica_periodica or self.verifica_straordinaria):
             if (self.costo_verifica_straordinaria != 0.00 or self.costo_verifica_periodica != 0.00):
                 self.campi_validati = True
-            else:
-                self.campi_validati = False
 
-     
     @api.depends('costo_verifica_periodica', 'costo_verifica_straordinaria')
     def _compute_valore_contratto(self):
         for record in self:
             self.valore_contratto = self.costo_verifica_periodica + self.costo_verifica_straordinaria
 
-     
     @api.onchange('impianto_categoria_id')
     def _onchange_impianto_categoria_id(self):
-        if self.impianto_categoria_name in ['Piattaforma Elevatrice', 'Montacarichi']:
-            self.verifica_straordinaria = False
-            self.periodicita_verifica = '2'
-        if self.impianto_categoria_name in ['Ascensore Generico', 'Ascensore Oleodinamico', 'Ascensore Elettromeccanico']:
-            self.periodicita_verifica = '2'
-        if self.impianto_categoria_name in ['Scariche Atmosferiche', 'Messa a Terra']:
-            pass
-        if self.impianto_categoria_id is not False:
-            pass
+        for line in self:
+            if line.impianto_categoria_name in ['Piattaforma Elevatrice', 'Montacarichi']:
+                line.verifica_straordinaria = False
+                line.periodicita_verifica = '2'
+            if line.impianto_categoria_name in ['Ascensore Generico', 'Ascensore Oleodinamico', 'Ascensore Elettromeccanico']:
+                line.periodicita_verifica = '2'
+            if line.impianto_categoria_name in ['Scariche Atmosferiche', 'Messa a Terra']:
+                pass
+            if line.impianto_categoria_id is not False:
+                pass
 
-     
     @api.onchange('customer_id')
     def _onchange_customer_id(self):
         self.referente_id = self.customer_id.referente_id
@@ -364,7 +346,6 @@ class Contratto(models.Model):
         # return res
 
     # metodo non utilizzato
-     
     def verifica_periodica_effettuata(self, verbale):
         self.data_ultima_verifica_effettuata = verbale.data_verbale
         self.n_verifiche_effettuate += 1
@@ -372,7 +353,6 @@ class Contratto(models.Model):
             # self.action_scaduto()
             pass
 
-     
     def aggiorna_stato(self):
         for record in self:
             if record.state == 'disdetta_uv':
@@ -386,7 +366,6 @@ class Contratto(models.Model):
                     else:
                         record.action_scaduto()
 
-     
     def _crea_verifica_periodica(self):
         for record in self:
             if record.state == 'attivo':
@@ -410,7 +389,7 @@ class Contratto(models.Model):
                     })
                     # verbale.carica_attributi_descrittivi()
 
-    #  
+    # @api.one
     # def crea_verifica_periodica(self):
     #     attributi_descrittivi = []
     #     record = self
@@ -420,7 +399,6 @@ class Contratto(models.Model):
     #             'unita_di_misura_id': linea.unita_di_misura_id,
     #             }])
 
-     
     def _crea_verifica_straordinaria(self):
         for record in self:
             if record.state == 'attivo' or record.state == 'disdetta_uv':
@@ -446,15 +424,12 @@ class Contratto(models.Model):
                     })
                     # verbale.carica_attributi_descrittivi()
 
-     
     def action_crea_verifica_periodica(self):
         self._crea_verifica_periodica()
 
-     
     def action_crea_verifica_straordinaria(self):
         self._crea_verifica_straordinaria()
 
-     
     def write(self, values):
         """
             Update all record(s) in recordset, with new value comes as {values}
@@ -469,7 +444,6 @@ class Contratto(models.Model):
         return result
 
     # Controllo su cancellazione
-     
     def unlink(self):
         # _logger.info('******************************** DELETE {0} {1}'.format(self.name, self.state))
         if self.state != "annullato":
@@ -479,16 +453,16 @@ class Contratto(models.Model):
             return result
 
 
-     
     def _aggiorna_da_create(self):
-        self.impianto_id.manutentore_id = self.manutentore_id
-        self.customer_id.referente_id = self.referente_id
-        self.customer_id.property_payment_term_id = self.modalita_pagamento_id
+        for line in self:
+            line.impianto_id.manutentore_id = line.manutentore_id
+            line.customer_id.referente_id = line.referente_id
+            line.customer_id.property_payment_term_id = line.modalita_pagamento_id
 
-     
     def _aggiorna_da_import(self):
-        self.customer_id = self.impianto_id.customer_id
-        self.referente_id = self.customer_id.referente_id
+        for line in self:
+            line.customer_id = line.impianto_id.customer_id
+            line.referente_id = line.customer_id.referente_id
 
     @api.model
     def create(self, values):

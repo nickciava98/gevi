@@ -11,12 +11,12 @@ _logger = logging.getLogger(__name__)
 try:
     import base64
 
-    from openerp import api, fields, models
-    from openerp.exceptions import UserError
-    from openerp.tools.translate import _
+    from odoo import api, fields, models
+    from odoo.exceptions import UserError
+    from odoo.tools.translate import _
 
 
-    from openerp.addons.gevi_fatturapa.bindings.fatturapa_v_1_2 import (
+    from odoo.addons.gevi_fatturapa.bindings.fatturapa_v_1_2 import (
 	FatturaElettronica,
 	FatturaElettronicaHeaderType,
 	DatiTrasmissioneType,
@@ -49,7 +49,7 @@ try:
 	CodiceArticoloType
     )
 
-    from openerp.addons.gevi_fatturapa.models.account import (
+    from odoo.addons.gevi_fatturapa.models.account import (
         RELATED_DOCUMENT_TYPES
     )
 except ImportError as err:
@@ -823,7 +823,6 @@ class WizardExportFatturapa(models.TransientModel):
             res[invoice.partner_id.id].append(invoice.id)
         return res
 
-    @api.multi
     def exportFatturaPA(self):
         invoice_obj = self.env['account.invoice']
         invoices_by_partner = self.group_invoices_by_partner()

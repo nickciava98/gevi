@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class ComuniItaliani(models.Model):
     _name = 'comuni_italiani.comune'
+    _description = "Comuni Italiani"
 
     name = fields.Char('Comune')
     cap = fields.Char('CAP', size=5)

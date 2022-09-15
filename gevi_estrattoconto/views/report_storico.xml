@@ -1,117 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="gevi_estrattoconto.report_storico_document">
-    <t t-call="report.external_layout">
-        <div class="page">
-            <div class="row">
-                <div class="col-xs-5 col-xs-offset-7">
-                    <span t-field="doc.name"/><br/>
-                    <t t-if="doc.indirizzo != False">
-                        <span t-field="doc.indirizzo"/><br/>
-                    </t>
-                    <t t-if="doc.citta != False and doc.cap != False and doc.provincia != False">
-                        <span t-field="doc.cap"/> - <span t-field="doc.citta"/> (<span t-field="doc.provincia"/>)<br/>
-                    </t>
-                </div>
-                <p>
-                    Documento: Estratto Conto Storico<br/>
-                    Data: <span t-esc="DataStampa"/><br/>
-                    Data: <span t-raw="fields.date.today()"/><br/>
-                </p>
-                <t t-set="tot_doc" t-value="0"/>
-                <t t-set="tot_scad" t-value="0"/>
-                <t t-foreach="clienti" t-as="c">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th colspan="7">CLIENTE: <span t-field="c.name"/> <span t-field="c.street"/> - <span t-field="c.zip"/> <span t-field="c.city"/> (<span t-field="c.provincia"/>)</th>
-                            </tr>
-                            <tr>
-                                <th>Tipo Doc.</th>
-                                <th>Rif. Doc.</th>
-                                <th>Data Doc.</th>
-                                <th>Scadenza</th>
-                                <th class="text-right">Totale Doc.</th>
-                                <th>Pagamenti</th>
-                                <th>Scoperto</th>
-
-                            </tr>
-                        </thead>
-                        <t t-foreach="fatture" t-as="f">
-                            <tr>
-                                <td>
-                                    <span t-field="f.type"/>
-                                </td>
-                                <td>
-                                    <span t-field="f.name"/>
-                                </td>
-                                <td>
-                                    <span t-field="f.date_invoice"/>
-                                </td>
-                                <td>
-                                    <span t-field="f.date_due"/>
-                                </td>
-                                <td>
-                                    <span t-field="f.amount_total_company_signed"/>
-                                    <t t-set="tot_doc" t-value="tot_doc+f.amount_total_company_signed"/>
-                                </td>
-                                <td>
-                                    <t t-foreach="pagamenti" t-as="p">
-                                        <t t-if="p.id in f.payment_ids.ids">
-                                        <span t-field="p.name"/> <span t-field="p.communication"/> <span t-field="p.amount"/> 
-                                        <!--
-                                            <t t-if="p.name != '/'">
-                                                <span t-field="p.name"/>
-                                            </t>
-                                        -->
-                                        </t>
-                                    </t>
-                                </td>
-                                <td>
-                                    <span t-field="f.residual_company_signed"/>
-                                    <t t-set="tot_doc" t-value="tot_doc+f.amount_total_company_signed"/>
-                                </td>
-                            </tr>
-
-                            <!--
-                            <tr>
-                                <td colspan="3"></td>
-                                <td><strong>Sub-Total :</strong></td>
-                                <td class="text-right"><span t-esc="Totals[doc.id][currency]['due']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'/></td>
-                                <td class="text-right"><span t-esc="Totals[doc.id][currency]['paid']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'/></td>
-                                <td class="text-right"><span t-esc="Totals[doc.id][currency]['mat']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'/></td>
-                                <td></td>
-                            </tr>
-                            -->
-                            <tr>
-                                <td colspan="3"></td>
-                                <td><strong>Totale:</strong></td>
-                                <td class="text-right">
-                                    <span t-esc="tot_doc"/>
-                                </td>
-                                <td></td>
-                                <td class="text-right">
-                                    <span t-esc="tot_scad"/>
-                                </td>
-                            </tr>
+    <template id="gevi_estrattoconto.report_storico_document">
+        <t t-call="report.external_layout">
+            <div class="page">
+                <div class="row">
+                    <div class="col-xs-5 col-xs-offset-7">
+                        <span t-field="doc.name"/><br/>
+                        <t t-if="doc.indirizzo != False">
+                            <span t-field="doc.indirizzo"/><br/>
                         </t>
-                    </table>
-                    <p t-if="not fatture">
-                        <strong>Nessun documento trovato.</strong>
+                        <t t-if="doc.citta != False and doc.cap != False and doc.provincia != False">
+                            <span t-field="doc.cap"/> - <span t-field="doc.citta"/> (<span t-field="doc.provincia"/>)<br/>
+                        </t>
+                    </div>
+                    <p>
+                        Documento: Estratto Conto Storico<br/>
+                        Data: <span t-esc="DataStampa"/><br/>
+                        Data: <span t-raw="fields.date.today()"/><br/>
                     </p>
-                </t>
- 
-            </div>
-        </div>
-   </t>
-</template>
+                    <t t-set="tot_doc" t-value="0"/>
+                    <t t-set="tot_scad" t-value="0"/>
+                    <t t-foreach="clienti" t-as="c">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th colspan="7">CLIENTE: <span t-field="c.name"/> <span t-field="c.street"/> - <span t-field="c.zip"/> <span t-field="c.city"/> (<span t-field="c.provincia"/>)</th>
+                                </tr>
+                                <tr>
+                                    <th>Tipo Doc.</th>
+                                    <th>Rif. Doc.</th>
+                                    <th>Data Doc.</th>
+                                    <th>Scadenza</th>
+                                    <th class="text-right">Totale Doc.</th>
+                                    <th>Pagamenti</th>
+                                    <th>Scoperto</th>
 
-<template id="report_storico">
-    <t t-call="report.html_container">
-        <t t-foreach="docs" t-as="doc">
-            <t t-call="gevi_estrattoconto.report_storico_document" t-lang="o.lang"/>
+                                </tr>
+                            </thead>
+                            <t t-foreach="fatture" t-as="f">
+                                <tr>
+                                    <td>
+                                        <span t-field="f.type"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="f.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="f.date_invoice"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="f.date_due"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="f.amount_total_company_signed"/>
+                                        <t t-set="tot_doc" t-value="tot_doc+f.amount_total_company_signed"/>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="pagamenti" t-as="p">
+                                            <t t-if="p.id in f.payment_ids.ids">
+                                                <span t-field="p.name"/> <span t-field="p.communication"/> <span t-field="p.amount"/>
+                                                <!--
+                                                    <t t-if="p.name != '/'">
+                                                        <span t-field="p.name"/>
+                                                    </t>
+                                                -->
+                                            </t>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <span t-field="f.residual_company_signed"/>
+                                        <t t-set="tot_doc" t-value="tot_doc+f.amount_total_company_signed"/>
+                                    </td>
+                                </tr>
+
+                                <!--
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td><strong>Sub-Total :</strong></td>
+                                    <td class="text-right"><span t-esc="Totals[doc.id][currency]['due']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'/></td>
+                                    <td class="text-right"><span t-esc="Totals[doc.id][currency]['paid']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'/></td>
+                                    <td class="text-right"><span t-esc="Totals[doc.id][currency]['mat']" t-esc-options='{"widget": "monetary", "display_currency": "currency"}'/></td>
+                                    <td></td>
+                                </tr>
+                                -->
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td><strong>Totale:</strong></td>
+                                    <td class="text-right">
+                                        <span t-esc="tot_doc"/>
+                                    </td>
+                                    <td></td>
+                                    <td class="text-right">
+                                        <span t-esc="tot_scad"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <p t-if="not fatture">
+                            <strong>Nessun documento trovato.</strong>
+                        </p>
+                    </t>
+
+                </div>
+            </div>
         </t>
-    </t>
-</template>
+    </template>
+
+    <template id="report_storico">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="gevi_estrattoconto.report_storico_document" t-lang="o.lang"/>
+            </t>
+        </t>
+    </template>
 
 </odoo>

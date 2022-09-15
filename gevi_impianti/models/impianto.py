@@ -35,7 +35,7 @@ class Impianto(models.Model):
     customer_id = fields.Many2one(
         'res.partner',
         ondelete='cascade',
-        domain=[('customer', '=', True)],
+        #domain=[('customer', '=', True)],
         string='Cliente Fatturazione',
         required=True)
 
@@ -49,12 +49,10 @@ class Impianto(models.Model):
     piva_cliente = fields.Char(compute='_compute_cliente', store=True)
     referente_name = fields.Char(string="Amministratore", compute='_compute_cliente', store=True)
 
-     
     def copy(self):
         raise exceptions.ValidationError('Duplicazione non consentita')
 
     # utility action url doc pangea
-     
     def action_doc_pangea(self):
         url = "http://sederm.icoversrl.it/pangea/{0}000".format(self.codice_impianto)
         return {
@@ -70,24 +68,22 @@ class Impianto(models.Model):
         self.provincia = self.comuni_italiani_id.provincia
         self.regione = self.comuni_italiani_id.regione
 
-     
     @api.onchange('customer_id')
     def _onchange_customer_id(self):
-        record = self
-        # self.name = record.customer_id.name
-        self.indirizzo = record.customer_id.street
-        self.indirizzo2 = record.customer_id.street2
-        self.localita = record.customer_id.localita
-        self.cap = record.customer_id.zip
-        self.citta = record.customer_id.city
-        self.provincia = record.customer_id.provincia
-        self.regione = record.customer_id.regione
+        for line in self:
+            line.indirizzo = line.customer_id.street
+            line.indirizzo2 = line.customer_id.street2
+            line.localita = line.customer_id.localita
+            line.cap = line.customer_id.zip
+            line.citta = line.customer_id.city
+            line.provincia = line.customer_id.provincia
+            line.regione = line.customer_id.regione
 
-
-    def write(self, values):
-        if 'impianto_categoria_id' in values:
-            self.carica_attributi_descrittivi()
-        return super(Impianto, self).write(values)
+    # @api.multi
+    # def write(self, values):
+    #     if 'impianto_categoria_id' in values:
+    #         self.carica_attributi_descrittivi()
+    #     return super(Impianto, self).write(values)
 
     @api.model
     def create(self, values):
@@ -104,20 +100,18 @@ class Impianto(models.Model):
         result.carica_attributi_descrittivi()
         return result
 
-     
     def carica_attributi_descrittivi(self):
         for r in self:
-            if (not r.attributi_caricati):
+            if (r.attributi_caricati is False):
                 new_linee_attributo = []
                 for linea in r.impianto_categoria_id.impianto_attributo_descrittivo_ids:
-                    new_linee_attributo.append((0, 0, {
+                    new_linee_attributo.append([0, 0, {
                         'name': linea.name,
-                        'unita_di_misura_id': linea.unita_di_misura_id.id,
-                        }))
+                        'unita_di_misura_id': linea.unita_di_misura_id,
+                        }])
                 r.attributi_caricati = True
                 self.impianto_riga_descrizione_ids = new_linee_attributo
 
-     
     def name_get(self):
         result = super(Impianto, self).name_get()
         res = []
@@ -135,14 +129,14 @@ class Impianto(models.Model):
             self.piva_cliente = record.customer_id.piva
             self.referente_name = record.customer_id.referente_id.name
 
-    # def _delete_attributi_impianto(self):
-    #     for linea in self.impianto_riga_descrizione_ids:
-    #         linea.unlink()
-    #
-    #
-    # def ricarica_attributi_impianto(self):
-    #     self.attributi_caricati = False
-    #     # riga sottostante cancella tutti gli attributi descrittivi dell'impianto
-    #     self._delete_attributi_impianto()
-    #     self.carica_attributi_descrittivi()
+    def _delete_attributi_impianto(self):
+        for linea in self.impianto_riga_descrizione_ids:
+            linea.unlink()
+
+    def ricarica_attributi_impianto(self):
+        for line in self:
+            line.attributi_caricati = False
+            # riga sottostante cancella tutti gli attributi descrittivi dell'impianto
+            line._delete_attributi_impianto()
+            line.carica_attributi_descrittivi()
 

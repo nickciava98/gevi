@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-      <!-- Search Contratto -->
-        <record model="ir.ui.view" id="gevi_zupdate20171219_contratto_search_view">
-            <field name="name">gevi_zupdate20171219.contratto</field>
-            <field name="model">gevi_contratti.contratto</field>
-            <field name="inherit_id" ref="gevi_contratti.search_gevi_contratti_contratto_view"/>
-            <field name="arch" type="xml">
-                <!-- Intestazione scheda -->
-                <xpath expr="//filter[@name='group_by_customer_id']" position="after">
-                    <filter string="Zona Amministratore" name="group_by_zona_commerciale_referente_id" context="{'group_by':'zona_commerciale_referente_id'}"/>
-                    <filter string="Tipo Amministratore" name="group_by_tipo_referente_id" context="{'group_by':'tipo_referente_id'}"/>
-                    <filter string="Tipo Cliente" name="group_by_tipo_cliente_id" context="{'group_by':'tipo_cliente_id'}"/>
-                </xpath>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+<odoo>
+    <record model="ir.ui.view" id="gevi_zupdate20171219_contratto_search_view">
+        <field name="name">gevi_zupdate20171219.contratto</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="inherit_id" ref="gevi_contratti.search_gevi_contratti_contratto_view"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//filter[@name='group_by_customer_id']" position="after">
+                <filter string="Zona Amministratore" name="group_by_zona_commerciale_referente_id"
+                        context="{'group_by':'zona_commerciale_referente_id'}"/>
+                <filter string="Tipo Amministratore" name="group_by_tipo_referente_id"
+                        context="{'group_by':'tipo_referente_id'}"/>
+                <filter string="Tipo Cliente" name="group_by_tipo_cliente_id" context="{'group_by':'tipo_cliente_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

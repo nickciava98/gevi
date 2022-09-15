@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import report_storico
+from . import report_storico

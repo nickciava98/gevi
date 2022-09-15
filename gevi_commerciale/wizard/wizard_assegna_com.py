@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class WizardAssegnaCom(models.TransientModel):
@@ -10,7 +10,6 @@ class WizardAssegnaCom(models.TransientModel):
         string="Commerciale",
         domain=[('job_id.name', 'ilike', 'Commerciale')])
 
-    @api.multi
     def assegna_com(self):
         referenti = self.env['gevi_contatti.referente'].browse(
             self._context.get('active_ids', []))

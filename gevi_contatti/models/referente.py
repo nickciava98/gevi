@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 
 
 class Referente(models.Model):
@@ -9,7 +9,8 @@ class Referente(models.Model):
     # richiesto per openchatter
     _inherit = ['mail.thread']
 
-    tipo_referente_id = fields.Many2one('gevi_contatti.contatto_categoria', string='Tipo Referente', domain=[('tipo', 'ilike', 'referente')])
+    tipo_referente_id = fields.Many2one('gevi_contatti.contatto_categoria',
+                                        string='Tipo Referente', domain=[('tipo', 'ilike', 'referente')])
 
     agente_id = fields.Many2one('hr.employee', domain="[('job_id.name', 'ilike', 'Agente')]")
 
@@ -57,28 +58,27 @@ class Referente(models.Model):
         result = super(Referente, self).create(values)
         return result
 
-     
     def invia_estratto_conto_scoperto(self):
+        for line in self:
+            clienti = self.env['res.partner'].search([('id', 'in', line.customer_ids.ids)])
+            fatture = self.env['account.invoice'].search(['&', ('partner_id', 'in', clienti.ids), ('state', 'in', ['open'])])
 
-        clienti = self.env['res.partner'].search([('id', 'in', self.customer_ids.ids)])
-        fatture = self.env['account.invoice'].search(['&', ('partner_id', 'in', clienti.ids), ('state', 'in', ['open'])])
+            tot_amm = 0
 
-        tot_amm = 0
+            for f in fatture:
+                tot_amm = tot_amm+f.residual_company_signed
 
-        for f in fatture:
-            tot_amm = tot_amm+f.residual_company_signed
-
-        if tot_amm == 0:
-            raise exceptions.UserError('La situazione contabile è regolare e non verrà inviata nessuna email')
-        else:
-            # do export
-            # id 12 = Invia estratto conto scoperto
-            domain_template = [('id', '=', 12)]
-            template_mail = self.env['mail.template'].search(domain_template)
-            if self.email:
-                template_mail.email_to = self.email
-                template_mail.send_mail(self.id, force_send=True)
-                template_mail.email_to = None
+            if tot_amm == 0:
+                raise exceptions.UserError('La situazione contabile è regolare e non verrà inviata nessuna email')
             else:
-                raise exceptions.UserError("L'indirizzo email deve essere presente e valido")
+                # do export
+                # id 12 = Invia estratto conto scoperto
+                domain_template = [('id', '=', 12)]
+                template_mail = self.env['mail.template'].search(domain_template)
+                if line.email:
+                    template_mail.email_to = line.email
+                    template_mail.send_mail(line.id, force_send=True)
+                    template_mail.email_to = None
+                else:
+                    raise exceptions.UserError("L'indirizzo email deve essere presente e valido")
 

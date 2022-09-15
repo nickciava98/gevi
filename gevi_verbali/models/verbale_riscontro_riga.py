@@ -7,7 +7,7 @@ class VerbaleRiscontroRiga(models.Model):
 
     name = fields.Char(string="Nome")
     verbale_id = fields.Many2one(
-        'gevi_verbali.verbale', ondelete='set null', string="Verbale")
+        'gevi_verbali.verbale', ondelete='cascade', string="Verbale")
 
     valore_attributo_id = fields.Many2one(
         'gevi.impianti.valore_attributo',

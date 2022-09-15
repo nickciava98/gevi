@@ -1,35 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
+<odoo>
+    <record id="crm_action_contratto_new" model="ir.actions.act_window">
+        <field name="name">Contratto</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="view_mode">form,tree,graph</field>
+        <field name="domain">[('opportunity_id', '=', active_id)]</field>
+        <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
+    </record>
 
-        <record id="crm_action_contratto_new" model="ir.actions.act_window">
-            <field name="name">Contratto</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="view_mode">form,tree,graph</field>
-            <field name="domain">[('opportunity_id', '=', active_id)]</field>
-            <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
-        </record>
+    <record id="crm_action_contratto" model="ir.actions.act_window">
+        <field name="name">Contratti</field>
+        <field name="res_model">gevi_contratti.contratto</field>
+        <field name="domain">[('opportunity_id', '=', active_id)]</field>
+        <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field>
+    </record>
 
-        <record id="crm_action_contratto" model="ir.actions.act_window">
-            <field name="name">Contratti</field>
-            <field name="res_model">gevi_contratti.contratto</field>
-            <field name="domain">[('opportunity_id', '=', active_id)]</field>
-            <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field>
-        </record>
-
-      <!-- Form Opportunity -->
-      <record model="ir.ui.view" id="gevi_zcrm_crm_sale_opp_contratto_form_view">
+    <!-- Form Opportunity -->
+    <record model="ir.ui.view" id="gevi_zcrm_crm_sale_opp_contratto_form_view">
         <field name="name">gevi_zcrm.crm_sale_opp_contratto.form</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='stage_id']" position="before">
-                        <button attrs="{'invisible': [('probability', '=', 0)]}" string="Nuovo Contratto"
-                                name="%(crm_action_contratto_new)d" type="action" class="oe_highlight"
-                                context="{'search_default_customer_id': partner_id, 'default_customer_id': partner_id, 'default_team_id': team_id}"/>
-                        <button attrs="{'invisible': [('probability', '&gt;', 0)]}" string="Nuovo Contratto"
-                                name="%(crm_action_contratto_new)d" type="action"
-                                context="{'search_default_customer_id': partner_id, 'default_customer_id': partner_id, 'default_team_id': team_id}"/>
+                <button attrs="{'invisible': [('probability', '=', 0)]}" string="Nuovo Contratto"
+                        name="%(crm_action_contratto_new)d" type="action" class="oe_highlight"
+                        context="{'search_default_customer_id': partner_id, 'default_customer_id': partner_id, 'default_team_id': team_id}"/>
+                <button attrs="{'invisible': [('probability', '&gt;', 0)]}" string="Nuovo Contratto"
+                        name="%(crm_action_contratto_new)d" type="action"
+                        context="{'search_default_customer_id': partner_id, 'default_customer_id': partner_id, 'default_team_id': team_id}"/>
             </xpath>
 
             <div name="button_box" position="inside">
@@ -47,33 +44,31 @@
             </div>
 
         </field>
-      </record>
+    </record>
 
 
-      <record model="ir.ui.view" id="gevi_zcrm_contratto_form_view">
+    <record model="ir.ui.view" id="gevi_zcrm_contratto_form_view">
         <field name="name">gevi_zcrm.contratto.form</field>
         <field name="model">gevi_contratti.contratto</field>
         <field name="inherit_id" ref="gevi_contratti.view_gevi_contratti_contratto_form"/>
         <field name="arch" type="xml">
             <notebook position="inside">
-              <page string="CRM" class="oe_page_">
-                  <group>
-                    <field name="opportunity_id"/>
-                    <field name="team_id"/>
-                  </group>
-              </page>
+                <page string="CRM" class="oe_page_">
+                    <group>
+                        <field name="opportunity_id"/>
+                        <field name="team_id"/>
+                    </group>
+                </page>
             </notebook>
-<!--            <button name="action_rescisso" position="before">-->
-<!--                <button name="action_first_attivo" type="object" states="bozza"-->
-<!--                        string="Attiva" class="oe_highlight"/>-->
-<!--            </button>-->
-<!--            <xpath expr="//field[@name='impianto_id']" position="replace">-->
-<!--                <field name="impianto_id" placeholder="Nome Impianto" options="{'no_quick_create': True, 'no_create_edit' : True}"/>-->
+            <!--            <button name="action_rescisso" position="before">-->
+            <!--                <button name="action_first_attivo" type="object" states="bozza"-->
+            <!--                        string="Attiva" class="oe_highlight"/>-->
+            <!--            </button>-->
+            <!--            <xpath expr="//field[@name='impianto_id']" position="replace">-->
+            <!--                <field name="impianto_id" placeholder="Nome Impianto" options="{'no_quick_create': True, 'no_create_edit' : True}"/>-->
 
-<!--            </xpath>-->
+            <!--            </xpath>-->
 
         </field>
-      </record>
-
-    </data>
-</openerp>	
+    </record>
+</odoo>

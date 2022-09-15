@@ -4,6 +4,7 @@ import time
 from datetime import date
 
 import logging
+
 _logger = logging.getLogger(__name__)
 
 
@@ -42,13 +43,14 @@ class Verbale(models.Model):
     data_esecuzione = fields.Date("Data Esecuzione", readonly=True)
     data_verbale = fields.Date("Data Verbale")
     multi_data = fields.Char("Altre Date Verbale")
-    #START SDC EDIT 17/12/2016
+    # START SDC EDIT 17/12/2016
     data_conferma = fields.Date("Data Conferma")
     data_validazione = fields.Date("Data Validazione")
-    #STOP SDC EDIT 17/12/2016
+    # STOP SDC EDIT 17/12/2016
 
     ispettore_id = fields.Many2one('hr.employee', string="Ispettore", domain=[('job_id.name', 'ilike', 'Ispettore')])
-    responsabile_tecnico_id = fields.Many2one('hr.employee', string="Responsabile Tecnico", domain=[('job_id.name', 'ilike', 'Responsabile Tecnico')])
+    responsabile_tecnico_id = fields.Many2one('hr.employee', string="Responsabile Tecnico",
+                                              domain=[('job_id.name', 'ilike', 'Responsabile Tecnico')])
 
     # CAMBIATO DA BOOLEAN A SELECTION
     rilievi_precedenti = fields.Selection(
@@ -128,11 +130,11 @@ class Verbale(models.Model):
     rilievi_straordinaria = fields.Text("Modifiche", default='Nessuna')
     # START_BJ_Edit_24/02
     tipo_straordinaria = fields.Selection(
-        [('per_lavori','per lavori'),
-         ('a_seguito_di_negativo','a seguito di negativo'),
-         ('per_tempo_prolungato','per fermo prolungato'),
-         ('a_seguito_di_incidente','a seguito di incidente'),
-         ('attivazione','attivazione'),
+        [('per_lavori', 'per lavori'),
+         ('a_seguito_di_negativo', 'a seguito di negativo'),
+         ('per_tempo_prolungato', 'per fermo prolungato'),
+         ('a_seguito_di_incidente', 'a seguito di incidente'),
+         ('attivazione', 'attivazione'),
          ]
     )
     mat_non_conformita = fields.Text("Non Conformità", default='Nessuna')
@@ -166,7 +168,8 @@ class Verbale(models.Model):
 
     # UPDATE SDC 26/02/2017 per raggruppamento per zona_impianto
 
-    zona_impianto_id = fields.Many2one('gevi_zone.zona_impianto', string="Zona Impianto", related='impianto_id.zona_impianto_id', store=True)
+    zona_impianto_id = fields.Many2one('gevi_zone.zona_impianto', string="Zona Impianto",
+                                       related='impianto_id.zona_impianto_id', store=True)
 
     # @api.depends('impianto_id.zona_impianto_id')
     # def _compute_zona_impianto(self):
@@ -179,7 +182,9 @@ class Verbale(models.Model):
     # inserire ('in_revisione', 'In Revisione'), tra gli stati del verbale
     def action_riconfermato(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             for record in self:
                 self.timbro_ispettore = (self.env.user).timbro_isp
@@ -198,12 +203,12 @@ class Verbale(models.Model):
     def unlink(self):
         # _logger.info('******************************** WRITE {0} {1}: VALUES {2} - STATE {3}'.format(self.codice_verifica, self.name, values, self.state))
         if self.state != "annullato":
-            raise exceptions.ValidationError('ATTENZIONE: Non è possibile cancellare la verifica {0} ({1}). Lo stato deve essere ANNULLATO!'.format(self.name, self.state))
+            raise exceptions.ValidationError(
+                'ATTENZIONE: Non è possibile cancellare la verifica {0} ({1}). Lo stato deve essere ANNULLATO!'.format(
+                    self.name, self.state))
         else:
             result = super(Verbale, self).unlink()
             return result
-
-
 
     # @api.multi
     # def write(self, values):
@@ -216,7 +221,9 @@ class Verbale(models.Model):
 
     def action_in_revisione(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             for record in self:
                 self.state = 'in_revisione'
@@ -228,7 +235,7 @@ class Verbale(models.Model):
         lista_categorie = []
         categoria_obj = self.env['gevi.impianti.impianto_categoria']
         categorie_ids = categoria_obj.search([('customer_id', '=', self.customer_id.id)])
-        for record in impianti_ids:
+        for record in self.impianti_ids:
             lista_categorie.append(record.id)
         res['domain'] = {'impianto_categoria_id': [('codice_categoria', 'ilike', 'MOD')]}
         return res
@@ -246,7 +253,8 @@ class Verbale(models.Model):
     mat_verifiche_precedenti = fields.Char('Eventuali verifiche precedenti e/o primo impianto')
     mat_prot_lettere = fields.Char('(Per impianti superiori a 1000V) N. Prot. e data lettera Azienda erogatrice')
     mat_protezione_propria_cabina = fields.Text("Protezione contro i contatti indiretti")
-    mat_formula_protezione_propria_cabina = fields.Char('Formula CEI 99-3', default="Ue = Re x If = {0} x {1} = {2} V > Utp {3} V.")
+    mat_formula_protezione_propria_cabina = fields.Char('Formula CEI 99-3',
+                                                        default="Ue = Re x If = {0} x {1} = {2} V > Utp {3} V.")
     mat_progetto = fields.Selection([('si', 'SI'), ('no', 'NO'), ('na', 'Non Applicabile')], string="Progetto")
 
     mat_progetto_note = fields.Char('Note Progetto')
@@ -270,6 +278,7 @@ class Verbale(models.Model):
         'gevi_verbali.verbale_raccomandazione_riga',
         'verbale_id',
         string="Raccomandazioni")
+
     # dominio_osservazioni = fields.Char('Dominio Osservazioni')
 
     # dominio_raccomandazioni = fields.Char('Dominio Raccomandazioni')
@@ -298,28 +307,30 @@ class Verbale(models.Model):
 
     @api.depends('ispettore_id')
     def _compute_is_ispettore(self):
-        if self.ispettore_id.user_id.id == self.env.uid:
-            self.is_ispettore = True
-        else:
-            self.is_ispettore = False
+        for line in self:
+            if line.ispettore_id.user_id.id == line.env.uid:
+                line.is_ispettore = True
+            else:
+                line.is_ispettore = False
 
     @api.depends('responsabile_tecnico_id')
     def _compute_is_responsabile_tecnico(self):
-        if self.responsabile_tecnico_id.user_id.id == self.env.uid:
-            self.is_responsabile_tecnico = True
-        else:
-            self.is_responsabile_tecnico = False
+        for line in self:
+            if line.responsabile_tecnico_id.user_id.id == line.env.uid:
+                line.is_responsabile_tecnico = True
+            else:
+                line.is_responsabile_tecnico = False
 
     @api.depends('impianto_categoria_id')
     def _compute_impianto_categoria_id(self):
-        record = self
-        self.impianto_categoria_name = record.impianto_categoria_id.name
+        for line in self:
+            line.impianto_categoria_name = line.impianto_categoria_id.name
 
     # STOP MERGE
 
     cf_cliente = fields.Char("CF Cliente", compute='_compute_riferimenti_impianto', store=True)
     piva_cliente = fields.Char("P.IVA Cliente", compute='_compute_riferimenti_impianto', store=True)
-    blocco_amministrativo = fields.Boolean("Blocco Amministrativo", compute='_compute_blocco_amministrativo', store=False)
+    blocco_amministrativo = fields.Boolean("Blocco Amministrativo", compute='_compute_blocco_amministrativo')
     codice_contratto = fields.Char("Codice Contratto", compute='_compute_blocco_amministrativo', store=True)
 
     @api.depends('impianto_id')
@@ -345,12 +356,6 @@ class Verbale(models.Model):
     #    return res
     #                       ###vedi file /opt/odoo/addons/gevi_zupdate20171219/models/verbale.py
 
-    @api.onchange("responsabile_tecnico_id", "ispettore_id")
-    def _onchange_rt_isp(self):
-        if self.responsabile_tecnico_id and self.ispettore_id:
-            self.state = 'assegnato'
-            self.data_assegnazione = fields.Date.context_today(self)
-
     @api.depends('impianto_id')
     def _compute_riferimenti_impianto(self):
         for record in self:
@@ -364,8 +369,8 @@ class Verbale(models.Model):
             self.piva_cliente = record.impianto_id.customer_id.piva
 
     def aggiorna_dati_impianto(self):
-        self._compute_riferimenti_impianto()
-
+        for line in self:
+            line._compute_riferimenti_impianto()
 
     # @api.multi
     # def carica_attributi_descrittivi(self):
@@ -380,26 +385,27 @@ class Verbale(models.Model):
     #     # return attributi_descrittivi_obj
 
     def aggiorna_prossima_verifica(self):
-        record = self
-        periodicita_verifica_int = int(record.contratto_id.periodicita_verifica)
-        start = fields.Date.from_string(self.data_verbale)
-        self.data_prossima_verifica = start.replace(year=start.year + periodicita_verifica_int)
-        self.impianto_id.data_ultima_verifica = self.data_verbale
-        self.data_ultima_verifica = self.data_verbale
-        # self.contratto_id.data_ultima_verifica_effettuata = self.data_verbale
-        # self.contratto_id.n_verifiche_effettuate += 1
+        for line in self:
+            periodicita_verifica_int = int(line.contratto_id.periodicita_verifica)
+            start = fields.Date.from_string(line.data_verbale)
+            line.data_prossima_verifica = start.replace(year=start.year + periodicita_verifica_int)
+            line.impianto_id.data_ultima_verifica = line.data_verbale
+            line.data_ultima_verifica = line.data_verbale
+            # self.contratto_id.data_ultima_verifica_effettuata = self.data_verbale
+            # self.contratto_id.n_verifiche_effettuate += 1
 
     def aggiorna_contratto(self):
-        contratto_obj = self.env['gevi_contratti.contratto'].search([('id', '=', self.contratto_id.id)])
-        contratto_obj.data_ultima_verifica_effettuata = self.data_verbale
-        contratto_obj.n_verifiche_effettuate += 1
-        contratto_obj.data_prossima_verifica = self.data_prossima_verifica
-        contratto_obj.data_ultima_verifica = self.data_verbale
-        # edit 28/05/2018 bug manutentore in contratto
-        contratto_obj.manutentore_id = self.impianto_id.manutentore_id
+        for line in self:
+            contratto_obj = self.env['gevi_contratti.contratto'].search([('id', '=', line.contratto_id.id)])
+            contratto_obj.data_ultima_verifica_effettuata = line.data_verbale
+            contratto_obj.n_verifiche_effettuate += 1
+            contratto_obj.data_prossima_verifica = line.data_prossima_verifica
+            contratto_obj.data_ultima_verifica = line.data_verbale
+            # edit 28/05/2018 bug manutentore in contratto
+            contratto_obj.manutentore_id = line.impianto_id.manutentore_id
 
-        contratto_obj.aggiorna_stato()
-        contratto_obj._compute_impianto_ubicazione()
+            contratto_obj.aggiorna_stato()
+            contratto_obj._compute_impianto_ubicazione()
 
     @api.model
     def create(self, values):
@@ -464,34 +470,42 @@ class Verbale(models.Model):
 
     def action_bozza(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             self.state = 'bozza'
 
     def action_assegnato(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             self.state = 'assegnato'
             self.data_assegnazione = fields.Date.context_today(self)
 
-    #START SDC EDIT 17/12/2016
+    # START SDC EDIT 17/12/2016
     def action_eseguito(self):
-        if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
-        else:
-            record = self
-            if record.impianto_categoria_id.name == 'Ascensore Generico':
-                raise exceptions.ValidationError("Per procedere è necessario cambiare la categoria dell'impianto")
+        for line in self:
+            if line.blocco_amministrativo is True:
+                raise exceptions.ValidationError(
+                    'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                        line.codice_contratto))
             else:
-                self.data_esecuzione = fields.Date.context_today(self)
-                self._carica_attributi_verbale()
-                self._calcola_norma_ascensori()
-                self.state = 'eseguito'
+                if line.impianto_categoria_id.name == 'Ascensore Generico':
+                    raise exceptions.ValidationError("Per procedere è necessario cambiare la categoria dell'impianto")
+                else:
+                    line.data_esecuzione = fields.Date.context_today(line)
+                    line._carica_attributi_verbale()
+                    line._calcola_norma_ascensori()
+                    line.state = 'eseguito'
 
     def action_confermato(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             for record in self:
                 self.data_conferma = fields.Date.context_today(self)
@@ -501,16 +515,18 @@ class Verbale(models.Model):
                 self.timbro_ispettore = (self.env.user).timbro_isp
                 # self.state = 'confermato'
                 if self.name.find('Prog') != -1:
-                    self.name = self.env['ir.sequence'].with_context(ir_sequence_date='2022-01-01').next_by_code('gevi_verbali.verbale')
+                    self.name = self.env['ir.sequence'].with_context(ir_sequence_date='2022-01-01').next_by_code(
+                        'gevi_verbali.verbale')
                     # self.name = self.env['ir.sequence'].next_by_code('gevi_verbali.verbale')
                     self.data_verbale = fields.Date.context_today(self)
                 self.state = 'confermato'
 
-
-    #START SDC EDIT 17/12/2016
+    # START SDC EDIT 17/12/2016
     def action_validato(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             if self.is_responsabile_tecnico:
                 self.timbro_responsabile_tecnico = (self.env.user).timbro_rt
@@ -521,7 +537,8 @@ class Verbale(models.Model):
                     self.aggiorna_contratto()
                 self.state = 'validato'
             else:
-                raise exceptions.ValidationError('Solo il Responsabile Tecnico può validare definitivamente il verbale!')
+                raise exceptions.ValidationError(
+                    'Solo il Responsabile Tecnico può validare definitivamente il verbale!')
 
                 # return {
                 #     'type': 'ir.actions.client',
@@ -544,86 +561,95 @@ class Verbale(models.Model):
 
         if self.fattura_anticipata is False:
             self._crea_ordine_vendita()
-    #STOP SDC EDIT 17/12/2016
+
+    # STOP SDC EDIT 17/12/2016
 
     def action_annullato(self):
         if self.blocco_amministrativo is True:
-            raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(self.codice_contratto))
+            raise exceptions.ValidationError(
+                'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
+                    self.codice_contratto))
         else:
             self.state = 'annullato'
 
     def _calcola_norma_ascensori(self):
-        if 'Ascensore' in self.impianto_categoria_name:
-            anno_collaudo_obj = self.env['gevi.impianti.impianto_riga_descrizione'].search(['&', ('impianto_id', '=', self.impianto_id.id),('name', 'ilike', "Data collaudo")], limit=1)
-            anno_collaudo_int = 1900
-            for anno_collaudo in anno_collaudo_obj:
-                anno_collaudo_int = int(anno_collaudo.valore_attributo)
-            norma_obj = self.env['gevi_verbali.normeascensori'].search(['&', ('anno_inizio', '<=', anno_collaudo_int),('anno_fine', '>=', anno_collaudo_int)], limit=1)
-            self.norma_riferimento = norma_obj.norma_collaudo
-            if not self.periodica:
-                if norma_obj.norma_collaudo:
-                    self.norma_riferimento = norma_obj.norma_collaudo + ' - ' + norma_obj.norma_straordinaria
+        for line in self:
+            if 'Ascensore' in line.impianto_categoria_name:
+                anno_collaudo_obj = self.env['gevi.impianti.impianto_riga_descrizione'].search(
+                    ['&', ('impianto_id', '=', line.impianto_id.id), ('name', 'ilike', "Data collaudo")], limit=1)
+                anno_collaudo_int = 1900
+                for anno_collaudo in anno_collaudo_obj:
+                    anno_collaudo_int = int(anno_collaudo.valore_attributo)
+                norma_obj = self.env['gevi_verbali.normeascensori'].search(
+                    ['&', ('anno_inizio', '<=', anno_collaudo_int), ('anno_fine', '>=', anno_collaudo_int)], limit=1)
+                line.norma_riferimento = norma_obj.norma_collaudo
+                if not line.periodica:
+                    if norma_obj.norma_collaudo:
+                        line.norma_riferimento = norma_obj.norma_collaudo + ' - ' + norma_obj.norma_straordinaria
 
     def _crea_ordine_vendita(self):
-        # record = self
-        ordine_obj = self.env['sale.order']
-        costo = fields.Float(default=0.0, digits=(12, 2))
-        ubicazione = fields.Char()
-        # if self.impianto_id.indirizzo2 is False:
-        #     self.impianto_indirizzo2 = ' '
-        codice_prodotto = fields.Char()
-        sigla_periodica = fields.Char()
-        sigla_impianto = fields.Char()
-        self.ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
-            self.customer_id.name.encode('utf-8'),
-            self.impianto_id.etichetta.encode('utf-8'),
-            self.impianto_id.indirizzo.encode('utf-8'),
-            ' ' if self.impianto_id.indirizzo2 is False else self.impianto_id.indirizzo2,
-            self.impianto_id.cap,
-            self.impianto_id.citta,
-            self.impianto_id.provincia
-        )
+        for line in self:
+            # record = self
+            ordine_obj = self.env['sale.order']
+            costo = fields.Float(default=0.0, digits=(12, 2))
+            ubicazione = fields.Char()
+            # if self.impianto_id.indirizzo2 is False:
+            #     self.impianto_indirizzo2 = ' '
+            codice_prodotto = fields.Char()
+            sigla_periodica = fields.Char()
+            sigla_impianto = fields.Char()
+            line.ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
+                line.customer_id.name.encode('utf-8'),
+                line.impianto_id.etichetta.encode('utf-8'),
+                line.impianto_id.indirizzo.encode('utf-8'),
+                ' ' if line.impianto_id.indirizzo2 is False else line.impianto_id.indirizzo2,
+                line.impianto_id.cap,
+                line.impianto_id.citta,
+                line.impianto_id.provincia
+            )
 
-        if self.periodica is True:
-            self.sigla_periodica = 'P'
-            self.costo = self.contratto_id.costo_verifica_periodica
+        if line.periodica is True:
+            line.sigla_periodica = 'P'
+            line.costo = line.contratto_id.costo_verifica_periodica
         else:
-            self.sigla_periodica = 'S'
-            self.costo = self.contratto_id.costo_verifica_straordinaria
+            line.sigla_periodica = 'S'
+            line.costo = line.contratto_id.costo_verifica_straordinaria
 
-        self.sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search([('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
-        if self.fattura_anticipata is True:
-            self.codice_prodotto = 'VV{0}-{1}-FA'.format(self.sigla_periodica, self.sigla_impianto)
+        line.sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
+            [('name', '=', line.impianto_categoria_id.name)], limit=1).descrizione
+        if line.fattura_anticipata is True:
+            line.codice_prodotto = 'VV{0}-{1}-FA'.format(line.sigla_periodica, line.sigla_impianto)
         else:
-            self.codice_prodotto = 'VV{0}-{1}'.format(self.sigla_periodica, self.sigla_impianto)
-        if self.customer_id.tipo_cliente_id.name == "Condominio":
-            self.codice_prodotto += 'C'
+            line.codice_prodotto = 'VV{0}-{1}'.format(line.sigla_periodica, line.sigla_impianto)
+        if line.customer_id.tipo_cliente_id.name == "Condominio":
+            line.codice_prodotto += 'C'
         # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
-        prodotto_obj = self.env['product.product'].search([('name', '=', self.codice_prodotto)], limit=1)
-        data_verbale_formato_it = fields.Date.from_string(self.data_verbale)
+        prodotto_obj = self.env['product.product'].search([('name', '=', line.codice_prodotto)], limit=1)
+        data_verbale_formato_it = fields.Date.from_string(line.data_verbale)
         ordine = ordine_obj.create({
             # 'name': ,
-            'origin': self.name,
-            'verbale_id': self.id,
-            'date_order': fields.Date.context_today(self),
-            'partner_id': self.customer_id.id,
-            'partner_invoice_id': self.customer_id.id,
+            'origin': line.name,
+            'verbale_id': line.id,
+            'date_order': fields.Date.context_today(line),
+            'partner_id': line.customer_id.id,
+            'partner_invoice_id': line.customer_id.id,
             'order_policy': 'manual',
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
-                'name': (prodotto_obj.description_sale).format(self.name, data_verbale_formato_it.strftime("%d/%m/%Y"), self.ubicazione.decode('utf-8'), self.data_ultima_verifica),
-                'price_unit': self.costo,
+                'name': (prodotto_obj.description_sale).format(line.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
+                                                               line.ubicazione.decode('utf-8'),
+                                                               line.data_ultima_verifica),
+                'price_unit': line.costo,
                 'discount': 0.0,
                 'sequence': 10,
-                'verbale_id': self.id,
+                'verbale_id': line.id,
             })],
         })
 
-
         # verifico agente associato ad amministratore per associazione PESCARA
-        if self.referente_id and self.referente_id.agente_id:
-            if self.referente_id.agente_id.user_id.has_group('__export__.res_groups_90'):
-                ordine.write({'user_id': self.referente_id.agente_id.user_id.id})
+        if line.referente_id and line.referente_id.agente_id:
+            if line.referente_id.agente_id.user_id.has_group('__export__.res_groups_90'):
+                ordine.write({'user_id': line.referente_id.agente_id.user_id.id})
 
         ordine.action_confirm()
         return ordine
@@ -648,17 +674,18 @@ class Verbale(models.Model):
         # # ordine_obj.action_wait(self)
 
     def send_mail(self):
-        # do export
-        # id 11 = Invia verbale
-        domain_template = [('id', '=', 11)]
-        if self.state == 'validato':
-            template_mail = self.env['mail.template'].search(domain_template)
-            if self.customer_id.referente_id and self.customer_id.referente_id.email:
-                template_mail.email_to = self.customer_id.referente_id.email
-                template_mail.send_mail(self.id, force_send=True)
-                template_mail.email_to = None
+        for line in self:
+            # do export
+            # id 11 = Invia verbale
+            domain_template = [('id', '=', 11)]
+            if line.state == 'validato':
+                template_mail = self.env['mail.template'].search(domain_template)
+                if line.customer_id.referente_id and line.customer_id.referente_id.email:
+                    template_mail.email_to = line.customer_id.referente_id.email
+                    template_mail.send_mail(line.id, force_send=True)
+                    template_mail.email_to = None
 
-            if self.manutentore_id and self.manutentore_id:
-                template_mail.email_to = self.manutentore_id.email
-                template_mail.send_mail(self.id, force_send=True)
-                template_mail.email_to = None
+                if line.manutentore_id and line.manutentore_id:
+                    template_mail.email_to = line.manutentore_id.email
+                    template_mail.send_mail(line.id, force_send=True)
+                    template_mail.email_to = None

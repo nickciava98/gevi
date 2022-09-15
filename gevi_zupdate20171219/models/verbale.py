@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 import xml.etree.ElementTree as etree
 
 import logging
@@ -16,7 +16,6 @@ class Verbale(models.Model):
             store=True
         )
 
-    @api.multi
     def apri_verbale(self):
         return {
             'type': 'ir.actions.act_window',

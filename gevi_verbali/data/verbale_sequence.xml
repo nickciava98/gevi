@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="1">
 
-    <!--
-        # Sequences per Verifica      
-    -->
-        
+        <!--
+            # Sequences per Verifica
+        -->
+
         <!--<record id="seq_type_gevi_verbali_verifica" model="ir.sequence.type">
             <field name="name">Codice Verifica</field>
             <field name="code">gevi_verbali.verifica</field>
@@ -17,11 +16,10 @@
             <field name="padding">6</field>
         </record>
 
+        <!--
+            # Sequences per Verbali
+        -->
 
-    <!--
-        # Sequences per Verbali     
-    -->
-     
         <!--<record id="seq_type_gevi_verbali_verbale" model="ir.sequence.type">
             <field name="name">Codice Verbale</field>
             <field name="code">gevi_verbali.verbale</field>
@@ -31,6 +29,6 @@
             <field name="code">gevi_verbali.verbale</field>
             <field name="prefix">%(year)s/</field>
         </record>
-        
+
     </data>
-</openerp>
+</odoo>

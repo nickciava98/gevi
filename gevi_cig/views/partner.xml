@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-      <!-- Form Clienti -->
-      <record model="ir.ui.view" id="gevi_cig_partner_form_view">
+<odoo>
+    <record model="ir.ui.view" id="gevi_cig_partner_form_view">
         <field name="name">gevi_cig.partner.form</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
+
         <field name="arch" type="xml">
             <!-- Banca -->
-            <xpath expr="//group[@name='acc_purchase']" position="before">
-              <group string="Banca" name="banca">
-                  <field name="banca_id" options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"/>
-              </group>             
+            <xpath expr="//field[@name='vat']" position="before">
+                <group string="Banca" name="banca">
+                    <field name="banca_id"
+                           options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"/>
+                </group>
             </xpath>
             <!-- Nasconde Acquisto -->
-            <xpath expr="//group[@name='acc_purchase']" position="attributes">
-              <attribute name="invisible">1</attribute>
-            </xpath>   
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
         </field>
-      </record>
-    </data>
-</openerp>
+    </record>
+</odoo>

@@ -1,129 +1,119 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-      <!-- Form Verbale -->
-        <record model="ir.ui.view" id="gevi_zupdate20170525_verbale_form_view">
-            <field name="name">gevi_zupdate20170525.verbale</field>
-            <field name="model">gevi_verbali.verbale</field>
-            <field name="inherit_id" ref="gevi_verbali.view_gevi_verbali_verbale_form"/>
-            <field name="arch" type="xml">
-                <!-- Intestazione scheda -->
-                <xpath expr="//group[@name='blocco1']" position="before">
-                    <group>
-                        <field name="prioritario" string="Prioritario" readonly="1"/>  
-                    </group>            
-                    <group>
-                        <field name="periodicita" string="Periodicità" readonly="1"/>  
-                    </group>    
-                </xpath>
+<odoo>
+    <record model="ir.ui.view" id="gevi_zupdate20170525_verbale_form_view">
+        <field name="name">gevi_zupdate20170525.verbale</field>
+        <field name="model">gevi_verbali.verbale</field>
+        <field name="inherit_id" ref="gevi_verbali.view_gevi_verbali_verbale_form"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//group" position="before">
+                <group>
+                    <field name="prioritario" string="Prioritario" readonly="1"/>
+                </group>
+                <group>
+                    <field name="periodicita" string="Periodicità" readonly="1"/>
+                </group>
+            </xpath>
 
-                <xpath expr="//group[@name='blocco1']" position="after">
-                    <group>
-                        <field name="tipo_attivita" string="Tipo attività" placeholder="esercente attività di" attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),('impianto_categoria_name', '!=', 'Scariche Atmosferiche')],'readonly': [('state', 'not in', ('confermato', 'in_revisione'))]}"/>  
-                    </group>            
-                </xpath>
-            </field>
-        </record>
+            <xpath expr="//group" position="after">
+                <group>
+                    <field name="tipo_attivita" string="Tipo attività" placeholder="esercente attività di"
+                           attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra'),('impianto_categoria_name', '!=', 'Scariche Atmosferiche')],'readonly': [('state', 'not in', ('confermato', 'in_revisione'))]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
 
 
-        <record model="ir.ui.view" id="gevi_zupdate20170525_verbale_tree_view">
-            <field name="name">gevi_zupdate20170525.verbale</field>
-            <field name="model">gevi_verbali.verbale</field>
-            <field name="inherit_id" ref="gevi_verbali.view_gevi_verbali_verbale_tree"/>
-            <field name="arch" type="xml">
-                <!-- Intestazione scheda -->
-                <xpath expr="//field[@name='name']" position="before">
-                    <field name="prioritario" string="Priorità"/>               
-                </xpath>
-                <xpath expr="//field[@name='state']" position="after">
-                    <field name="periodicita" string="Periodicità"/>               
-                </xpath>
-            </field>
-        </record>
+    <record model="ir.ui.view" id="gevi_zupdate20170525_verbale_tree_view">
+        <field name="name">gevi_zupdate20170525.verbale</field>
+        <field name="model">gevi_verbali.verbale</field>
+        <field name="inherit_id" ref="gevi_verbali.view_gevi_verbali_verbale_tree"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="prioritario" string="Priorità"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="periodicita" string="Periodicità"/>
+            </xpath>
+        </field>
+    </record>
 
-        <record model="ir.ui.view" id="gevi_zupdate20170525_verbale_form_view_group_noreadonly">
-            <field name="name">gevi_zupdate20170525.verbale</field>
-            <field name="model">gevi_verbali.verbale</field>
-            <field name="inherit_id" ref="gevi_zupdate20170525.gevi_zupdate20170525_verbale_form_view"/>
-            <field name="groups_id" eval="[(6, 0, [ref('__export__.res_groups_66') ])]" /> 
-            <field name="arch" type="xml">
-                <!-- Intestazione campo -->
+    <record model="ir.ui.view" id="gevi_zupdate20170525_verbale_form_view_group_noreadonly">
+        <field name="name">gevi_zupdate20170525.verbale</field>
+        <field name="model">gevi_verbali.verbale</field>
+        <field name="inherit_id" ref="gevi_zupdate20170525.gevi_zupdate20170525_verbale_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione campo -->
 
-                <xpath expr="//field[@name='prioritario']" position="attributes">
-                    <attribute name="readonly">0</attribute>          
-                </xpath>
+            <xpath expr="//field[@name='prioritario']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
 
-            </field>
-        </record>
-        <!-- action gevi_verbali filter bozza per RT-->
-        <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_da_assegnare">
-            <field name="name">Mie Verifiche da Assegnare</field>
-            <field name="res_model">gevi_verbali.verbale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">['&amp;',('state', '=', 'bozza'),('responsabile_tecnico_id.user_id', '=', uid)]</field>
-            <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Nessuna verifica da assegnare
-                </p>
-            </field>
-        </record>
+        </field>
+    </record>
+    <!-- action gevi_verbali filter bozza per RT-->
+    <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_da_assegnare">
+        <field name="name">Mie Verifiche da Assegnare</field>
+        <field name="res_model">gevi_verbali.verbale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['&amp;',('state', '=', 'bozza'),('responsabile_tecnico_id.user_id', '=', uid)]</field>
+        <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Nessuna verifica da assegnare
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_verbali filter assegnato per RT-->
-        <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_assegnato">
-            <field name="name">Mie Verifiche Assegnate RT</field>
-            <field name="res_model">gevi_verbali.verbale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">['&amp;',('state', '=', 'assegnato'),('responsabile_tecnico_id.user_id', '=', uid)]</field>
-            <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Nessuna verifica assegnata
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_verbali filter assegnato per RT-->
+    <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_assegnato">
+        <field name="name">Mie Verifiche Assegnate RT</field>
+        <field name="res_model">gevi_verbali.verbale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['&amp;',('state', '=', 'assegnato'),('responsabile_tecnico_id.user_id', '=', uid)]</field>
+        <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Nessuna verifica assegnata
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_verbali filter assegnato per ISP-->
-        <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_assegnato_isp">
-            <field name="name">Mie Verifiche Assegnate ISP</field>
-            <field name="res_model">gevi_verbali.verbale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">['&amp;',('state', '=', 'assegnato'),('ispettore_id.user_id', '=', uid)]</field>
-            <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Nessuna verifica assegnata
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_verbali filter assegnato per ISP-->
+    <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_assegnato_isp">
+        <field name="name">Mie Verifiche Assegnate ISP</field>
+        <field name="res_model">gevi_verbali.verbale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['&amp;',('state', '=', 'assegnato'),('ispettore_id.user_id', '=', uid)]</field>
+        <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Nessuna verifica assegnata
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_verbali filter in_revisione per ISP-->
-        <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_in_revisione">
-            <field name="name">Mie Verifiche In Revisione</field>
-            <field name="res_model">gevi_verbali.verbale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">['&amp;',('state', '=', 'in_revisione'),('ispettore_id.user_id', '=', uid)]</field>
-            <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Nessuna verifica in revisione
-                </p>
-            </field>
-        </record>
+    <!-- action gevi_verbali filter in_revisione per ISP-->
+    <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_in_revisione">
+        <field name="name">Mie Verifiche In Revisione</field>
+        <field name="res_model">gevi_verbali.verbale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['&amp;',('state', '=', 'in_revisione'),('ispettore_id.user_id', '=', uid)]</field>
+        <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Nessuna verifica in revisione
+            </p>
+        </field>
+    </record>
 
-        <!-- action gevi_verbali filter Verbali dei Miei Amministratori-->
-        <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_miei_amministratori">
-            <field name="name">Verbali Miei Amministratori</field>
-            <field name="res_model">gevi_verbali.verbale</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('utente_assegnato_referente_id', '=', uid)]</field>
-            <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Nessuna verifica
-                </p>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+    <!-- action gevi_verbali filter Verbali dei Miei Amministratori-->
+    <record model="ir.actions.act_window" id="action_gevi_zupdate20170525_verbale_miei_amministratori">
+        <field name="name">Verbali Miei Amministratori</field>
+        <field name="res_model">gevi_verbali.verbale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('utente_assegnato_referente_id', '=', uid)]</field>
+        <field name="context" eval="{'order': 'prioritario, write_date desc, data_programmazione desc'}"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Nessuna verifica
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
-import controllers
-import report
+from . import controllers
+from . import report
 

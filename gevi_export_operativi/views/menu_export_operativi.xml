@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <!-- Side Menu - Applicazione -->
-        <menuitem id="gelab_export_operativi" name="Esportazioni" parent="gevi_verbali.gevi_verbali_top_menu" sequence="10"/>
-        <menuitem id="gelab_export_operativi_nuova_esportazione" name="Nuova Esportazione" parent="gelab_export_operativi"  action="action_gevi_export_operativi_menu" sequence="10"/>
-        <menuitem id="gelab_export_operativi_elenco_esportazioni" name="Elenco Esportazioni" parent="gelab_export_operativi"  action="action_elenco_esportazioni_tree" sequence="11"/>
-        <menuitem id="gelab_export_operativi_mie_esportazioni" name="Le mie Esportazioni" parent="gelab_export_operativi"  action="action_mie_esportazioni_tree" sequence="12"/>
-
-    </data>
-</openerp>
+<odoo>
+    <menuitem id="gelab_export_operativi" name="Esportazioni"
+              parent="gevi_verbali.gevi_verbali_top_menu" sequence="10"/>
+    <menuitem id="gelab_export_operativi_nuova_esportazione" name="Nuova Esportazione"
+              parent="gelab_export_operativi"
+              action="action_gevi_export_operativi_menu" sequence="10"/>
+    <menuitem id="gelab_export_operativi_elenco_esportazioni" name="Elenco Esportazioni"
+              parent="gelab_export_operativi"  action="action_elenco_esportazioni_tree" sequence="11"/>
+    <menuitem id="gelab_export_operativi_mie_esportazioni" name="Le mie Esportazioni"
+              parent="gelab_export_operativi"  action="action_mie_esportazioni_tree" sequence="12"/>
+</odoo>

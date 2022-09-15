@@ -1,42 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-        <record model="ir.ui.view" id="wizard_conferma_con_pin_form_view">
-            <field name="name">gevi_verbali.wizardconferma.form</field>
-            <field name="model">gevi_verbali.wizardconferma</field>
-            <field name="arch" type="xml">
-                <form string="Assegna Ispettore">
-                    <div>Inserire il PIN</div>
+<odoo>
+    <record model="ir.ui.view" id="wizard_conferma_con_pin_form_view">
+        <field name="name">gevi_verbali.wizardconferma.form</field>
+        <field name="model">gevi_verbali.wizardconferma</field>
+        <field name="arch" type="xml">
+            <form string="Assegna Ispettore">
+                <div>Inserire il PIN</div>
+                <group>
                     <group>
-                        <group>
-                            <field name="pin" string="PIN: " password="True"/>
-                        </group>
-                        <group>
-                            
-                        </group>
+                        <field name="pin" string="PIN: " password="True"/>
                     </group>
-                    <footer>
-                        <button name="conferma_con_pin" type="object"
-                                string="Conferma" class="oe_highlight"/>
-                        <button special="cancel" string="Annulla"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
+                    <group>
 
-        <record model="ir.actions.act_window" id="action_lancia_wizard_conferma_con_pin">
-            <field name="name">Conferma con PIN</field>
-            <field name="res_model">gevi_verbali.wizardconferma</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-    <!--        <field name="src_model">gevi_verbali.verbale</field>-->
-        </record>
+                    </group>
+                </group>
+                <footer>
+                    <button name="conferma_con_pin" type="object"
+                            string="Conferma" class="oe_highlight"/>
+                    <button special="cancel" string="Annulla"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-<!--        <act_window id="action_lancia_wizard_conferma_con_pin"-->
-<!--                    name="Conferma con PIN"-->
-<!--                    src_model="gevi_verbali.verbale"-->
-<!--                    res_model="gevi_verbali.wizardconferma"-->
-<!--                    view_mode="form"-->
-<!--                    target="new"/>-->
-    </data>
-</openerp>
+    <record id="action_lancia_wizard_conferma_con_pin" model="ir.actions.act_window">
+        <field name="name">Conferma con PIN</field>
+        <field name="res_model">gevi_verbali.wizardconferma</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

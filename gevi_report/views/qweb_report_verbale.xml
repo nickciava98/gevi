@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <report 
-            id="report_gevi_verbali_verbale"
-            string="Verbale"
-            model="gevi_verbali.verbale" 
-            report_type="qweb-pdf"
-            file="gevi_report.report_verbale" 
-            name="gevi_report.report_verbale"          
-        />
-    </data>
-</openerp>
+<odoo>
+    <report
+        id="report_gevi_verbali_verbale"
+        string="Verbale"
+        model="gevi_verbali.verbale"
+        report_type="qweb-pdf"
+        file="gevi_report.report_verbale"
+        name="gevi_report.report_verbale"
+    />
+</odoo>

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
-from openerp import http, exceptions
-from openerp.http import request
-from openerp.addons.web.controllers import main
+from odoo import http, exceptions
+from odoo.http import request
+from odoo.addons.web.controllers import main
 import logging
 _logger = logging.getLogger(__name__)
 

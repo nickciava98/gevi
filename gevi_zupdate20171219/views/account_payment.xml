@@ -1,34 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>
-      <!-- Search Contratto -->
-        <record model="ir.ui.view" id="gevi_zupdate20171219_account_payment_search_view">
-            <field name="name">gevi_zupdate20171219.account.payment</field>
-            <field name="model">account.payment</field>
-            <field name="inherit_id" ref="account.view_account_payment_search"/>
-            <field name="arch" type="xml">
-                <!-- Intestazione scheda -->
-                <xpath expr="//filter[@name='annocorrente']" position="before">
-                    <filter string="Data Pagamento" name="group_by_payment_date" context="{'group_by':'payment_date'}"/>
-                    <filter string="Amministratore" name="group_by_referente_id" context="{'group_by':'referente_id'}"/>
-                    <filter string="Zona Amministratore" name="group_by_zona_commerciale_referente_id" context="{'group_by':'zona_commerciale_referente_id'}"/>
-                    <filter string="Tipo Cliente" name="group_by_tipo_cliente_id" context="{'group_by':'tipo_cliente_id'}"/>
-                    <field string="Utente Amministratore" name="utente_referente_id"/>
-                    <field string="Agente Amministratore" name="agente_referente_id"/>
-                    <filter string="Utente Amministratore" name="group_by_utente_referente_id" context="{'group_by':'utente_referente_id'}"/>
-                    <filter string="Agente Amministratore" name="group_by_agente_referente_id" context="{'group_by':'agente_referente_id'}"/>
-                    <separator/>
-                </xpath>
+<odoo>
+    <record model="ir.ui.view" id="gevi_zupdate20171219_account_payment_search_view">
+        <field name="name">gevi_zupdate20171219.account.payment</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//filter" position="before">
+                <filter string="Data Pagamento" name="group_by_date" context="{'group_by':'date'}"/>
+                <filter string="Amministratore" name="group_by_referente_id" context="{'group_by':'referente_id'}"/>
+                <filter string="Zona Amministratore" name="group_by_zona_commerciale_referente_id"
+                        context="{'group_by':'zona_commerciale_referente_id'}"/>
+                <filter string="Tipo Cliente" name="group_by_tipo_cliente_id" context="{'group_by':'tipo_cliente_id'}"/>
+                <field string="Utente Amministratore" name="utente_referente_id"/>
+                <field string="Agente Amministratore" name="agente_referente_id"/>
+                <filter string="Utente Amministratore" name="group_by_utente_referente_id"
+                        context="{'group_by':'utente_referente_id'}"/>
+                <filter string="Agente Amministratore" name="group_by_agente_referente_id"
+                        context="{'group_by':'agente_referente_id'}"/>
+                <separator/>
+            </xpath>
 
-                <xpath expr="//filter[@name='annocorrente']" position="after">
-                    <separator/>
-                    <filter string="Ultimi 30 GG" name="ultimi_30_gg" domain="[('payment_date','&gt;',(context_today()-relativedelta(days=30)).strftime('%Y-%m-%d'))]" help="Pagamenti degli ultimi 30 giorni"/>
-                    <filter string="Ultimi 90 GG" name="ultimi_90_gg" domain="[('payment_date','&gt;',(context_today()-relativedelta(days=90)).strftime('%Y-%m-%d'))]" help="Pagamenti degli ultimi 90 giorni"/>
-                    <filter string="Ultimi 180 GG" name="ultimi_180_gg" domain="[('payment_date','&gt;',(context_today()-relativedelta(days=180)).strftime('%Y-%m-%d'))]" help="Pagamenti degli ultimi 180 giorni"/>
-                    <filter string="Anno Precedente" name="anno_precedente" domain="['&amp;',('payment_date','&lt;=', (context_today()-relativedelta(years=1)).strftime('%Y-12-31')),('payment_date','&gt;=', (context_today()-relativedelta(years=1)).strftime('%Y-01-01'))]" help="Pagamenti dell'anno precedente"/>
-                </xpath>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+            <xpath expr="//filter" position="after">
+                <separator/>
+                <filter string="Ultimi 30 GG" name="ultimi_30_gg"
+                        domain="[('date','&gt;',(context_today()-relativedelta(days=30)).strftime('%Y-%m-%d'))]"
+                        help="Pagamenti degli ultimi 30 giorni"/>
+                <filter string="Ultimi 90 GG" name="ultimi_90_gg"
+                        domain="[('date','&gt;',(context_today()-relativedelta(days=90)).strftime('%Y-%m-%d'))]"
+                        help="Pagamenti degli ultimi 90 giorni"/>
+                <filter string="Ultimi 180 GG" name="ultimi_180_gg"
+                        domain="[('date','&gt;',(context_today()-relativedelta(days=180)).strftime('%Y-%m-%d'))]"
+                        help="Pagamenti degli ultimi 180 giorni"/>
+                <filter string="Anno Precedente" name="anno_precedente"
+                        domain="['&amp;',('date','&lt;=', (context_today()-relativedelta(years=1)).strftime('%Y-12-31')),('date','&gt;=', (context_today()-relativedelta(years=1)).strftime('%Y-01-01'))]"
+                        help="Pagamenti dell'anno precedente"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

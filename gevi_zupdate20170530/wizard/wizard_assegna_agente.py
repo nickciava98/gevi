@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class WizardAssegnaAgente(models.TransientModel):
@@ -10,7 +10,6 @@ class WizardAssegnaAgente(models.TransientModel):
         string="Agente",
         domain=[('job_id.name', 'ilike', 'Agente')])
 
-    @api.multi
     def assegna_agente(self):
         referenti = self.env['gevi_contatti.referente'].browse(
             self._context.get('active_ids', []))

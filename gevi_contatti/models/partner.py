@@ -16,7 +16,6 @@ class Partner(models.Model):
     codice_ipa = fields.Char('Codice IPA')
     split_payment = fields.Boolean('Split Payment', default=False)
     tipo_cliente_name = fields.Char('Tipo Cliente Name')
-    customer = fields.Boolean(default=True)
 
     tipo_cliente_id = fields.Many2one('gevi_contatti.contatto_categoria', string='Tipo Cliente', domain=[('tipo', 'ilike', 'cliente')])
 
@@ -38,38 +37,37 @@ class Partner(models.Model):
     }
 
 
-     
     def action_doc_pangea(self):
         url = "http://sederm.icoversrl.it/pangea/{0}".format(self.codice_cliente)
         return {
-                    'type': 'ir.actions.act_url',
-                    'target': 'new',
-                    'url': url
-                }
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': url
+        }
 
 
-     
     @api.onchange('split_payment')
     def _onchange_split_payment(self):
-        if self.split_payment is True:
-            self.property_account_position_id = self.env['account.fiscal.position'].search([('name', 'ilike', 'Split Payment')], limit=1).id
-        else:
-            self.property_account_position_id = 0
+        for line in self:
+            if line.split_payment is True:
+                line.property_account_position_id = \
+                    self.env['account.fiscal.position'].search([('name', 'ilike', 'Split Payment')], limit=1).id
+            else:
+                line.property_account_position_id = 0
 
-     
     def _errore_cliente_presente(self):
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'action_warn',
-                'name': 'Warning',
-                'params': {
-                    'title': 'Attenzione!',
-                    'text': 'In anagrafica è già presente un cliente con il Fiscale/Partita Iva indicato.',
-                    'sticky': True
-                }
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'action_warn',
+            'name': 'Warning',
+            'params': {
+                'title': 'Attenzione!',
+                'text': 'In anagrafica è già presente un cliente con il Fiscale/Partita Iva indicato.',
+                'sticky': True
             }
+        }
 
-    #  
+    # @api.one
     # @api.constrains('cf', 'piva')
     # def controllo_esistenza_cliente(self, cf, piva):
     #     if cf is not None:
@@ -83,7 +81,6 @@ class Partner(models.Model):
     #         if count != 0:
     #             raise exceptions.ValidationError('In anagrafica è già presente un cliente con la Partita Iva indicata!')
 
-     
     def write(self, values):
         """
             Update all record(s) in recordset, with new value comes as {values}

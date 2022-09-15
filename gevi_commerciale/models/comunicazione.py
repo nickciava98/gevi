@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import fields, models, api, exceptions
+from odoo import fields, models, api, exceptions
 
 
 class Comunicazione(models.Model):
@@ -13,7 +13,7 @@ class Comunicazione(models.Model):
         default=None,
         help=False,
         comodel_name='gevi_contatti.referente',
-        ondelete='set null'
+        ondelete='cascade'
     )
 
     commerciale_id = fields.Many2one(
@@ -23,7 +23,7 @@ class Comunicazione(models.Model):
         help=False,
         comodel_name='hr.employee',
         # domain=['|', ('job_id.name', 'ilike', 'Commerciale'), ('job_id.name', 'ilike', 'Agente')],
-        ondelete='set null'
+        ondelete='cascade'
     )
 
     tipo_comunicazione = fields.Selection(

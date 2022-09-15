@@ -1,23 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<openerp>
-    <data>   
-    <!-- MENU CONTRATTI -->
-        <!-- Top Menu -->
-		<menuitem id="gevi_contratti_top_menu" name="Contratti" sequence="3"/>
-        
-        
-        <!-- Side Menu - Applicazione -->
-        <menuitem id="gevi_contratti_side_menu_categoria" name="Contratti" parent="gevi_contratti_top_menu"/>
-        <menuitem id="gevi_contratti_tutti_menu" name="Tutti i contratti" parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_contratto_list" sequence="1"/>
-        <menuitem id="gevi_contratti_ascensori_menu" name="Ascensore" parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_contratto_ascensori" sequence="2"/>
-        <menuitem id="gevi_contratti_impianto_mat_menu" name="Messa a Terra" parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_contratto_impianto_mat" sequence="3"/>
-        <menuitem id="gevi_contratti_impianto_satm_menu" name="Scariche Atmosferiche" parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_contratto_impianto_satm" sequence="4"/>
-        <menuitem id="gevi_contratti_miei_contratti_menu" name="I Miei Contratti" parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_miei_contratti_list" sequence="5"/>
+<odoo>
+    <menuitem id="gevi_contratti_top_menu" name="Contratti" sequence="3"/>
 
-        <!-- Side Menu - Raggruppamento -->
-        <menuitem id="gevi_contratti_side_menu_raggruppamento" name="Raggruppa" parent="gevi_contratti_top_menu"/>
-        <menuitem id="gevi_contratti_impianto_group_by_referente_menu" name="Referente" parent="gevi_contratti_side_menu_raggruppamento" action="action_gevi_contratti_contratto_group_by_referente_id" sequence="5"/>
-        <menuitem id="gevi_contratti_impianto_group_by_cliente_menu" name="Cliente" parent="gevi_contratti_side_menu_raggruppamento" action="action_gevi_contratti_contratto_group_by_customer_id" sequence="6"/>
-        <menuitem id="gevi_contratti_impianto_group_by_categoria_impianto_menu" name="Tipo Impianto" parent="gevi_contratti_side_menu_raggruppamento" action="action_gevi_contratti_contratto_group_by_impianto_categoria_id" sequence="7"/>
-    </data>
-</openerp>
+
+    <!-- Side Menu - Applicazione -->
+    <menuitem id="gevi_contratti_side_menu_categoria" name="Contratti" parent="gevi_contratti_top_menu"/>
+    <menuitem id="gevi_contratti_tutti_menu" name="Tutti i contratti" parent="gevi_contratti_side_menu_categoria"
+              action="action_gevi_contratti_contratto_list" sequence="1"/>
+    <menuitem id="gevi_contratti_ascensori_menu" name="Ascensore" parent="gevi_contratti_side_menu_categoria"
+              action="action_gevi_contratti_contratto_ascensori" sequence="2"/>
+    <menuitem id="gevi_contratti_impianto_mat_menu" name="Messa a Terra" parent="gevi_contratti_side_menu_categoria"
+              action="action_gevi_contratti_contratto_impianto_mat" sequence="3"/>
+    <menuitem id="gevi_contratti_impianto_satm_menu" name="Scariche Atmosferiche"
+              parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_contratto_impianto_satm"
+              sequence="4"/>
+    <menuitem id="gevi_contratti_miei_contratti_menu" name="I Miei Contratti"
+              parent="gevi_contratti_side_menu_categoria" action="action_gevi_contratti_miei_contratti_list"
+              sequence="5"/>
+
+    <!-- Side Menu - Raggruppamento -->
+    <menuitem id="gevi_contratti_side_menu_raggruppamento" name="Raggruppa" parent="gevi_contratti_top_menu"/>
+    <menuitem id="gevi_contratti_impianto_group_by_referente_menu" name="Referente"
+              parent="gevi_contratti_side_menu_raggruppamento"
+              action="action_gevi_contratti_contratto_group_by_referente_id" sequence="5"/>
+    <menuitem id="gevi_contratti_impianto_group_by_cliente_menu" name="Cliente"
+              parent="gevi_contratti_side_menu_raggruppamento"
+              action="action_gevi_contratti_contratto_group_by_customer_id" sequence="6"/>
+    <menuitem id="gevi_contratti_impianto_group_by_categoria_impianto_menu" name="Tipo Impianto"
+              parent="gevi_contratti_side_menu_raggruppamento"
+              action="action_gevi_contratti_contratto_group_by_impianto_categoria_id" sequence="7"/>
+</odoo>

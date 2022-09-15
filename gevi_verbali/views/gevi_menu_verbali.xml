@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- MENU VERBALI -->
-    <!-- Top Menu -->
     <menuitem id="gevi_verbali_top_menu" name="Verbali" />
 
     <!-- Side Menu - Applicazione -->
@@ -25,15 +22,21 @@
               action="action_gevi_verbali_verbale_annullato" sequence="8"/>
 
     <!-- Side Menu - Configurazione Applicazione -->
-    <menuitem id="gevi_verbali_side_menu_configurazione" name="Configurazione" parent="gevi_verbali_top_menu"/>
-    <menuitem id="gevi_verbali_osservazione_menu" name="Osservazioni" parent="gevi_verbali_side_menu_configurazione"
-              action="action_gevi_verbali_osservazione_form" sequence="1"/>
+    <menuitem id="gevi_verbali_side_menu_configurazione" name="Configurazione"
+              parent="gevi_verbali_top_menu"/>
+    <menuitem id="gevi_verbali_osservazione_menu" name="Osservazioni"
+              parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_osservazione_form"
+              sequence="1"/>
     <menuitem id="gevi_verbali_osservazione_categoria_menu" name="Categoria Osservazioni"
-              parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_osservazione_categoria_form" sequence="2"/>
-    <menuitem id="gevi_verbali_normeascensori_menu" name="Norme Ascensori" parent="gevi_verbali_side_menu_configurazione"
+              parent="gevi_verbali_side_menu_configurazione"
+              action="action_gevi_verbali_osservazione_categoria_form" sequence="2"/>
+    <menuitem id="gevi_verbali_normeascensori_menu" name="Norme Ascensori"
+              parent="gevi_verbali_side_menu_configurazione"
               action="action_gevi_verbali_normeascensori_form" sequence="3"/>
-    <menuitem id="gevi_verbali_raccomandazione_menu" name="Raccomandazioni" parent="gevi_verbali_side_menu_configurazione"
+    <menuitem id="gevi_verbali_raccomandazione_menu" name="Raccomandazioni"
+              parent="gevi_verbali_side_menu_configurazione"
               action="action_gevi_verbali_raccomandazione_form" sequence="4"/>
-    <menuitem id="gevi_verbali_osservazione_mat_menu" name="Osservazioni MAT" parent="gevi_verbali_side_menu_configurazione"
+    <menuitem id="gevi_verbali_osservazione_mat_menu" name="Osservazioni MAT"
+              parent="gevi_verbali_side_menu_configurazione"
               action="action_gevi_verbali_osservazione_mat_form" sequence="5"/>
 </odoo>

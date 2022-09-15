@@ -2,8 +2,8 @@
 # Copyright 2014 Davide Corio <davide.corio@abstract.it>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from openerp import fields, models, api, _
-from openerp.exceptions import ValidationError
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -65,7 +65,6 @@ class ResPartner(models.Model):
     #partner.fiscalcode -> partner.cf
     #partner.state_id ->
 
-    @api.multi
     @api.constrains(
         'codice_ipa', 'codice_destinatario', 'company_type',
         'electronic_invoice_subjected', 'piva', 'cf', 'lastname',

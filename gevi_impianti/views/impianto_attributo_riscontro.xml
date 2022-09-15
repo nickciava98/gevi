@@ -1,45 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <!--Form Attributo Riscontro-->
-       	<record model="ir.ui.view" id="view_gevi_impianto_attributo_riscontro_form">
-			<field name="name">Attributo Riscontro</field>
-			<field name="model">gevi.impianti.impianto_attributo_riscontro</field>
-			<field name="arch" type="xml">
-				<form string="Riscontro Form">
-					<sheet>
-                        <group>
-                            <field name="name" default_focus="1" string="Attributo Riscontro" placeholder="Riscontro" />
-                            <field name="impianto_categoria_id" string="Categoria Impianto" />
-                        </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_impianto_attributo_riscontro_form">
+        <field name="name">Attributo Riscontro</field>
+        <field name="model">gevi.impianti.impianto_attributo_riscontro</field>
+        <field name="arch" type="xml">
+            <form string="Riscontro Form">
+                <sheet>
+                    <group>
+                        <field name="name" default_focus="1" string="Attributo Riscontro" placeholder="Riscontro" />
+                        <field name="impianto_categoria_id" string="Categoria Impianto" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <!--Action Attributo Riscontro-->
-        <record model="ir.actions.act_window" id="action_gevi_impianto_attributo_riscontro_form">
-            <field name="name">Attributo Riscontro</field>
-            <field name="res_model">gevi.impianti.impianto_attributo_riscontro</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">Inserisci Attributo Riscontro
-                </p>
-            </field>
-        </record>
+    <!--Action Attributo Riscontro-->
+    <record model="ir.actions.act_window" id="action_gevi_impianto_attributo_riscontro_form">
+        <field name="name">Attributo Riscontro</field>
+        <field name="res_model">gevi.impianti.impianto_attributo_riscontro</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Attributo Riscontro
+            </p>
+        </field>
+    </record>
 
-        <!--Tree Attributo Riscontro-->
-        <record model="ir.ui.view" id="gevi_impianto_attributo_riscontro_tree">
-            <field name="name">Attributo Riscontro</field>
-            <field name="model">gevi.impianti.impianto_attributo_riscontro</field>
-            <field name="arch" type="xml">
-                <tree string="Lista Attributi Riscontro">
-                    <field name="name" string="Attributo Riscontro"/>
-                    <field name="impianto_categoria_id" string="Categoria Impianto" />
-                </tree>
-            </field>
-        </record>
-
-
-    </data>
-</openerp>
+    <!--Tree Attributo Riscontro-->
+    <record model="ir.ui.view" id="gevi_impianto_attributo_riscontro_tree">
+        <field name="name">Attributo Riscontro</field>
+        <field name="model">gevi.impianti.impianto_attributo_riscontro</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Attributi Riscontro">
+                <field name="name" string="Attributo Riscontro"/>
+                <field name="impianto_categoria_id" string="Categoria Impianto" />
+            </tree>
+        </field>
+    </record>
+</odoo>
