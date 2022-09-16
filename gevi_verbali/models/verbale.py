@@ -633,7 +633,7 @@ class Verbale(models.Model):
             'date_order': fields.Date.context_today(line),
             'partner_id': line.customer_id.id,
             'partner_invoice_id': line.customer_id.id,
-            'order_policy': 'manual',
+            'invoice_policy': 'order',
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
                 'name': (prodotto_obj.description_sale).format(line.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
