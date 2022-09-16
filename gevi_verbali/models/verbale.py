@@ -629,7 +629,7 @@ class Verbale(models.Model):
         ordine = ordine_obj.create({
             # 'name': ,
             'origin': line.name,
-            'verbale_id': line.id,
+            
             'date_order': fields.Date.context_today(line),
             'partner_id': line.customer_id.id,
             'partner_invoice_id': line.customer_id.id,
