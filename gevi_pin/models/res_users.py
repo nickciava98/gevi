@@ -45,15 +45,15 @@ class ResUsers(models.Model):
     #         self.vecchio_pin = ""
 
     # @api.multi
-    # def preferenze_cambio_pin(self):
-    #     self.ensure_one()
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'res_model': 'gevi_pin.wizard.cambiopin',
-    #         'view_type': 'form',
-    #         'view_mode': 'form',
-    #         'target': 'new',
-    #     }
+    def preferenze_cambio_pin(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'gevi_pin.wizard.cambiopin',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+        }
 
     # versione con specifica v7
     # def preferenze_cambio_pin(self, cr, uid, ids, context=None):
