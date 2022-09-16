@@ -609,20 +609,20 @@ class Verbale(models.Model):
             )
 
         if line.periodica is True:
-            line.sigla_periodica = 'P'
-            line.costo = line.contratto_id.costo_verifica_periodica
+            sigla_periodica = 'P'
+            costo = line.contratto_id.costo_verifica_periodica
         else:
-            line.sigla_periodica = 'S'
-            line.costo = line.contratto_id.costo_verifica_straordinaria
+            sigla_periodica = 'S'
+            costo = line.contratto_id.costo_verifica_straordinaria
 
-        line.sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
+        sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', line.impianto_categoria_id.name)], limit=1).descrizione
         if line.fattura_anticipata is True:
-            line.codice_prodotto = 'VV{0}-{1}-FA'.format(line.sigla_periodica, line.sigla_impianto)
+            codice_prodotto = 'VV{0}-{1}-FA'.format(line.sigla_periodica, line.sigla_impianto)
         else:
-            line.codice_prodotto = 'VV{0}-{1}'.format(line.sigla_periodica, line.sigla_impianto)
+            codice_prodotto = 'VV{0}-{1}'.format(line.sigla_periodica, line.sigla_impianto)
         if line.customer_id.tipo_cliente_id.name == "Condominio":
-            line.codice_prodotto += 'C'
+            codice_prodotto += 'C'
         # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
         prodotto_obj = self.env['product.product'].search([('name', '=', line.codice_prodotto)], limit=1)
         data_verbale_formato_it = fields.Date.from_string(line.data_verbale)
@@ -639,7 +639,7 @@ class Verbale(models.Model):
                 'name': (prodotto_obj.description_sale).format(line.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
                                                                line.ubicazione.decode('utf-8'),
                                                                line.data_ultima_verifica),
-                'price_unit': line.costo,
+                'price_unit': costo,
                 'discount': 0.0,
                 'sequence': 10,
                 'verbale_id': line.id,
