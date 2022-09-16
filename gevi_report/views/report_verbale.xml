@@ -1,6 +1,6 @@
 <odoo>
     <template id="gevi_report.report_verbale">
-        <t t-name="gevi_report.report_verbale">
+<!--        <t t-name="gevi_report.report_verbale">-->
             <t t-foreach="docs" t-as="doc">
                 <t t-if="doc.state != 'eseguito' and doc.state != 'validato' and doc.state != 'confermato'">
                     <t t-call="gevi_report.report_no_stampa" />
@@ -38,6 +38,6 @@
                     </t>
                 </t>
             </t>
-        </t>
+<!--        </t>-->
     </template>
 </odoo>

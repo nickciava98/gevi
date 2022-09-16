@@ -689,3 +689,8 @@ class Verbale(models.Model):
                     template_mail.email_to = line.manutentore_id.email
                     template_mail.send_mail(line.id, force_send=True)
                     template_mail.email_to = None
+
+    @api.onchange("ispettore_id", "responsabile_tecnico_id")
+    def _onchange_ispettore_id_responsabile_tecnico_id(self):
+        if self.ispettore_id and self.responsabile_tecnico_id:
+            self.state = "assegnato"
