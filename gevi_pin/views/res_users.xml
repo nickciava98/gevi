@@ -2,10 +2,10 @@
     <record model="ir.ui.view" id="gevi_pin_user_form_view">
         <field name="name">gevi_pin.users.form</field>
         <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <!-- Modifica su indirizzo-->
-            <xpath expr="//button[@name='preference_change_password']" position="after">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
                 <separator string="Preferenze Verbali"/>
                 <group>
                     <field name="timbro_isp" widget="image"/>
