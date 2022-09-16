@@ -618,13 +618,13 @@ class Verbale(models.Model):
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', line.impianto_categoria_id.name)], limit=1).descrizione
         if line.fattura_anticipata is True:
-            codice_prodotto = 'VV{0}-{1}-FA'.format(line.sigla_periodica, line.sigla_impianto)
+            codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
-            codice_prodotto = 'VV{0}-{1}'.format(line.sigla_periodica, line.sigla_impianto)
+            codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)
         if line.customer_id.tipo_cliente_id.name == "Condominio":
             codice_prodotto += 'C'
         # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
-        prodotto_obj = self.env['product.product'].search([('name', '=', line.codice_prodotto)], limit=1)
+        prodotto_obj = self.env['product.product'].search([('name', '=', codice_prodotto)], limit=1)
         data_verbale_formato_it = fields.Date.from_string(line.data_verbale)
         ordine = ordine_obj.create({
             # 'name': ,
@@ -637,7 +637,7 @@ class Verbale(models.Model):
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
                 'name': (prodotto_obj.description_sale).format(line.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
-                                                               line.ubicazione.decode('utf-8'),
+                                                               ubicazione.decode('utf-8'),
                                                                line.data_ultima_verifica),
                 'price_unit': costo,
                 'discount': 0.0,
