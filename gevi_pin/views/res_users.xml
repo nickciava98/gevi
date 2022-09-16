@@ -13,7 +13,7 @@
                 </group>
                 <group>
                     <group>
-                        <field name="pin" style="width:10%%" password="True"/>
+                        <field name="pin" password="True"/>
                     </group>
                     <group>
                         <button name="290" type="action" string="Cambia PIN"/>
