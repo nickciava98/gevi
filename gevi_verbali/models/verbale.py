@@ -598,7 +598,7 @@ class Verbale(models.Model):
             codice_prodotto = fields.Char()
             sigla_periodica = fields.Char()
             sigla_impianto = fields.Char()
-            line.ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
+            ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
                 line.customer_id.name.encode('utf-8'),
                 line.impianto_id.etichetta.encode('utf-8'),
                 line.impianto_id.indirizzo.encode('utf-8'),
