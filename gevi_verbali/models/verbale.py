@@ -637,7 +637,7 @@ class Verbale(models.Model):
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
                 'name': (prodotto_obj.description_sale).format(line.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
-                                                               ubicazione.decode('utf-8'),
+                                                               ubicazione,
                                                                line.data_ultima_verifica),
                 'price_unit': costo,
                 'discount': 0.0,
