@@ -16,7 +16,7 @@
                         <field name="pin" password="True"/>
                     </group>
                     <group>
-                        <button name="preferenze_cambio_pin" type="action" string="Cambia PIN"/>
+                        <button name="preferenze_cambio_pin" type="object" string="Cambia PIN"/>
                     </group>
                 </group>
                 <!--<button name="preferenze_cambio_pin" type="object" string="Cambia Pin" class="oe_highlight"/>-->
