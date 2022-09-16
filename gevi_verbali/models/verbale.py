@@ -642,7 +642,7 @@ class Verbale(models.Model):
                 'price_unit': costo,
                 'discount': 0.0,
                 'sequence': 10,
-                'verbale_id': line.id,
+                
             })],
         })
 
