@@ -107,7 +107,7 @@ class Impianto(models.Model):
                 for linea in r.impianto_categoria_id.impianto_attributo_descrittivo_ids:
                     new_linee_attributo.append([0, 0, {
                         'name': linea.name,
-                        'unita_di_misura_id': linea.unita_di_misura_id,
+                        'unita_di_misura_id': linea.unita_di_misura_id.id,
                         }])
                 r.attributi_caricati = True
                 self.impianto_riga_descrizione_ids = new_linee_attributo
