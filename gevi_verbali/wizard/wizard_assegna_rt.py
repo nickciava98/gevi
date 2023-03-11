@@ -9,10 +9,12 @@ class WizardAssegnaRT(models.TransientModel):
         'hr.employee',
         string="Responsabile Tecnico",
         domain=[('job_id.name', 'ilike', 'Responsabile Tecnico')])
+    verbale_id = fields.Many2one(
+        "gevi_verbali.verbale"
+    )
 
     def assegna_rt(self):
-        verbali = self.env['gevi_verbali.verbale'].browse(
-            self._context.get('active_ids', []))
+        verbali = [self.verbale_id]
         for verbale in verbali:
             verbale.responsabile_tecnico_id = self.responsabile_tecnico_id
         return {'type': 'ir.actions.act_window_close'}

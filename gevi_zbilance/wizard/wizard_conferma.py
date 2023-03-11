@@ -6,10 +6,12 @@ class WizardConferma(models.TransientModel):
     _name = 'gevi_zbilance.wizardconferma'
 
     pin = fields.Char(string="Inserire il PIN", help="PIN (4 cifre)", size=4)
+    verbale_id = fields.Many2one(
+        "gevi_zbilance.verbale"
+    )
 
     def conferma_con_pin(self):
-        verbale = self.env['gevi_zbilance.verbale'].browse(
-            self._context.get('active_id', []))
+        verbale = self.verbale_id
         if self.pin == self.env.user.pin:
             if verbale.state in "confermato":
                 verbale.action_validato()

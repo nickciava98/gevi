@@ -712,6 +712,7 @@ class Verbale(models.Model):
             "res_model": "gevi_verbali.wizard_assegna_isp",
             "view_mode": "form",
             "view_type": "form",
+            "context": {"default_verbale_id": self.id},
             "views": [(False, "form")],
             "target": "new"
         }
@@ -723,6 +724,7 @@ class Verbale(models.Model):
             "res_model": "gevi_verbali.wizard_assegna_rt",
             "view_mode": "form",
             "view_type": "form",
+            "context": {"default_verbale_id": self.id},
             "views": [(False, "form")],
             "target": "new"
         }
@@ -734,6 +736,7 @@ class Verbale(models.Model):
             "res_model": "gevi_verbali.wizardconferma",
             "view_mode": "form",
             "view_type": "form",
+            "context": {"default_verbale_id": self.id},
             "views": [(False, "form")],
             "target": "new"
         }

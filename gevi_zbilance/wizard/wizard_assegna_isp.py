@@ -10,9 +10,12 @@ class WizardAssegnaISP(models.TransientModel):
         string="Ispettore",
         domain=[('job_id.name', 'ilike', 'Ispettore')])
 
+    verbale_id = fields.Many2one(
+        "gevi_zbilance.verbale"
+    )
+
     def assegna_isp(self):
-        verbali = self.env['gevi_zbilance.verbale'].browse(
-            self._context.get('active_ids', []))
+        verbali = [self.verbale_id]
         for verbale in verbali:
             if verbale.state in "in_revisione":
                 verbale.ispettore_id = self.ispettore_id
