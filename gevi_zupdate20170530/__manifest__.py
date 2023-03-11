@@ -35,7 +35,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/wizard_assegna_agente.xml',
         # il caricamento della vista dei menu deve essere l'ultima cosa specificata nel contesto data.
     ],

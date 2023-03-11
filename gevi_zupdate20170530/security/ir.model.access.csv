@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gevi_zupdate20170530_wizard_assegna_agente,access_gevi_zupdate20170530_wizard_assegna_agente,model_gevi_zupdate20170530_wizard_assegna_agente,base.group_user,1,1,1,1
