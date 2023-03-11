@@ -529,7 +529,7 @@ class VerbaleBilance(models.Model):
             'name': 'Verbale',
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': self._name,
+            'res_model': "gevi_zbilance.verbale",
             'res_id': self.id,
             'target': 'current',
         }
