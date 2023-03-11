@@ -218,7 +218,8 @@ class Contratto(models.Model):
 
     def action_annullato(self):
         self.state = 'annullato'
-        verbale_obj = self.env['gevi_verbali.verbale'].search(['&',('contratto_id', '=', self.id),('state','in',('bozza','assegnato'))])
+        obj_name_verbale = self.get_verbale_obj_name_by_cat_impianto()
+        verbale_obj = self.env[obj_name_verbale].search(['&',('contratto_id', '=', self.id),('state','in',('bozza','assegnato'))])
         for verbale in verbale_obj:
             verbale.action_annullato()
 
@@ -369,7 +370,8 @@ class Contratto(models.Model):
     def _crea_verifica_periodica(self):
         for record in self:
             if record.state == 'attivo':
-                verbale_obj = self.env['gevi_verbali.verbale']
+                obj_name_verbale = record.get_verbale_obj_name_by_cat_impianto()
+                verbale_obj = self.env[obj_name_verbale]
                 fa = False
                 if record.causale_blocco == 'fattura_anticipata':
                     fa = True
@@ -402,7 +404,8 @@ class Contratto(models.Model):
     def _crea_verifica_straordinaria(self):
         for record in self:
             if record.state == 'attivo' or record.state == 'disdetta_uv':
-                verbale_obj = self.env['gevi_verbali.verbale']
+                obj_name_verbale = record.get_verbale_obj_name_by_cat_impianto()
+                verbale_obj = self.env[obj_name_verbale]
                 fa = False
                 if record.causale_blocco == 'fattura_anticipata':
                     fa = True

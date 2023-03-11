@@ -75,7 +75,8 @@
                                 states="confermato" 
                                 class="oe_highlight"/>
 
-                        <button name="action_annullato" type="object" string="Annulla Verbale" states="bozza,assegnato" confirm="Sei sicuro di voler ANNULLARE la verifica?"/>
+                        <button name="action_annullato" type="object" string="Annulla Verbale"
+                                states="bozza,assegnato" confirm="Sei sicuro di voler ANNULLARE la verifica?"/>
 
                         <button name="send_mail" type="object"
                                 string="Invia per email" 

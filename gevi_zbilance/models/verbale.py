@@ -27,6 +27,8 @@ class VerbaleBilance(models.Model):
         compute='_compute_riferimenti_impianto', store=True)
     impianto_etichetta = fields.Char(
         compute='_compute_riferimenti_impianto', store=True)
+    manutentore_id = fields.Many2one(
+        'gevi_contatti.manutentore', string='Manutentore')
 
     range_p_min = fields.Float(
         compute='_compute_riferimenti_impianto', store=True)
