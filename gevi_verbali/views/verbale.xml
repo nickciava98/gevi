@@ -48,13 +48,13 @@
                     />
 
                     <!-- name="303" -->
-                        <button name="%(action_lancia_wizard_conferma_con_pin)d" type="action"
+                        <button name="%(action_wizard_conferma_con_pin)d" type="action"
                                 string="Conferma Verbale (PIN)"
                                 states="eseguito" class="oe_highlight"
                                 confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
 
                        <!-- name="303" -->
-                        <button name="%(action_lancia_wizard_conferma_con_pin)d" type="action"
+                        <button name="%(action_wizard_conferma_con_pin)d" type="action"
                                 string="Valida Definitivamente (PIN)"
                                 states="confermato"
                                 class="oe_highlight"/>
