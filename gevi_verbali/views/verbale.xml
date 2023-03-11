@@ -47,26 +47,17 @@
                             class="oe_highlight"
                     />
 
-                    <button name="action_confermato" type="object"
-                            string="Conferma Verbale"
-                            states="eseguito"
-                            class="oe_highlight"
-                            confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?\nSe la categoria dell'impianto è 'Ascensore Generico' non sarà possibile andare avanti."
-                    />
-                    <button name="action_validato" type="object"
-                            string="Valida Definitivamente"
-                            states="confermato"
-                            class="oe_highlight"
-                    />
+                    <!-- name="303" -->
+                        <button name="%(action_lancia_wizard_conferma_con_pin)d" type="action"
+                                string="Conferma Verbale (PIN)"
+                                states="eseguito" class="oe_highlight"
+                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
 
-                    <button name="303" type="action"
-                            string="Conferma Verbale (PIN)"
-                            states="eseguito" class="oe_highlight"
-                            confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
-                    <button name="303" type="action"
-                            string="Valida Definitivamente (PIN)"
-                            states="confermato"
-                            class="oe_highlight"/>
+                       <!-- name="303" -->
+                        <button name="%(action_lancia_wizard_conferma_con_pin)d" type="action"
+                                string="Valida Definitivamente (PIN)"
+                                states="confermato"
+                                class="oe_highlight"/>
 
                     <button name="action_annullato"
                             type="object" string="Annulla Verbale" states="bozza,assegnato"
