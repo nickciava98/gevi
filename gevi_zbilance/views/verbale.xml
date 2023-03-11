@@ -88,17 +88,18 @@
                         <field name="state" widget="statusbar"/>
                     </header>
                         <sheet>
-                            <group>
-                                <h1 style="color: red;" attrs="{'invisible': [('blocco_amministrativo', '=', False)]}">BLOCCO AMMINISTRATIVO IN CORSO
-                                </h1>
-                                <h1>
-                                    <label for="name" string="Verifica N." attrs="{'invisible': [('state','not in',('bozza','assegnato'))]}"/>
-                                    <label for="name" string="Verbale N." attrs="{'invisible': [('state','not in',('eseguito','confermato','validato'))]}"/>
-                                    <field name="name" class="oe_inline" readonly="1"/>
-                                    <label for="name" string=" - Straordinaria" attrs="{'invisible': [('periodica', '=', True)]}"/>
-                                    <label for="name" string=" - Periodica" attrs="{'invisible': [('periodica', '=', False)]}"/>
-                                </h1>
-                            </group>
+
+                            <h1 decoration-danger="True"
+                                attrs="{'invisible': [('blocco_amministrativo', '=', False)]}">BLOCCO AMMINISTRATIVO IN CORSO
+                            </h1>
+                            <h1>
+                                <label for="name" string="Verifica N." attrs="{'invisible': [('state','not in',('bozza','assegnato'))]}"/>
+                                <label for="name" string="Verbale N." attrs="{'invisible': [('state','not in',('eseguito','confermato','validato'))]}"/>
+                                <field name="name" readonly="1"/>
+                                <label for="name" string=" - Straordinaria" attrs="{'invisible': [('periodica', '=', True)]}"/>
+                                <label for="name" string=" - Periodica" attrs="{'invisible': [('periodica', '=', False)]}"/>
+                            </h1>
+
                             
                             <group>
                                 <group>
@@ -133,7 +134,8 @@
                                 <group>
                                     <field name="data_ultima_verifica"/>
 
-                                    <field name="prossima_verifica" string="Prossima Verifica"  attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
+                                    <field name="prossima_verifica" string="Prossima Verifica"
+                                           attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
                                 </group>
                             </group>
                             <group>
@@ -181,7 +183,8 @@
 
 
                             <group>
-                                <field name="impianto_categoria_name" invisible="1"/>tipo_verbale
+                                <field name="impianto_categoria_name" invisible="1"/>
+<!--                                tipo_verbale-->
                                  <field name="tipo_verbale"/>
                                  <field name="pesiera_ids" widget="many2many_tags"/>
                             </group>
@@ -194,7 +197,7 @@
                             </group>
 
                             <notebook>
-                                <page string="Prova di Zero" class="oe_page_" >
+                                <page string="Prova di Zero" >
                                     <group>
                                         <h3>Esattezza del dispositivo di azzeramento - Rif. EN 45501:2015 A 4.2.3</h3>
                                     </group>
@@ -213,7 +216,7 @@
                                     </group>
                                 </page>
 
-                                <page string="Prova di Ripetibilità" class="oe_page_">
+                                <page string="Prova di Ripetibilità">
                                     <group>
                                         <h3>Prova di Ripetibilità - Rif. EN 45501:2015 A 4.10</h3>
                                     </group>
@@ -233,7 +236,7 @@
                                     </group>
                                 </page>
 
-                                <page string="Prova di Eccentricità" class="oe_page_">
+                                <page string="Prova di Eccentricità">
                                     <group>
                                         <h3>Prova di Eccentricità - Rif. EN 45501:2015 A 4.7</h3>
                                     </group>
@@ -253,7 +256,7 @@
                                         </field>
                                     </group>
                                 </page>
-                                <page string="Prova di Linearità" class="oe_page_">
+                                <page string="Prova di Linearità">
                                     <group>
                                         <h3>Prova di Linearità - Rif. EN 45501:2015 A 4.4.1</h3>
                                     </group>
@@ -276,7 +279,7 @@
                                         </field>
                                     </group>
                                 </page>
-                                <page string="Prova di Tara" class="oe_page_">
+                                <page string="Prova di Tara">
                                     <group>
                                         <h3>Esattezza del dispositivo di Tara - Rif. EN 45501:2015 A 4.6.1</h3>
                                     </group>
@@ -293,7 +296,7 @@
                                         </field>
                                     </group>
                                 </page>
-                                <page string="Prova di Mobilità" class="oe_page_">
+                                <page string="Prova di Mobilità">
                                     <group>
                                         <h3>Prova di mobilità (Indicazione analogica) - Rif. EN 45501:2015 A 4.9</h3>
                                     </group>
@@ -326,10 +329,10 @@
                             </group>
 
                             <group>
-                                <field name="esito_verifica" string="Esito della Verifica"  fg_color="green:esito_verifica=='Positivo';"/>
+                                <field name="esito_verifica" string="Esito della Verifica"  decoration-success="esito_verifica=='Positivo'"/>
                             </group>
                         <notebook>
-                            <page string="Altro" class="oe_page_">
+                            <page string="Altro">
                             <group>
                                 <field name="note_interne"/>
                             </group>
@@ -346,7 +349,7 @@
                                 </group>
                             </page>
 
-                            <page string="Informazioni Correlate" class="oe_page_" attrs="{'invisible': True}">
+                            <page string="Informazioni Correlate" attrs="{'invisible': True}">
                                 <group>
                                     <field name="contratto_id"  options="{'no_open': True}"/>
                                     <field name="periodica"/>
@@ -488,7 +491,8 @@
             <field name="name">Bozza</field>
             <field name="res_model">gevi_zbilance.verbale</field>
             <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_state': 'bozza'}"/>
+            <field name="context">{'search_default_state': 'bozza'}
+            </field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea una Verifica
                 </p>
@@ -500,7 +504,7 @@
             <field name="name">Assegnato</field>
             <field name="res_model">gevi_zbilance.verbale</field>
             <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_state': 'assegnato'}"/>
+            <field name="context" >{'search_default_state': 'assegnato'}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea una Verifica
                 </p>
@@ -511,7 +515,8 @@
             <field name="name">Eseguito</field>
             <field name="res_model">gevi_zbilance.verbale</field>
             <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_state': 'eseguito'}"/>
+            <field name="context">
+                {'search_default_state': 'eseguito'}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea una Verifica
                 </p>
@@ -523,7 +528,8 @@
             <field name="name">Confermato</field>
             <field name="res_model">gevi_zbilance.verbale</field>
             <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_state': 'confermato'}"/>
+            <field name="context">
+                {'search_default_state': 'confermato'}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea un Verbale
                 </p>
@@ -535,7 +541,7 @@
             <field name="name">Validato</field>
             <field name="res_model">gevi_zbilance.verbale</field>
             <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_state': 'validato'}"/>
+            <field name="context">{'search_default_state': 'validato'}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea un Verbale
                 </p>
@@ -547,7 +553,8 @@
             <field name="name">Annullato</field>
             <field name="res_model">gevi_zbilance.verbale</field>
             <field name="view_mode">tree,form</field>
-            <field name="context" eval="{'search_default_state': 'annullato'}"/>
+            <field name="context">
+                {'search_default_state': 'annullato'}</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Crea un Verbale
                 </p>

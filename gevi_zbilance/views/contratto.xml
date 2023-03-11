@@ -11,13 +11,13 @@
               <page string="Verifiche/Verbali Bilance" class="oe_page_"
                     attr="{'invisible': ['descrizione_categoria_impianto', '!=', 'BIL']}">
                   <group>
-                      <field name="verbale_bilance_ids" nolabel="1">
+                      <field name="verbale_bilance_ids" nolabel="1" options="{'no_open': True}">
                           <tree string="Verbali Bilance del Contratto">
-                              <field name="name"/>
-                              <field name="data_verbale"/>
-                              <field name="periodica"/>
-                              <field name="data_programmazione"/>
-                              <field name="state"/>
+                              <field name="name" options="{'no_open': True}"/>
+                              <field name="data_verbale" options="{'no_open': True}"/>
+                              <field name="periodica" options="{'no_open': True}"/>
+                              <field name="data_programmazione" options="{'no_open': True}"/>
+                              <field name="state" options="{'no_open': True}"/>
                               <button name="apri_verbale_bilance" type="object" state="validato" string="Apri" class="oe_highlight"/>
                           </tree>
                       </field>
