@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="crm_action_contratto_new" model="ir.actions.act_window">
+            <field name="name">Contratto</field>
+            <field name="res_model">gevi_contratti.contratto</field>
+            <field name="view_mode">form,tree,graph</field>
+            <field name="domain">[('opportunity_id', '=', active_id)]</field>
+            <field name="context">{'search_default_opportunity_id': active_id, 'default_opportunity_id': active_id}</field>
+        </record>
+
+        <record id="crm_action_contratto" model="ir.actions.act_window">
+            <field name="name">Contratti</field>
+            <field name="res_model">gevi_contratti.contratto</field>
+            <field name="domain">[('opportunity_id', '=', active_id)]</field>
+            <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field>
+        </record>
+
+      <!-- Form Opportunity -->
+      <record model="ir.ui.view" id="gevi_zcrm_crm_sale_opp_contratto_form_view">
+        <field name="name">gevi_zcrm.crm_sale_opp_contratto.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="before">
+                        <button attrs="{'invisible': [('probability', '=', 0)]}" string="Nuovo Contratto"
+                                name="%(crm_action_contratto_new)d" type="action" class="oe_highlight"
+                                context="{'search_default_customer_id': partner_id, 'default_customer_id': partner_id, 'default_team_id': team_id}"/>
+                        <button attrs="{'invisible': [('probability', '&gt;', 0)]}" string="Nuovo Contratto"
+                                name="%(crm_action_contratto_new)d" type="action"
+                                context="{'search_default_customer_id': partner_id, 'default_customer_id': partner_id, 'default_team_id': team_id}"/>
+            </xpath>
+
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="action" attrs="{'invisible': [('contratti_total', '=', 0)]}"
+                        name="%(crm_action_contratto)d" icon="fa-book"
+                        context="{'search_default_opportunity_id': id, 'default_opportunity_id': id}">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="contratti_total"  attrs="{'invisible': 1}"/>
+                            <field name="contratti_label"/>
+                        </span>
+                        <span class="o_stat_text"> Contratto(i)</span>
+                    </div>
+                </button>
+            </div>
+
+        </field>
+      </record>
+
+
+      <record model="ir.ui.view" id="gevi_zcrm_contratto_form_view">
+        <field name="name">gevi_zcrm.contratto.form</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="inherit_id" ref="gevi_contratti.view_gevi_contratti_contratto_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+              <page string="CRM" class="oe_page_">
+                  <group>
+                    <field name="opportunity_id"/>
+                    <field name="team_id"/>
+                  </group>
+              </page>
+            </notebook>
+<!--            <button name="action_rescisso" position="before">-->
+<!--                <button name="action_first_attivo" type="object" states="bozza"-->
+<!--                        string="Attiva" class="oe_highlight"/>-->
+<!--            </button>-->
+<!--            <xpath expr="//field[@name='impianto_id']" position="replace">-->
+<!--                <field name="impianto_id" placeholder="Nome Impianto" options="{'no_quick_create': True, 'no_create_edit' : True}"/>-->
+
+<!--            </xpath>-->
+
+        </field>
+      </record>
+
+    </data>
+</odoo>

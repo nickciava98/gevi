@@ -689,7 +689,51 @@ class Verbale(models.Model):
                     template_mail.send_mail(line.id, force_send=True)
                     template_mail.email_to = None
 
-    @api.onchange("ispettore_id", "responsabile_tecnico_id")
-    def _onchange_ispettore_id_responsabile_tecnico_id(self):
-        if self.ispettore_id and self.responsabile_tecnico_id:
-            self.state = "assegnato"
+    # @api.onchange("ispettore_id", "responsabile_tecnico_id")
+    # def _onchange_ispettore_id_responsabile_tecnico_id(self):
+    #     if self.ispettore_id and self.responsabile_tecnico_id:
+    #         self.state = "assegnato"
+
+    def apri_verbale(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Verbale',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': self._name,
+            'res_id': self.id,
+            'target': 'current',
+        }
+
+    def wizard_assegna_isp(self):
+        return {
+            "name": "Assegna Ispettore",
+            "type": "ir.actions.act_window",
+            "res_model": "gevi_verbali.wizard_assegna_isp",
+            "view_mode": "form",
+            "view_type": "form",
+            "views": [(False, "form")],
+            "target": "new"
+        }
+
+    def wizard_assegna_rt(self):
+        return {
+            "name": "Assegna Responsabile Tecnico",
+            "type": "ir.actions.act_window",
+            "res_model": "gevi_verbali.wizard_assegna_rt",
+            "view_mode": "form",
+            "view_type": "form",
+            "views": [(False, "form")],
+            "target": "new"
+        }
+
+    def wizard_conferma(self):
+        return {
+            "name": "Conferma con PIN",
+            "type": "ir.actions.act_window",
+            "res_model": "gevi_verbali.wizardconferma",
+            "view_mode": "form",
+            "view_type": "form",
+            "views": [(False, "form")],
+            "target": "new"
+        }

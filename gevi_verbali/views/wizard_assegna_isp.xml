@@ -18,9 +18,14 @@
         </field>
     </record>
 
-    <act_window id="action_lancia_wizard_assegna_isp"
-                name="Assegna Ispettore"
-                res_model="gevi_verbali.wizard_assegna_isp"
-                view_mode="form"
-                target="new"/>
+    <record id="action_wizard_assegna_isp" model="ir.actions.server">
+        <field name="name">Assegna Ispettore</field>
+        <field name="model_id" ref="gevi_verbali.model_gevi_verbali_verbale"/>
+        <field name="binding_model_id" ref="gevi_verbali.model_gevi_verbali_verbale"/>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = record.wizard_assegna_isp()
+        </field>
+    </record>
 </odoo>

@@ -93,8 +93,14 @@ class Impianto(models.Model):
 
             @return: returns a id of new record
         """
-        values['codice_impianto'] = self.env['ir.sequence'].next_by_code(
-            'gevi.impianti.impianto')
+        ic_id = values['impianto_categoria_id']
+        cat_id = self.env['gevi.impianti.impianto_categoria'].search([('id', '=', ic_id)])
+        if cat_id.descrizione == 'BIL':
+            values['codice_impianto'] = self.env['ir.sequence'].next_by_code(
+                'gevi.impianti.impianto')
+        else:
+            values['codice_impianto'] = self.env['ir.sequence'].next_by_code(
+                'gevi.impianti.impianto')
         values['name'] = values['codice_impianto']
         result = super(Impianto, self).create(values)
         result.carica_attributi_descrittivi()

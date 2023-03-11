@@ -109,10 +109,8 @@
                                    attrs="{'readonly': [('name', '!=', '/')]}" options="{'no_open': True}"/>
                         </group>
                         <group>
-                            <field name="ispettore_id"
-                                   options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
-                            <field name="responsabile_tecnico_id"
-                                   options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            <field name="ispettore_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            <field name="responsabile_tecnico_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
                         </group>
                         <group>
                             <label for="impianto_id" string="Ubicazione"/>

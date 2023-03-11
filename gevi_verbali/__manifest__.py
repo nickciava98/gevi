@@ -51,7 +51,6 @@
         # 'data/gevi_verbali.osservazione_categoria.csv',
         # 'data/gevi_verbali.osservazione.csv',
         'templates.xml',
-        'views/verbale.xml',
         'data/verbale_sequence.xml',
         'views/osservazione.xml',
         'views/osservazione_categoria.xml',
@@ -65,6 +64,7 @@
         # 'views/verbale_workflow.xml',
         # il caricamento della vista dei menu deve essere l'ultima cosa specificata nel contesto data.
         'views/gevi_menu_verbali.xml',
+        'views/verbale.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

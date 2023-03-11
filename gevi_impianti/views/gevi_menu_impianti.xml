@@ -1,5 +1,6 @@
 <odoo>
-    <menuitem id="gevi_impianti_top_menu" name="Impianti"/>
+    <menuitem id="gevi_impianti_top_menu" name="Impianti"
+              web_icon="gevi_impianti,static/description/app_icon.png"/>
 
     <!-- Side Menu - Applicazione -->
     <menuitem id="gevi_impianti_side_menu_categoria" name="Impianti" parent="gevi_impianti_top_menu"/>

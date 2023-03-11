@@ -279,7 +279,7 @@ class Contratto(models.Model):
             self.manutentore_email = record.manutentore_id.email
             self.manutentore_interlocutore = record.manutentore_id.interlocutore
 
-    # Azione riferita al button filtra_cliente 
+    # Azione riferita al button filtra_cliente
     # @api.one
     # @api.onchange('cliente_cf_piva')
     # def _onchange_cliente_cf_piva(self):
@@ -471,7 +471,7 @@ class Contratto(models.Model):
             @param values: provides a data for new record
             @return: returns a id of new record
         """
-        # per l'importazione dei dati, si può modificare il prefisso della 
+        # per l'importazione dei dati, si può modificare il prefisso della
         # sequence in modo da avere un prefisso tipo c/2016 così si capisce
         # che è un contratto vecchio.
 
@@ -516,3 +516,10 @@ class Contratto(models.Model):
                 node.set("domain", "[('customer_id', '=', customer_id)]")
             res['arch'] = etree.tostring(doc)
         return res
+
+    def get_verbale_obj_name_by_cat_impianto(self):
+        if self.impianto_id.impianto_categoria_id.descrizione == 'BIL':
+            return 'gevi_zbilance.verbale'
+        else:
+            return 'gevi_verbali.verbale'
+        pass

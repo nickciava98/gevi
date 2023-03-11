@@ -6,7 +6,9 @@ class CambioCategoriaImpiantoVerbale(models.TransientModel):
     _name = 'gevi_wizard_operativi.cambio_categoria_impianto_verbale'
 
     impianto_categoria_id = fields.Many2one(
-        'gevi.impianti.impianto_categoria', string='Categoria Impianto')
+        'gevi.impianti.impianto_categoria', string='Categoria Impianto',
+        domain=[('descrizione', '!=', 'BIL')]
+    )
 
     def cambio_categoria_impianto(self):
         verbali_obj = self.env['gevi_verbali.verbale'].browse(

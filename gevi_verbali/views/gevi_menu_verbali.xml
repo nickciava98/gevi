@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem id="gevi_verbali_top_menu" name="Verbali" />
+    <menuitem id="gevi_verbali_top_menu" name="Verbali" web_icon="gevi_verbali,static/description/app_icon.png"/>
 
     <!-- Side Menu - Applicazione -->
     <menuitem id="gevi_verbali_side_menu" name="Verbali" parent="gevi_verbali_top_menu"/>

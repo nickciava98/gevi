@@ -1,5 +1,6 @@
 <odoo>
-    <menuitem id="gevi_commerciale_top_menu" name="Commerciale" sequence="9"/>
+    <menuitem id="gevi_commerciale_top_menu" name="Commerciale" sequence="9"
+              web_icon="gevi_commerciale,static/description/app_icon.png"/>
 
     <menuitem id="gevi_commerciale_appuntamento_side_menu" name="Appuntamenti"
               parent="gevi_commerciale_top_menu"  sequence="1"/>

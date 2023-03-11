@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+	<data noupdate="1">
+
+		<record model="ir.sequence" id="seq_gevi_zbilance_bilancia">
+			<field name="name">GEVI Codice Bilancia</field>
+			<field name="code">gevi_zbilance.bilancia</field>
+			<field name="prefix">BIL</field>
+			<field name="padding">7</field>
+		</record>
+
+		<record model="ir.sequence" id="seq_gevi_zbilance_bilancia">
+			<field name="name">GEVI Codice Verifica Bilancia</field>
+			<field name="code">gevi_zbilance.verifica</field>
+            <field name="prefix">ProgBil/</field>
+            <field name="padding">6</field>
+		</record>
+	</data>
+</openerp>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+      <!-- Form Impianto -->
+
+        <record model="ir.ui.view" id="gevi_zbilance_impianto_form_view">
+            <field name="name">gevi_zbilance.impianto.form</field>
+            <field name="model">gevi.impianti.impianto</field>
+            <field name="inherit_id" ref="gevi_impianti.view_gevi_impianti_impianto_form"/>
+            <field name="arch" type="xml">
+                <!-- Intestazione scheda -->
+
+<!--                <xpath expr="//field[@name='data_ultima_verifica']" position="after">-->
+
+                <xpath expr="//notebook" position="before">
+
+                    <field name="descrizione_categoria_impianto" invisible="1"/>
+
+                    <h2 attrs="{'invisible': [('descrizione_categoria_impianto', '!=', 'BIL')]}">
+                        Dati bilance
+                    </h2>
+                    <group attrs="{'invisible': [('descrizione_categoria_impianto', '!=', 'BIL')]}">
+                        <group>
+                            <field name="tipologia_bilancia" attrs="{'required': [('descrizione_categoria_impianto', '=', 'BIL')]}"/>
+                            <field name="classe_bilancia" attrs="{'required': [('descrizione_categoria_impianto', '=', 'BIL')]}"/>
+                        </group>
+                        <group>
+                            <field name="range_1" attrs="{'required': [('descrizione_categoria_impianto', '=', 'BIL')]}"/>
+                            <field name="range_2" widget="selection" />
+                            <field name="range_3" widget="selection" />
+
+                        </group>
+                    </group>
+                </xpath>
+
+                <notebook position="inside">
+                    
+                    <page name="verbali" string="Verbali e Verifiche Bilance"
+                        attrs="{'invisible': [('descrizione_categoria_impianto', '!=', 'BIL')]}">
+                        <field name="verbale_bilance_ids">
+                            <tree string="Verbali Bilance" create="false" delete="false">
+                                <field name="name" />
+                                <field name="data_verbale"/>
+                                <field name="customer_id" />
+                                <field name="impianto_id"/>
+                                <field name="periodica"/>
+                                <field name="impianto_categoria_id" />
+                                <field name="ispettore_id"/>
+                                <field name="state" />
+                                <button name="apri_verbale_bilance" type="object" state="validato" string="Apri" class="oe_highlight"/>
+                            </tree>                           
+                        </field>
+                    </page>
+                    
+                </notebook>
+                                
+            </field>
+        </record>
+
+
+        <!-- action gevi_impianti filter Bilance-->
+        <record model="ir.actions.act_window" id="action_gevi_zbilance_impianto_bilance">
+            <field name="name">Bilance</field>
+            <field name="res_model">gevi.impianti.impianto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" eval="{'search_default_ascensore_generico': 'Bilance'}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un impianto
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

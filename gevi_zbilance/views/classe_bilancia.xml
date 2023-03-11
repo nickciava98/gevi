@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Form Classe bilancia -->
+       	<record model="ir.ui.view" id="view_gevi_zbilance_classe_bilancia_form">
+			<field name="name">Classe bilancia</field>
+			<field name="model">gevi_zbilance.classe_bilancia</field>
+			<field name="arch" type="xml">
+				<form string="Classe bilancia Form">
+					<sheet>
+                        <group>
+                            <field name="divisioni" default_focus="1" />
+                            <field name="classe_strumento" />
+                            <field name="classe_massa" />
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <!--Action Classe bilancia -->
+        <record model="ir.actions.act_window" id="action_gevi_zbilance_classe_bilancia_form">
+            <field name="name">Classe bilancia</field>
+            <field name="res_model">gevi_zbilance.classe_bilancia</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Inserisci Classe bilancia
+                </p>
+            </field>
+        </record>
+
+        <!--Tree Classe bilancia -->
+        <record model="ir.ui.view" id="gevi_zbilance_classe_bilancia_tree">
+            <field name="name">Classe bilancia</field>
+            <field name="model">gevi_zbilance.classe_bilancia</field>
+            <field name="arch" type="xml">
+                <tree string="Lista classe bilancia">
+                    <field name="divisioni" />
+                    <field name="classe_strumento" />
+                    <field name="classe_massa" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

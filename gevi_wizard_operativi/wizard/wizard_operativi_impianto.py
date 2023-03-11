@@ -29,7 +29,9 @@ class CambioCategoriaImpianto(models.TransientModel):
     _name = 'gevi_wizard_operativi.cambio_categoria_impianto'
 
     impianto_categoria_id = fields.Many2one(
-        'gevi.impianti.impianto_categoria', string='Categoria Impianto')
+        'gevi.impianti.impianto_categoria', string='Categoria Impianto',
+        domain=[('descrizione', '!=', 'BIL')]
+    )
 
     def cambio_categoria_impianto(self):
         impianti_obj = self.env['gevi.impianti.impianto'].browse(

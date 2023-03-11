@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem id="gevi_contatti_top_menu" name="Rubrica"/>
+    <menuitem id="gevi_contatti_top_menu" name="Rubrica" web_icon="gevi_contatti,static/description/app_icon.png"/>
 
     <!-- Side Menu - Applicazione -->
     <menuitem id="gevi_contatti_side_menu_contatti" name="Contatti" parent="gevi_contatti_top_menu"/>
