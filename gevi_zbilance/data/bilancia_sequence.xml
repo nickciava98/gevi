@@ -15,5 +15,11 @@
             <field name="prefix">ProgBil/</field>
             <field name="padding">6</field>
 		</record>
+
+		<record id="seq_gevi_zbilance_verbale" model="ir.sequence">
+            <field name="name">GEVI Codice Verbale Bilance</field>
+            <field name="code">gevi_zbilance.verbale</field>
+            <field name="prefix">BIL %(year)s/</field>
+        </record>
 	</data>
 </openerp>
