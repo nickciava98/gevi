@@ -546,13 +546,14 @@ class VerbaleBilance(models.Model):
                 self.impianto_id.provincia
             )
         sigla_periodica = ""
+        costo = 0
 
         if self.periodica is True:
             sigla_periodica += 'P'
-            self.costo = self.contratto_id.costo_verifica_periodica
+            costo = self.contratto_id.costo_verifica_periodica
         else:
             sigla_periodica += 'S'
-            self.costo = self.contratto_id.costo_verifica_straordinaria
+            costo = self.contratto_id.costo_verifica_straordinaria
 
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
@@ -575,7 +576,7 @@ class VerbaleBilance(models.Model):
                 'name': (prodotto_obj.description_sale).format(self.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
                                                                ubicazione,
                                                                self.data_ultima_verifica),
-                'price_unit': self.costo,
+                'price_unit': costo,
                 'discount': 0.0,
                 'sequence': 10,
 
