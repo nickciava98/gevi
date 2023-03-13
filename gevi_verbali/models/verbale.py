@@ -588,56 +588,55 @@ class Verbale(models.Model):
                         line.norma_riferimento = norma_obj.norma_collaudo + ' - ' + norma_obj.norma_straordinaria
 
     def _crea_ordine_vendita(self):
-        for line in self:
-            # record = self
-            ordine_obj = self.env['sale.order']
-            costo = fields.Float(default=0.0, digits=(12, 2))
-            ubicazione = fields.Char()
-            # if self.impianto_id.indirizzo2 is False:
-            #     self.impianto_indirizzo2 = ' '
-            codice_prodotto = fields.Char()
-            sigla_periodica = fields.Char()
-            sigla_impianto = fields.Char()
-            ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
-                line.customer_id.name.encode('utf-8'),
-                line.impianto_id.etichetta.encode('utf-8'),
-                line.impianto_id.indirizzo.encode('utf-8'),
-                ' ' if line.impianto_id.indirizzo2 is False else line.impianto_id.indirizzo2,
-                line.impianto_id.cap,
-                line.impianto_id.citta,
-                line.impianto_id.provincia
-            )
+        # record = self
+        ordine_obj = self.env['sale.order']
+        costo = fields.Float(default=0.0, digits=(12, 2))
+        ubicazione = fields.Char()
+        # if self.impianto_id.indirizzo2 is False:
+        #     self.impianto_indirizzo2 = ' '
+        codice_prodotto = ""
+        sigla_periodica = ""
+        sigla_impianto = ""
+        ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
+            self.customer_id.name.encode('utf-8'),
+            self.impianto_id.etichetta.encode('utf-8'),
+            self.impianto_id.indirizzo.encode('utf-8'),
+            ' ' if self.impianto_id.indirizzo2 is False else self.impianto_id.indirizzo2,
+            self.impianto_id.cap,
+            self.impianto_id.citta,
+            self.impianto_id.provincia
+        )
 
-        if line.periodica is True:
-            sigla_periodica = 'P'
-            costo = line.contratto_id.costo_verifica_periodica
+        if self.periodica is True:
+            sigla_periodica += 'P'
+            costo = self.contratto_id.costo_verifica_periodica
         else:
-            sigla_periodica = 'S'
-            costo = line.contratto_id.costo_verifica_straordinaria
+            sigla_periodica += 'S'
+            costo = self.contratto_id.costo_verifica_straordinaria
 
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
-            [('name', '=', line.impianto_categoria_id.name)], limit=1).descrizione
-        if line.fattura_anticipata is True:
+            [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
+        if self.fattura_anticipata is True:
             codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
             codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)
-        if line.customer_id.tipo_cliente_id.name == "Condominio":
+        if self.customer_id.tipo_cliente_id.name == "Condominio":
             codice_prodotto += 'C'
         # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
         prodotto_obj = self.env['product.product'].search([('name', '=', codice_prodotto)], limit=1)
         data_verbale_formato_it = fields.Date.from_string(line.data_verbale)
         ordine = ordine_obj.create({
             # 'name': ,
-            'origin': line.name,
+            'origin': self.name,
             
-            'date_order': fields.Date.context_today(line),
-            'partner_id': line.customer_id.id,
-            'partner_invoice_id': line.customer_id.id,
+            'date_order': fields.Date.context_today(self),
+            'partner_id': self.customer_id.id,
+            'partner_invoice_id': self.customer_id.id,
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
-                'name': (prodotto_obj.description_sale).format(line.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
+                'name': (prodotto_obj.description_sale).format(self.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
                                                                ubicazione,
-                                                               line.data_ultima_verifica),
+                                                               self.data_ultima_verifica),
                 'price_unit': costo,
                 'discount': 0.0,
                 'sequence': 10,
@@ -646,9 +645,9 @@ class Verbale(models.Model):
         })
 
         # verifico agente associato ad amministratore per associazione PESCARA
-        if line.referente_id and line.referente_id.agente_id:
-            if line.referente_id.agente_id.user_id.has_group('__export__.res_groups_90'):
-                ordine.write({'user_id': line.referente_id.agente_id.user_id.id})
+        if self.referente_id and self.referente_id.agente_id:
+            if self.referente_id.agente_id.user_id.has_group('__export__.res_groups_90'):
+                ordine.write({'user_id': self.referente_id.agente_id.user_id.id})
 
         ordine.action_confirm()
         return ordine

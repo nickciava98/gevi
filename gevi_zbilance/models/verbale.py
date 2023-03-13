@@ -545,20 +545,21 @@ class VerbaleBilance(models.Model):
                 self.impianto_id.citta,
                 self.impianto_id.provincia
             )
+        sigla_periodica = ""
 
         if self.periodica is True:
-            self.sigla_periodica = 'P'
+            sigla_periodica += 'P'
             self.costo = self.contratto_id.costo_verifica_periodica
         else:
-            self.sigla_periodica = 'S'
+            sigla_periodica += 'S'
             self.costo = self.contratto_id.costo_verifica_straordinaria
 
-        self.sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
+        sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
         if self.fattura_anticipata is True:
-            self.codice_prodotto = 'VV{0}-{1}-FA'.format(self.sigla_periodica, self.sigla_impianto)
+            self.codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
-            self.codice_prodotto = 'VV{0}-{1}'.format(self.sigla_periodica, self.sigla_impianto)
+            self.codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)
         # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
         prodotto_obj = self.env['product.product'].search([('name', '=', self.codice_prodotto)], limit=1)
         data_verbale_formato_it = fields.Date.from_string(self.data_verbale)
