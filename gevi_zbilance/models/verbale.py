@@ -547,6 +547,7 @@ class VerbaleBilance(models.Model):
             )
         sigla_periodica = ""
         costo = 0
+        codice_prodotto = ""
 
         if self.periodica is True:
             sigla_periodica += 'P'
@@ -558,11 +559,11 @@ class VerbaleBilance(models.Model):
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
         if self.fattura_anticipata is True:
-            self.codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
+            codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
-            self.codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)
-        # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
-        prodotto_obj = self.env['product.product'].search([('name', '=', self.codice_prodotto)], limit=1)
+            codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)
+        # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(codice_prodotto))
+        prodotto_obj = self.env['product.product'].search([('name', '=', codice_prodotto)], limit=1)
         data_verbale_formato_it = fields.Date.from_string(self.data_verbale)
         odv = {
             # 'name': ,
