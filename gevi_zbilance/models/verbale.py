@@ -536,7 +536,7 @@ class VerbaleBilance(models.Model):
 
     def _crea_ordine_vendita(self):
         ordine_obj = self.env['sale.order']
-        self.ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
+        ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
                 self.customer_id.name.encode('utf-8'),
                 self.impianto_id.etichetta.encode('utf-8'),
                 self.impianto_id.indirizzo.encode('utf-8'),
@@ -572,7 +572,7 @@ class VerbaleBilance(models.Model):
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
                 'name': (prodotto_obj.description_sale).format(self.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
-                                                               self.ubicazione,
+                                                               ubicazione,
                                                                self.data_ultima_verifica),
                 'price_unit': self.costo,
                 'discount': 0.0,

@@ -5,7 +5,7 @@ class ProvaTara(models.Model):
     _name = 'gevi_zbilance.prova_tara'
 
     verbale_id = fields.Many2one(
-        'gevi_zbilance.verbale', ondelete='set null', string="Verbale")
+        'gevi_zbilance.verbale', ondelete='cascade', string="Verbale")
 
     divisione = fields.Integer("Divis.")
     carico_l = fields.Integer("Massa L")

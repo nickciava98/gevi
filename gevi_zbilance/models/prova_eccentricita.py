@@ -5,7 +5,7 @@ class ProvaEccentricita(models.Model):
     _name = 'gevi_zbilance.prova_eccentricita'
 
     verbale_id = fields.Many2one(
-        'gevi_zbilance.verbale', ondelete='set null', string="Verbale")
+        'gevi_zbilance.verbale', ondelete='cascade', string="Verbale")
 
     posizione = fields.Integer("Posizione")
     carico_l = fields.Integer("Massa L")
