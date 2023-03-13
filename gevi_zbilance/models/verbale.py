@@ -319,7 +319,7 @@ class VerbaleBilance(models.Model):
             self.timbro_ispettore = (self.env.user).timbro_isp
             if self.name.find('Prog') != -1:
                 self.name = self.env['ir.sequence'].with_context(
-                    ir_sequence_date='2022-01-01').next_by_code('gevi_zbilance.verbale')
+                    ir_sequence_date='2023-01-01').next_by_code('gevi_zbilance.verbale')
                 # self.name = self.env['ir.sequence'].next_by_code('gevi_zbilance.verbale')
                 self.data_verbale = fields.Date.context_today(self)
             self.state = 'confermato'

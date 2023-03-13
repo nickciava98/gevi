@@ -515,7 +515,7 @@ class Verbale(models.Model):
                 self.timbro_ispettore = (self.env.user).timbro_isp
                 # self.state = 'confermato'
                 if self.name.find('Prog') != -1:
-                    self.name = self.env['ir.sequence'].with_context(ir_sequence_date='2022-01-01').next_by_code(
+                    self.name = self.env['ir.sequence'].with_context(ir_sequence_date='2023-01-01').next_by_code(
                         'gevi_verbali.verbale')
                     # self.name = self.env['ir.sequence'].next_by_code('gevi_verbali.verbale')
                     self.data_verbale = fields.Date.context_today(self)
