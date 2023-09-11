@@ -47,7 +47,7 @@
             <xpath expr="//field[@name='title']" position="replace">
                 <field name="website" widget="url" placeholder="es. www.sito.it"/>
             </xpath>
-            <xpath expr="//div[@class='oe_title']" position="after">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
                 <group>
                     <group>
                         <field name="referente_id" options="{'no_quick_create': True, 'no_create_edit' : True}"
