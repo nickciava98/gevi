@@ -1,13 +1,13 @@
-openerp.report = function(instance) {
+openerp.report = function (instance) {
     var wkhtmltopdf_state;
 
-    var trigger_download = function(session, response, c, action, options) {
+    var trigger_download = function (session, response, c, action, options) {
         session.get_file({
             url: '/report/download',
             data: {data: JSON.stringify(response)},
             complete: openerp.web.unblockUI,
             error: c.rpc_error.bind(c),
-            success: function(){
+            success: function () {
                 if (action && options && !action.dialog) {
                     options.on_close();
                 }
@@ -16,11 +16,11 @@ openerp.report = function(instance) {
     };
 
     instance.web.ActionManager = instance.web.ActionManager.extend({
-        ir_actions_report_xml: function(action, options) {
+        ir_actions_report_xml: function (action, options) {
             var self = this;
             instance.web.blockUI();
             action = _.clone(action);
-            _t =  instance.web._t;
+            _t = instance.web._t;
 
             // QWeb reports
             if ('report_type' in action && (action.report_type == 'qweb-html' || action.report_type == 'qweb-pdf' || action.report_type == 'controller')) {
@@ -88,7 +88,7 @@ workers to print a pdf version of the reports.'), true);
                     });
                 } else if (action.report_type === 'controller') {
                     return trigger_download(self.session, response, c, action, options);
-                }                     
+                }
             } else {
                 return self._super(action, options);
             }

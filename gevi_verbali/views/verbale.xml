@@ -48,16 +48,16 @@
                     />
 
                     <!-- name="303" -->
-                        <button name="%(action_wizard_conferma_con_pin)d" type="action"
-                                string="Conferma Verbale (PIN)"
-                                states="eseguito" class="oe_highlight"
-                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
+                    <button name="%(action_wizard_conferma_con_pin)d" type="action"
+                            string="Conferma Verbale (PIN)"
+                            states="eseguito" class="oe_highlight"
+                            confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
 
-                       <!-- name="303" -->
-                        <button name="%(action_wizard_conferma_con_pin)d" type="action"
-                                string="Valida Definitivamente (PIN)"
-                                states="confermato"
-                                class="oe_highlight"/>
+                    <!-- name="303" -->
+                    <button name="%(action_wizard_conferma_con_pin)d" type="action"
+                            string="Valida Definitivamente (PIN)"
+                            states="confermato"
+                            class="oe_highlight"/>
 
                     <button name="action_annullato"
                             type="object" string="Annulla Verbale" states="bozza,assegnato"
@@ -74,22 +74,22 @@
                 </header>
                 <sheet>
 
-                        <h1 decoration-danger="True"
-                            attrs="{'invisible': [('blocco_amministrativo', '=', False)]}">
-                            BLOCCO AMMINISTRATIVO IN CORSO
-                        </h1>
-                        <h1>
-                            <label for="name" string="Verifica N."
-                                   attrs="{'invisible': [('state','not in',('bozza','assegnato'))]}"/>
-                            <label for="name" string="Verbale N."
-                                   attrs="{'invisible': [('state','not in',('eseguito','confermato','validato'))]}"/>
-                            <field name="name" class="oe_inline" readonly="1"/>
-                            <label for="name" string=" - Straordinaria"
-                                   attrs="{'invisible': [('periodica', '=', True)]}"/>
-                            <label for="name" string=" - Periodica"
-                                   attrs="{'invisible': [('periodica', '=', False)]}"/>
+                    <h1 decoration-danger="True"
+                        attrs="{'invisible': [('blocco_amministrativo', '=', False)]}">
+                        BLOCCO AMMINISTRATIVO IN CORSO
+                    </h1>
+                    <h1>
+                        <label for="name" string="Verifica N."
+                               attrs="{'invisible': [('state','not in',('bozza','assegnato'))]}"/>
+                        <label for="name" string="Verbale N."
+                               attrs="{'invisible': [('state','not in',('eseguito','confermato','validato'))]}"/>
+                        <field name="name" class="oe_inline" readonly="1"/>
+                        <label for="name" string=" - Straordinaria"
+                               attrs="{'invisible': [('periodica', '=', True)]}"/>
+                        <label for="name" string=" - Periodica"
+                               attrs="{'invisible': [('periodica', '=', False)]}"/>
 
-                        </h1>
+                    </h1>
 
 
                     <group>
@@ -100,8 +100,10 @@
                                    attrs="{'readonly': [('name', '!=', '/')]}" options="{'no_open': True}"/>
                         </group>
                         <group>
-                            <field name="ispettore_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
-                            <field name="responsabile_tecnico_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            <field name="ispettore_id"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            <field name="responsabile_tecnico_id"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
                         </group>
                         <group>
                             <label for="impianto_id" string="Ubicazione"/>
@@ -161,7 +163,7 @@
                         <field name="satm_omologazione" string="Omologazione Impianto"
                                attrs="{'invisible': [('impianto_categoria_name', '!=', 'Scariche Atmosferiche')]}"/>
                         <field name="note_di_registro" string="Note al registro degli esiti"
-                               attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}" />
+                               attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}"/>
                         <!-- Campi MAT -->
                         <field name="mat_prot_lettere" string="N.Prot. e data lettera Az.Erogatrice"
                                attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
@@ -212,7 +214,7 @@
                                 <field name="name" readonly="1"/>
                                 <field name="valore_attributo_id"
                                        options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
-                                <field name="valore_rilievo" />
+                                <field name="valore_rilievo"/>
                                 <field name="unita_di_misura_id" string="UdM" readonly="1"/>
                                 <field name="note_rilievo" invisible="1"/>
                             </tree>
@@ -236,7 +238,7 @@
                                attrs="{'invisible': ['|',('impianto_categoria_name', '==', 'Messa a Terra'),('impianto_categoria_name', '==', 'Scariche Atmosferiche')]}"/>
                     </group>
                     <!-- Osservazioni Ascensore, PEM -->
-                    <group  attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),('impianto_categoria_name', 'in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                    <group attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),('impianto_categoria_name', 'in', ('Messa a Terra','Scariche Atmosferiche'))]}">
                         <field name="verbale_osservazione_riga_ids">
                             <tree decoration-danger="vincolante" string="Osservazioni" editable="bottom">
                                 <field name="verbale_id" invisible="1"/>
@@ -249,7 +251,7 @@
                     </group>
 
                     <!-- Osservazioni MAT, SATM -->
-                    <group  attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),('impianto_categoria_name', 'not in', ('Messa a Terra','Scariche Atmosferiche'))]}">
+                    <group attrs="{'invisible': ['|',('state','in',('bozza','assegnato')),('impianto_categoria_name', 'not in', ('Messa a Terra','Scariche Atmosferiche'))]}">
                         <field name="verbale_osservazione_mat_riga_ids">
                             <tree decoration-danger="vincolante" string="Osservazioni" editable="bottom">
                                 <field name="verbale_id" invisible="1"/>
@@ -348,10 +350,10 @@
                   decoration-success="state in ('eseguito','pagamento_parziale')">
                 <field name="name"/>
                 <field name="data_verbale" attrs="{'invisible': [('state','not in',('confermato','validato'))]}"/>
-                <field name="customer_id" />
+                <field name="customer_id"/>
                 <field name="impianto_id"/>
                 <field name="periodica"/>
-                <field name="impianto_categoria_id" />
+                <field name="impianto_categoria_id"/>
                 <field name="ispettore_id"/>
                 <!--<field name="data_assegnazione" attrs="{'nolabel': [('state','not in','assegnato')]}"/>-->
                 <field name="data_programmazione"/>
@@ -381,9 +383,9 @@
             <search>
                 <field name="name"/>
                 <field name="data_verbale"/>
-                <field name="customer_id" />
+                <field name="customer_id"/>
                 <field name="impianto_id"/>
-                <field name="impianto_categoria_id" />
+                <field name="impianto_categoria_id"/>
                 <field name="ispettore_id"/>
                 <field name="cf_cliente"/>
                 <field name="piva_cliente"/>
@@ -397,45 +399,45 @@
                 <filter string="Bozza"
                         name="bozza"
                         domain="[('state','=','bozza')]"
-                        help="Filtra per Bozza" />
+                        help="Filtra per Bozza"/>
                 <filter string="Assegnato"
                         name="assegnato"
                         domain="[('state','=','assegnato')]"
-                        help="Filtra per Assegnato" />
+                        help="Filtra per Assegnato"/>
                 <filter string="Eseguito"
                         name="eseguito"
                         domain="[('state','=','eseguito')]"
-                        help="Filtra per Eseguito" />
+                        help="Filtra per Eseguito"/>
                 <filter string="Confermato"
                         name="confermato"
                         domain="[('state','=','confermato')]"
-                        help="Filtra per Confermato" />
+                        help="Filtra per Confermato"/>
                 <filter string="Validato"
                         name="validato"
                         domain="[('state','=','validato')]"
-                        help="Filtra per Validato" />
+                        help="Filtra per Validato"/>
                 <filter string="Annullato"
                         name="annullato"
                         domain="[('state','=','annullato')]"
-                        help="Filtra per Annullato" />
+                        help="Filtra per Annullato"/>
 
                 <group string="Raggruppa">
                     <filter string="Stato"
                             name="group_by_state"
                             context="{'group_by':'state'}"
-                            help="filtro per Stato" />
+                            help="filtro per Stato"/>
                     <filter string="Cliente"
                             name="group_by_customer_id"
                             context="{'group_by':'customer_id'}"
-                            help="filtro per Cliente" />
+                            help="filtro per Cliente"/>
                     <filter string="Amministratore"
                             name="group_by_referente_id"
                             context="{'group_by':'referente_id'}"
-                            help="filtro per Amministratore" />
+                            help="filtro per Amministratore"/>
                     <filter string="Manutentore"
                             name="group_by_manutentore_id"
                             context="{'group_by':'manutentore_id'}"
-                            help="filtro per Manutentore" />
+                            help="filtro per Manutentore"/>
                 </group>
             </search>
         </field>

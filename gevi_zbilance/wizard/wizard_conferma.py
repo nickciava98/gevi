@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models, exceptions
 
 
 class WizardConferma(models.TransientModel):
     _name = 'gevi_zbilance.wizardconferma'
+    _description = "Conferma"
 
     pin = fields.Char(string="Inserire il PIN", help="PIN (4 cifre)", size=4)
     verbale_id = fields.Many2one(

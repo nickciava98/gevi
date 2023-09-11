@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class ValoreAttributo(models.Model):
     _name = 'gevi.impianti.valore_attributo'
+    _description = "Valore Attributo"
 
     name = fields.Char()
 

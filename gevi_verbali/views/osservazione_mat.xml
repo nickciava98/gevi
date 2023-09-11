@@ -8,9 +8,9 @@
                     <h1>Raccomandazione</h1>
                     <group>
                         <field name="indice_osservazione" string="Indice"/>
-                        <field name="name" string="Nome" />
-                        <field name="vincolante" string="Vincolante" />
-                        <field name="tipo" string="Tipo" />
+                        <field name="name" string="Nome"/>
+                        <field name="vincolante" string="Vincolante"/>
+                        <field name="tipo" string="Tipo"/>
                     </group>
                 </sheet>
             </form>
@@ -35,9 +35,9 @@
         <field name="arch" type="xml">
             <tree string="Lista Osservazioni MAT">
                 <field name="indice_osservazione" string="Indice"/>
-                <field name="name" string="Nome" />
-                <field name="vincolante" string="Vincolante" />
-                <field name="tipo" string="Tipo" />
+                <field name="name" string="Nome"/>
+                <field name="vincolante" string="Vincolante"/>
+                <field name="tipo" string="Tipo"/>
             </tree>
         </field>
     </record>

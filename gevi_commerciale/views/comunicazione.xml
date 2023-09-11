@@ -57,7 +57,7 @@
                     <filter string="Nome"
                             name="by_commerciale_id"
                             context="{'group_by':'commerciale_id'}"
-                            help="Raggruppa per commerciale" />
+                            help="Raggruppa per commerciale"/>
                 </group>
             </search>
         </field>

@@ -16,11 +16,11 @@
         <field name="model">comuni_italiani.comune</field>
         <field name="arch" type="xml">
             <tree string="Lista Comuni Italiani">
-                <field name="name" default_focus="1" />
-                <field name="cap" />
-                <field name="provincia" />
-                <field name="regione" />
-                <field name="priorita" />
+                <field name="name" default_focus="1"/>
+                <field name="cap"/>
+                <field name="provincia"/>
+                <field name="regione"/>
+                <field name="priorita"/>
             </tree>
         </field>
     </record>
@@ -33,11 +33,11 @@
             <form string="Anagrafica Comune">
                 <sheet>
                     <group>
-                        <field name="name" default_focus="1" />
-                        <field name="cap" />
-                        <field name="provincia" />
-                        <field name="regione" />
-                        <field name="priorita" />
+                        <field name="name" default_focus="1"/>
+                        <field name="cap"/>
+                        <field name="provincia"/>
+                        <field name="regione"/>
+                        <field name="priorita"/>
                     </group>
                 </sheet>
             </form>

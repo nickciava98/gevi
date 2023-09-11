@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class WizardAssegnaISP(models.TransientModel):
     _name = 'gevi_zbilance.wizard_assegna_isp'
+    _description = "Assegna Ispettore"
 
     ispettore_id = fields.Many2one(
         'hr.employee',

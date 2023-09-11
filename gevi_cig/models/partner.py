@@ -7,5 +7,5 @@ class Partner(models.Model):
 
     banca_id = fields.Many2one(
         'res.partner.bank',
-        string = "Banca d'appoggio"
+        string="Banca d'appoggio"
     )

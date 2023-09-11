@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api
+from odoo import fields, models
+
+
 # from openerp.tools.translate import _
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class account_payment(models.Model):
@@ -44,4 +44,3 @@ class account_payment(models.Model):
         related='referente_id.agente_id',
         store=True
     )
-

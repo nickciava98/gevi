@@ -1,10 +1,14 @@
 <odoo>
-    <menuitem id="gevi_contatti_zona_commerciale" name="Zona Commerciale" parent="gevi_contatti.gevi_contatti_side_menu_configurazione" action="action_gevi_zone_zona_commerciale_tree"/>
+    <menuitem id="gevi_contatti_zona_commerciale" name="Zona Commerciale"
+              parent="gevi_contatti.gevi_contatti_side_menu_configurazione"
+              action="action_gevi_zone_zona_commerciale_tree"/>
 
     <!-- FINE CONTATTI -->
 
     <!-- MENU IMPIANTI -->
-    <menuitem id="gevi_impianto_zona_impianto" name="Zona Impianto" parent="gevi_impianti.gevi_impianti_side_menu_configurazione" action="action_gevi_zone_zona_impianto_tree"/>
+    <menuitem id="gevi_impianto_zona_impianto" name="Zona Impianto"
+              parent="gevi_impianti.gevi_impianti_side_menu_configurazione"
+              action="action_gevi_zone_zona_impianto_tree"/>
 
     <!-- FINE IMPIANTI -->
 </odoo>

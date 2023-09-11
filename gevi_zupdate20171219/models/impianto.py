@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class Impianto(models.Model):
@@ -14,7 +14,7 @@ class Impianto(models.Model):
     def apri_verbale(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Verbale', 
+            'name': 'Verbale',
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': self._name,

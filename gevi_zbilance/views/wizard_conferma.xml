@@ -12,7 +12,7 @@
                             <field name="pin" string="PIN: " password="True"/>
                         </group>
                         <group>
-                            
+
                         </group>
                     </group>
                     <footer>

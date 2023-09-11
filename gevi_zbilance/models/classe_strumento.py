@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 from ..utils import utils
 
 
@@ -8,15 +8,15 @@ class ClasseStrumento(models.Model):
     name = fields.Char("Classe strumento")
     campione_massa = fields.Many2one(
         'gevi_zbilance.classe_pesiera', string='Campione di massa',
-        required=True,)
+        required=True, )
 
-    portata = fields.Float("Portata", default=0.00, digits=(12, 2), required=True,)
+    portata = fields.Float("Portata", default=0.00, digits=(12, 2), required=True, )
 
     um_portata = fields.Selection(
         selection=utils.unita_di_misura,
         string='U. d. M.',
         default=utils.unita_di_misura_default,
-        required=True,)
+        required=True, )
 
     tipo = fields.Selection(
         [
@@ -26,7 +26,4 @@ class ClasseStrumento(models.Model):
             ('ordinaria', 'Ordinaria'),
         ],
         string='Tipologia',
-        required=True,)
-
-
-
+        required=True, )

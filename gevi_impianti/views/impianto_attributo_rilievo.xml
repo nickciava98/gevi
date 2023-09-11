@@ -6,7 +6,7 @@
             <form string="Rilievo Form">
                 <sheet>
                     <group>
-                        <field name="name" default_focus="1" string="Attributo Rilievo" placeholder="Rilievo" />
+                        <field name="name" default_focus="1" string="Attributo Rilievo" placeholder="Rilievo"/>
                         <field name="impianto_categoria_id" string="Categoria Impianto"/>
                         <field name="unita_di_misura_id" string="Unità di misura"/>
                     </group>

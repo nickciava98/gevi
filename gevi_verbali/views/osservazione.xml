@@ -8,9 +8,9 @@
                     <h1>Osservazione</h1>
                     <group>
                         <field name="indice_osservazione" string="Indice Osservazione" style="width: 15%%"/>
-                        <field name="name" string="Nome Osservazione" />
-                        <field name="vincolante" string="Vincolante" />
-                        <field name="osservazione_categoria_id" string="Categoria Osservazione" />
+                        <field name="name" string="Nome Osservazione"/>
+                        <field name="vincolante" string="Vincolante"/>
+                        <field name="osservazione_categoria_id" string="Categoria Osservazione"/>
                     </group>
                 </sheet>
             </form>
@@ -35,9 +35,9 @@
         <field name="arch" type="xml">
             <tree string="Lista Osservazioni">
                 <field name="indice_osservazione" string="Indice Osservazione"/>
-                <field name="name" string="Nome Osservazione" />
-                <field name="vincolante" string="Vincolante" />
-                <field name="osservazione_categoria_id" string="Categoria Osservazione" />
+                <field name="name" string="Nome Osservazione"/>
+                <field name="vincolante" string="Vincolante"/>
+                <field name="osservazione_categoria_id" string="Categoria Osservazione"/>
             </tree>
         </field>
     </record>

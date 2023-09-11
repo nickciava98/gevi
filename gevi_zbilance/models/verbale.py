@@ -1,7 +1,8 @@
 # coding=utf-8
+import logging
+
 from odoo import fields, models, api, exceptions
 
-import logging
 _logger = logging.getLogger(__name__)
 
 
@@ -17,27 +18,27 @@ class VerbaleBilance(models.Model):
     impianto_id = fields.Many2one('gevi.impianti.impianto', string="Impianto")
 
     impianto_indirizzo = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_indirizzo2 = fields.Char(
-        compute='_compute_riferimenti_impianto', store=False)
-    impianto_cap = fields.Char(compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=False, compute_sudo=False)
+    impianto_cap = fields.Char(compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_citta = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_provincia = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_etichetta = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     manutentore_id = fields.Many2one(
         'gevi_contatti.manutentore', string='Manutentore')
 
     range_p_min = fields.Float(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     range_p_max = fields.Float(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     range_e_divisione_verifica = fields.Float(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     range_d_divisione_minima = fields.Float(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
 
     state = fields.Selection(
         [
@@ -71,7 +72,7 @@ class VerbaleBilance(models.Model):
             ('negativo', 'Negativo'),
         ],
         default='da_selezionare'
-        )
+    )
 
     customer_id = fields.Many2one(
         'res.partner',
@@ -132,12 +133,11 @@ class VerbaleBilance(models.Model):
     zona_impianto_id = fields.Many2one('gevi_zone.zona_impianto', string="Zona Impianto",
                                        related='impianto_id.zona_impianto_id', store=True)
 
-    cf_cliente = fields.Char("CF Cliente", compute='_compute_riferimenti_impianto', store=True)
-    piva_cliente = fields.Char("P.IVA Cliente", compute='_compute_riferimenti_impianto', store=True)
+    cf_cliente = fields.Char("CF Cliente", compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
+    piva_cliente = fields.Char("P.IVA Cliente", compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     blocco_amministrativo = fields.Boolean("Blocco Amministrativo", compute='_compute_blocco_amministrativo',
-                                           store=False)
-    codice_contratto = fields.Char("Codice Contratto", compute='_compute_blocco_amministrativo', store=True, ondelete='cascade',)
-
+                                           store=False, compute_sudo=False)
+    codice_contratto = fields.Char("Codice Contratto", compute='_compute_blocco_amministrativo', store=True, compute_sudo=False)
 
     # campi ispezione visiva
     n_sigilli = fields.Integer("Sigilli N.", default=False)
@@ -168,7 +168,7 @@ class VerbaleBilance(models.Model):
             ('d', 'Schema D'),
             ('e', 'Schema E'),
         ],
-        )
+    )
 
     # Rif. EN 45501:2015 A 4.2.3
     prova_zero_ids = fields.One2many(
@@ -214,14 +214,14 @@ class VerbaleBilance(models.Model):
     # campi related
 
     stato_contratto = fields.Selection(
-            string='Stato Contratto',
-            readonly=True,
-            related='contratto_id.state',
-            store=True
-        )
+        string='Stato Contratto',
+        readonly=True,
+        related='contratto_id.state',
+        store=True
+    )
 
     periodicita = fields.Selection(
-        'gelab.contratto', string="Periodicità", related='contratto_id.periodicita_verifica', store=True)
+        string="Periodicità", related='contratto_id.periodicita_verifica')
 
     utente_assegnato_referente_id = fields.Many2one(
         string='Utente Assegnato ad Amministratore',
@@ -270,7 +270,6 @@ class VerbaleBilance(models.Model):
     def _compute_impianto_categoria_id(self):
         for record in self:
             record.impianto_categoria_name = record.impianto_categoria_id.name
-
 
     @api.depends('ispettore_id')
     def _compute_is_ispettore(self):
@@ -400,7 +399,7 @@ class VerbaleBilance(models.Model):
         if self.schema_eccentricita == 'c':
             x = range(8)
         for n in x:
-            prova_eccentricita.append([0, 0, {'posizione': (n+1)}])
+            prova_eccentricita.append([0, 0, {'posizione': (n + 1)}])
         self.prova_eccentricita_ids = prova_eccentricita
 
     @api.onchange('schema_eccentricita')
@@ -490,7 +489,6 @@ class VerbaleBilance(models.Model):
             result = super(VerbaleBilance, self).unlink()
             return result
 
-
     # metodi common
 
     def aggiorna_dati_impianto(self):
@@ -537,14 +535,14 @@ class VerbaleBilance(models.Model):
     def _crea_ordine_vendita(self):
         ordine_obj = self.env['sale.order']
         ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
-                self.customer_id.name.encode('utf-8'),
-                self.impianto_id.etichetta.encode('utf-8'),
-                self.impianto_id.indirizzo.encode('utf-8'),
-                ' ' if self.impianto_id.indirizzo2 is False else self.impianto_id.indirizzo2,
-                self.impianto_id.cap,
-                self.impianto_id.citta,
-                self.impianto_id.provincia
-            )
+            self.customer_id.name.encode('utf-8'),
+            self.impianto_id.etichetta.encode('utf-8'),
+            self.impianto_id.indirizzo.encode('utf-8'),
+            ' ' if self.impianto_id.indirizzo2 is False else self.impianto_id.indirizzo2,
+            self.impianto_id.cap,
+            self.impianto_id.citta,
+            self.impianto_id.provincia
+        )
         sigla_periodica = ""
         costo = 0
         codice_prodotto = ""
@@ -632,4 +630,3 @@ class VerbaleBilance(models.Model):
             "views": [(False, "form")],
             "target": "new"
         }
-

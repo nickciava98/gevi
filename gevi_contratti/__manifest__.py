@@ -34,7 +34,7 @@
         'gevi_contatti',
         'gevi_impianti',
         'comuni_italiani'
-        ],
+    ],
 
     # always loaded
     'data': [
@@ -43,8 +43,8 @@
         'templates.xml',
         'views/contratto.xml',
         'data/contratto_sequence.xml',
-		# il caricamento della vista dei menu deve essere l'ultima cosa specificata nel contesto data.
-		'views/gevi_menu_contratti.xml',
+        # il caricamento della vista dei menu deve essere l'ultima cosa specificata nel contesto data.
+        'views/gevi_menu_contratti.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -55,5 +55,5 @@
         # 'data/gevi_impianti.impianto_attributo_riscontro.csv',
         # 'data/gevi_impianti.valore_attributo.csv',
     ],
-	'application': True,
+    'application': True,
 }

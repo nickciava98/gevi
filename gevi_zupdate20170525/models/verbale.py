@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class Verbale(models.Model):
@@ -14,7 +14,7 @@ class Verbale(models.Model):
     tipo_attivita = fields.Char('Tipo attivita')
 
     periodicita = fields.Selection(
-        'gelab.contratto', string="Periodicità", related='contratto_id.periodicita_verifica', store=True)
+        string="Periodicità", related='contratto_id.periodicita_verifica', store=True)
 
     utente_assegnato_referente_id = fields.Many2one(
         string='Utente Assegnato ad Amministratore',
@@ -23,4 +23,3 @@ class Verbale(models.Model):
         related='referente_id.utente_assegnato_id',
         store=True
     )
-

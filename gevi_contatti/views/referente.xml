@@ -7,22 +7,23 @@
                 <sheet>
 
                     <h1>
-                        <span class="oe_inline oe_form_field">SCHEDA AMMINISTRATORE- </span>
+                        <span class="oe_inline oe_form_field">SCHEDA AMMINISTRATORE-</span>
                         <field name="codice_referente" class="oe_inline" readonly="1"/>
                     </h1>
-                    <h2><label for="name" string="Ragione sociale"/>
+                    <h2>
+                        <label for="name" string="Ragione sociale"/>
                         <field name="name" default_focus="1" placeholder="Nome"/>
                     </h2>
                     <group>
                         <group>
                             <field name="tipo_referente_id" string="Tipo di Amministratore" widget="selection"
                                    options="{'no_open': True}"/>
-                            <field name="agente_id" string="Agente" widget="selection" />
-                            <field name="utente_assegnato_id" string="Utente Assegnato" widget="selection" />
+                            <field name="agente_id" string="Agente" widget="selection"/>
+                            <field name="utente_assegnato_id" string="Utente Assegnato" widget="selection"/>
                         </group>
                         <group>
-                            <field name="cf" placeholder="Cod. Fiscale" invisible="1" />
-                            <field name="piva" placeholder="P. Iva" invisible="1" />
+                            <field name="cf" placeholder="Cod. Fiscale" invisible="1"/>
+                            <field name="piva" placeholder="P. Iva" invisible="1"/>
                         </group>
                     </group>
                     <group>
@@ -36,7 +37,7 @@
                                        options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"
                                        placeholder="Scegli il comune"/>
                                 <field name="citta" placeholder="Città"/>
-                                <field name="localita" placeholder="Località" />
+                                <field name="localita" placeholder="Località"/>
                                 <div class="address_format">
                                     <field name="cap" placeholder="CAP"/>
                                     <field name="provincia" placeholder="Prov."/>
@@ -57,22 +58,20 @@
                     </group>
                     <notebook>
                         <page string="Note Interne">
-                            <field name="note_interne" placeholder="Ulteriori informazioni..." />
+                            <field name="note_interne" placeholder="Ulteriori informazioni..."/>
                         </page>
                         <page string="Clienti">
-                            <group>
-                                <field name="customer_ids" nolabel="1">
-                                    <tree create="false" delete="false">
-                                        <field name="codice_cliente"/>
-                                        <field name="codice_contabile"/>
-                                        <field name="name"/>
-                                        <field name="tipo_cliente_id"/>
-                                        <field name="street" string="Indirizzo"/>
-                                        <field name="city"/>
-                                        <field name="provincia" string="Prov"/>
-                                    </tree>
-                                </field>
-                            </group>
+                            <field name="customer_ids" nolabel="1">
+                                <tree create="false" delete="false">
+                                    <field name="codice_cliente"/>
+                                    <field name="codice_contabile"/>
+                                    <field name="name"/>
+                                    <field name="tipo_cliente_id"/>
+                                    <field name="street" string="Indirizzo"/>
+                                    <field name="city"/>
+                                    <field name="provincia" string="Prov"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
@@ -118,15 +117,15 @@
                     <filter string="Nome"
                             name="by_name"
                             context="{'group_by':'name'}"
-                            help="Raggruppa per nome" />
+                            help="Raggruppa per nome"/>
                     <filter string="Tipo Amministratore"
                             name="by_tipo_referente_id"
                             context="{'group_by':'tipo_referente_id'}"
-                            help="Raggruppa per Tipo di Amministratore" />
+                            help="Raggruppa per Tipo di Amministratore"/>
                     <filter string="Utente Assegnato"
                             name="by_utente_assegnato_id"
                             context="{'group_by':'utente_assegnato_id'}"
-                            help="Raggruppa per Utente Assegnato" />
+                            help="Raggruppa per Utente Assegnato"/>
                 </group>
             </search>
         </field>

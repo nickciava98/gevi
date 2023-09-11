@@ -33,8 +33,7 @@
     'version': '0.9',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'comuni_italiani', 'mail'],
-
+    'depends': ['base', 'comuni_italiani', 'mail', 'gevi_contatti'],
 
     # always loaded
     'data': [
@@ -64,7 +63,7 @@
     ],
     # only loaded in demonstration mode
     'demo': [
-        #'demo.xml',
+        # 'demo.xml',
     ],
     'application': True,
 

@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-    
-      <record model="ir.ui.view" id="apri_verbale_bilance_contratto_form_view">
-        <field name="name">gevi_zbilance.verbale.contratto.form</field>
-        <field name="model">gevi_contratti.contratto</field>
-        <field name="inherit_id" ref="gevi_contratti.view_gevi_contratti_contratto_form"/>
-        <field name="arch" type="xml">
-          <notebook position="inside">
-              <page string="Verifiche/Verbali Bilance" class="oe_page_"
-                    attr="{'invisible': ['descrizione_categoria_impianto', '!=', 'BIL']}">
-                  <group>
-                      <field name="verbale_bilance_ids" nolabel="1" options="{'no_open': True}">
-                          <tree string="Verbali Bilance del Contratto">
-                              <field name="name" options="{'no_open': True}"/>
-                              <field name="data_verbale" options="{'no_open': True}"/>
-                              <field name="periodica" options="{'no_open': True}"/>
-                              <field name="data_programmazione" options="{'no_open': True}"/>
-                              <field name="state" options="{'no_open': True}"/>
-                              <button name="apri_verbale_bilance" type="object" state="validato" string="Apri" class="oe_highlight"/>
-                          </tree>
-                      </field>
-                  </group>
-              </page>
-          </notebook>
-        </field>
-      </record>
+
+        <record model="ir.ui.view" id="apri_verbale_bilance_contratto_form_view">
+            <field name="name">gevi_zbilance.verbale.contratto.form</field>
+            <field name="model">gevi_contratti.contratto</field>
+            <field name="inherit_id" ref="gevi_contratti.view_gevi_contratti_contratto_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Verifiche/Verbali Bilance" class="oe_page_"
+                          attr="{'invisible': ['descrizione_categoria_impianto', '!=', 'BIL']}">
+                        <field name="verbale_bilance_ids" nolabel="1" options="{'no_open': True}">
+                            <tree string="Verbali Bilance del Contratto">
+                                <field name="name" options="{'no_open': True}"/>
+                                <field name="data_verbale" options="{'no_open': True}"/>
+                                <field name="periodica" options="{'no_open': True}"/>
+                                <field name="data_programmazione" options="{'no_open': True}"/>
+                                <field name="state" options="{'no_open': True}"/>
+                                <button name="apri_verbale_bilance" type="object" state="validato" string="Apri"
+                                        class="oe_highlight"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
 
     </data>
 </odoo>

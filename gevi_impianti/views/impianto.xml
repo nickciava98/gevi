@@ -5,20 +5,23 @@
         <field name="arch" type="xml">
             <form string="Impianto">
                 <sheet>
-                    <h1><span class="oe_inline oe_form_field">SCHEDA IMPIANTO-</span>
-                        <field name="codice_impianto" class="oe_inline" /></h1>
+                    <h1>
+                        <span class="oe_inline oe_form_field">SCHEDA IMPIANTO-</span>
+                        <field name="codice_impianto" class="oe_inline"/>
+                    </h1>
                     <h1>
                         <field name="name" string="Nome Impianto" invisible="1"/>
                     </h1>
-                    <h2><label for="customer_id" string="Cliente"/>
+                    <h2>
+                        <label for="customer_id" string="Cliente"/>
                         <field name="customer_id" placeholder="Cliente Fatturazione"/>
                     </h2>
                     <group>
                         <group>
                             <field name="etichetta" default_focus="1" placeholder="Ad esempio: SCALA A"/>
-                            <field name="impianto_categoria_id" widget="selection" />
-                            <field name="manutentore_id" widget="selection" />
-                            <field name="data_ultima_verifica" />
+                            <field name="impianto_categoria_id" widget="selection"/>
+                            <field name="manutentore_id" widget="selection"/>
+                            <field name="data_ultima_verifica"/>
                         </group>
                         <group>
                             <label for="indirizzo" string="Indirizzo"/>
@@ -39,18 +42,16 @@
                     </group>
                     <notebook>
                         <page string="Attributi" class="oe_page_" accesskey="">
-                            <group>
-                                <field name="impianto_riga_descrizione_ids" nolabel="1">
-                                    <tree string="Attributi" editable="bottom" create="false" delete="false">
-                                        <field name="name" readonly="1"/>
-                                        <field name="valore_attributo"/>
-                                        <field name="unita_di_misura_id" readonly="1"/>
-                                    </tree>
-                                </field>
-                            </group>
+                            <field name="impianto_riga_descrizione_ids" nolabel="1">
+                                <tree string="Attributi" editable="bottom" create="false" delete="false">
+                                    <field name="name" readonly="1"/>
+                                    <field name="valore_attributo"/>
+                                    <field name="unita_di_misura_id" readonly="1"/>
+                                </tree>
+                            </field>
                         </page>
                         <page string="Note Interne">
-                            <field name="note_interne" placeholder="Ulteriori informazioni..." />
+                            <field name="note_interne" placeholder="Ulteriori informazioni..."/>
                         </page>
                         <page string="Informazioni Correlate" class="oe_page_" invisible="1">
                             <group>
@@ -76,13 +77,13 @@
         <field name="arch" type="xml">
             <tree string="Lista Impianti">
                 <field name="codice_impianto"/>
-                <field name="customer_id" />
+                <field name="customer_id"/>
                 <field name="etichetta"/>
-                <field name="impianto_categoria_id" />
+                <field name="impianto_categoria_id"/>
                 <field name="indirizzo"/>
                 <field name="citta"/>
                 <field name="provincia" string="Prov"/>
-                <field name="manutentore_id" string="Manutentore" />
+                <field name="manutentore_id" string="Manutentore"/>
             </tree>
         </field>
     </record>
@@ -117,48 +118,48 @@
                 <filter string="Ascensori Oleodinamici"
                         name="ascensori_oleo"
                         domain="[('impianto_categoria_id','=','Ascensore Oleodinamico')]"
-                        help="Filtra per Ascensore Oleodinamico" />
+                        help="Filtra per Ascensore Oleodinamico"/>
 
                 <filter string="Ascensori Elettromeccanici"
                         name="ascensori_elet"
                         domain="[('impianto_categoria_id','=','Ascensore Elettromeccanico')]"
-                        help="Filtra per Ascensore Elettromeccanico" />
+                        help="Filtra per Ascensore Elettromeccanico"/>
 
                 <filter string="Messa a terra"
                         name="impianto_mat"
                         domain="[('impianto_categoria_id','=','Messa a Terra')]"
-                        help="Filtra per Messa a Terra" />
+                        help="Filtra per Messa a Terra"/>
 
                 <filter string="Scariche Atmosferiche"
                         name="impianto_satm"
                         domain="[('impianto_categoria_id','=','Scariche Atmosferiche')]"
-                        help="Filtra per Scariche Atmosferiche" />
+                        help="Filtra per Scariche Atmosferiche"/>
 
                 <filter string="Piattaforma Elevatrice"
                         name="piattaforma_elevatrice"
                         domain="[('impianto_categoria_id','=','Piattaforma Elevatrice')]"
-                        help="Filtra per Piattaforma Elevatrice" />
+                        help="Filtra per Piattaforma Elevatrice"/>
 
                 <filter string="Montacarichi"
                         name="montacarichi"
                         domain="[('impianto_categoria_id','=','Montacarichi')]"
-                        help="Filtra per Montacarichi" />
+                        help="Filtra per Montacarichi"/>
 
                 <filter string="Ascensore Generico"
                         name="ascensore_generico"
                         domain="[('impianto_categoria_id','=','Ascensore Generico')]"
-                        help="Filtra per Ascensore Generico" />
+                        help="Filtra per Ascensore Generico"/>
 
                 <group string="Raggruppa">
                     <filter string="Categoria Impianto"
                             name="group_by_categoria_impianto_id"
                             context="{'group_by':'impianto_categoria_id'}"
-                            help="Raggruppa per Categoria Impianto" />
+                            help="Raggruppa per Categoria Impianto"/>
 
                     <filter string="Manutentore"
                             name="group_by_manutentore_id"
                             context="{'group_by':'manutentore_id'}"
-                            help="Raggruppa per Manutentore" />
+                            help="Raggruppa per Manutentore"/>
                 </group>
             </search>
         </field>

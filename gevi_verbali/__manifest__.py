@@ -43,7 +43,7 @@
         'gevi_impianti',
         'comuni_italiani',
         'gevi_zone'
-        ],
+    ],
 
     # always loaded
     'data': [
@@ -75,5 +75,5 @@
         # 'data/gevi_impianti.impianto_attributo_riscontro.csv',
         # 'data/gevi_impianti.valore_attributo.csv',
     ],
-	'application': True,
+    'application': True,
 }

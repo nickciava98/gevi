@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api
-
 import logging
+
+from odoo import fields, models
+
 _logger = logging.getLogger(__name__)
 
 
@@ -32,4 +33,4 @@ class Contratto(models.Model):
         store=True
     )
 
-   # state = fields.Selection(selection_add=[('disdetta_uv', 'Disdetta UV')])
+# state = fields.Selection(selection_add=[('disdetta_uv', 'Disdetta UV')])

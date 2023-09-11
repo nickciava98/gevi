@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class Pesiera(models.Model):
@@ -6,7 +6,7 @@ class Pesiera(models.Model):
 
     classe = fields.Many2one(
         'gevi_zbilance.classe_pesiera', string='Classe Pesiera',
-        required=True,)
+        required=True, )
 
     name = fields.Char("Codice Interno")
     # codice_interno = fields.Char("Codice Interno")
@@ -16,5 +16,3 @@ class Pesiera(models.Model):
     matricola = fields.Char("Matricola")
     certificato = fields.Char("Certificato")
     scadenza_certificato = fields.Date("Scadenza certificato")
-
-

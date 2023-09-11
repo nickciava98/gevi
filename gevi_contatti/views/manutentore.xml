@@ -6,10 +6,11 @@
             <form string="Manutentore">
                 <sheet>
                     <h1>
-                        <span class="oe_inline oe_form_field">SCHEDA MANUTENTORE- </span>
+                        <span class="oe_inline oe_form_field">SCHEDA MANUTENTORE-</span>
                         <field name="codice_manutentore" class="oe_inline" readonly="1"/>
                     </h1>
-                    <h2><label for="name" string="Ragione sociale"/>
+                    <h2>
+                        <label for="name" string="Ragione sociale"/>
                         <field name="name" default_focus="1" placeholder="Nome"/>
                     </h2>
                     <group>
@@ -32,10 +33,10 @@
                                        options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"
                                        placeholder="Scegli il comune"/>
                                 <field name="citta" placeholder="Città"/>
-                                <field name="localita" placeholder="Località" />
+                                <field name="localita" placeholder="Località"/>
                                 <div class="address_format">
-                                    <field name="cap" placeholder="CAP" />
-                                    <field name="provincia" placeholder="Prov." />
+                                    <field name="cap" placeholder="CAP"/>
+                                    <field name="provincia" placeholder="Prov."/>
                                 </div>
 
                             </div>
@@ -53,7 +54,7 @@
                     </group>
                     <notebook>
                         <page string="Note Interne">
-                            <field name="note_interne" placeholder="Ulteriori informazioni..." />
+                            <field name="note_interne" placeholder="Ulteriori informazioni..."/>
                         </page>
                     </notebook>
                 </sheet>
@@ -97,7 +98,7 @@
                     <filter string="Nome"
                             name="by_name"
                             context="{'group_by':'name'}"
-                            help="Raggruppa per nome" />
+                            help="Raggruppa per nome"/>
                 </group>
             </search>
         </field>

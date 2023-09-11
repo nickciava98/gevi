@@ -1,10 +1,10 @@
 <odoo>
     <report
-        id="report_gevi_verbali_verbale"
-        string="Verbale"
-        model="gevi_verbali.verbale"
-        report_type="qweb-pdf"
-        file="gevi_report.report_verbale"
-        name="gevi_report.report_verbale"
+            id="report_gevi_verbali_verbale"
+            string="Verbale"
+            model="gevi_verbali.verbale"
+            report_type="qweb-pdf"
+            file="gevi_report.report_verbale"
+            name="gevi_report.report_verbale"
     />
 </odoo>

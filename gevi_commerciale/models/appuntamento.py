@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 from datetime import timedelta
-from odoo import fields, models, api, exceptions
+
+from odoo import fields, models, api
 
 
 class Appuntamento(models.Model):
     _name = 'gevi_commerciale.appuntamento'
+    _description = "Appuntamento"
 
     name = fields.Char(
         'Memo'
     )
     esito = fields.Selection(
         required=True,
-        selection=[('in_corso', 'In Corso'),('ok', 'OK'), ('ko', 'KO')],
+        selection=[('in_corso', 'In Corso'), ('ok', 'OK'), ('ko', 'KO')],
         default='in_corso'
     )
     referente_id = fields.Many2one(
@@ -41,7 +43,7 @@ class Appuntamento(models.Model):
     )
     can_edit_commerciale = fields.Boolean(
         default=lambda self: self._compute_default_can_edit_commerciale(),
-#        compute=_compute_can_edit_commerciale,
+        #        compute=_compute_can_edit_commerciale,
     )
     fine_appuntamento = fields.Datetime(
         string="Fine appuntamento",
@@ -57,7 +59,7 @@ class Appuntamento(models.Model):
 
     @api.model
     def _compute_default_can_edit_commerciale(self):
-        return True #self.env.user.has_group('__export__.res_groups_78')
+        return True  # self.env.user.has_group('__export__.res_groups_78')
 
     @api.onchange('referente_id')
     def onchange_referente(self):
@@ -79,6 +81,5 @@ class Appuntamento(models.Model):
 
     @api.model
     def _compute_default_commerciale(self):
-        utente_corrente = self.env['hr.employee'].search([('user_id', '=', self.env.user.id)], limit = 1)
+        utente_corrente = self.env['hr.employee'].search([('user_id', '=', self.env.user.id)], limit=1)
         return utente_corrente.id
-

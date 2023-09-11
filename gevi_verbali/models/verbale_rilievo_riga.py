@@ -6,9 +6,10 @@ class VerbaleRilievoRiga(models.Model):
     _name = 'gevi_verbali.verbale_rilievo_riga'
 
     name = fields.Char(string="Nome")
-    valore_rilievo = fields.Float(string="Rilievo", digits=(10,2))
+    valore_rilievo = fields.Float(string="Rilievo", digits=(10, 2))
     note_rilievo = fields.Char(string="Note")
-    impianto_categoria_name = fields.Char(compute='_compute_impianto_categoria_id', string="Categoria Impianto Name", store=True)
+    impianto_categoria_name = fields.Char(compute='_compute_impianto_categoria_id', string="Categoria Impianto Name",
+                                          store=True)
 
     verbale_id = fields.Many2one(
         'gevi_verbali.verbale', ondelete='cascade', string="Verbale")
@@ -43,4 +44,3 @@ class VerbaleRilievoRiga(models.Model):
     def _compute_impianto_categoria_id(self):
         for line in self:
             line.impianto_categoria_name = line.impianto_categoria_id.name
-

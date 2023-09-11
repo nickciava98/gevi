@@ -61,12 +61,13 @@ class Referente(models.Model):
     def invia_estratto_conto_scoperto(self):
         for line in self:
             clienti = self.env['res.partner'].search([('id', 'in', line.customer_ids.ids)])
-            fatture = self.env['account.invoice'].search(['&', ('partner_id', 'in', clienti.ids), ('state', 'in', ['open'])])
+            fatture = self.env['account.invoice'].search(
+                ['&', ('partner_id', 'in', clienti.ids), ('state', 'in', ['open'])])
 
             tot_amm = 0
 
             for f in fatture:
-                tot_amm = tot_amm+f.residual_company_signed
+                tot_amm = tot_amm + f.residual_company_signed
 
             if tot_amm == 0:
                 raise exceptions.UserError('La situazione contabile è regolare e non verrà inviata nessuna email')
@@ -81,4 +82,3 @@ class Referente(models.Model):
                     template_mail.email_to = None
                 else:
                     raise exceptions.UserError("L'indirizzo email deve essere presente e valido")
-

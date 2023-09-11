@@ -9,7 +9,7 @@
                     <group>
                         <group>
                             <field name="indice_categoria" string="Indice Categoria"/>
-                            <field name="name" string="Categoria Osservazione" />
+                            <field name="name" string="Categoria Osservazione"/>
                         </group>
                     </group>
                     <group>
@@ -37,7 +37,7 @@
         <field name="arch" type="xml">
             <tree string="Lista Categoria Osservazioni">
                 <field name="indice_categoria" string="Indice Categoria"/>
-                <field name="name" string="Categoria Osservazione" />
+                <field name="name" string="Categoria Osservazione"/>
             </tree>
         </field>
     </record>

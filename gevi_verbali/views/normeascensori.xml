@@ -7,11 +7,11 @@
                 <sheet>
                     <h1>Norma</h1>
                     <group>
-                        <field name="name" string="Nome" />
+                        <field name="name" string="Nome"/>
                         <field name="impianto_categoria_id"/>
                         <field name="anno_inizio"/>
                         <field name="anno_fine"/>
-                        <field name="norma_collaudo" />
+                        <field name="norma_collaudo"/>
                         <field name="norma_straordinaria"/>
                     </group>
                 </sheet>
@@ -36,11 +36,11 @@
         <field name="model">gevi_verbali.normeascensori</field>
         <field name="arch" type="xml">
             <tree string="Lista Norme">
-                <field name="name" string="Nome" />
+                <field name="name" string="Nome"/>
                 <field name="impianto_categoria_id"/>
                 <field name="anno_inizio"/>
                 <field name="anno_fine"/>
-                <field name="norma_collaudo" />
+                <field name="norma_collaudo"/>
                 <field name="norma_straordinaria"/>
             </tree>
         </field>

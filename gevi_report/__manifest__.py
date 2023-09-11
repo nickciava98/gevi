@@ -23,10 +23,9 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base',
-    'gevi_contratti',
-    'gevi_verbali',
-    ],
-
+                'gevi_contratti',
+                'gevi_verbali',
+                ],
 
     # always loaded
     'data': [

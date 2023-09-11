@@ -1,19 +1,19 @@
 <odoo>
-	<data noupdate="1">
+    <data noupdate="1">
 
-		<!--#
-		# Sequences per gevi_impianti
-		#-->
+        <!--#
+        # Sequences per gevi_impianti
+        #-->
 
-		<!--<record model="ir.sequence.type" id="seq_type_gevi_impianti_impianto">
-			<field name="name">Codice Impianto</field>
-			<field name="code">gevi_impianti.impianto</field>
-		</record> -->
-		<record model="ir.sequence" id="seq_gevi_impianti_impianto">
-			<field name="name">GEVI Codice Impianto</field>
-			<field name="code">gevi.impianti.impianto</field>
-			<field name="prefix">IM</field>
-			<field name="padding">6</field>
-		</record>
-	</data>
+        <!--<record model="ir.sequence.type" id="seq_type_gevi_impianti_impianto">
+            <field name="name">Codice Impianto</field>
+            <field name="code">gevi_impianti.impianto</field>
+        </record> -->
+        <record model="ir.sequence" id="seq_gevi_impianti_impianto">
+            <field name="name">GEVI Codice Impianto</field>
+            <field name="code">gevi.impianti.impianto</field>
+            <field name="prefix">IM</field>
+            <field name="padding">6</field>
+        </record>
+    </data>
 </odoo>

@@ -11,7 +11,8 @@
         <field name="name">Contratti</field>
         <field name="res_model">gevi_contratti.contratto</field>
         <field name="domain">[('opportunity_id', '=', active_id)]</field>
-        <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field>
+        <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}
+        </field>
     </record>
 
     <!-- Form Opportunity -->
@@ -35,10 +36,10 @@
                         context="{'search_default_opportunity_id': id, 'default_opportunity_id': id}">
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
-                            <field name="contratti_total"  attrs="{'invisible': 1}"/>
+                            <field name="contratti_total" attrs="{'invisible': 1}"/>
                             <field name="contratti_label"/>
                         </span>
-                        <span class="o_stat_text"> Contratto(i)</span>
+                        <span class="o_stat_text">Contratto(i)</span>
                     </div>
                 </button>
             </div>

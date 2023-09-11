@@ -40,15 +40,15 @@
               parent="gevi_verbali_side_menu_configurazione"
               action="action_gevi_verbali_osservazione_mat_form" sequence="5"/>
 
-<!--    <menuitem id="gevi_verbali_assegna_menu" name="Assegna Verbale"-->
-<!--              parent="gevi_verbali_top_menu"/>-->
-<!--    <menuitem id="menu_wizard_assegna_isp"-->
-<!--              parent="gevi_verbali_assegna_menu"-->
-<!--              action="action_lancia_wizard_assegna_isp"/>-->
-<!--    <menuitem id="menu_wizard_assegna_rt"-->
-<!--              parent="gevi_verbali_assegna_menu"-->
-<!--              action="action_lancia_wizard_assegna_rt"/>-->
-<!--    <menuitem id="menu_wizard_assegna_conferma_con_pin"-->
-<!--              parent="gevi_verbali_assegna_menu"-->
-<!--              action="action_lancia_wizard_conferma_con_pin"/>-->
+    <!--    <menuitem id="gevi_verbali_assegna_menu" name="Assegna Verbale"-->
+    <!--              parent="gevi_verbali_top_menu"/>-->
+    <!--    <menuitem id="menu_wizard_assegna_isp"-->
+    <!--              parent="gevi_verbali_assegna_menu"-->
+    <!--              action="action_lancia_wizard_assegna_isp"/>-->
+    <!--    <menuitem id="menu_wizard_assegna_rt"-->
+    <!--              parent="gevi_verbali_assegna_menu"-->
+    <!--              action="action_lancia_wizard_assegna_rt"/>-->
+    <!--    <menuitem id="menu_wizard_assegna_conferma_con_pin"-->
+    <!--              parent="gevi_verbali_assegna_menu"-->
+    <!--              action="action_lancia_wizard_conferma_con_pin"/>-->
 </odoo>

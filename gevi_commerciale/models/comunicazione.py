@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models, api
 
 
 class Comunicazione(models.Model):
     _name = 'gevi_commerciale.comunicazione'
+    _description = "Comunicazione"
 
     name = fields.Char(related='referente_id.name', store=True)
 

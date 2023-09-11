@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class CaricaAttributiDescrittivi(models.TransientModel):
     _name = 'gevi_wizard_operativi.carica_attributi_descrittivi'
+    _description = "Carica Attributi Descrittivi"
 
     def carica_attributi_descrittivi(self):
         impianti_obj = self.env['gevi.impianti.impianto'].browse(
@@ -15,7 +16,8 @@ class CaricaAttributiDescrittivi(models.TransientModel):
     def carica_attributi_descrittivi_pem(self):
         impianti_obj = self.env['gevi.impianti.impianto'].browse(
             self._context.get('active_ids', []))
-        categoria_asc = self.env['gevi.impianti.impianto_categoria'].search([('name', '=', 'Ascensore Generico')], limit=1)
+        categoria_asc = self.env['gevi.impianti.impianto_categoria'].search([('name', '=', 'Ascensore Generico')],
+                                                                            limit=1)
         for impianto in impianti_obj:
             impianto_categoria = impianto.impianto_categoria_id
             impianto.impianto_categoria_id = categoria_asc.id
@@ -27,6 +29,7 @@ class CaricaAttributiDescrittivi(models.TransientModel):
 
 class CambioCategoriaImpianto(models.TransientModel):
     _name = 'gevi_wizard_operativi.cambio_categoria_impianto'
+    _description = "Cambio Categoria Impianto"
 
     impianto_categoria_id = fields.Many2one(
         'gevi.impianti.impianto_categoria', string='Categoria Impianto',

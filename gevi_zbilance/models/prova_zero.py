@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class ProvaZero(models.Model):
@@ -10,7 +10,7 @@ class ProvaZero(models.Model):
     divisione = fields.Integer("Divis.")
     carico_l = fields.Integer("Massa L")
     indicazione = fields.Float("Ind.")
-    add_load = fields.Float("AL") # carico_addizionale
+    add_load = fields.Float("AL")  # carico_addizionale
     p = fields.Float("P")
     errore_e = fields.Float("Err E")
     verifica = fields.Boolean("Pass", default=False)

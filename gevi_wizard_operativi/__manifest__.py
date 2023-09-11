@@ -32,7 +32,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base', 'gevi_impianti', 'gevi_verbali',
-        ],
+    ],
 
     # always loaded
     'data': [
@@ -45,5 +45,5 @@
     'demo': [
         # 'demo.xml',
     ],
-	'application': False,
+    'application': False,
 }

@@ -6,8 +6,8 @@
             <form string="Valore Attributo">
                 <sheet>
                     <group>
-                        <field name="name" default_focus="1" string="Valore Attributo" />
-                        <field name="tipo" string="Tipo Attributo" />
+                        <field name="name" default_focus="1" string="Valore Attributo"/>
+                        <field name="tipo" string="Tipo Attributo"/>
                     </group>
                 </sheet>
             </form>
@@ -32,8 +32,8 @@
         <field name="model">gevi.impianti.valore_attributo</field>
         <field name="arch" type="xml">
             <tree string="Lista Valori Attributo">
-                <field name="name" default_focus="1" string="Valore Attributo" />
-                <field name="tipo" string="Tipo Attributo" />
+                <field name="name" default_focus="1" string="Valore Attributo"/>
+                <field name="tipo" string="Tipo Attributo"/>
             </tree>
         </field>
     </record>

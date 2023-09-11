@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from odoo import http
 
 # class Gevi(http.Controller):
 #     @http.route('/gevi/gevi/', auth='public')

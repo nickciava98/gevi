@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, api
+
+
 # from openerp.tools.translate import _
 
 
@@ -12,7 +14,7 @@ class AccountInvoice(models.Model):
     )
     banca_id = fields.Many2one(
         'res.partner.bank',
-        string = "Banca d'appoggio"
+        string="Banca d'appoggio"
     )
 
     @api.onchange('contratto_id')

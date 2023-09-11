@@ -9,19 +9,29 @@
                                 <p style="margin-left: 65%;">Spett.le
                                     <br/>
                                     <span t-field="doc.customer_id.name"/>
-                                    <br/><span t-field="doc.customer_id.street"/>
+                                    <br/>
+                                    <span t-field="doc.customer_id.street"/>
                                     <t t-if="doc.customer_id.street2 != 0">
-                                        <br/><span t-field="doc.customer_id.street2"/>
+                                        <br/>
+                                        <span t-field="doc.customer_id.street2"/>
                                     </t>
-                                    <br/><span t-field="doc.customer_id.zip"/>  <span t-field="doc.customer_id.city"/>  <span t-field="doc.customer_id.provincia"/>
+                                    <br/>
+                                    <span t-field="doc.customer_id.zip"/>
+                                    <span t-field="doc.customer_id.city"/>
+                                    <span t-field="doc.customer_id.provincia"/>
                                     <br/>
                                 </p>
                                 <p style="margin-left: 65%;">E p.c.
-                                    <br/><span t-field="doc.referente_id.name"/>
-                                    <br/> Via email: <span t-field="doc.referente_id.email"/>
+                                    <br/>
+                                    <span t-field="doc.referente_id.name"/>
+                                    <br/>
+                                    Via email:
+                                    <span t-field="doc.referente_id.email"/>
                                     <br/>
                                 </p>
-                                <p>ROMA, <span t-field="doc.data_stipula"/></p>
+                                <p>ROMA,
+                                    <span t-field="doc.data_stipula"/>
+                                </p>
                                 <p style="text-align: center;">
                                     <strong>ACCETTAZIONE INCARICO</strong>
                                 </p>
@@ -29,9 +39,14 @@
                                     <strong>(VERIFICA IMPIANTO AI SENSI DEL DPR 162/99)</strong>
                                 </p>
                                 <p>Gentile Cliente,</p>
-                                <p>con riferimento al suo ordine <span t-field="doc.data_stipula" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> La ringraziamo per aver scelto ICOVER S.r.l e Le confermiamo
-                                    l'accettazione dell'incarico conferitoci per la verifica periodica degli impianti di seguito
-                                    riportati:</p>
+                                <p>con riferimento al suo ordine
+                                    <span t-field="doc.data_stipula"
+                                          t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                    La ringraziamo per aver scelto ICOVER S.r.l e Le confermiamo
+                                    l'accettazione dell'incarico conferitoci per la verifica periodica degli impianti di
+                                    seguito
+                                    riportati:
+                                </p>
                                 <table class="table table-bordered table-responsive">
                                     <thead style="font-weight:bold">
                                         <tr>
@@ -58,7 +73,8 @@
                                             </td>
                                             <td>​
                                                 <span t-field="doc.impianto_id.indirizzo"/>
-                                                <span t-field="doc.impianto_id.localita"/> -
+                                                <span t-field="doc.impianto_id.localita"/>
+                                                -
                                                 <span t-field="doc.impianto_id.cap"/>
                                                 <span t-field="doc.impianto_id.citta"/>
                                                 <span t-field="doc.impianto_id.provincia"/>
@@ -68,7 +84,9 @@
                                 </table>
                                 <p>
                                     <span style="font-weight:bold">Dettaglio costi:</span>
-                                    <br/> Al termine della verifica Le sarà fatturato l'importo riportato nell'incarico firmato per
+                                    <br/>
+                                    Al termine della verifica Le sarà fatturato l'importo riportato nell'incarico
+                                    firmato per
                                     accettazione.
 
 
@@ -78,41 +96,71 @@
                                 </p>
                                 <table class="table table-bordered table-responsive" style="margin-bottom: 0px">
                                     <tr>
-                                        <td width="15%"><strong>​Azienda</strong></td>
-                                        <td><span t-field="doc.customer_id.name"/></td>
+                                        <td width="15%">
+                                            <strong>​Azienda</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.customer_id.name"/>
+                                        </td>
                                     </tr>
                                 </table>
                                 <table class="table table-bordered table-responsive" style="margin: 0px">
                                     <tr>
-                                        <td width="15%"><strong>​Indirizzo</strong></td>
-                                        <td><span t-field="doc.customer_id.street"/>  <span t-field="doc.customer_id.street2"/></td>
+                                        <td width="15%">
+                                            <strong>​Indirizzo</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.customer_id.street"/>
+                                            <span t-field="doc.customer_id.street2"/>
+                                        </td>
                                     </tr>
                                 </table>
                                 <table class="table table-bordered table-responsive" style="margin: 0px">
                                     <tr>
-                                        <td width="15%">​<strong>CAP</strong></td>
-                                        <td width="10%"><span t-field="doc.customer_id.zip"/></td>
-                                        <td width="10%">​<strong>Città</strong></td>
-                                        <td><span t-field="doc.customer_id.city"/> (​<span t-field="doc.customer_id.provincia"/>)</td>
+                                        <td width="15%">​
+                                            <strong>CAP</strong>
+                                        </td>
+                                        <td width="10%">
+                                            <span t-field="doc.customer_id.zip"/>
+                                        </td>
+                                        <td width="10%">​
+                                            <strong>Città</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.customer_id.city"/>
+                                            (​<span t-field="doc.customer_id.provincia"/>)
+                                        </td>
                                     </tr>
                                 </table>
                                 <table class="table table-bordered table-responsive" style="margin-top: 0px">
                                     <tr>
-                                        <td width="15%"><strong>​CF</strong></td>
-                                        <td width="35%">​<span t-field="doc.customer_id.cf"/></td>
-                                        <td width="15%"><strong>​P.Iva</strong></td>
-                                        <td><span t-field="doc.customer_id.piva"/></td>
+                                        <td width="15%">
+                                            <strong>​CF</strong>
+                                        </td>
+                                        <td width="35%">​
+                                            <span t-field="doc.customer_id.cf"/>
+                                        </td>
+                                        <td width="15%">
+                                            <strong>​P.Iva</strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.customer_id.piva"/>
+                                        </td>
                                     </tr>
                                 </table>
-                                <p>Il pagamento s’intende a prestazione avvenuta, mediante <span t-field="doc.modalita_pagamento_id.name"/> Come previsto dal
-                                    Regolamento REG VA disponibile sul sito internet www.icoversrl.it si comunica che il Team di
-                                    ispettori attualmente abilitati all’espletamento delle verifiche è il seguente:</p>
+                                <p>Il pagamento s’intende a prestazione avvenuta, mediante
+                                    <span t-field="doc.modalita_pagamento_id.name"/>
+                                    Come previsto dal
+                                    Regolamento REG VA disponibile sul sito internet www.icoversrl.it si comunica che il
+                                    Team di
+                                    ispettori attualmente abilitati all’espletamento delle verifiche è il seguente:
+                                </p>
                                 <table class="table noborder">
                                     <tbody>
                                         <tr>
                                             <td>​Ing. Adamo Tripodi</td>
                                             <td>​Ing. Gianluca Pingitore</td>
-                                            <td>​Ing. Pietro Aversa </td>
+                                            <td>​Ing. Pietro Aversa</td>
                                         </tr>
                                         <tr>
                                             <td>​Ing. Francesco Vaccarella</td>
@@ -126,29 +174,41 @@
                                                 <t t-if="'Messa' in doc.impianto_categoria_name or 'Scariche' in doc.impianto_categoria_name">
                                                     Libero Cafaro
                                                 </t>
-                                                ​</td>
+                                                ​
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p>Eventuali ricusazioni dovranno essere formalizzate secondo quanto previsto dal punto 4 del Regolamento
-                                    REG VA. Per segnalarci eventuali discordanze o variazioni di anagrafiche la preghiamo di contattarci
+                                <p>Eventuali ricusazioni dovranno essere formalizzate secondo quanto previsto dal punto
+                                    4 del Regolamento
+                                    REG VA. Per segnalarci eventuali discordanze o variazioni di anagrafiche la
+                                    preghiamo di contattarci
                                     inviando un’e-mail all’indirizzo amministrazione@icoversrl.it.
                                 </p>
                                 <br/>
                                 <div class="row">
                                     <div class="col-xs-5">
-                                        <p style="margin-left: 20px"> Cordiali Saluti</p>
+                                        <p style="margin-left: 20px">Cordiali Saluti</p>
                                     </div>
                                     <div class="col-xs-7">
-                                        <p style="text-align: center;">Direttore Commerciale<br/>
-                                            <br/><br/><br/>
-                                            <span style="font-size: 6px">_______________________________________________________________________</span>
-                                            <br/><img src="/gevi_report/static/src/img/timbro-test.png" style="max-height:99px; position:absolute; bottom: -20px; left: 210px; z-index:-1;"/>
+                                        <p style="text-align: center;">Direttore Commerciale
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span style="font-size: 6px">
+                                                _______________________________________________________________________
+                                            </span>
+                                            <br/>
+                                            <img src="/gevi_report/static/src/img/timbro-test.png"
+                                                 style="max-height:99px; position:absolute; bottom: -20px; left: 210px; z-index:-1;"/>
                                         </p>
                                     </div>
                                 </div>
                                 <p style="font-weight:bold; font-size:8pt;">
-                                    <u>n.b. la presente copia si rilascia al cliente per gli adempimenti previsti dal DPR 162/99.</u>
+                                    <u>n.b. la presente copia si rilascia al cliente per gli adempimenti previsti dal
+                                        DPR 162/99.
+                                    </u>
                                 </p>
                             </div>
                         </div>

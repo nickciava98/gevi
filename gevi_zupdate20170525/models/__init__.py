@@ -14,15 +14,13 @@
 ### FINE Appunti per il nuovo file python ###
 
 
-
-
 ### Contesto __init__.py ###
 
 # Inserire i nome dei modelli da importare del modulo nella forma nomefile senza estensione
 
 # from . import nomeclasse
 
+from . import account_invoice
+from . import impianto
 from . import partner
 from . import verbale
-from . import impianto
-from . import account_invoice

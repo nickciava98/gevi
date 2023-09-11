@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class WizardAssegnaRT(models.TransientModel):
     _name = 'gevi_zbilance.wizard_assegna_rt'
+    _description = "Assegna RT"
 
     responsabile_tecnico_id = fields.Many2one(
         'hr.employee',

@@ -4,10 +4,12 @@
         <field name="model">gevi_wizard_operativi.cambio_categoria_impianto_verbale</field>
         <field name="arch" type="xml">
             <form string="Cambio categoria Impianto">
-                <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.<br/></div>
+                <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.
+                    <br/>
+                </div>
                 <group>
                     <group>
-                        <field name="impianto_categoria_id" widget="selection" />
+                        <field name="impianto_categoria_id" widget="selection"/>
                     </group>
                 </group>
                 <footer>

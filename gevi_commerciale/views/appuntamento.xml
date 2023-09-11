@@ -17,7 +17,7 @@
                             <field name="commerciale_id"
                                    string="Utente"
                                    attrs="{'readonly': [('can_edit_commerciale', '=', False)]}"
-                                   options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}" />
+                                   options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"/>
                             <field name="can_edit_commerciale" invisible="1"/>
 
                         </group>
@@ -68,7 +68,7 @@
                     <filter string="Nome"
                             name="by_commerciale_id"
                             context="{'group_by':'commerciale_id'}"
-                            help="Raggruppa per utente" />
+                            help="Raggruppa per utente"/>
                 </group>
             </search>
         </field>

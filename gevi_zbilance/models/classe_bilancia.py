@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class ClasseBilancia(models.Model):
@@ -7,9 +7,7 @@ class ClasseBilancia(models.Model):
     divisioni = fields.Char("Divisioni")
     classe_strumento = fields.Many2one(
         'gevi_zbilance.classe_strumento', string='Classe strumento',
-        required=True,)
+        required=True, )
     classe_massa = fields.Many2one(
         'gevi_zbilance.classe_pesiera', string='Classe massa',
-        required=True,)
-
-
+        required=True, )

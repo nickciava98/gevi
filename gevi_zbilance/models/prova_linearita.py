@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class ProvaLinearita(models.Model):
@@ -11,7 +11,7 @@ class ProvaLinearita(models.Model):
     carico_l = fields.Integer("Massa L")
     indicazione_cres = fields.Float("Ind. Cresc")
     indicazione_decr = fields.Float("Ind. Decres.")
-    add_load_cres = fields.Float("Add Load Cresc.") # carico_addizionale
+    add_load_cres = fields.Float("Add Load Cresc.")  # carico_addizionale
     add_load_decr = fields.Float("Add Load Decres.")
     errore_e_zero_cres = fields.Float("Err E0 Cresc.")
     errore_e_zero_decr = fields.Float("Err E0 Decres.")

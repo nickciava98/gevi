@@ -4,7 +4,9 @@
         <field name="model">gevi_verbali.wizard_assegna_isp</field>
         <field name="arch" type="xml">
             <form string="Assegna Ispettore">
-                <div>Scegliere l'ispettore da assegnare ai verbali selezionati. Eventuali verbali con stato diverso da "bozza" verranno ignorati!</div>
+                <div>Scegliere l'ispettore da assegnare ai verbali selezionati. Eventuali verbali con stato diverso da
+                    "bozza" verranno ignorati!
+                </div>
                 <group>
                     <field name="ispettore_id"
                            options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>

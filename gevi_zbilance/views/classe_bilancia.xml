@@ -2,21 +2,21 @@
 <odoo>
     <data>
         <!--Form Classe bilancia -->
-       	<record model="ir.ui.view" id="view_gevi_zbilance_classe_bilancia_form">
-			<field name="name">Classe bilancia</field>
-			<field name="model">gevi_zbilance.classe_bilancia</field>
-			<field name="arch" type="xml">
-				<form string="Classe bilancia Form">
-					<sheet>
+        <record model="ir.ui.view" id="view_gevi_zbilance_classe_bilancia_form">
+            <field name="name">Classe bilancia</field>
+            <field name="model">gevi_zbilance.classe_bilancia</field>
+            <field name="arch" type="xml">
+                <form string="Classe bilancia Form">
+                    <sheet>
                         <group>
-                            <field name="divisioni" default_focus="1" />
-                            <field name="classe_strumento" />
-                            <field name="classe_massa" />
+                            <field name="divisioni" default_focus="1"/>
+                            <field name="classe_strumento"/>
+                            <field name="classe_massa"/>
                         </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <!--Action Classe bilancia -->
         <record model="ir.actions.act_window" id="action_gevi_zbilance_classe_bilancia_form">
@@ -35,9 +35,9 @@
             <field name="model">gevi_zbilance.classe_bilancia</field>
             <field name="arch" type="xml">
                 <tree string="Lista classe bilancia">
-                    <field name="divisioni" />
-                    <field name="classe_strumento" />
-                    <field name="classe_massa" />
+                    <field name="divisioni"/>
+                    <field name="classe_strumento"/>
+                    <field name="classe_massa"/>
                 </tree>
             </field>
         </record>

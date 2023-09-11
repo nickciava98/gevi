@@ -22,18 +22,17 @@
     # any module necessary for this one to work correctly
     'depends': ['base', 'comuni_italiani', 'gevi_contatti', 'gevi_impianti', 'hr'],
 
-
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        #'data/gevi_zone.zona_agente.csv',
+        # 'data/gevi_zone.zona_agente.csv',
         'templates.xml',
         'views/referente.xml',
         'views/manutentore.xml',
         'views/partner.xml',
         'views/impianto.xml',
         'views/hr.xml',
-        #'views/zona_agente.xml',
+        # 'views/zona_agente.xml',
         'views/zona_commerciale.xml',
         'views/zona_impianto.xml',
 

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+import logging
 import xml.etree.ElementTree as etree
 
-import logging
+from odoo import fields, models, api
+
 _logger = logging.getLogger(__name__)
 
 
@@ -10,16 +11,16 @@ class Verbale(models.Model):
     _inherit = 'gevi_verbali.verbale'
 
     stato_contratto = fields.Selection(
-            string='Stato Contratto',
-            readonly=True,
-            related='contratto_id.state',
-            store=True
-        )
+        string='Stato Contratto',
+        readonly=True,
+        related='contratto_id.state',
+        store=True
+    )
 
     def apri_verbale(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Verbale', 
+            'name': 'Verbale',
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': self._name,

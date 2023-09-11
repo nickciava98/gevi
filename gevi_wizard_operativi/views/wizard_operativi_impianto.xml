@@ -4,13 +4,18 @@
         <field name="model">gevi_wizard_operativi.carica_attributi_descrittivi</field>
         <field name="arch" type="xml">
             <form string="Carica Attributi Descrittivi">
-                <div>Attenzione! Verranno caricati gli attributi descrittivi per gli impianti selezionati.<br/>
-                    Quindi, in caso di attributi caricati, verrano AGGIUNTI gli attributi a quelli già esistenti!</div>
-                <div>Il bottone "Carica per PEM", è pensato per gli impianti di tipo ascensore/PEM per i quali non sono stati <br/>
+                <div>Attenzione! Verranno caricati gli attributi descrittivi per gli impianti selezionati.
+                    <br/>
+                    Quindi, in caso di attributi caricati, verrano AGGIUNTI gli attributi a quelli già esistenti!
+                </div>
+                <div>Il bottone "Carica per PEM", è pensato per gli impianti di tipo ascensore/PEM per i quali non sono
+                    stati
+                    <br/>
                     caricati gli attributi descrittivi e quindi è necessario eseguire le seguenti operazioni:
                     <li>Cambio della categoria in Ascensore generico</li>
                     <li>Caricamento degli attributi descrittivi</li>
-                    <li>Cambio della categoria a quella precedentemente impostata</li><br/>
+                    <li>Cambio della categoria a quella precedentemente impostata</li>
+                    <br/>
                     Uomo avvisato mezzo salvato!
                 </div>
                 <footer>
@@ -38,10 +43,12 @@
         <field name="model">gevi_wizard_operativi.cambio_categoria_impianto</field>
         <field name="arch" type="xml">
             <form string="Cambio categoria Impianto">
-                <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.<br/></div>
+                <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.
+                    <br/>
+                </div>
                 <group>
                     <group>
-                        <field name="impianto_categoria_id" widget="selection" />
+                        <field name="impianto_categoria_id" widget="selection"/>
                     </group>
                 </group>
                 <footer>

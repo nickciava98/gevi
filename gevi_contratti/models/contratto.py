@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+import logging
+
 from lxml import etree
 
-import logging
+from odoo import fields, models, api, exceptions
+
 _logger = logging.getLogger(__name__)
 
 
 class Contratto(models.Model):
     _name = 'gevi_contratti.contratto'
+    _description = "Contratto"
 
     name = fields.Char('Nome', default="/", readonly=True)
     codice_contratto = fields.Char(
@@ -16,7 +19,7 @@ class Contratto(models.Model):
         default="/", )
 
     impianto_categoria_id = fields.Many2one(
-        'gevi.impianti.impianto_categoria', string='Categoria Impianto')
+        'gevi.impianti.impianto_categoria', string='Categ. Impianto')
 
     verifica_periodica = fields.Boolean('Verifica Periodica', default=False)
     verifica_straordinaria = fields.Boolean(
@@ -27,13 +30,13 @@ class Contratto(models.Model):
     modalita_pagamento_id = fields.Many2one('account.payment.term', string="Modalità di Pagamento")
 
     durata_contratto = fields.Selection(
-            [
-                ('1', 'Una Verifica'),
-                ('2', 'Due Verifiche'),
-                ('-1', 'Senza Scadenza'),
-            ],
-            required=True,
-            string="Durata del Contratto")
+        [
+            ('1', 'Una Verifica'),
+            ('2', 'Due Verifiche'),
+            ('-1', 'Senza Scadenza'),
+        ],
+        required=True,
+        string="Durata del Contratto")
 
     referente_id = fields.Many2one(
         'gevi_contatti.referente', string="Referente", required=True)
@@ -41,12 +44,12 @@ class Contratto(models.Model):
     # #agente_id = fields.Many2one('res.users', string="Agente", domain=[('zona','=',referente_id.zona)])
 
     cliente_name = fields.Char(
-        compute='_compute_impianto_ubicazione', string="Denominazione Cliente", store=False)
+        compute='_compute_impianto_ubicazione', string="Denominazione Cliente", store=False, compute_sudo=False)
 
     customer_id = fields.Many2one(
         'res.partner',
         ondelete='cascade',
-        #domain=[('customer', '=', True)],
+        # domain=[('customer', '=', True)],
         string='Cliente Fatturazione',
         required=True)
 
@@ -61,7 +64,8 @@ class Contratto(models.Model):
     manutentore_id = fields.Many2one(
         'gevi_contatti.manutentore', string="Manutentore")
 
-    campi_validati = fields.Boolean(compute='_valida_campi', string="Verifica Periodica/Straordinaria", store=False, default=False, required=True)
+    campi_validati = fields.Boolean(compute='_valida_campi', string="Verifica Periodica/Straordinaria", store=False,
+                                    default=False, required=True)
 
     data_ultima_verifica = fields.Date('Data Ultima Verifica')
 
@@ -129,19 +133,20 @@ class Contratto(models.Model):
         compute='_compute_dati_referente', store=False)
 
     impianto_etichetta = fields.Char(
-        compute='_compute_impianto_ubicazione', store=False)
+        compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
     impianto_indirizzo = fields.Char(
-        compute='_compute_impianto_ubicazione', store=False)
+        compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
     impianto_indirizzo2 = fields.Char(
-        compute='_compute_impianto_ubicazione', store=False)
+        compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
     impianto_localita = fields.Char(
-        compute='_compute_impianto_ubicazione', store=False)
-    impianto_cap = fields.Char(compute='_compute_impianto_ubicazione', store=False)
+        compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
+    impianto_cap = fields.Char(compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
     impianto_citta = fields.Char(
-        compute='_compute_impianto_ubicazione', store=False)
+        compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
     impianto_provincia = fields.Char(
-        compute='_compute_impianto_ubicazione', store=False)
-    impianto_categoria_name = fields.Char(compute='_compute_impianto_ubicazione', string="Categoria Impianto", store=True)
+        compute='_compute_impianto_ubicazione', store=False, compute_sudo=False)
+    impianto_categoria_name = fields.Char(compute='_compute_impianto_ubicazione', string="Categoria Impianto",
+                                          store=True, compute_sudo=False)
 
     manutentore_citta = fields.Char(
         compute='_compute_dati_mautentore', store=False)
@@ -162,7 +167,7 @@ class Contratto(models.Model):
             ('attivo', 'Attivo'),
             ('scaduto', 'Scaduto'),
             ('rescisso', 'Rescisso'),
-            ('disdetta_uv','Disdetta UV'),
+            ('disdetta_uv', 'Disdetta UV'),
             ('annullato', 'Annullato'),
         ],
         string="Stato")
@@ -190,12 +195,12 @@ class Contratto(models.Model):
 
     blocco_amministrativo = fields.Boolean('Blocco Amministrativo', default=False)
     causale_blocco = fields.Selection(
-            [
-                ('moroso', 'Amministratore Moroso'),
-                ('fuori_fido', 'Fuori Fido'),
-                ('fattura_anticipata', 'Fattura Anticipata'),
-            ],
-            string="Causale Blocco")
+        [
+            ('moroso', 'Amministratore Moroso'),
+            ('fuori_fido', 'Fuori Fido'),
+            ('fattura_anticipata', 'Fattura Anticipata'),
+        ],
+        string="Causale Blocco")
 
     def action_attivo(self):
         self.state = 'attivo'
@@ -219,7 +224,8 @@ class Contratto(models.Model):
     def action_annullato(self):
         self.state = 'annullato'
         obj_name_verbale = self.get_verbale_obj_name_by_cat_impianto()
-        verbale_obj = self.env[obj_name_verbale].search(['&',('contratto_id', '=', self.id),('state','in',('bozza','assegnato'))])
+        verbale_obj = self.env[obj_name_verbale].search(
+            ['&', ('contratto_id', '=', self.id), ('state', 'in', ('bozza', 'assegnato'))])
         for verbale in verbale_obj:
             verbale.action_annullato()
 
@@ -231,54 +237,54 @@ class Contratto(models.Model):
     @api.depends('customer_id')
     def _compute_dati_cliente(self):
         for record in self:
-            self.cliente_cf = record.customer_id.cf
-            self.cliente_piva = record.customer_id.piva
-            self.cliente_tipo = record.customer_id.tipo_cliente_id.name
-            self.cliente_street = record.customer_id.street
-            self.cliente_street2 = record.customer_id.street2
-            self.cliente_localita = record.customer_id.localita
-            self.cliente_zip = record.customer_id.zip
-            self.cliente_city = record.customer_id.city
-            self.cliente_provincia = record.customer_id.provincia
-            self.cliente_mod_pagamento = record.customer_id.property_payment_term_id.name
+            record.cliente_cf = record.customer_id.cf
+            record.cliente_piva = record.customer_id.piva
+            record.cliente_tipo = record.customer_id.tipo_cliente_id.name
+            record.cliente_street = record.customer_id.street
+            record.cliente_street2 = record.customer_id.street2
+            record.cliente_localita = record.customer_id.localita
+            record.cliente_zip = record.customer_id.zip
+            record.cliente_city = record.customer_id.city
+            record.cliente_provincia = record.customer_id.provincia
+            record.cliente_mod_pagamento = record.customer_id.property_payment_term_id.name
 
     @api.depends('referente_id')
     def _compute_dati_referente(self):
         for record in self:
-            self.referente_indirizzo = record.referente_id.indirizzo
-            self.referente_indirizzo2 = record.referente_id.indirizzo2
-            self.referente_localita = record.referente_id.localita
-            self.referente_cap = record.referente_id.cap
-            self.referente_citta = record.referente_id.citta
-            self.referente_provincia = record.referente_id.provincia
-            self.referente_tel = record.referente_id.tel
-            self.referente_cell = record.referente_id.cell
-            self.referente_fax = record.referente_id.fax
-            self.referente_email = record.referente_id.email
-            self.referente_interlocutore = record.referente_id.interlocutore
+            record.referente_indirizzo = record.referente_id.indirizzo
+            record.referente_indirizzo2 = record.referente_id.indirizzo2
+            record.referente_localita = record.referente_id.localita
+            record.referente_cap = record.referente_id.cap
+            record.referente_citta = record.referente_id.citta
+            record.referente_provincia = record.referente_id.provincia
+            record.referente_tel = record.referente_id.tel
+            record.referente_cell = record.referente_id.cell
+            record.referente_fax = record.referente_id.fax
+            record.referente_email = record.referente_id.email
+            record.referente_interlocutore = record.referente_id.interlocutore
 
     @api.depends('impianto_id')
     def _compute_impianto_ubicazione(self):
         for record in self:
-            self.impianto_etichetta = record.impianto_id.etichetta
-            self.impianto_indirizzo = record.impianto_id.indirizzo
-            self.impianto_indirizzo2 = record.impianto_id.indirizzo2
-            self.impianto_localita = record.impianto_id.localita
-            self.impianto_cap = record.impianto_id.cap
-            self.impianto_citta = record.impianto_id.citta
-            self.impianto_provincia = record.impianto_id.provincia
-            self.cliente_name = record.impianto_id.customer_id.name
-            self.impianto_categoria_name = record.impianto_id.impianto_categoria_id.name
+            record.impianto_etichetta = record.impianto_id.etichetta
+            record.impianto_indirizzo = record.impianto_id.indirizzo
+            record.impianto_indirizzo2 = record.impianto_id.indirizzo2
+            record.impianto_localita = record.impianto_id.localita
+            record.impianto_cap = record.impianto_id.cap
+            record.impianto_citta = record.impianto_id.citta
+            record.impianto_provincia = record.impianto_id.provincia
+            record.cliente_name = record.impianto_id.customer_id.name
+            record.impianto_categoria_name = record.impianto_id.impianto_categoria_id.name
 
     @api.depends('manutentore_id')
     def _compute_dati_mautentore(self):
         for record in self:
-            self.manutentore_citta = record.manutentore_id.citta
-            self.manutentore_tel = record.manutentore_id.tel
-            self.manutentore_cell = record.manutentore_id.cell
-            self.manutentore_fax = record.manutentore_id.fax
-            self.manutentore_email = record.manutentore_id.email
-            self.manutentore_interlocutore = record.manutentore_id.interlocutore
+            record.manutentore_citta = record.manutentore_id.citta
+            record.manutentore_tel = record.manutentore_id.tel
+            record.manutentore_cell = record.manutentore_id.cell
+            record.manutentore_fax = record.manutentore_id.fax
+            record.manutentore_email = record.manutentore_id.email
+            record.manutentore_interlocutore = record.manutentore_id.interlocutore
 
     # Azione riferita al button filtra_cliente
     # @api.one
@@ -304,11 +310,12 @@ class Contratto(models.Model):
 
     def carica_riferimenti(self):
         for record in self:
-            self.impianto_categoria_id = record.impianto_id.impianto_categoria_id.id
-            self.customer_id = record.impianto_id.customer_id.id
-            self.referente_id = record.impianto_id.customer_id.referente_id.id
+            record.impianto_categoria_id = record.impianto_id.impianto_categoria_id.id
+            record.customer_id = record.impianto_id.customer_id.id
+            record.referente_id = record.impianto_id.customer_id.referente_id.id
 
-    @api.depends('verifica_periodica','verifica_straordinaria','costo_verifica_periodica','costo_verifica_straordinaria')
+    @api.depends('verifica_periodica', 'verifica_straordinaria', 'costo_verifica_periodica',
+                 'costo_verifica_straordinaria')
     def _valida_campi(self):
         self.campi_validati = False
         if (self.verifica_periodica or self.verifica_straordinaria):
@@ -318,7 +325,7 @@ class Contratto(models.Model):
     @api.depends('costo_verifica_periodica', 'costo_verifica_straordinaria')
     def _compute_valore_contratto(self):
         for record in self:
-            self.valore_contratto = self.costo_verifica_periodica + self.costo_verifica_straordinaria
+            record.valore_contratto = record.costo_verifica_periodica + record.costo_verifica_straordinaria
 
     @api.onchange('impianto_categoria_id')
     def _onchange_impianto_categoria_id(self):
@@ -326,7 +333,8 @@ class Contratto(models.Model):
             if line.impianto_categoria_name in ['Piattaforma Elevatrice', 'Montacarichi']:
                 line.verifica_straordinaria = False
                 line.periodicita_verifica = '2'
-            if line.impianto_categoria_name in ['Ascensore Generico', 'Ascensore Oleodinamico', 'Ascensore Elettromeccanico']:
+            if line.impianto_categoria_name in ['Ascensore Generico', 'Ascensore Oleodinamico',
+                                                'Ascensore Elettromeccanico']:
                 line.periodicita_verifica = '2'
             if line.impianto_categoria_name in ['Scariche Atmosferiche', 'Messa a Terra']:
                 pass
@@ -377,16 +385,16 @@ class Contratto(models.Model):
                     fa = True
                 if record.verifica_periodica:
                     verbale = verbale_obj.create({
-                        'impianto_id': self.impianto_id.id,
-                        'data_ultima_verifica': self.data_ultima_verifica,
-                        'contratto_id': self.id,
-                        'manutentore_id': self.manutentore_id.id,
+                        'impianto_id': record.impianto_id.id,
+                        'data_ultima_verifica': record.data_ultima_verifica,
+                        'contratto_id': record.id,
+                        'manutentore_id': record.manutentore_id.id,
                         'periodica': True,
-                        'impianto_categoria_id': self.impianto_id.impianto_categoria_id.id,
-                        'impianto_categoria_name': self.impianto_id.impianto_categoria_id.name,
-                        'customer_id': self.impianto_id.customer_id.id,
-                        'referente_id': self.impianto_id.customer_id.referente_id.id,
-                        'data_programmazione': self.data_prossima_verifica,
+                        'impianto_categoria_id': record.impianto_id.impianto_categoria_id.id,
+                        'impianto_categoria_name': record.impianto_id.impianto_categoria_id.name,
+                        'customer_id': record.impianto_id.customer_id.id,
+                        'referente_id': record.impianto_id.customer_id.referente_id.id,
+                        'data_programmazione': record.data_prossima_verifica,
                         'fattura_anticipata': fa,
                     })
                     # verbale.carica_attributi_descrittivi()
@@ -412,16 +420,16 @@ class Contratto(models.Model):
                 # attributi_descrittivi_obj = self.env['gevi.impianti.impianto_riga_descrizione'].search([('impianto_id', '=', record.impianto_id.id)])
                 if record.verifica_straordinaria is True:
                     verbale = verbale_obj.create({
-                        'impianto_id': self.impianto_id.id,
-                        'data_ultima_verifica': self.data_ultima_verifica,
-                        'contratto_id': self.id,
-                        'manutentore_id': self.manutentore_id.id,
+                        'impianto_id': record.impianto_id.id,
+                        'data_ultima_verifica': record.data_ultima_verifica,
+                        'contratto_id': record.id,
+                        'manutentore_id': record.manutentore_id.id,
                         'periodica': False,
-                        'impianto_categoria_id': self.impianto_id.impianto_categoria_id.id,
-                        'impianto_categoria_name': self.impianto_id.impianto_categoria_id.name,
-                        'customer_id': self.impianto_id.customer_id.id,
-                        'referente_id': self.impianto_id.customer_id.referente_id.id,
-                        'data_programmazione': self.data_prossima_verifica,
+                        'impianto_categoria_id': record.impianto_id.impianto_categoria_id.id,
+                        'impianto_categoria_name': record.impianto_id.impianto_categoria_id.name,
+                        'customer_id': record.impianto_id.customer_id.id,
+                        'referente_id': record.impianto_id.customer_id.referente_id.id,
+                        'data_programmazione': record.data_prossima_verifica,
                         'fattura_anticipata': fa,
                         # 'impianto_riga_descrizione_ids': [attributi_descrittivi_obj.ids],
                     })
@@ -442,19 +450,20 @@ class Contratto(models.Model):
         """
         result = super(Contratto, self).write(values)
         for record in self:
-            self.customer_id.property_payment_term_id = record.modalita_pagamento_id
-            self.customer_id.referente_id = record.referente_id
+            record.customer_id.property_payment_term_id = record.modalita_pagamento_id
+            record.customer_id.referente_id = record.referente_id
         return result
 
     # Controllo su cancellazione
     def unlink(self):
         # _logger.info('******************************** DELETE {0} {1}'.format(self.name, self.state))
         if self.state != "annullato":
-            raise exceptions.ValidationError('ATTENZIONE: Non è possibile cancellare la verifica {0} ({1}). Lo stato deve essere ANNULLATO!'.format(self.name, self.state))
+            raise exceptions.ValidationError(
+                'ATTENZIONE: Non è possibile cancellare la verifica {0} ({1}). Lo stato deve essere ANNULLATO!'.format(
+                    self.name, self.state))
         else:
             result = super(Contratto, self).unlink()
             return result
-
 
     def _aggiorna_da_create(self):
         for line in self:
@@ -512,7 +521,8 @@ class Contratto(models.Model):
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
-        res = super(Contratto, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
+        res = super(Contratto, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar,
+                                                     submenu=submenu)
         if view_type == 'form':
             doc = etree.XML(res['arch'])
             for node in doc.xpath("//field[@name='impianto_id']"):

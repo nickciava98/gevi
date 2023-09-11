@@ -43,7 +43,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base', 'gevi_verbali', 'gevi_contatti', 'account', 'gevi_impianti', 'gevi_zone',
-        ],
+    ],
 
     # always loaded
     'data': [
@@ -59,5 +59,5 @@
     'demo': [
         # 'demo.xml',
     ],
-	'application': False,
+    'application': False,
 }

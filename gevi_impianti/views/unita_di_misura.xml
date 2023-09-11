@@ -6,8 +6,8 @@
             <form string="Unità di misura">
                 <sheet>
                     <group>
-                        <field name="name" default_focus="1" string="Unità di misura" />
-                        <field name="descrizione" string="Descrizione" />
+                        <field name="name" default_focus="1" string="Unità di misura"/>
+                        <field name="descrizione" string="Descrizione"/>
                     </group>
                 </sheet>
             </form>
@@ -32,8 +32,8 @@
         <field name="model">gevi.impianti.unita_di_misura</field>
         <field name="arch" type="xml">
             <tree string="Lista Valori Attributo">
-                <field name="name" default_focus="1" string="Unità di misura" />
-                <field name="descrizione" string="Descrizione" />
+                <field name="name" default_focus="1" string="Unità di misura"/>
+                <field name="descrizione" string="Descrizione"/>
             </tree>
         </field>
     </record>

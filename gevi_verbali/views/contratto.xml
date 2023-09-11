@@ -6,19 +6,17 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page string="Verifiche/Verbali" class="oe_page_">
-                    <group>
-                        <field name="verbali_ids" nolabel="1">
-                            <tree string="Verbali del Contratto">
-                                <field name="name"/>
-                                <field name="data_verbale"/>
-                                <field name="periodica"/>
-                                <field name="data_programmazione"/>
-                                <field name="state"/>
-                                <button name="apri_verbale" type="object" state="validato"
-                                        string="Apri" class="oe_highlight"/>
-                            </tree>
-                        </field>
-                    </group>
+                    <field name="verbali_ids" nolabel="1">
+                        <tree string="Verbali del Contratto">
+                            <field name="name"/>
+                            <field name="data_verbale"/>
+                            <field name="periodica"/>
+                            <field name="data_programmazione"/>
+                            <field name="state"/>
+                            <button name="apri_verbale" type="object" state="validato"
+                                    string="Apri" class="oe_highlight"/>
+                        </tree>
+                    </field>
                 </page>
             </notebook>
         </field>

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models, api
 
 
 class Partner(models.Model):
@@ -10,14 +10,15 @@ class Partner(models.Model):
 
     codice_cliente = fields.Char('Codice Cliente', default="/")
 
-    cf = fields.Char('Codice Fiscale', size=16)
+    cf = fields.Char('Cod. Fiscale', size=16)
     piva = fields.Char('Partita IVA', size=13)
     codice_contabile = fields.Char('Codice Contabile')
     codice_ipa = fields.Char('Codice IPA')
     split_payment = fields.Boolean('Split Payment', default=False)
     tipo_cliente_name = fields.Char('Tipo Cliente Name')
 
-    tipo_cliente_id = fields.Many2one('gevi_contatti.contatto_categoria', string='Tipo Cliente', domain=[('tipo', 'ilike', 'cliente')])
+    tipo_cliente_id = fields.Many2one('gevi_contatti.contatto_categoria', string='Tipo Cliente',
+                                      domain=[('tipo', 'ilike', 'cliente')])
 
     provincia = fields.Char('Provincia', size=2)
     localita = fields.Char('Località')
@@ -36,7 +37,6 @@ class Partner(models.Model):
         'type': 'contact',
     }
 
-
     def action_doc_pangea(self):
         url = "http://sederm.icoversrl.it/pangea/{0}".format(self.codice_cliente)
         return {
@@ -44,7 +44,6 @@ class Partner(models.Model):
             'target': 'new',
             'url': url
         }
-
 
     @api.onchange('split_payment')
     def _onchange_split_payment(self):

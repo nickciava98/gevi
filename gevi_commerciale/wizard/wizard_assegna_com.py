@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class WizardAssegnaCom(models.TransientModel):
     _name = 'gevi_commerciale.wizard_assegna_com'
+    _description = "Assegna Com."
 
     commerciale_id = fields.Many2one(
         'hr.employee',

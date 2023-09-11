@@ -6,9 +6,7 @@
         <field name="arch" type="xml">
             <notebook position="inside">
                 <page string="Impianti">
-                    <group>
-                        <field name="impianto_ids" nolabel="1"/>
-                    </group>
+                    <field name="impianto_ids" nolabel="1"/>
                 </page>
             </notebook>
         </field>

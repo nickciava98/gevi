@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models, api
+from odoo.exceptions import ValidationError
 
 
 class ZonaAgente(models.Model):
@@ -15,17 +16,12 @@ class ZonaAgente(models.Model):
         string="Agente",
         domain=[('job_id.name', 'ilike', "Agente")])
 
-    def _check_recursion(self, cr, uid, ids, context=None):
-        level = 100
-        while len(ids):
-            cr.execute('select distinct parent_id from gevi_zone_zona_agente where id IN %s', (tuple(ids), ))
-            ids = filter(None, map(lambda x:x[0], cr.fetchall()))
-            if not level:
-                return False
-            level -= 1
-        return True
+    @api.constrains("parent_id")
+    def _constrains_parent_id(self):
+        for line in self:
+            if line.parent_id.id in self.search([("parent_id", "!=", False)]).ids:
+                raise ValidationError("Attenzione! Non è possibile creare zone ricorsive.")
 
-    _constraints = [
-        (_check_recursion, 'Attenzione! Non è possibile creare zone ricorsive.', ['parent_id']),
+    _sql_constraints = [
         ('agente_id_unique', 'UNIQUE(agente_id)', "Una zona agente può essere assegnata ad un solo agente"),
     ]

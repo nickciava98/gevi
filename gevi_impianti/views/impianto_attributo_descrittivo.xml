@@ -6,9 +6,9 @@
             <form string="Descrittivo Form">
                 <sheet>
                     <group>
-                        <field name="name" default_focus="1" string="Attributo Descrittivo" placeholder="Descrittivo" />
-                        <field name="unita_di_misura_id" string="Unità di misura" />
-                        <field name="impianto_categoria_id" string="Categoria Impianto" />
+                        <field name="name" default_focus="1" string="Attributo Descrittivo" placeholder="Descrittivo"/>
+                        <field name="unita_di_misura_id" string="Unità di misura"/>
+                        <field name="impianto_categoria_id" string="Categoria Impianto"/>
                     </group>
                 </sheet>
             </form>
@@ -33,8 +33,8 @@
         <field name="arch" type="xml">
             <tree string="Lista Attributi Descrittivo">
                 <field name="name" string="Attributo Descrittivo"/>
-                <field name="unita_di_misura_id" string="Unità di misura" />
-                <field name="impianto_categoria_id" string="Categoria Impianto" />
+                <field name="unita_di_misura_id" string="Unità di misura"/>
+                <field name="impianto_categoria_id" string="Categoria Impianto"/>
             </tree>
         </field>
     </record>

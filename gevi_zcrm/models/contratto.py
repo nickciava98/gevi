@@ -1,4 +1,4 @@
-from odoo import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class Contratto(models.Model):
@@ -6,7 +6,7 @@ class Contratto(models.Model):
     _inherit = 'gevi_contratti.contratto'
 
     opportunity_id = fields.Many2one('crm.lead', 'Opportunity', domain="[('type', '=', 'opportunity')]")
-    team_id = fields.Many2one('crm.team', 'Sales Team', oldname='section_id')
+    team_id = fields.Many2one('crm.team', 'Sales Team')
 
     # @api.multi
     # def action_first_attivo(self):
@@ -45,4 +45,3 @@ class Contratto(models.Model):
     #                 node.set("domain", "[('customer_id', '=', customer_id)]")
     #             res['arch'] = etree.tostring(doc)
     #     return res
-

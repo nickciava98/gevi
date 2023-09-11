@@ -1,10 +1,9 @@
-
 # -*- coding: utf-8 -*-
 
-import time
-from odoo import api, fields, models
-
 import logging
+
+from odoo import fields, models
+
 _logger = logging.getLogger(__name__)
 
 
@@ -23,7 +22,9 @@ class ReportStorico(models.AbstractModel):
         # clienti = self.env['res.partner'].search([('id', 'in', cli)])
         clienti = self.env['res.partner'].search([('id', 'in', amministratore.customer_ids.ids)])
         fatture = self.env['account.invoice'].search([('partner_id', 'in', clienti.ids)])
-        pagamenti = self.env['account.payment'].search(['&', '&', ('partner_id', 'in', clienti.ids), ('partner_type', '=', 'customer'), ('payment_type', '=', 'inbound')])
+        pagamenti = self.env['account.payment'].search(
+            ['&', '&', ('partner_id', 'in', clienti.ids), ('partner_type', '=', 'customer'),
+             ('payment_type', '=', 'inbound')])
 
         # _logger.info('******************************** acconti: {0}'.format(acconti))
         # _logger.info('******************************** zone: {0}'.format(zone.ids))
@@ -38,5 +39,3 @@ class ReportStorico(models.AbstractModel):
             'DataStampa': fields.date.today(),
         }
         return report_obj.render('gevi_estrattoconto.report_storico', values=docargs)
-
-

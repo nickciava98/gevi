@@ -6,7 +6,8 @@
             <form string="Assegna Commerciale">
                 <div>Scegliere il commerciale da assegnare agli amministratori selezionati.</div>
                 <group>
-                    <field name="commerciale_id" options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                    <field name="commerciale_id"
+                           options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
                 </group>
                 <footer>
                     <button name="assegna_com" type="object"

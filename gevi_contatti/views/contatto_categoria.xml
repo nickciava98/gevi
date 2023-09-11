@@ -1,14 +1,14 @@
 <odoo>
     <record model="ir.ui.view" id="view_gevi_contatti_contatto_categoria_form">
-        <field name="name">Categoria Contatto </field>
+        <field name="name">Categoria Contatto</field>
         <field name="model">gevi_contatti.contatto_categoria</field>
         <field name="arch" type="xml">
             <form string="Categoria Contatto ">
                 <sheet>
                     <h1>Categoria Contatto</h1>
                     <group>
-                        <field name="name" default_focus="1" string="Categoria Contatto " />
-                        <field name="tipo" string="Tipo Contatto" />
+                        <field name="name" default_focus="1" string="Categoria Contatto "/>
+                        <field name="tipo" string="Tipo Contatto"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -21,7 +21,7 @@
 
     <!--Action Categoria Contatto -->
     <record model="ir.actions.act_window" id="action_gevi_contatti_contatto_categoria_form">
-        <field name="name">Categoria Contatto </field>
+        <field name="name">Categoria Contatto</field>
         <field name="res_model">gevi_contatti.contatto_categoria</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
@@ -32,12 +32,12 @@
 
     <!--Tree Categoria Contatto  -->
     <record model="ir.ui.view" id="gevi_contatti_contatto_categoria_tree">
-        <field name="name">Categoria Contatto </field>
+        <field name="name">Categoria Contatto</field>
         <field name="model">gevi_contatti.contatto_categoria</field>
         <field name="arch" type="xml">
             <tree string="Lista Valori Contatto">
-                <field name="name" default_focus="1" string="Categoria Contatto " />
-                <field name="tipo" string="Tipo Contatto" />
+                <field name="name" default_focus="1" string="Categoria Contatto "/>
+                <field name="tipo" string="Tipo Contatto"/>
             </tree>
         </field>
     </record>

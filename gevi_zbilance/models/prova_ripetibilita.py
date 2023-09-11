@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class ProvaRipetibilita(models.Model):
@@ -8,5 +8,5 @@ class ProvaRipetibilita(models.Model):
         'gevi_zbilance.verbale', ondelete='cascade', string="Verbale")
 
     indicazione = fields.Float("Indicazione I")
-    delta_l = fields.Float("Add Load") # carico_addizionale
+    delta_l = fields.Float("Add Load")  # carico_addizionale
     p = fields.Float("P")

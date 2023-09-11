@@ -8,7 +8,8 @@
                 <form string="Assegna Responsabile Tecnico">
                     <div>Scegli il Responsabile Tecnico da assegnare ai verbali selezionati:</div>
                     <group>
-                        <field name="responsabile_tecnico_id" options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        <field name="responsabile_tecnico_id"
+                               options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
                     </group>
                     <footer>
                         <button name="assegna_rt" type="object"

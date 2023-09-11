@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
+from odoo import fields, models
 
 
 class Impianto(models.Model):
@@ -15,4 +15,3 @@ class Impianto(models.Model):
         'res.partner',
         domain=[('customer', '=', True)],
         string='Proprietario')
-

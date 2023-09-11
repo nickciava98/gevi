@@ -35,7 +35,7 @@ class Impianto(models.Model):
     customer_id = fields.Many2one(
         'res.partner',
         ondelete='cascade',
-        #domain=[('customer', '=', True)],
+        # domain=[('customer', '=', True)],
         string='Cliente Fatturazione',
         required=True)
 
@@ -56,17 +56,18 @@ class Impianto(models.Model):
     def action_doc_pangea(self):
         url = "http://sederm.icoversrl.it/pangea/{0}000".format(self.codice_impianto)
         return {
-                    'type': 'ir.actions.act_url',
-                    'target': 'new',
-                    'url': url
-                }
+            'type': 'ir.actions.act_url',
+            'target': 'new',
+            'url': url
+        }
 
     @api.onchange('comuni_italiani_id')
     def comuni_italiani_change(self):
-        self.citta = self.comuni_italiani_id.name
-        self.cap = self.comuni_italiani_id.cap
-        self.provincia = self.comuni_italiani_id.provincia
-        self.regione = self.comuni_italiani_id.regione
+        for line in self:
+            line.citta = line.comuni_italiani_id.name
+            line.cap = line.comuni_italiani_id.cap
+            line.provincia = line.comuni_italiani_id.provincia
+            line.regione = line.comuni_italiani_id.regione
 
     @api.onchange('customer_id')
     def _onchange_customer_id(self):
@@ -108,32 +109,33 @@ class Impianto(models.Model):
 
     def carica_attributi_descrittivi(self):
         for r in self:
-            if (r.attributi_caricati is False):
+            if not r.attributi_caricati:
                 new_linee_attributo = []
                 for linea in r.impianto_categoria_id.impianto_attributo_descrittivo_ids:
                     new_linee_attributo.append([0, 0, {
                         'name': linea.name,
                         'unita_di_misura_id': linea.unita_di_misura_id.id,
-                        }])
+                    }])
                 r.attributi_caricati = True
                 self.impianto_riga_descrizione_ids = new_linee_attributo
 
     def name_get(self):
-        result = super(Impianto, self).name_get()
         res = []
+
         for record in self:
             name = record.name
             cliente = record.customer_id.name
             etichetta = record.etichetta
             res.append((record.id, cliente + " " + etichetta + " " + name))
+
         return res
 
     @api.depends('customer_id')
     def _compute_cliente(self):
         for record in self:
-            self.cf_cliente = record.customer_id.cf
-            self.piva_cliente = record.customer_id.piva
-            self.referente_name = record.customer_id.referente_id.name
+            record.cf_cliente = record.customer_id.cf
+            record.piva_cliente = record.customer_id.piva
+            record.referente_name = record.customer_id.referente_id.name
 
     def _delete_attributi_impianto(self):
         for linea in self.impianto_riga_descrizione_ids:
@@ -145,4 +147,3 @@ class Impianto(models.Model):
             # riga sottostante cancella tutti gli attributi descrittivi dell'impianto
             line._delete_attributi_impianto()
             line.carica_attributi_descrittivi()
-

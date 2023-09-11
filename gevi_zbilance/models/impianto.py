@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class Impianto(models.Model):
@@ -16,7 +16,7 @@ class Impianto(models.Model):
             ('Meccanica', 'Meccanica (non automatica)'),
         ],
         string='Tipologia',
-        required=False,)
+        required=False, )
 
     verbale_bilance_ids = fields.One2many('gevi_zbilance.verbale', 'impianto_id', string="Verifiche/Verbali Bilance",
                                           readonly=True)
@@ -25,19 +25,19 @@ class Impianto(models.Model):
     # required per range 1 gestito nella vista
     range_1 = fields.Many2one(
         'gevi_zbilance.range_bilancia', string='Range 1',
-        required=False,)
+        required=False, )
     range_2 = fields.Many2one(
         'gevi_zbilance.range_bilancia', string='Range 2',
-        required=False,)
+        required=False, )
     range_3 = fields.Many2one(
         'gevi_zbilance.range_bilancia', string='Range 3',
-        required=False,)
+        required=False, )
 
     # classe (divisioni, classe della bilancia, classe masse)
     # required gestito nella vista
     classe_bilancia = fields.Many2one(
         'gevi_zbilance.classe_pesiera', string='Classe massa',
-        required=False,)
+        required=False, )
 
     # metodi common
 

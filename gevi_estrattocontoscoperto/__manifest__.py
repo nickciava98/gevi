@@ -21,8 +21,7 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'gevi_contatti', 'account',
-    ],
-
+                ],
 
     # always loaded
     'data': [

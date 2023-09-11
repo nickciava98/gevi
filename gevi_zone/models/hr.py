@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class Employee(models.Model):
@@ -14,7 +14,7 @@ class Employee(models.Model):
     zona_ispettore_ids = fields.One2many(
         'gevi_zone.zona_impianto', 'ispettore_id', string="Zone Impianto ISP")
 
-    qualifica = fields.Char(related='job_id.name', store=False)
+    qualifica = fields.Char(related='job_id.name', store=False, string="Qualifica")
 
     # has_zona_impianto = fields.Boolean(default="False", compute='_zone_qualifica')
     # has_zona_commerciale = fields.Boolean(default="False", compute='_zone_qualifica')

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api, exceptions
-import time
-from datetime import date
-
 import logging
+
+from odoo import fields, models, api, exceptions
 
 _logger = logging.getLogger(__name__)
 
@@ -89,16 +87,16 @@ class Verbale(models.Model):
         'gevi_contatti.manutentore', string='Manutentore')
 
     impianto_indirizzo = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_indirizzo2 = fields.Char(
-        compute='_compute_riferimenti_impianto', store=False)
-    impianto_cap = fields.Char(compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=False, compute_sudo=False)
+    impianto_cap = fields.Char(compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_citta = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_provincia = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
     impianto_etichetta = fields.Char(
-        compute='_compute_riferimenti_impianto', store=True)
+        compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
 
     verbale_riscontro_riga_ids = fields.One2many(
         'gevi_verbali.verbale_riscontro_riga', 'verbale_id',
@@ -328,10 +326,10 @@ class Verbale(models.Model):
 
     # STOP MERGE
 
-    cf_cliente = fields.Char("CF Cliente", compute='_compute_riferimenti_impianto', store=True)
-    piva_cliente = fields.Char("P.IVA Cliente", compute='_compute_riferimenti_impianto', store=True)
-    blocco_amministrativo = fields.Boolean("Blocco Amministrativo", compute='_compute_blocco_amministrativo')
-    codice_contratto = fields.Char("Codice Contratto", compute='_compute_blocco_amministrativo', store=True)
+    cf_cliente = fields.Char("CF Cliente", compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
+    piva_cliente = fields.Char("P.IVA Cliente", compute='_compute_riferimenti_impianto', store=True, compute_sudo=False)
+    blocco_amministrativo = fields.Boolean("Blocco Amministrativo", compute='_compute_blocco_amministrativo', compute_sudo=False)
+    codice_contratto = fields.Char("Codice Contratto", compute='_compute_blocco_amministrativo', store=True, compute_sudo=False)
 
     @api.depends('impianto_id')
     def _compute_blocco_amministrativo(self):
@@ -359,14 +357,14 @@ class Verbale(models.Model):
     @api.depends('impianto_id')
     def _compute_riferimenti_impianto(self):
         for record in self:
-            self.impianto_etichetta = record.impianto_id.etichetta
-            self.impianto_indirizzo = record.impianto_id.indirizzo
-            self.impianto_indirizzo2 = record.impianto_id.indirizzo2
-            self.impianto_cap = record.impianto_id.cap
-            self.impianto_citta = record.impianto_id.citta
-            self.impianto_provincia = record.impianto_id.provincia
-            self.cf_cliente = record.impianto_id.customer_id.cf
-            self.piva_cliente = record.impianto_id.customer_id.piva
+            record.impianto_etichetta = record.impianto_id.etichetta
+            record.impianto_indirizzo = record.impianto_id.indirizzo
+            record.impianto_indirizzo2 = record.impianto_id.indirizzo2
+            record.impianto_cap = record.impianto_id.cap
+            record.impianto_citta = record.impianto_id.citta
+            record.impianto_provincia = record.impianto_id.provincia
+            record.cf_cliente = record.impianto_id.customer_id.cf
+            record.piva_cliente = record.impianto_id.customer_id.piva
 
     def aggiorna_dati_impianto(self):
         for line in self:
@@ -628,7 +626,7 @@ class Verbale(models.Model):
         ordine = ordine_obj.create({
             # 'name': ,
             'origin': self.name,
-            
+
             'date_order': fields.Date.context_today(self),
             'partner_id': self.customer_id.id,
             'partner_invoice_id': self.customer_id.id,
@@ -640,7 +638,7 @@ class Verbale(models.Model):
                 'price_unit': costo,
                 'discount': 0.0,
                 'sequence': 10,
-                
+
             })],
         })
 

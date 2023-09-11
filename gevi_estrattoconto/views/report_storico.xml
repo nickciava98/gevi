@@ -4,18 +4,29 @@
             <div class="page">
                 <div class="row">
                     <div class="col-xs-5 col-xs-offset-7">
-                        <span t-field="doc.name"/><br/>
+                        <span t-field="doc.name"/>
+                        <br/>
                         <t t-if="doc.indirizzo != False">
-                            <span t-field="doc.indirizzo"/><br/>
+                            <span t-field="doc.indirizzo"/>
+                            <br/>
                         </t>
                         <t t-if="doc.citta != False and doc.cap != False and doc.provincia != False">
-                            <span t-field="doc.cap"/> - <span t-field="doc.citta"/> (<span t-field="doc.provincia"/>)<br/>
+                            <span t-field="doc.cap"/>
+                            -
+                            <span t-field="doc.citta"/>
+                            (<span t-field="doc.provincia"/>)
+                            <br/>
                         </t>
                     </div>
                     <p>
-                        Documento: Estratto Conto Storico<br/>
-                        Data: <span t-esc="DataStampa"/><br/>
-                        Data: <span t-raw="fields.date.today()"/><br/>
+                        Documento: Estratto Conto Storico
+                        <br/>
+                        Data:
+                        <span t-esc="DataStampa"/>
+                        <br/>
+                        Data:
+                        <span t-raw="fields.date.today()"/>
+                        <br/>
                     </p>
                     <t t-set="tot_doc" t-value="0"/>
                     <t t-set="tot_scad" t-value="0"/>
@@ -23,7 +34,14 @@
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th colspan="7">CLIENTE: <span t-field="c.name"/> <span t-field="c.street"/> - <span t-field="c.zip"/> <span t-field="c.city"/> (<span t-field="c.provincia"/>)</th>
+                                    <th colspan="7">CLIENTE:
+                                        <span t-field="c.name"/>
+                                        <span t-field="c.street"/>
+                                        -
+                                        <span t-field="c.zip"/>
+                                        <span t-field="c.city"/>
+                                        (<span t-field="c.provincia"/>)
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th>Tipo Doc.</th>
@@ -57,7 +75,9 @@
                                     <td>
                                         <t t-foreach="pagamenti" t-as="p">
                                             <t t-if="p.id in f.payment_ids.ids">
-                                                <span t-field="p.name"/> <span t-field="p.communication"/> <span t-field="p.amount"/>
+                                                <span t-field="p.name"/>
+                                                <span t-field="p.communication"/>
+                                                <span t-field="p.amount"/>
                                                 <!--
                                                     <t t-if="p.name != '/'">
                                                         <span t-field="p.name"/>
@@ -84,7 +104,9 @@
                                 -->
                                 <tr>
                                     <td colspan="3"></td>
-                                    <td><strong>Totale:</strong></td>
+                                    <td>
+                                        <strong>Totale:</strong>
+                                    </td>
                                     <td class="text-right">
                                         <span t-esc="tot_doc"/>
                                     </td>

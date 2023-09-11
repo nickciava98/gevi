@@ -9,7 +9,6 @@ class ContattoCategoria(models.Model):
     # richiesto per openchatter
     _inherit = ['mail.thread']
 
-
     name = fields.Char()
 
     tipo = fields.Selection(

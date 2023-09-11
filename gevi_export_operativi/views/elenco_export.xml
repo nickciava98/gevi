@@ -22,7 +22,7 @@
                 <field name="name"/>
                 <field name="excel_file" filename="file_name"/>
                 <field name="file_name" invisible="1"/>
-                <field name="tipo" />
+                <field name="tipo"/>
             </tree>
         </field>
     </record>

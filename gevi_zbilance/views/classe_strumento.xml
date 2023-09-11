@@ -2,23 +2,23 @@
 <odoo>
     <data>
         <!--Form Classe strumento -->
-       	<record model="ir.ui.view" id="view_gevi_zbilance_classe_strumento_form">
-			<field name="name">Classe strumento</field>
-			<field name="model">gevi_zbilance.classe_strumento</field>
-			<field name="arch" type="xml">
-				<form string="Classe strumento Form">
-					<sheet>
+        <record model="ir.ui.view" id="view_gevi_zbilance_classe_strumento_form">
+            <field name="name">Classe strumento</field>
+            <field name="model">gevi_zbilance.classe_strumento</field>
+            <field name="arch" type="xml">
+                <form string="Classe strumento Form">
+                    <sheet>
                         <group>
-                            <field name="name" default_focus="1" />
-                            <field name="campione_massa" />
-                            <field name="portata" />
-                            <field name="um_portata" />
-                            <field name="tipo" />
+                            <field name="name" default_focus="1"/>
+                            <field name="campione_massa"/>
+                            <field name="portata"/>
+                            <field name="um_portata"/>
+                            <field name="tipo"/>
                         </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <!--Action Classe strumento -->
         <record model="ir.actions.act_window" id="action_gevi_zbilance_classe_strumento_form">
@@ -37,11 +37,11 @@
             <field name="model">gevi_zbilance.classe_strumento</field>
             <field name="arch" type="xml">
                 <tree string="Lista classe bilancia">
-                    <field name="name" />
-                    <field name="campione_massa" />
-                    <field name="portata" />
-                    <field name="um_portata" />
-                    <field name="tipo" />
+                    <field name="name"/>
+                    <field name="campione_massa"/>
+                    <field name="portata"/>
+                    <field name="um_portata"/>
+                    <field name="tipo"/>
                 </tree>
             </field>
         </record>

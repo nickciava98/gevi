@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class ProvaEccentricita(models.Model):
@@ -10,7 +10,7 @@ class ProvaEccentricita(models.Model):
     posizione = fields.Integer("Posizione")
     carico_l = fields.Integer("Massa L")
     indicazione = fields.Float("Ind.")
-    add_load = fields.Float("AL") # carico_addizionale
+    add_load = fields.Float("AL")  # carico_addizionale
     p = fields.Float("P")
     errore_e_zero = fields.Float("Err E0")
     errore_e_c = fields.Float("Err E Corr")

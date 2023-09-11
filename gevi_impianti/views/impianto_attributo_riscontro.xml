@@ -6,8 +6,8 @@
             <form string="Riscontro Form">
                 <sheet>
                     <group>
-                        <field name="name" default_focus="1" string="Attributo Riscontro" placeholder="Riscontro" />
-                        <field name="impianto_categoria_id" string="Categoria Impianto" />
+                        <field name="name" default_focus="1" string="Attributo Riscontro" placeholder="Riscontro"/>
+                        <field name="impianto_categoria_id" string="Categoria Impianto"/>
                     </group>
                 </sheet>
             </form>
@@ -32,7 +32,7 @@
         <field name="arch" type="xml">
             <tree string="Lista Attributi Riscontro">
                 <field name="name" string="Attributo Riscontro"/>
-                <field name="impianto_categoria_id" string="Categoria Impianto" />
+                <field name="impianto_categoria_id" string="Categoria Impianto"/>
             </tree>
         </field>
     </record>

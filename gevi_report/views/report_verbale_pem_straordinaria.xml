@@ -7,12 +7,16 @@
                         <div class="page">
 
                             <p style="text-align: center;">
-                                <span style="font-weight:bold; font-size: 14pt;">VERBALE DI VERIFICA STRAORDINARIA</span>
+                                <span style="font-weight:bold; font-size: 14pt;">VERBALE DI VERIFICA STRAORDINARIA
+                                </span>
                                 <br/>(ai sensi dell'art. 14, del D.P.R. 162/99)
                             </p>
-                            <span style="font-weight:bold; font-size: 12pt;">VERBALE N.</span><span style="font-weight:bold; font-size: 12pt;" t-field="doc.name"/>
+                            <span style="font-weight:bold; font-size: 12pt;">VERBALE N.</span>
+                            <span style="font-weight:bold; font-size: 12pt;" t-field="doc.name"/>
                             <p style="text-align:justify">
-                                Il sottoscritto <span style="font-weight:bold" t-field="doc.ispettore_id"/> ha provveduto in data
+                                Il sottoscritto
+                                <span style="font-weight:bold" t-field="doc.ispettore_id"/>
+                                ha provveduto in data
                                 <span style="font-weight:bold" t-field="doc.data_verbale"/>
                                 alla verifica straordinaria
                                 <t t-if="doc.tipo_straordinaria == 'per_lavori'">per lavori</t>
@@ -34,7 +38,8 @@
                                 di proprietà
                                 <span style="font-weight:bold" t-field="doc.customer_id.name"/>
                             </p>
-                            con le seguenti caratteristiche:<br/>
+                            con le seguenti caratteristiche:
+                            <br/>
                             <div class="row">
                                 <div class="col-xs-6">
                                     Marca/N.Impianto:
@@ -42,7 +47,8 @@
                                         <t t-if="x.name == 'Marca'">
                                             <span style="font-weight:bold" t-field="x.valore_attributo"/>
                                         </t>
-                                    </t> /
+                                    </t>
+                                    /
                                     <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                         <t t-if="x.name == 'N. Impianto'">
                                             <span style="font-weight:bold" t-field="x.valore_attributo"/>
@@ -50,7 +56,8 @@
                                     </t>
                                 </div>
                                 <div class="col-xs-6">
-                                    <span>Ditta Manutentrice: </span><span style="font-weight:bold" t-field="doc.manutentore_id"/>
+                                    <span>Ditta Manutentrice:</span>
+                                    <span style="font-weight:bold" t-field="doc.manutentore_id"/>
                                 </div>
                             </div>
 
@@ -64,7 +71,7 @@
                                     </t>
                                 </div>
                                 <div class="col-xs-3">
-                                    <span>collaudato il </span>
+                                    <span>collaudato il</span>
                                     <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                         <t t-if="x.name == 'Data collaudo'">
                                             <span style="font-weight:bold" t-field="x.valore_attributo"/>
@@ -72,7 +79,7 @@
                                     </t>
                                 </div>
                                 <div class="col-xs-6">
-                                    <span>Azionamento: </span>
+                                    <span>Azionamento:</span>
                                     <t t-if="'Elettrica' in doc.impianto_categoria_id.name">
                                         <strong>Elettromeccanico</strong>
                                     </t>
@@ -93,7 +100,7 @@
                                     </t>
                                 </div>
                                 <div class="col-xs-3">
-                                    <span>Velocità: </span>
+                                    <span>Velocità:</span>
                                     <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                         <t t-if="'Velocit' in x.name">
                                             <span style="font-weight:bold" t-field="x.valore_attributo"/>
@@ -102,7 +109,7 @@
                                     </t>
                                 </div>
                                 <div class="col-xs-3">
-                                    <span>Portata: </span>
+                                    <span>Portata:</span>
                                     <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                         <t t-if="x.name == 'Portata'">
                                             <span style="font-weight:bold" t-field="x.valore_attributo"/>
@@ -111,7 +118,7 @@
                                     </t>
                                 </div>
                                 <div class="col-xs-3">
-                                    <span>N.Fermate: </span>
+                                    <span>N.Fermate:</span>
                                     <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                         <t t-if="x.name == 'N. Fermate'">
                                             <span style="font-weight:bold" t-field="x.valore_attributo"/>
@@ -130,101 +137,159 @@
                             </div>
                             <br/>
                             <p>
-                                <t t-if="doc.tipo_straordinaria == 'per_lavori'"><span style="font-weight:bold">MODIFICHE APPORTATE ALL’IMPIANTO:</span></t>
-                                <t t-if="doc.tipo_straordinaria == 'a_seguito_di_negativo'"><span style="font-weight:bold">A SEGUITO DI VERBALE NEGATIVO:</span></t>
-                                <t t-if="doc.tipo_straordinaria == 'per_tempo_prolungato'"><span style="font-weight:bold">A SEGUITO DEL FERMO PROLUNGATO:</span></t>
+                                <t t-if="doc.tipo_straordinaria == 'per_lavori'">
+                                    <span style="font-weight:bold">MODIFICHE APPORTATE ALL’IMPIANTO:</span>
+                                </t>
+                                <t t-if="doc.tipo_straordinaria == 'a_seguito_di_negativo'">
+                                    <span style="font-weight:bold">A SEGUITO DI VERBALE NEGATIVO:</span>
+                                </t>
+                                <t t-if="doc.tipo_straordinaria == 'per_tempo_prolungato'">
+                                    <span style="font-weight:bold">A SEGUITO DEL FERMO PROLUNGATO:</span>
+                                </t>
                             </p>
-                            <div width="100%"  style="border: 1px solid white; padding: 2px 5px; min-height: 350px; font-size: 8pt; letter-spacing: 1px;">
+                            <div width="100%"
+                                 style="border: 1px solid white; padding: 2px 5px; min-height: 350px; font-size: 8pt; letter-spacing: 1px;">
                                 <t t-if="doc.non_conformita !=0 and doc.non_conformita != 'Nessuna'">
                                     <p style="text-align:justify; font-size: 9pt;">
-                                        NON CONFORMITA':<br/>
-                                        <span t-field="doc.non_conformita"/><br/>
+                                        NON CONFORMITA':
+                                        <br/>
+                                        <span t-field="doc.non_conformita"/>
+                                        <br/>
                                     </p>
                                 </t>
                                 <p style="text-align:justify; font-size: 9pt;">
-                                    <span t-field="doc.rilievi_straordinaria"/><br/>
+                                    <span t-field="doc.rilievi_straordinaria"/>
+                                    <br/>
                                 </p>
                             </div>
                             <br/>
                             <p>N.B. Il presente verbale è parte integrante del libretto originale.</p>
-                            <table width="100%" style="border: 1px solid black; border-collapse: collapse; font-size: 8pt; letter-spacing: 1px;">
+                            <table width="100%"
+                                   style="border: 1px solid black; border-collapse: collapse; font-size: 8pt; letter-spacing: 1px;">
                                 <tr>
-                                    <th colspan="4" style="text-align:center; border: 1px solid black; padding: 2px 5px;"><strong>Strumentazione utilizzata per la verifica: <span style="margin-left:2%" t-esc="doc.kit_utilizzato"/></strong></th>
+                                    <th colspan="4"
+                                        style="text-align:center; border: 1px solid black; padding: 2px 5px;">
+                                        <strong>Strumentazione utilizzata per la verifica:
+                                            <span style="margin-left:2%" t-esc="doc.kit_utilizzato"/>
+                                        </strong>
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th width="40%" style="border: 1px solid black; padding: 2px 5px;"></th>
-                                    <th width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">Rilievi/Note</th>
+                                    <th width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                        Rilievi/Note
+                                    </th>
                                     <th width="40%" style="border: 1px solid black; padding: 2px 5px;"></th>
-                                    <th width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">Rilievi/Note</th>
+                                    <th width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                        Rilievi/Note
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Illuminamento locale del macchinario</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Illuminamento
+                                        locale del macchinario
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'locale' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Velocità nominale ascensore </td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Velocità nominale
+                                        ascensore
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'nominale ascensore' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Illuminamento vano di corsa</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Illuminamento
+                                        vano di corsa
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'vano' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Velocità intervento limitatore</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Velocità
+                                        intervento limitatore
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'limitatore' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Illuminamento cabina</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Illuminamento
+                                        cabina
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'cabina' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Scorrimento funi di trazione</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Scorrimento funi
+                                        di trazione
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-if="'Elettr' in doc.impianto_categoria_id.name">
                                             <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                                 <t t-if="'Scorrimento' in x.name">
-                                                    <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                    <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                        <span>N/A</span>
+                                                    </t>
                                                     <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                        <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                        <span t-esc="x.valore_rilievo"/>
+                                                        <span t-esc="x.unita_di_misura_id.name"/>
                                                     </t>
                                                 </t>
                                             </t>
@@ -235,19 +300,28 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Resistenza di isolamento del quadro</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Resistenza di
+                                        isolamento del quadro
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'Resistenza' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Regolare funzionamento comando di emergenza (*)</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Regolare
+                                        funzionamento comando di emergenza (*)
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'Regolare funzionamento comando' in x.name">
                                                 <span t-field="x.valore_attributo_id.name"/>
@@ -256,19 +330,28 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Forza per prevenire la chiusura delle porte</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Forza per
+                                        prevenire la chiusura delle porte
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'Forza' in x.name">
-                                                <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                    <span>N/A</span>
+                                                </t>
                                                 <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                    <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                    <span t-esc="x.valore_rilievo"/>
+                                                    <span t-esc="x.unita_di_misura_id.name"/>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Regolare funzionamento manovra "a uomo presente" (*)</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Regolare
+                                        funzionamento manovra "a uomo presente" (*)
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                             <t t-if="'Regolare funzionamento manovra' in x.name">
                                                 <span t-field="x.valore_attributo_id.name"/>
@@ -277,23 +360,31 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Apertura valvola sovrapressione</td>
-                                    <td width="10%" style="border: 1px solid black; padding: 2px 5px; text-align: center">
+                                    <td width="40%" style="border: 1px solid black; padding: 2px 5px;">Apertura valvola
+                                        sovrapressione
+                                    </td>
+                                    <td width="10%"
+                                        style="border: 1px solid black; padding: 2px 5px; text-align: center">
                                         <t t-if="'Elettr' in doc.impianto_categoria_id.name">
                                             N/A
                                         </t>
                                         <t t-if="'Oleodinamico' in doc.impianto_categoria_id.name">
                                             <t t-foreach="doc.verbale_rilievo_riga_ids" t-as="x">
                                                 <t t-if="'Apertura valvola' in x.name">
-                                                    <t t-if="x.valore_attributo_id.name == 'N/A'"><span>N/A</span></t>
+                                                    <t t-if="x.valore_attributo_id.name == 'N/A'">
+                                                        <span>N/A</span>
+                                                    </t>
                                                     <t t-if="x.valore_attributo_id.name != 'N/A'">
-                                                        <span t-esc="x.valore_rilievo"/> <span t-esc="x.unita_di_misura_id.name"/>
+                                                        <span t-esc="x.valore_rilievo"/>
+                                                        <span t-esc="x.unita_di_misura_id.name"/>
                                                     </t>
                                                 </t>
                                             </t>
                                         </t>
                                     </td>
-                                    <td colspan="2" width="40%" style="border: 1px solid black; padding: 2px 5px;">(*) Solo in caso di Piattaforma Elevatrice</td>
+                                    <td colspan="2" width="40%" style="border: 1px solid black; padding: 2px 5px;">(*)
+                                        Solo in caso di Piattaforma Elevatrice
+                                    </td>
                                 </tr>
                             </table>
                             <br/>
@@ -316,24 +407,42 @@
                             <div class="row">
                                 <div class="col-xs-4">
                                     <p style="text-align:left;">
-                                        Addì, <span t-field="doc.data_verbale"/>
+                                        Addì,
+                                        <span t-field="doc.data_verbale"/>
                                     </p>
                                 </div>
                                 <div class="col-xs-4">
                                     <p style="text-align:center;">
                                         Il Verificatore
-                                        <br/><br/><br/><br/>
-                                        <span style="font-size: 6px">_______________________________________________________________________</span>
-                                        <br/><img t-if="doc.timbro_ispettore" t-att-src="'data:image/png;base64,%s' % doc.timbro_ispettore" style="max-height:180px; position:absolute; bottom: -50px; left: 60px; z-index:-1;"/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span style="font-size: 6px">
+                                            _______________________________________________________________________
+                                        </span>
+                                        <br/>
+                                        <img t-if="doc.timbro_ispettore"
+                                             t-att-src="'data:image/png;base64,%s' % doc.timbro_ispettore"
+                                             style="max-height:180px; position:absolute; bottom: -50px; left: 60px; z-index:-1;"/>
                                     </p>
                                 </div>
                                 <div class="col-xs-4">
                                     <p style="text-align:center;">
                                         La Direzione Tecnica
-                                        <br/><br/><br/><br/>
-                                        <span style="font-size: 6px">_______________________________________________________________________</span>
-                                        <br/><span style="font-weight:bold;" t-field="doc.data_validazione"/>
-                                        <br/><img t-if="doc.timbro_responsabile_tecnico" t-att-src="'data:image/png;base64,%s' % doc.timbro_responsabile_tecnico" style="max-width:180px; position:absolute; bottom: 10px; left: 60px; z-index:-1;"/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <span style="font-size: 6px">
+                                            _______________________________________________________________________
+                                        </span>
+                                        <br/>
+                                        <span style="font-weight:bold;" t-field="doc.data_validazione"/>
+                                        <br/>
+                                        <img t-if="doc.timbro_responsabile_tecnico"
+                                             t-att-src="'data:image/png;base64,%s' % doc.timbro_responsabile_tecnico"
+                                             style="max-width:180px; position:absolute; bottom: 10px; left: 60px; z-index:-1;"/>
                                     </p>
                                 </div>
                             </div>

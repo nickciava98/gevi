@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _, tools
+from odoo import models, fields, api
 
 
 class CrmLead(models.Model):

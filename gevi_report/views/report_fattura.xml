@@ -18,8 +18,12 @@
                                                     </p>
                                                     <p>
                                                         <span t-field="o.partner_id.name"/>
-                                                        <br/><span t-field="o.partner_id.street"/>
-                                                        <br/><span t-field="o.partner_id.zip"/>, <span t-field="o.partner_id.city"/> <span t-field="o.partner_id.provincia"/>
+                                                        <br/>
+                                                        <span t-field="o.partner_id.street"/>
+                                                        <br/>
+                                                        <span t-field="o.partner_id.zip"/>,
+                                                        <span t-field="o.partner_id.city"/>
+                                                        <span t-field="o.partner_id.provincia"/>
                                                     </p>
                                                 </td>
                                                 <td width="50%">
@@ -28,8 +32,12 @@
                                                     </p>
                                                     <p>
                                                         <span t-field="o.partner_id.referente_id.name"/>
-                                                        <br/><span t-field="o.partner_id.referente_id.indirizzo"/>
-                                                        <br/><span t-field="o.partner_id.referente_id.cap"/>, <span t-field="o.partner_id.referente_id.citta"/> <span t-field="o.partner_id.referente_id.provincia"/>
+                                                        <br/>
+                                                        <span t-field="o.partner_id.referente_id.indirizzo"/>
+                                                        <br/>
+                                                        <span t-field="o.partner_id.referente_id.cap"/>,
+                                                        <span t-field="o.partner_id.referente_id.citta"/>
+                                                        <span t-field="o.partner_id.referente_id.provincia"/>
                                                     </p>
                                                 </td>
                                             </tr>
@@ -53,8 +61,16 @@
                                                 <td width="15%" align="center">Data</td>
                                             </tr>
                                             <tr>
-                                                <td align="center"><strong><span t-field="o.number"/></strong></td>
-                                                <td align="center"><strong><span t-field="o.date_invoice"/></strong></td>
+                                                <td align="center">
+                                                    <strong>
+                                                        <span t-field="o.number"/>
+                                                    </strong>
+                                                </td>
+                                                <td align="center">
+                                                    <strong>
+                                                        <span t-field="o.date_invoice"/>
+                                                    </strong>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -64,22 +80,50 @@
                             <table class="table table-bordered table-responsive notablepad">
                                 <tbody>
                                     <tr style="letter-spacing: 1px;">
-                                        <td style="font-size:8pt"><font size="0.43em">Divisa</font> <strong><font size="0.6em"> EUR</font> </strong></td>
-                                        <td style="font-size:8pt"><font size="0.43em">Cod.Contabile</font><strong> <span t-field="o.partner_id.codice_contabile"/></strong></td>
-                                        <td style="font-size:8pt"><font size="0.43em">Cod.Cliente</font><strong> <span t-field="o.partner_id.codice_cliente"/></strong></td>
-                                        <td colspan="2" style="font-size:8pt"><font size="0.43em">P.Iva</font><strong> <span t-field="o.partner_id.piva"/></strong> </td>
-                                        <td colspan="2" style="font-size:8pt"><font size="0.43em">Codice Fiscale</font> <strong> <span t-field="o.partner_id.cf"/></strong></td>
+                                        <td style="font-size:8pt">
+                                            <font size="0.43em">Divisa</font>
+                                            <strong>
+                                                <font size="0.6em">EUR</font>
+                                            </strong>
+                                        </td>
+                                        <td style="font-size:8pt">
+                                            <font size="0.43em">Cod.Contabile</font>
+                                            <strong>
+                                                <span t-field="o.partner_id.codice_contabile"/>
+                                            </strong>
+                                        </td>
+                                        <td style="font-size:8pt">
+                                            <font size="0.43em">Cod.Cliente</font>
+                                            <strong>
+                                                <span t-field="o.partner_id.codice_cliente"/>
+                                            </strong>
+                                        </td>
+                                        <td colspan="2" style="font-size:8pt">
+                                            <font size="0.43em">P.Iva</font>
+                                            <strong>
+                                                <span t-field="o.partner_id.piva"/>
+                                            </strong>
+                                        </td>
+                                        <td colspan="2" style="font-size:8pt">
+                                            <font size="0.43em">Codice Fiscale</font>
+                                            <strong>
+                                                <span t-field="o.partner_id.cf"/>
+                                            </strong>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="border-right: 0px">
-                                            <font size="0.43em">PAGAMENTO</font> <br/>
+                                            <font size="0.43em">PAGAMENTO</font>
+                                            <br/>
                                             <!--<font size="0.43em">BANCA D'APPOGGIO</font><br/>-->
-                                            <font size="0.43em">BANCA PER BONIFICO</font><br/>
+                                            <font size="0.43em">BANCA PER BONIFICO</font>
+                                            <br/>
                                             <font size="0.43em">IBAN</font>
                                         </td>
 
                                         <td colspan="4" style="border-left: 0px">
-                                            <span t-field="o.payment_term_id"/><br/>
+                                            <span t-field="o.payment_term_id"/>
+                                            <br/>
                                             <!---<br/>-->
                                             <!--<span t-field="o.banca_id.bank_name"/><br/>
                                             <span t-field="o.banca_id.acc_number"/>-->
@@ -89,16 +133,22 @@
                             </table>
                             <!-- IN CASO DI DATI INTESTAZIONE FATTURA IN TUTTE LE PAGINE TAGLIARE FINO A QUESTO COMMENTO -->
                             <!-- Nota Split-Payment e CIG-->
-                            <table t-if="o.partner_id.split_payment == 1 or o.codice_cig != 0" class="table table-condensed">
+                            <table t-if="o.partner_id.split_payment == 1 or o.codice_cig != 0"
+                                   class="table table-condensed">
                                 <tbody class="table table-bordered table-responsive">
                                     <tr>
                                         <td>
                                             <t t-if="o.partner_id.split_payment == 1">
-                                                Scissione dei pagamenti (art.17/ter DPR 633/72 introdotto dal comma 629 art. unico legge stabilita' 2015)
+                                                Scissione dei pagamenti (art.17/ter DPR 633/72 introdotto dal comma 629
+                                                art. unico legge stabilita' 2015)
                                                 <br/>
                                             </t>
                                             <t t-if="o.codice_cig != 0">
-                                                Codice CIG: <span t-field="o.codice_cig"/><span style="margin-left:2%"> Codice IPA: <span t-field="o.partner_id.codice_ipa"/></span>
+                                                Codice CIG:
+                                                <span t-field="o.codice_cig"/>
+                                                <span style="margin-left:2%">Codice IPA:
+                                                    <span t-field="o.partner_id.codice_ipa"/>
+                                                </span>
                                             </t>
                                         </td>
                                     </tr>
@@ -112,22 +162,28 @@
                                         <th>Descrizione</th>
                                         <th width="4%" class="text-right">Qtà</th>
                                         <th width="12%" class="text-right">Prezzo U.</th>
-                                        <th t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">Sconto(%)</th>
+                                        <th t-if="display_discount" class="text-right"
+                                            groups="sale.group_discount_per_so_line">Sconto(%)
+                                        </th>
                                         <th width="12%" class="text-right">Importo</th>
                                         <th width="6%" class="text-right">IVA</th>
                                     </tr>
                                 </thead>
                                 <tbody class="invoice_tbody">
                                     <tr t-foreach="o.invoice_line_ids" t-as="l">
-                                        <td><span t-field="l.name"/></td>
+                                        <td>
+                                            <span t-field="l.name"/>
+                                        </td>
                                         <td class="text-right">
                                             <span t-esc="'%.0f'%(l.quantity)"/>
-                                            <span t-field="l.uom_id"  groups="product.group_uom"/>
+                                            <span t-field="l.uom_id" groups="product.group_uom"/>
                                         </td>
                                         <td class="text-right">
-                                            <span t-field="l.price_unit"/> €
+                                            <span t-field="l.price_unit"/>
+                                            €
                                         </td>
-                                        <td t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                                        <td t-if="display_discount" class="text-right"
+                                            groups="sale.group_discount_per_so_line">
                                             <span t-field="l.discount"/>
                                         </td>
                                         <td class="text-right">

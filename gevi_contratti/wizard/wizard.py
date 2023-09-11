@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields
 
 
 class Wizard(models.TransientModel):
     _name = 'openacademy.wizard'
+    _description = "Wizard"
 
     def _default_session(self):
         return self.env['openacademy.session'].browse(
@@ -16,4 +17,3 @@ class Wizard(models.TransientModel):
         required=True,
         default=_default_session)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
-

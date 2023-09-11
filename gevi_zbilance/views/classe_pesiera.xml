@@ -2,19 +2,19 @@
 <odoo>
     <data>
         <!--Form Classe pesiera -->
-       	<record model="ir.ui.view" id="view_gevi_zbilance_classe_pesiera_form">
-			<field name="name">Classe pesiera</field>
-			<field name="model">gevi_zbilance.classe_pesiera</field>
-			<field name="arch" type="xml">
-				<form string="Classe pesiera Form">
-					<sheet>
+        <record model="ir.ui.view" id="view_gevi_zbilance_classe_pesiera_form">
+            <field name="name">Classe pesiera</field>
+            <field name="model">gevi_zbilance.classe_pesiera</field>
+            <field name="arch" type="xml">
+                <form string="Classe pesiera Form">
+                    <sheet>
                         <group>
-                            <field name="name" default_focus="1" />
+                            <field name="name" default_focus="1"/>
                         </group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <!--Action Classe pesiera -->
         <record model="ir.actions.act_window" id="action_gevi_zbilance_classe_pesiera_form">
@@ -33,7 +33,7 @@
             <field name="model">gevi_zbilance.classe_pesiera</field>
             <field name="arch" type="xml">
                 <tree string="Lista classe pesiera">
-                    <field name="name" />
+                    <field name="name"/>
                 </tree>
             </field>
         </record>

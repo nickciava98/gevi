@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class AccountInvoice(models.Model):
@@ -36,4 +36,3 @@ class AccountInvoice(models.Model):
         related='referente_id.agente_id',
         store=True
     )
-

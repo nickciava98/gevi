@@ -14,7 +14,7 @@
     <record id="view_zone_res_partner_filter" model="ir.ui.view">
         <field name="name">gevi_zone.partner.search</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="gevi_contatti.search_gevi_contatti_cliente_view" />
+        <field name="inherit_id" ref="gevi_contatti.search_gevi_contatti_cliente_view"/>
         <field name="arch" type="xml">
             <!-- Filtra per zona -->
             <xpath expr="///filter[@name='customer']" position="before">
@@ -26,7 +26,7 @@
                 <filter string="Zona Commerciale"
                         name="group_by_zona_commerciale"
                         context="{'group_by':'zona_commerciale_id'}"
-                        help="Raggruppa per Zona Commerciale" />
+                        help="Raggruppa per Zona Commerciale"/>
             </xpath>
         </field>
     </record>
