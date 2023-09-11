@@ -19,7 +19,7 @@
                 </group>
             </xpath>
             <!-- Modifica su indirizzo-->
-            <xpath expr="//div[@class='o_address_format']" position="replace">
+            <xpath expr="//div[hasclass('o_address_format')]" position="replace">
                 <div class="o_address_format">
                     <field name="street" placeholder="Indirizzo" />
                     <field name="street2" placeholder="Indirizzo2" invisible="1" />
