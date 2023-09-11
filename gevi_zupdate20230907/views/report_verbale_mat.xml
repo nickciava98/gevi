@@ -1,6 +1,6 @@
 <odoo>
     <template id="gevi_zupdate20230907_report_verbale_mat_inherit" inherit_id="gevi_report.report_verbale_mat">
-        <xpath expr="//t[@t-if='doc.mat_con_cabina']" position="after">
+        <xpath expr="//t[@t-if='doc.mat_con_cabina == True']" position="after">
             <t t-if="doc.locali_medici">
                 <p>
                     <p>CLASSIFICAZIONE LOCALI AD USO MEDICO</p>
