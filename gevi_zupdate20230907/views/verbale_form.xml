@@ -1,0 +1,85 @@
+<openerp>
+    <data>
+        <record id="gevi_zupdate20230907_verbale_form_inherit" model="ir.ui.view">
+            <field name="name">gevi.zupdate20230907.verbale.form.inherit</field>
+            <field name="model">gevi_verbali.verbale</field>
+            <field name="inherit_id" ref="gevi_verbali.view_gevi_verbali_verbale_form"/>
+
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mat_con_cabina']/parent::group" position="after">
+                    <group>
+                        <field name="locali_medici"
+                               attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')],
+                                       'readonly': [('state', '=', 'validato')]}"/>
+                    </group>
+
+                    <table attrs="{'invisible': [('locali_medici', '=', False)]}" class="table table-bordered">
+                        <tr>
+                            <td style="vertical-align: center !important;">
+                                <field name="gruppo_0"/>
+                                <label for="gruppo_0" string="Gruppo 0"/>
+                            </td>
+
+                            <td style="vertical-align: center !important;">
+                                <field name="studio_medico_generico" attrs="{'readonly': [('gruppo_0', '=', False)]}"/>
+                                <label for="studio_medico_generico" string="Studio Medico Generico"/>
+                                <br/>
+                                <field name="sala_massaggi" attrs="{'readonly': [('gruppo_0', '=', False)]}"/>
+                                <label for="sala_massaggi" string="Sala Massaggi"/>
+                                <br/>
+                                <field name="ambulatorio" attrs="{'readonly': [('gruppo_0', '=', False)]}"/>
+                                <label for="ambulatorio" string="Ambulatorio"/>
+                                <br/>
+                                <label for="altro_gruppo_0" string="Altro"/>
+                                <field name="altro_gruppo_0" attrs="{'readonly': [('gruppo_0', '=', False)]}"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: center !important;">
+                                <field name="gruppo_1"/>
+                                <label for="gruppo_1" string="Gruppo 1"/>
+                            </td>
+
+                            <td style="vertical-align: center !important;">
+                                <field name="veterinario" attrs="{'readonly': [('gruppo_1', '=', False)]}"/>
+                                <label for="veterinario" string="Veterinario"/>
+                                <br/>
+                                <field name="studio_dentistico" attrs="{'readonly': [('gruppo_1', '=', False)]}"/>
+                                <label for="studio_dentistico" string="Studio Dentistico"/>
+                                <br/>
+                                <field name="sala_fisioterapica" attrs="{'readonly': [('gruppo_1', '=', False)]}"/>
+                                <label for="sala_fisioterapica" string="Sala Fisioterapica"/>
+                                <br/>
+                                <field name="dentista" attrs="{'readonly': [('gruppo_1', '=', False)]}"/>
+                                <label for="dentista" string="Dentista"/>
+                                <br/>
+                                <label for="altro_gruppo_1" string="Altro"/>
+                                <field name="altro_gruppo_1" attrs="{'readonly': [('gruppo_1', '=', False)]}"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="vertical-align: center !important;">
+                                <field name="gruppo_2"/>
+                                <label for="gruppo_2" string="Gruppo 2"/>
+                            </td>
+
+                            <td style="vertical-align: center !important;">
+                                <field name="sala_operatoria" attrs="{'readonly': [('gruppo_2', '=', False)]}"/>
+                                <label for="sala_operatoria" string="Sala Operatoria"/>
+                                <br/>
+                                <label for="altro_gruppo_2" string="Altro"/>
+                                <field name="altro_gruppo_2" attrs="{'readonly': [('gruppo_2', '=', False)]}"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <group>
+                        <field name="rilievi_ambiente" attrs="{'invisible': [('locali_medici', '=', False)]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

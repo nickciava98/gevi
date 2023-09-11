@@ -1,0 +1,86 @@
+<odoo>
+    <template id="gevi_zupdate20230907_report_verbale_mat_inherit" inherit_id="gevi_report.report_verbale_mat">
+        <xpath expr="//t[@t-if='doc.mat_con_cabina']" position="after">
+            <t t-if="doc.locali_medici">
+                <p>
+                    <p>CLASSIFICAZIONE LOCALI AD USO MEDICO</p>
+
+                    <table class="table table-bordered">
+                        <tr t-if="doc.gruppo_0">
+                            <td style="vertical-align: center !important;">
+                                Gruppo 0
+                            </td>
+
+                            <td style="vertical-align: center !important;">
+                                <t t-if="doc.studio_medico_generico">
+                                    - Studio Medico Generico<br/>
+                                </t>
+
+                                <t t-if="doc.sala_massaggi">
+                                    - Sala Massaggi<br/>
+                                </t>
+
+                                <t t-if="doc.ambulatorio">
+                                    - Ambulatorio<br/>
+                                </t>
+
+                                <t t-if="doc.altro_gruppo_0">
+                                    - Altro: <span t-field="doc.altro_gruppo_0"/>
+                                </t>
+                            </td>
+                        </tr>
+
+                        <tr t-if="doc.gruppo_1">
+                            <td style="vertical-align: center !important;">
+                                Gruppo 1
+                            </td>
+
+                            <td style="vertical-align: center !important;">
+                                <t t-if="doc.veterinario">
+                                    - Veterinario<br/>
+                                </t>
+
+                                <t t-if="doc.studio_dentistico">
+                                    - Studio Dentistico<br/>
+                                </t>
+
+                                <t t-if="doc.sala_fisioterapica">
+                                    - Sala Fisioterapica<br/>
+                                </t>
+
+                                <t t-if="doc.dentista">
+                                    - Dentista<br/>
+                                </t>
+
+                                <t t-if="doc.altro_gruppo_1">
+                                    - Altro: <span t-field="doc.altro_gruppo_1"/>
+                                </t>
+                            </td>
+                        </tr>
+
+                        <tr t-if="doc.gruppo_2">
+                            <td style="vertical-align: center !important;">
+                                Gruppo 2
+                            </td>
+
+                            <td style="vertical-align: center !important;">
+                                <t t-if="doc.sala_operatoria">
+                                    - Sala Operatoria<br/>
+                                </t>
+
+                                <t t-if="doc.altro_gruppo_2">
+                                    - Altro: <span t-field="doc.altro_gruppo_2"/>
+                                </t>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div>
+                        Rilievi Ambiente Uso Medico:<br/>
+                        <p t-field="doc.rilievi_ambiente"/>
+                    </div>
+                </p>
+            </t>
+        </xpath>
+    </template>
+</odoo>
