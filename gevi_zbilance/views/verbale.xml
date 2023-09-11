@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <!-- view form gevi_verbali -->
+		<record model="ir.ui.view" id="view_gevi_bilance_verbale_form">
+			<field name="name">gevi_zbilance.verbale.form</field>
+			<field name="model">gevi_zbilance.verbale</field>
+			<field name="arch" type="xml">
+				<form string="Verbale di verifica" create="false">
+                   <header>
+                   <!-- START SDC EDIT 12/12/2016 
+                                    modifica type="object" in type="workflow" 
+                                    rimosso action dal name del button
+                                    modificato name per essere usato nelle transition -->
+                        <!--<button name="bozza" type="workflow"
+                                string="Recupera in Eseguito"
+                                states="cancellato"
+                                class="oe_highlight"/>
+                        <button name="assegna" type="workflow"
+                                string="Assegna" 
+                                states="bozza"
+                                class="oe_highlight"/>
+                        <button name="esegui" type="workflow"
+                                string="Eseguito" 
+                                states="assegnato"
+                                class="oe_highlight"
+                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
+                        <button name="conferma" type="workflow"
+                                string="Conferma Verbale" 
+                                states="eseguito"
+                                class="oe_highlight"
+                                confirm="Se la categoria dell'impianto è 'Ascensore Generico' non sarà possibile andare avanti. Vuoi continuare?"/>
+                        <button name="valida" type="workflow"
+                                string="Valida Definitivamente" 
+                                states="confermato"
+                                class="oe_highlight"/>-->
+                        <button name="action_bozza" type="object"
+                                string="Recupera in bozza"
+                                states="annullato"
+                                class="oe_highlight"
+                                />
+                        <!-- <button name="action_assegnato" type="object"
+                                string="Assegna" 
+                                states="bozza"
+                                class="oe_highlight"
+                                /> -->
+                        <button name="action_eseguito" type="object"
+                                string="Eseguito" 
+                                states="assegnato"
+                                class="oe_highlight"
+                                />
+
+<!--                        <button name="action_confermato" type="object"-->
+<!--                                string="Conferma Verbale" -->
+<!--                                states="eseguito"-->
+<!--                                class="oe_highlight"-->
+<!--                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?\nSe la categoria dell'impianto è 'Ascensore Generico' non sarà possibile andare avanti."-->
+<!--                                />-->
+
+<!--                        <button name="action_validato" type="object"-->
+<!--                                string="Valida Definitivamente" -->
+<!--                                states="confermato"-->
+<!--                                class="oe_highlight"-->
+<!--                                />-->
+
+                       <!-- name="303" -->
+                        <button name="%(action_lancia_wizard_conferma_con_pin)d" type="action"
+                                string="Conferma Verbale (PIN)" 
+                                states="eseguito" class="oe_highlight" 
+                                confirm="Sarà generato il numero progressivo del verbale. Vuoi continuare?"/>
+
+                       <!-- name="303" -->
+                        <button name="%(action_lancia_wizard_conferma_con_pin)d" type="action"
+                                string="Valida Definitivamente (PIN)" 
+                                states="confermato" 
+                                class="oe_highlight"/>
+
+                        <button name="action_annullato" type="object" string="Annulla Verbale"
+                                states="bozza,assegnato" confirm="Sei sicuro di voler ANNULLARE la verifica?"/>
+
+                        <button name="send_mail" type="object"
+                                string="Invia per email" 
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state', 'not in', 'validato')]}"
+                                confirm="Verrà inviata una email all'amministratore ed eventualmente al manutentore. La casella info@icoversrl.it riceverà una Copia Conforme del messaggio. Continuare?"/>
+
+                    <!-- STOP SDC  EDIT -->       
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                        <sheet>
+
+                            <h1 decoration-danger="True"
+                                attrs="{'invisible': [('blocco_amministrativo', '=', False)]}">BLOCCO AMMINISTRATIVO IN CORSO
+                            </h1>
+                            <h1>
+                                <label for="name" string="Verifica N." attrs="{'invisible': [('state','not in',('bozza','assegnato'))]}"/>
+                                <label for="name" string="Verbale N." attrs="{'invisible': [('state','not in',('eseguito','confermato','validato'))]}"/>
+                                <field name="name" readonly="1"/>
+                                <label for="name" string=" - Straordinaria" attrs="{'invisible': [('periodica', '=', True)]}"/>
+                                <label for="name" string=" - Periodica" attrs="{'invisible': [('periodica', '=', False)]}"/>
+                            </h1>
+
+                            
+                            <group>
+                                <group>
+                                    <field name="impianto_categoria_id" string="Tipo Impianto" options="{'no_open': True}"/>
+                                    <field name="customer_id" string="Cliente" attrs="{'readonly': [('name', '!=', '/')]}" options="{'no_open': True}"/>
+                                </group>
+                                <group>
+                                    <field name="ispettore_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                    <field name="responsabile_tecnico_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                                </group>
+                                <group>
+                                    <label for="impianto_id" string="Ubicazione"/>
+                                    <div>
+                                        <field name="impianto_id" attrs="{'readonly': [('name', '!=', '/')]}"/>
+                                        <field name="impianto_etichetta"/>
+                                        <field name="impianto_indirizzo"/>
+                                        <field name="impianto_indirizzo2" attrs="{'invisible': [('impianto_indirizzo2', '=', False)]}"/>
+                                        <field name="impianto_citta"/>
+                                        <div class="address_format">
+                                            <field name="impianto_cap" />
+                                            <field name="impianto_provincia" />
+                                        </div>
+                                    </div>
+                                </group>
+                                <group>
+                                    <!--<field name="data_assegnazione"/>-->
+                                    <field name="data_programmazione"/>
+                                    <!--<field name="data_esecuzione"/>-->
+                                    <field name="data_verbale"/>
+                                    <field name="data_validazione" attrs="{'invisible': [('state', 'not in', 'validato')]}"/>
+                                </group>
+                                <group>
+                                    <field name="data_ultima_verifica"/>
+
+                                    <field name="prossima_verifica" string="Prossima Verifica"
+                                           attrs="{'invisible': [('impianto_categoria_name', '!=', 'Messa a Terra')]}"/>
+                                </group>
+                            </group>
+                            <group>
+<!--                                        <field name="manutentore_id" options="{'no_quick_create': True, 'no_create_edit' : True}"/>-->
+                                    <field name="referente_id" options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            </group>
+
+<!--                                <group>-->
+<!--                                    <h1>Entrare nell'impianto per modificare gli attributi descrittivi</h1>-->
+<!--                                </group>                    -->
+
+                            <h2>Ispezione visiva</h2>
+
+                            <group>
+                                <group>
+                                    <field name="n_sigilli"/>
+                                </group>
+                                <group>
+                                    <field name="sigilli_regolari"/>
+                                    <field name="indicazioni_metr_regolari"/>
+                                </group>
+                              </group>
+
+                                <group>
+                                    <field name="note_sigilli"/>
+                                </group>
+
+                            <group>
+                                <group>
+                                    <field name="n_libretto_metr"/>
+                                </group>
+                                <group>
+                                    <field name="libretto_presente"/>
+                                    <field name="rilascio_nuovo_libretto"/>
+                                </group>
+                              </group>
+
+                                <group>
+                                    <field name="anno_marcatura_ce"/>
+                                    <field name="anno_fabbricazione"/>
+                                    <field name="data_inizio_utilizzo"/>
+                                    <field name="release_sw_bilancia"/>
+                                    <field name="rif_numero"/>
+                                </group>
+
+
+                            <group>
+                                <field name="impianto_categoria_name" invisible="1"/>
+<!--                                tipo_verbale-->
+                                 <field name="tipo_verbale"/>
+                                 <field name="pesiera_ids" widget="many2many_tags"/>
+                            </group>
+
+                            <group>
+                                <img src="/gevi_zbilance/static/src/img/schema_eccentricita.png"/>
+                            </group>
+                            <group>
+                                <field name="schema_eccentricita"/>
+                            </group>
+
+                            <notebook>
+                                <page string="Prova di Zero" >
+                                    <group>
+                                        <h3>Esattezza del dispositivo di azzeramento - Rif. EN 45501:2015 A 4.2.3</h3>
+                                    </group>
+                                    <group>
+                                        <field name="prova_zero_ids" nolabel="1">
+                                            <tree string="Prova di Zero" editable="bottom" create="false" delete="false">
+                                                <field name="divisione"/>
+                                                <field name="carico_l"/>
+                                                <field name="indicazione"/>
+                                                <field name="add_load"/>
+                                                <field name="p"/>
+                                                <field name="errore_e"/>
+                                                <field name="verifica" readonly="1" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+
+                                <page string="Prova di Ripetibilità">
+                                    <group>
+                                        <h3>Prova di Ripetibilità - Rif. EN 45501:2015 A 4.10</h3>
+                                    </group>
+                                    <group>
+                                        <field name="prova_ripetibilita_ids" nolabel="1">
+                                            <tree string="Prova di Ripetibilità" editable="bottom" create="false" delete="false">
+                                                <field name="indicazione"/>
+                                                <field name="delta_l"/>
+                                                <field name="p"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                    <group>
+                                        <field name="ripetibilita_carico"/>
+                                        <field name="ripetibilita_diff_pmax_pmin"/>
+                                        <field name="ripetibilita_tolleranza"/>
+                                    </group>
+                                </page>
+
+                                <page string="Prova di Eccentricità">
+                                    <group>
+                                        <h3>Prova di Eccentricità - Rif. EN 45501:2015 A 4.7</h3>
+                                    </group>
+                                    <group>
+                                        <field name="prova_eccentricita_ids" nolabel="1">
+                                            <tree string="Prova di Eccentricità" editable="bottom" create="false" delete="false">
+                                                <field name="posizione" readonly="1"/>
+                                                <field name="carico_l"/>
+                                                <field name="indicazione"/>
+                                                <field name="add_load"/>
+                                                <field name="p"/>
+                                                <field name="errore_e_zero"/>
+                                                <field name="errore_e_c"/>
+                                                <field name="mpe"/>
+                                                <field name="verifica" readonly="1"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page string="Prova di Linearità">
+                                    <group>
+                                        <h3>Prova di Linearità - Rif. EN 45501:2015 A 4.4.1</h3>
+                                    </group>
+                                    <group>
+                                        <field name="prova_linearita_ids" nolabel="1">
+                                            <tree string="Prova di Linearità" editable="bottom" create="false" delete="false">
+                                                <field name="divisione" readonly="1"/>
+                                                <field name="carico_l"/>
+                                                <field name="indicazione_cres"/>
+                                                <field name="indicazione_decr"/>
+                                                <field name="add_load_cres"/>
+                                                <field name="add_load_decr"/>
+                                                <field name="errore_e_zero_cres"/>
+                                                <field name="errore_e_zero_decr"/>
+                                                <field name="errore_e_corr_cres"/>
+                                                <field name="errore_e_corr_decr"/>
+                                                <field name="verifica_cres" readonly="1"/>
+                                                <field name="verifica_decr" readonly="1"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page string="Prova di Tara">
+                                    <group>
+                                        <h3>Esattezza del dispositivo di Tara - Rif. EN 45501:2015 A 4.6.1</h3>
+                                    </group>
+                                    <group>
+                                        <field name="prova_tara_ids" nolabel="1">
+                                            <tree string="Prova di Tara" editable="bottom" create="false" delete="false">
+                                                <field name="divisione"/>
+                                                <field name="carico_l"/>
+                                                <field name="indicazione"/>
+                                                <field name="add_load"/>
+                                                <field name="errore_e"/>
+                                                <field name="verifica" readonly="1" />
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page string="Prova di Mobilità">
+                                    <group>
+                                        <h3>Prova di mobilità (Indicazione analogica) - Rif. EN 45501:2015 A 4.9</h3>
+                                    </group>
+                                    <group>
+                                        <field name="prova_mobilita_ids" nolabel="1">
+                                            <tree string="Prova di Mobilità" editable="bottom" create="false" delete="false">
+                                                <field name="divisione"/>
+                                                <field name="carico_l"/>
+                                                <field name="indicazione"/>
+                                                <field name="add_load"/>
+                                                <field name="errore_e" readonly="1" />
+                                                <field name="indicazione_i2"/>
+                                                <field name="verifica" readonly="1"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </page>
+                            </notebook>
+                            <group>
+                                <h3>Esiti delle Prove</h3>
+                            </group>
+
+                            <group>
+                                <field name="esito_zero" string="Esito Prova di Zero - Rif. EN 45501:2015 A 4.2.3" readonly="1" />
+                                <field name="esito_ripetibilita" string="Esito Prova di Ripetibilità - Rif. EN 45501:2015 A 4.10" readonly="1" />
+                                <field name="esito_eccentricita" string="Esito Prova di Eccentricità - Rif. EN 45501:2015 A 4.7" readonly="1" />
+                                <field name="esito_linearita" string="Esito Prova di Linearità - Rif. EN 45501:2015 A 4.4.1" readonly="1" />
+                                <field name="esito_tara" string="Esito Prova di Tara - Rif. EN 45501:2015 A 4.6.1" readonly="1" />
+                                <field name="esito_mobilita" string="Esito Prova di Mobilità - Rif. EN 45501:2015 A 4.9" readonly="1" />
+                            </group>
+
+                            <group>
+                                <field name="esito_verifica" string="Esito della Verifica"  decoration-success="esito_verifica=='Positivo'"/>
+                            </group>
+                        <notebook>
+                            <page string="Altro">
+                            <group>
+                                <field name="note_interne"/>
+                            </group>
+                                <group>
+<!--
+                                    <field name="impianto_riga_descrizione_ids" nolabel="1">
+                                        <tree string="Attributi" editable="bottom" create="false" delete="false">
+                                            <field name="name" readonly="1"/>
+                                            <field name="valore_attributo"/>
+                                            <field name="unita_di_misura_id" readonly="1"/>
+                                        </tree>                           
+                                    </field> 
+-->
+                                </group>
+                            </page>
+
+                            <page string="Informazioni Correlate" attrs="{'invisible': True}">
+                                <group>
+                                    <field name="contratto_id"  options="{'no_open': True}"/>
+                                    <field name="periodica"/>
+                                    <field name="fattura_anticipata"/>
+                                    <field name="cf_cliente"/>
+                                    <field name="piva_cliente"/>
+                                    <field name="blocco_amministrativo"/>
+                                    <field name="is_ispettore" invisible="1"/>
+                                    <field name="is_responsabile_tecnico" invisible="1"/>               
+                                </group>
+                            </page>
+                        </notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <!-- calendar view -->
+        <record model="ir.ui.view" id="calendar_gevi_verbali_verbale_view">
+            <field name="name">Assegnazione Verifica</field>
+            <field name="model">gevi_zbilance.verbale</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario Verbali" date_start="data_programmazione"                          
+                          color="ispettore_id">
+                    <field name="customer_id"/>
+                    <field name="impianto_etichetta"/>
+                    <field name="impianto_citta"/>
+<!--                    <field name="manutentore_id"/>-->
+                </calendar>
+            </field>
+        </record>
+        
+        <!-- view tree gevi_verbali -->
+        <record model="ir.ui.view" id="view_gevi_bilance_verbale_tree">
+			<field name="name">gevi_zbilance.verbale.tree</field>
+			<field name="model">gevi_zbilance.verbale</field>
+			<field name="arch" type="xml">
+				<tree string="Lista Verifiche e Verbali" create="false"
+                      decoration-muted="state=='annullato'"
+                      decoration-info="state=='assegnato'"
+                      decoration-success="state in ('eseguito','pagamento_parziale')">
+                    <field name="name"/>
+                    <field name="data_verbale" attrs="{'invisible': [('state','not in',('confermato','validato'))]}"/>
+                    <field name="customer_id" />
+					<field name="impianto_id"/>
+                    <field name="periodica"/>
+                    <field name="impianto_categoria_id" />
+                    <field name="ispettore_id"/>
+                    <!--<field name="data_assegnazione" attrs="{'nolabel': [('state','not in','assegnato')]}"/>-->
+                    <field name="data_programmazione"/>
+                    <field name="data_ultima_verifica"/>
+                    <!--<field name="data_esecuzione" attrs="{'invisible': [('state','not in','eseguito')]}"/>-->
+                    <field name="state"/>
+				</tree>		
+			</field>
+		</record>
+
+        <!-- action gevi_verbali action -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_list">
+            <field name="name">Verifiche e Verbali</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,calendar,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+        <!-- search gevi_verbali filter -->
+        <record model="ir.ui.view" id="search_gevi_bilance_verbale_view">
+			<field name="name">gevi_zbilance.verbale.search</field>
+			<field name="model">gevi_zbilance.verbale</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+                    <field name="data_verbale"/>
+                    <field name="customer_id" />
+					<field name="impianto_id"/>
+                    <field name="impianto_categoria_id" />
+                    <field name="ispettore_id"/>
+                    <field name="cf_cliente"/>
+                    <field name="piva_cliente"/>
+                    <field name="referente_id"/>
+                    <!--<field name="data_assegnazione" attrs="{'nolabel': [('state','not in','assegnato')]}"/>-->
+                    <field name="data_programmazione"/>
+                    <field name="data_ultima_verifica"/>
+                    <!--<field name="data_esecuzione" attrs="{'invisible': [('state','not in','eseguito')]}"/>-->
+                    <field name="state" />
+						
+                    <filter string="Bozza"
+                        name="bozza"
+                        domain="[('state','=','bozza')]"
+                        help="Filtra per Bozza" />
+                    <filter string="Assegnato"
+                        name="assegnato"
+                        domain="[('state','=','assegnato')]"
+                        help="Filtra per Assegnato" />                   
+                    <filter string="Eseguito"
+                        name="eseguito"
+                        domain="[('state','=','eseguito')]"
+                        help="Filtra per Eseguito" />
+                    <filter string="Confermato"
+                        name="confermato"
+                        domain="[('state','=','confermato')]"
+                        help="Filtra per Confermato" />                    
+                    <filter string="Validato"
+                        name="validato"
+                        domain="[('state','=','validato')]"
+                        help="Filtra per Validato" />                    
+                    <filter string="Annullato"
+                        name="annullato"
+                        domain="[('state','=','annullato')]"
+                        help="Filtra per Annullato" />
+                    
+                    <group string="Raggruppa">
+                        <filter string="Stato"
+                            name="group_by_state"
+                            context="{'group_by':'state'}"
+                            help="filtro per Stato" />
+                        <filter string="Cliente"
+                            name="group_by_customer_id"
+                            context="{'group_by':'customer_id'}"
+                            help="filtro per Cliente" />
+                        <filter string="Amministratore"
+                            name="group_by_referente_id"
+                            context="{'group_by':'referente_id'}"
+                            help="filtro per Amministratore" />
+<!--                        <filter string="Manutentore"-->
+<!--                            name="group_by_manutentore_id"-->
+<!--                            context="{'group_by':'manutentore_id'}"-->
+<!--                            help="filtro per Manutentore" />-->
+                    </group>				
+				</search>
+            </field>
+        </record>       
+
+        <!-- action gevi_verbali filter bozza -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_bozza">
+            <field name="name">Bozza</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_state': 'bozza'}
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una Verifica
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter assegnato -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_assegnato">
+            <field name="name">Assegnato</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context" >{'search_default_state': 'assegnato'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una Verifica
+                </p>
+            </field>
+        </record>
+        <!-- action gevi_verbali filter eseguito -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_eseguito">
+            <field name="name">Eseguito</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">
+                {'search_default_state': 'eseguito'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una Verifica
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter confermato -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_confermato">
+            <field name="name">Confermato</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">
+                {'search_default_state': 'confermato'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter validato -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_validato">
+            <field name="name">Validato</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_state': 'validato'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+        <!-- action gevi_verbali filter annullato -->
+        <record model="ir.actions.act_window" id="action_gevi_bilance_verbale_annullato">
+            <field name="name">Annullato</field>
+            <field name="res_model">gevi_zbilance.verbale</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">
+                {'search_default_state': 'annullato'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un Verbale
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

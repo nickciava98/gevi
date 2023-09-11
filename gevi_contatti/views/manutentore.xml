@@ -1,0 +1,116 @@
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_contatti_manutentore_form">
+        <field name="name">gevi_contatti.manutentore.form</field>
+        <field name="model">gevi_contatti.manutentore</field>
+        <field name="arch" type="xml">
+            <form string="Manutentore">
+                <sheet>
+                    <h1>
+                        <span class="oe_inline oe_form_field">SCHEDA MANUTENTORE- </span>
+                        <field name="codice_manutentore" class="oe_inline" readonly="1"/>
+                    </h1>
+                    <h2><label for="name" string="Ragione sociale"/>
+                        <field name="name" default_focus="1" placeholder="Nome"/>
+                    </h2>
+                    <group>
+                        <group>
+                            <field name="tipo_manutentore_id" string="Tipo di Referente" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="cf" placeholder="Codice Fiscale"/>
+                            <field name="piva" placeholder="es. IT0533192309"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <label for="indirizzo" string="Indirizzo"/>
+                            <div>
+                                <field name="indirizzo" placeholder="Indirizzo"/>
+                                <field name="indirizzo2" invisible="1" placeholder="Estensione indirizzo"
+                                       attrs="{'invisible': [('indirizzo2', '=', False)]}"/>
+                                <field name="comuni_italiani_id" class="oe_edit_only"
+                                       options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"
+                                       placeholder="Scegli il comune"/>
+                                <field name="citta" placeholder="Città"/>
+                                <field name="localita" placeholder="Località" />
+                                <div class="address_format">
+                                    <field name="cap" placeholder="CAP" />
+                                    <field name="provincia" placeholder="Prov." />
+                                </div>
+
+                            </div>
+                        </group>
+                        <group>
+                            <field name="tel" placeholder="Telefono"/>
+                            <field name="cell" placeholder="Cellulare"/>
+                            <field name="fax" placeholder="Fax"/>
+                            <field name="email" placeholder="E-Mail"/>
+                            <field name="sitoweb" placeholder="www.sito.it"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="interlocutore" placeholder="Interlocutore"/>
+                    </group>
+                    <notebook>
+                        <page string="Note Interne">
+                            <field name="note_interne" placeholder="Ulteriori informazioni..." />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- view tree gevi_manutentore -->
+    <record model="ir.ui.view" id="view_gevi_contatti_manutentore_tree">
+        <field name="name">gevi_contatti.manutentore.tree</field>
+        <field name="model">gevi_contatti.manutentore</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Manutentori">
+                <field name="name"/>
+                <field name="indirizzo"/>
+                <field name="citta"/>
+                <field name="provincia"/>
+                <field name="cap"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- search gevi_manutentori filter -->
+    <record model="ir.ui.view" id="search_gevi_contatti_manutentore_view">
+        <field name="name">gevi_contatti.manutentore.search</field>
+        <field name="model">gevi_contatti.manutentore</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="cf"/>
+                <field name="piva"/>
+                <field name="citta"/>
+                <field name="provincia"/>
+
+                <group string="Raggruppa">
+                    <filter string="Nome"
+                            name="by_name"
+                            context="{'group_by':'name'}"
+                            help="Raggruppa per nome" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- action gevi_manutentore form -->
+    <record model="ir.actions.act_window" id="action_gevi_contatti_manutentore_list">
+        <field name="name">Manutentori</field>
+        <field name="res_model">gevi_contatti.manutentore</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un Manutentore
+            </p>
+        </field>
+    </record>
+</odoo>

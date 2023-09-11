@@ -1,0 +1,45 @@
+<odoo>
+    <record model="ir.ui.view" id="gevi_zone_manutentore_form_view">
+        <field name="name">gevi_zone.manutentore.form</field>
+        <field name="model">gevi_contatti.manutentore</field>
+        <field name="inherit_id" ref="gevi_contatti.view_gevi_contatti_manutentore_form"/>
+        <field name="arch" type="xml">
+            <!-- inserimento campo zona -->
+            <xpath expr="//field[@name='tipo_manutentore_id']" position="after">
+                <field name="zona_impianto_id" placeholder="Scegli la zona Impianto"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="gevi_zone_manutentore_tree_view">
+        <field name="name">gevi_zone.manutentore.tree</field>
+        <field name="model">gevi_contatti.manutentore</field>
+        <field name="inherit_id" ref="gevi_contatti.view_gevi_contatti_manutentore_tree"/>
+        <field name="arch" type="xml">
+            <!-- inserimento campo zona -->
+            <xpath expr="///field[@name='provincia']" position="after">
+                <field name="zona_impianto_id" placeholder="Scegli la zona Impianto"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_zone_gevi_manutentore_filter" model="ir.ui.view">
+        <field name="name">gevi_zone.manutentore.search</field>
+        <field name="model">gevi_contatti.manutentore</field>
+        <field name="inherit_id" ref="gevi_contatti.search_gevi_contatti_manutentore_view"/>
+        <field name="arch" type="xml">
+            <!-- Filtra per zona -->
+            <xpath expr="///field[@name='provincia']" position="after">
+                <field name="zona_impianto_id"/>
+            </xpath>
+
+            <!-- Raggruppa per zona -->
+            <xpath expr="//filter[@name='by_name']" position="after">
+                <filter string="Zona Impianto"
+                        name="group_by_zona"
+                        context="{'group_by':'zona_impianto_id'}"
+                        help="Raggruppa per Zona"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

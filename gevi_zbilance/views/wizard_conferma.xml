@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_bil_conferma_con_pin_form_view">
+            <field name="name">gevi_zbilance.wizardconferma.form</field>
+            <field name="model">gevi_zbilance.wizardconferma</field>
+            <field name="arch" type="xml">
+                <form string="Conferma con PIN">
+                    <div>Inserire il PIN</div>
+                    <group>
+                        <group>
+                            <field name="pin" string="PIN: " password="True"/>
+                        </group>
+                        <group>
+                            
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="conferma_con_pin" type="object"
+                                string="Conferma" class="oe_highlight"/>
+                        <button special="cancel" string="Annulla"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_lancia_wizard_conferma_con_pin" model="ir.actions.server">
+            <field name="name">Conferma con PIN</field>
+            <field name="model_id" ref="gevi_zbilance.model_gevi_zbilance_verbale"/>
+            <field name="binding_model_id" ref="gevi_zbilance.model_gevi_zbilance_verbale"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = record.wizard_bil_conferma()
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,38 @@
+<odoo>
+    <record model="ir.ui.view" id="gevi_zupdate20171219_account_invoice_form_view">
+        <field name="name">gevi_zupdate20171219.account.invoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="referente_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search Fattura -->
+    <record model="ir.ui.view" id="gevi_zupdate20171219_account_invoice_search_view">
+        <field name="name">gevi_zupdate20171219.account.invoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//field" position="before">
+                <field string="Tipo Amministratore" name="tipo_referente_id"/>
+                <field string="Tipo Cliente" name="tipo_cliente_id"/>
+                <field string="Utente Amministratore" name="utente_referente_id"/>
+                <field string="Agente Amministratore" name="agente_referente_id"/>
+            </xpath>
+
+            <xpath expr="//filter" position="after">
+                <filter string="Tipo Amministratore" name="group_by_tipo_referente_id"
+                        context="{'group_by':'tipo_referente_id'}"/>
+                <filter string="Tipo Cliente" name="group_by_tipo_cliente_id" context="{'group_by':'tipo_cliente_id'}"/>
+                <filter string="Utente Amministratore" name="group_by_utente_referente_id"
+                        context="{'group_by':'utente_referente_id'}"/>
+                <filter string="Agente Amministratore" name="group_by_agente_referente_id"
+                        context="{'group_by':'agente_referente_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,62 @@
+<odoo>
+    <record model="ir.ui.view" id="gevi_commerciale_referente_form_view">
+        <field name="name">gevi_commerciale.referente.form</field>
+        <field name="model">gevi_contatti.referente</field>
+        <field name="inherit_id" ref="gevi_contatti.view_gevi_contatti_referente_form"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <notebook position="inside">
+                <page name="verbali" string="Verifiche/Verbali">
+                    <field name="verbale_ids" create="false" delete="false">
+                        <tree>
+                            <field name="name"/>
+                            <field name="data_verbale"
+                                   attrs="{'invisible': [('state','not in',('confermato','validato'))]}"/>
+                            <field name="customer_id"/>
+                            <field name="impianto_id"/>
+                            <field name="periodica"/>
+                            <field name="impianto_categoria_id"/>
+                            <field name="ispettore_id"/>
+                            <field name="data_programmazione"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="appuntamenti" string="Appuntamenti">
+                    <field name="appuntamento_ids">
+                        <tree editable="bottom">
+                            <field name="commerciale_id" domain="[('user_id', '=', uid)]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            <field name="inizio_appuntamento"/>
+                            <field name="fine_appuntamento"/>
+                            <field name="esito"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="comunicazioni" string="Comunicazioni">
+                    <field name="comunicazione_ids">
+                        <tree editable="bottom">
+                            <field name="commerciale_id" domain="[('user_id', '=', uid)]"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
+                            <field name="tipo_comunicazione"/>
+                            <field name="data_comunicazione"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_gevi_contatti_miei_amministratori_list">
+        <field name="name">Miei amministratori</field>
+        <field name="res_model">gevi_contatti.referente</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['|',('agente_id.user_id', '=', uid), ('utente_assegnato_id', '=', uid)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Miei amministratori
+            </p>
+        </field>
+    </record>
+</odoo>

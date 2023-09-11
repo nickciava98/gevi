@@ -1,0 +1,87 @@
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_export_operativi_export_operativo_form">
+        <field name="name">gevi_export_operativi.export_operativo.form</field>
+        <field name="model">gevi_export_operativi.export_operativo</field>
+        <field name="arch" type="xml">
+            <form string="Export Operativi">
+                <group>
+                    <div>
+                        Selezionare l'intervallo di interesse.
+                    </div>
+                </group>
+                <group>
+                    <div style="font-weight: bold; color: darkred;">
+                        Dopo la generazione, sarà possibile scaricare il file dal menù "Le mie Esportazioni".
+                    </div>
+                </group>
+                <group name="export_ministero">
+                    <group>
+                        <field name="verbale_data_da"/>
+                        <field name="verbale_data_a"/>
+                    </group>
+                    <group>
+                        <button name="action_export_ministero" string="Excel Ministero"
+                                type="object" class="oe_highlight"/>
+                    </group>
+                </group>
+                <group name="export_eseguiti">
+                    <group>
+                        <field name="esecuzione_data_da"/>
+                        <field name="esecuzione_data_a"/>
+                    </group>
+                    <group>
+                        <button name="action_export_eseguiti" string="Excel Eseguiti"
+                                type="object" class="oe_highlight"/>
+                    </group>
+                </group>
+                <group name="export_confermati">
+                    <group>
+                        <field name="conferma_data_da"/>
+                        <field name="conferma_data_a"/>
+                    </group>
+                    <group>
+                        <button name="action_export_confermati" string="Excel Confermati"
+                                type="object" class="oe_highlight"/>
+                    </group>
+                </group>
+                <group name="export_verifiche">
+                    <group>
+                        <field name="zona_impianto_id"
+                               options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"/>
+                        <field name="manutentore_ids" widget="many2many_tags"
+                               options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"/>
+                    </group>
+                    <group>
+                        <field name="template_export_isp" readonly="1"/>
+                        <button name="action_export_ispettore" string="Excel Verifiche"
+                                type="object" class="oe_highlight"/>
+                    </group>
+                </group>
+                <group name="export_verifiche_manutentore">
+                    <group>
+                        <field name="programmazione_data_da"/>
+                        <field name="programmazione_data_a"/>
+                    </group>
+                    <group>
+                        <field name="zona_impianto_ids" widget="many2many_tags"
+                               options="{'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"/>
+                        <button name="action_export_manutentori" string="Excel Verifiche"
+                                type="object" class="oe_highlight"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Chiudi" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gevi_export_operativi_menu" model="ir.actions.act_window">
+        <field name="name">Export Operativi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gevi_export_operativi.export_operativo</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_gevi_export_operativi_export_operativo_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

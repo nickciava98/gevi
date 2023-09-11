@@ -1,0 +1,31 @@
+<odoo>
+    <record model="ir.ui.view" id="pannello_operativo_referente_form">
+        <field name="name">gevi_pannelli_operativi.pannello_operativo_referente.form</field>
+        <field name="model">gevi_pannelli_operativi.pannello_operativo_referente</field>
+        <field name="arch" type="xml">
+            <form string="Pannello Operativo per l'aggiornamento massivo dei dati dell'Amministratore">
+                <group name="aggiorna_zona_commerciale" string="Aggiorna Zona Commerciale">
+                    <group>
+                        <field name="zona_commerciale_id"
+                               options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                    </group>
+                    <group>
+                        <button name="cambio_zona_commerciale" type="object" string="Applica"
+                                class="oe_highlight"
+                                help="Per tutti gli Amministratori selezionati verrà aggiornata la zona commerciale con quella selezionata"/>
+                    </group>
+                </group>
+                <footer>
+                    <button special="cancel" string="Chiudi" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pannello_operativo_referente" model="ir.actions.act_window">
+        <field name="name">Pannello Operativo Amministratore</field>
+        <field name="res_model">gevi_pannelli_operativi.pannello_operativo_referente</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

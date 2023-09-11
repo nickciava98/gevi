@@ -1,0 +1,16 @@
+<odoo>
+    <template id="gevi_report.report_no_stampa">
+        <t t-name="gevi_report.report_verbale">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div class="row">
+                        <div style="text-align:center; font-size:14pt">
+                            ATTENZIONE:
+                            <br/>Non è possibile stampare un verbale che non è stato ESEGUITO, VALIDATO o CONFERMATO!
+                        </div>
+                    </div>
+                </div><!-- Fine class="page" -->
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <record model="ir.ui.view" id="verbali_cambio_categoria_impianto_verbale_form">
+        <field name="name">gevi_wizard_operativi.cambio_categoria_impianto_verbale.form</field>
+        <field name="model">gevi_wizard_operativi.cambio_categoria_impianto_verbale</field>
+        <field name="arch" type="xml">
+            <form string="Cambio categoria Impianto">
+                <div>Attenzione! Verrà cambiata la categoria dell'impianto senza nessun'altra operatività.<br/></div>
+                <group>
+                    <group>
+                        <field name="impianto_categoria_id" widget="selection" />
+                    </group>
+                </group>
+                <footer>
+                    <button name="cambio_categoria_impianto" type="object"
+                            string="Mi fido!" class="oe_highlight"/>
+                    <button special="cancel" string="Cancella"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_operativi_cambio_categoria_impianto_verbale" model="ir.actions.act_window">
+        <field name="name">Cambio categoria Impianto</field>
+        <field name="res_model">gevi_wizard_operativi.cambio_categoria_impianto_verbale</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

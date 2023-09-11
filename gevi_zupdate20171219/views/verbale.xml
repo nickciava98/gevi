@@ -1,0 +1,22 @@
+<odoo>
+    <record model="ir.ui.view" id="gevi_zupdate20171219_verbale_search_view">
+        <field name="name">gevi_zupdate20171219.verbale</field>
+        <field name="model">gevi_verbali.verbale</field>
+        <field name="inherit_id" ref="gevi_verbali.search_gevi_verbali_verbale_view"/>
+        <field name="arch" type="xml">
+            <!-- Intestazione scheda -->
+            <xpath expr="//filter" position="after">
+                <filter string="Prossimi 6 mesi" name="prossimi_sei_mesi"
+                        domain="[('data_programmazione','&lt;',(context_today()+relativedelta(months=7)).strftime('%Y-%m-01')), ('data_programmazione','&gt;=',time.strftime('%Y-%m-01'))]"
+                        help="Verbali che scadono nei prossimi 6 mesi"/>
+                <filter string="Anno Corrente" name="anno_corrente"
+                        domain="['|', ('data_programmazione', '=', False), '&amp;',('data_programmazione','&lt;=', time.strftime('%Y-12-31')),('data_programmazione','&gt;=',time.strftime('%Y-01-01'))]"
+                        help="Verbali programmati per l'anno corrente"/>
+                <filter string="Solo scaduti" name="solo_scaduti"
+                        domain="['|', ('data_programmazione', '=', False), ('data_programmazione','&lt;=', time.strftime('%Y-%m-%d'))]"
+                        help="Solo verbali scaduti"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

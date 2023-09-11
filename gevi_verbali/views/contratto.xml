@@ -1,0 +1,26 @@
+<odoo>
+    <record model="ir.ui.view" id="gevi_verbali_contratto_form_view">
+        <field name="name">gevi.verbali.contratto.form</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="inherit_id" ref="gevi_contratti.view_gevi_contratti_contratto_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Verifiche/Verbali" class="oe_page_">
+                    <group>
+                        <field name="verbali_ids" nolabel="1">
+                            <tree string="Verbali del Contratto">
+                                <field name="name"/>
+                                <field name="data_verbale"/>
+                                <field name="periodica"/>
+                                <field name="data_programmazione"/>
+                                <field name="state"/>
+                                <button name="apri_verbale" type="object" state="validato"
+                                        string="Apri" class="oe_highlight"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

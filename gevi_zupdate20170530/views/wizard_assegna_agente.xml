@@ -1,0 +1,27 @@
+<odoo>
+    <record model="ir.ui.view" id="wizard_assegna_agente_form_view">
+        <field name="name">gevi_zupdate20170530.assegna_agente.form</field>
+        <field name="model">gevi_zupdate20170530.wizard_assegna_agente</field>
+        <field name="arch" type="xml">
+            <form string="Assegna Agente">
+                <div>Scegliere l'agente da assegnare agli amministratori selezionati.</div>
+                <group>
+                    <field name="agente_id"
+                           options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="assegna_agente" type="object"
+                            string="Assegna" class="oe_highlight"/>
+                    <button special="cancel" string="Cancella"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lancia_wizard_assegna_agente" model="ir.actions.act_window">
+        <field name="name">Assegna Agente</field>
+        <field name="res_model">gevi_zupdate20170530.wizard_assegna_agente</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

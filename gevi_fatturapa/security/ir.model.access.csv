@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gevi_fatturapa_gevi_fatturapa,gevi_fatturapa.gevi_fatturapa,model_gevi_fatturapa_gevi_fatturapa,,1,0,0,0

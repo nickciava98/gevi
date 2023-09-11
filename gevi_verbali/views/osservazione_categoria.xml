@@ -1,0 +1,44 @@
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_verbali_osservazione_categoria_form">
+        <field name="name">Categoria Osservazione</field>
+        <field name="model">gevi_verbali.osservazione_categoria</field>
+        <field name="arch" type="xml">
+            <form string="Form Categoria Osservazione">
+                <sheet>
+                    <h1>Categoria Osservazione</h1>
+                    <group>
+                        <group>
+                            <field name="indice_categoria" string="Indice Categoria"/>
+                            <field name="name" string="Categoria Osservazione" />
+                        </group>
+                    </group>
+                    <group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Tree osservazione_categoria-->
+    <record model="ir.actions.act_window" id="action_gevi_verbali_osservazione_categoria_form">
+        <field name="name">Categoria Osservazione</field>
+        <field name="res_model">gevi_verbali.osservazione_categoria</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci Nuova Osservazione Categoria
+            </p>
+        </field>
+    </record>
+
+    <!-- Tree osservazione_categoria -->
+    <record model="ir.ui.view" id="gevi_verbali_osservazione_categoria_tree">
+        <field name="name">Categoria Osservazione</field>
+        <field name="model">gevi_verbali.osservazione_categoria</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Categoria Osservazioni">
+                <field name="indice_categoria" string="Indice Categoria"/>
+                <field name="name" string="Categoria Osservazione" />
+            </tree>
+        </field>
+    </record>
+</odoo>

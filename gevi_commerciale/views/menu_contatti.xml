@@ -1,0 +1,5 @@
+<odoo>
+    <menuitem id="gevi_contatti_miei_amministratori_menu" name="Miei Amministratori"
+              parent="gevi_contatti.gevi_contatti_side_menu_contatti"
+              action="action_gevi_contatti_miei_amministratori_list" sequence="5"/>
+</odoo>

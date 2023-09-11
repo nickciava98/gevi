@@ -1,0 +1,10 @@
+<odoo>
+    <report
+        id="report_gevi_contratti_contratto"
+        string="Accettazione Incarico"
+        model="gevi_contratti.contratto"
+        report_type="qweb-pdf"
+        file="gevi_report.report_contratto"
+        name="gevi_report.report_contratto"
+    />
+</odoo>

@@ -1,0 +1,31 @@
+<odoo>
+    <record model="ir.ui.view" id="wizard_assegna_isp_form_view">
+        <field name="name">gevi_verbali.assegna_isp.form</field>
+        <field name="model">gevi_verbali.wizard_assegna_isp</field>
+        <field name="arch" type="xml">
+            <form string="Assegna Ispettore">
+                <div>Scegliere l'ispettore da assegnare ai verbali selezionati. Eventuali verbali con stato diverso da "bozza" verranno ignorati!</div>
+                <group>
+                    <field name="ispettore_id"
+                           options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                </group>
+                <footer>
+                    <button name="assegna_isp" type="object"
+                            string="Assegna" class="oe_highlight"/>
+                    <button special="cancel" string="Cancella"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_assegna_isp" model="ir.actions.server">
+        <field name="name">Assegna Ispettore</field>
+        <field name="model_id" ref="gevi_verbali.model_gevi_verbali_verbale"/>
+        <field name="binding_model_id" ref="gevi_verbali.model_gevi_verbali_verbale"/>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = record.wizard_assegna_isp()
+        </field>
+    </record>
+</odoo>

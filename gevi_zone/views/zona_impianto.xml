@@ -1,0 +1,26 @@
+<odoo>
+    <record model="ir.ui.view" id="view_gevi_zone_zona_impianto_tree">
+        <field name="name">gevi_zone.zona_impianto.tree</field>
+        <field name="model">gevi_zone.zona_impianto</field>
+        <field name="arch" type="xml">
+            <tree string="Zona Impianto" editable="bottom">
+                <field name="parent_id"/>
+                <field name="name"/>
+                <field name="ispettore_id"/>
+                <field name="responsabile_tecnico_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Action -->
+    <record model="ir.actions.act_window" id="action_gevi_zone_zona_impianto_tree">
+        <field name="name">Zona Impianto</field>
+        <field name="res_model">gevi_zone.zona_impianto</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="context" eval="{'search_default_da_selezionare':1}">-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Inserisci una Zona Impianto
+            </p>
+        </field>
+    </record>
+</odoo>

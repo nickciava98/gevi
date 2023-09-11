@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_elenco_esportazioni_form" model="ir.ui.view">
+        <field name="name">gevi_export_operativi.elenco_esportazioni.form</field>
+        <field name="model">gevi_export_operativi.elenco_esportazioni</field>
+        <field name="arch" type="xml">
+            <form string="Esportazione Excel">
+                <group>
+                    <field name="excel_file" readonly="1" filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_elenco_esportazioni_tree" model="ir.ui.view">
+        <field name="name">gevi_export_operativi.elenco_esportazioni.tree</field>
+        <field name="model">gevi_export_operativi.elenco_esportazioni</field>
+        <field name="arch" type="xml">
+            <tree string="Esportazione Excel">
+                <field name="create_uid" string="Creato da"/>
+                <field name="create_date" string="Creato il"/>
+                <field name="name"/>
+                <field name="excel_file" filename="file_name"/>
+                <field name="file_name" invisible="1"/>
+                <field name="tipo" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_elenco_esportazioni_tree" model="ir.actions.act_window">
+        <field name="name">Elenco Esportazioni</field>
+        <field name="view_mode">tree,form</field>
+        <field name="res_model">gevi_export_operativi.elenco_esportazioni</field>
+    </record>
+
+    <record id="action_mie_esportazioni_tree" model="ir.actions.act_window">
+        <field name="name">Le mie Esportazioni</field>
+        <field name="view_mode">tree,form</field>
+        <field name="res_model">gevi_export_operativi.elenco_esportazioni</field>
+        <field name="domain">[('create_uid', '=', uid)]</field>
+    </record>
+
+    <record id="action_elenco_esportazioni_form" model="ir.actions.act_window">
+        <field name="name">Esportazione</field>
+        <field name="view_id" ref="view_elenco_esportazioni_form"/>
+        <field name="view_mode">form</field>
+        <field name="res_model">gevi_export_operativi.elenco_esportazioni</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+    <data noupdate="1">
+
+        <!--
+            # Sequences per Verifica
+        -->
+
+        <!--<record id="seq_type_gevi_verbali_verifica" model="ir.sequence.type">
+            <field name="name">Codice Verifica</field>
+            <field name="code">gevi_verbali.verifica</field>
+        </record>        -->
+        <record id="seq_gevi_verbali_verifica" model="ir.sequence">
+            <field name="name">GEVI Codice Verifica</field>
+            <field name="code">gevi_verbali.verifica</field>
+            <field name="prefix">Prog/</field>
+            <field name="padding">6</field>
+        </record>
+
+        <!--
+            # Sequences per Verbali
+        -->
+
+        <!--<record id="seq_type_gevi_verbali_verbale" model="ir.sequence.type">
+            <field name="name">Codice Verbale</field>
+            <field name="code">gevi_verbali.verbale</field>
+        </record>        -->
+        <record id="seq_gevi_verbali_verbale" model="ir.sequence">
+            <field name="name">GEVI Codice Verbale</field>
+            <field name="code">gevi_verbali.verbale</field>
+            <field name="prefix">%(year)s/</field>
+        </record>
+
+    </data>
+</odoo>

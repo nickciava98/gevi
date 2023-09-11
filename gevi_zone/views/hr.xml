@@ -1,0 +1,59 @@
+<odoo>
+	<record model="ir.ui.view" id="gevi_zone_hr_employee_form_view">
+		<field name="name">hr.employee.form</field>
+		<field name="model">hr.employee</field>
+		<field name="inherit_id" ref="hr.view_employee_form"/>
+		<field name="arch" type="xml">
+			<!-- inserimento campo zona -->
+			<xpath expr="//field[@name='coach_id']" position="after">
+				<!-- inserimento campo fittizio per test su qualifica -->
+				<field name="qualifica" invisible="1"/>
+			</xpath>
+			<notebook position="inside">
+				<!--<page string="Zona Agente" attrs="{'invisible': [('qualifica','not in', ['Agente'])]}">
+                    <group>
+                        <field name="zona_agente_ids" readonly="1">
+                            <tree string="Zona Agente">
+                                <field name="parent_id"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>-->
+				<page string="Zona Commerciale" attrs="{'invisible': [('qualifica','not in', ['Commerciale'])]}">
+					<group>
+						<field name="zona_commerciale_ids" readonly="1">
+							<tree string="Zona Commerciale">
+								<field name="parent_id"/>
+								<field name="name"/>
+							</tree>
+						</field>
+					</group>
+				</page>
+				<page string="Zona Impianto" attrs="{'invisible': [('qualifica','not in', ['Responsabile Tecnico','Ispettore'])]}">
+					<group>
+						<field name="zona_responsabile_tecnico_ids"
+							   attrs="{'invisible': [('qualifica','not in', ['Responsabile Tecnico'])]}"
+							   readonly="1">
+							<tree string="Zona Impianto RT">
+								<field name="parent_id"/>
+								<field name="name"/>
+								<field name="ispettore_id"/>
+							</tree>
+						</field>
+					</group>
+					<group>
+						<field name="zona_ispettore_ids"
+							   attrs="{'invisible': [('qualifica','not in', ['Ispettore'])]}" readonly="1">
+							<tree string="Zona Impianto ISP">
+								<field name="parent_id"/>
+								<field name="name"/>
+								<field name="responsabile_tecnico_id"/>
+							</tree>
+						</field>
+					</group>
+				</page>
+			</notebook>
+		</field>
+	</record>
+</odoo>

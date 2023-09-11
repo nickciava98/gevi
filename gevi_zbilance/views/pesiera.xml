@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Form Pesiera -->
+       	<record model="ir.ui.view" id="view_gevi_zbilance_pesiera_form">
+			<field name="name">Pesiera</field>
+			<field name="model">gevi_zbilance.pesiera</field>
+			<field name="arch" type="xml">
+				<form string="Pesiera Form">
+					<sheet>
+                        <group>
+                            <field name="classe" default_focus="1" />
+                            <field name="name" />
+                            <field name="marca" />
+                            <field name="modello" />
+                            <field name="descrizione" />
+                            <field name="matricola" />
+                            <field name="certificato" />
+                            <field name="scadenza_certificato" />
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <!--Action Pesiera -->
+        <record model="ir.actions.act_window" id="action_gevi_zbilance_pesiera_form">
+            <field name="name">Pesiera</field>
+            <field name="res_model">gevi_zbilance.pesiera</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Inserisci Pesiera
+                </p>
+            </field>
+        </record>
+
+        <!--Tree Pesiera -->
+        <record model="ir.ui.view" id="gevi_zbilance_pesiera_tree">
+            <field name="name">Pesiera</field>
+            <field name="model">gevi_zbilance.pesiera</field>
+            <field name="arch" type="xml">
+                <tree string="Lista pesiere">
+                    <field name="classe"/>
+                    <field name="name" />
+                    <field name="marca" />
+                    <field name="modello" />
+                    <field name="matricola" />
+                    <field name="certificato" />
+                    <field name="scadenza_certificato" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

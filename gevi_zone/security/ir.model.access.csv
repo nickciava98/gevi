@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gevi_zone_zona_commerciale,access_gevi_zone_zona_commerciale,model_gevi_zone_zona_commerciale,base.group_user,1,1,1,1
+access_gevi_zone_zona_impianto,access_gevi_zone_zona_impianto,model_gevi_zone_zona_impianto,base.group_user,1,1,1,1

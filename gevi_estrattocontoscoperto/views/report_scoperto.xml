@@ -1,0 +1,140 @@
+<odoo>
+    <template id="gevi_estrattocontoscoperto.report_scoperto_document">
+        <t t-call="gevi_report.html_container">
+            <t t-call="report.external_layout">
+                <div class="page" style="margin-left: 30px; margin-right: 30px;">
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-7">
+                            <span t-field="doc.name"/><br/>
+                            <t t-if="doc.indirizzo != False">
+                                <span t-field="o.indirizzo"/><br/>
+                            </t>
+                            <t t-if="doc.citta != False and doc.cap != False and doc.provincia != False">
+                                <span t-field="doc.cap"/> - <span t-field="doc.citta"/> (<span t-field="doc.provincia"/>)<br/>
+                            </t>
+                        </div>
+                        <p>
+                            Documento: Estratto Conto Scoperto<br/>
+                            Data: <span t-esc="oggi"/><br/>
+
+                        </p>
+                        <t t-set="valuta_c" t-value="res_company.currency_id"/>
+                        <t t-set="tot_amm" t-value="0"/>
+                        <t t-foreach="clienti" t-as="c">
+                            <t t-set="tot_doc" t-value="0"/>
+                            <t t-set="tot_scad" t-value="0"/>
+                            <t t-set="tot_pag" t-value="0"/>
+
+                            <t t-set="fatt_cliente" t-value="False"/>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7">CLIENTE: <span t-field="c.name"/> <span t-field="c.street"/> - <span t-field="c.zip"/> <span t-field="c.city"/> (<span t-field="c.provincia"/>)<br/> C.F. <span t-field="c.cf"/> - P.I. <span t-field="c.piva"/> </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo Doc.</th>
+                                        <th>Rif. Doc.</th>
+                                        <th>Data Doc.</th>
+                                        <th>Scadenza</th>
+                                        <th>Totale Doc.</th>
+                                        <th>Pagamenti</th>
+                                        <th>Scoperto</th>
+
+                                    </tr>
+                                </thead>
+                                <t t-foreach="fatture" t-as="f">
+                                    <t t-if="f.commercial_partner_id.id == c.id">
+                                        <t t-if="fatt_cliente == 0">
+                                            <t t-set="fatt_cliente" t-value="1"/>
+                                        </t>
+                                        <tr>
+                                            <td>
+                                                <span t-field="f.type"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="f.number"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="f.date_invoice"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="f.date_due"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="f.amount_total_company_signed"/>
+                                                <t t-set="tot_doc" t-value="tot_doc+f.amount_total_company_signed"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <t t-foreach="pagamenti" t-as="p">
+                                                    <t t-if="p.id in f.payment_ids.ids">
+                                                        <span t-field="p.payment_date" t-options="{'format';: 'dd-MM-yyyy'}"/>
+                                                        <span t-field="p.amount"/> <t t-set="tot_pag" t-value="tot_pag+p.amount"/>
+                                                        <!--
+                                                            <t t-if="p.name != '/'">
+                                                                <span t-field="p.name"/>
+                                                            </t>
+                                                        -->
+                                                    </t>
+                                                </t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span class="text-right" t-field="f.residual_company_signed"/>
+                                                <t t-set="tot_scad" t-value="tot_scad+f.residual_company_signed"/>
+                                                <t t-set="tot_amm" t-value="tot_amm+f.residual_company_signed"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-if="fatt_cliente == 0">
+                                    <tr>
+                                        <td colspan="7"  class="text-center">
+                                            <p><strong>Nessun documento da mostrare.</strong></p>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="fatt_cliente != 0">
+                                    <tr>
+                                        <td colspan="3"/>
+                                        <td><strong>Totale:</strong></td>
+                                        <td class="text-right">
+                                            <span t-esc="tot_doc" t-esc-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="tot_pag" t-esc-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="tot_scad" t-esc-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                            <p t-if="not fatture">
+                                <strong>Nessun documento da mostrare.</strong>
+                            </p>
+                        </t> <!-- t foreach cliente -->
+                        <t t-if="tot_amministratore == 0">
+                            <p>
+                                La situazione contabile è regolare.<br/>
+                            </p>
+                        </t>
+                        <t t-if="tot_amministratore != 0">
+                            <p>
+                                La informiamo, pertanto, che il totale degli scoperti è di <strong><span t-esc="tot_amm" t-esc-options='{"widget": "monetary", "display_currency": "valuta_c"}'/></strong>
+                            </p>
+                        </t>
+
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_scoperto">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="gevi_estrattocontoscoperto.report_scoperto_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

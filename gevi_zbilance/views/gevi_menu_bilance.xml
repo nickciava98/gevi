@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>   
+    <!-- MENU BILANCE -->
+        <!-- Top Menu -->
+		<menuitem id="gevi_bilance_top_menu" name="Bilance" web_icon="gevi_zbilance,static/description/app_icon.png"/>
+        
+        <!-- Side Menu - Applicazione -->
+        <menuitem id="gevi_bilance_side_menu" name="Verbali" parent="gevi_bilance_top_menu"/>
+        <menuitem id="gevi_bilance_tutti_categoria_menu" name="Tutti i Verbali" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_list" sequence="1"/>
+        <menuitem id="gevi_bilance_bozza_categoria_menu" name="Bozza" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_bozza" sequence="2"/>
+        <menuitem id="gevi_bilance_assegnato_categoria_menu" name="Assegnato" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_assegnato" sequence="3"/>
+        <menuitem id="gevi_bilance_eseguito_categoria_menu" name="Eseguito" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_eseguito" sequence="5"/>
+        <menuitem id="gevi_bilance_confermato_categoria_menu" name="Confermato" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_confermato" sequence="6"/>
+        <menuitem id="gevi_bilance_validato_categoria_menu" name="Validato" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_validato" sequence="7"/>
+        <menuitem id="gevi_bilance_annullato_categoria_menu" name="Annullato" parent="gevi_bilance_side_menu" action="action_gevi_bilance_verbale_annullato" sequence="8"/>
+
+        <!-- Side Menu - Configurazione Applicazione -->
+        <menuitem id="gevi_bilance_side_menu_configurazione" name="Configurazione" parent="gevi_bilance_top_menu"/>
+        <menuitem id="gevi_bilance_pesiere_menu" name="Pesiere" parent="gevi_bilance_side_menu_configurazione" action="action_gevi_zbilance_pesiera_form" sequence="1"/>
+
+<!--        <menuitem id="gevi_verbali_osservazione_categoria_menu" name="Categoria Osservazioni" parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_osservazione_categoria_form" sequence="2"/>-->
+<!--        <menuitem id="gevi_verbali_normeascensori_menu" name="Norme Ascensori" parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_normeascensori_form" sequence="3"/>-->
+<!--        <menuitem id="gevi_verbali_raccomandazione_menu" name="Raccomandazioni" parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_raccomandazione_form" sequence="4"/>-->
+<!--        <menuitem id="gevi_verbali_osservazione_mat_menu" name="Osservazioni MAT" parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_osservazione_mat_form" sequence="5"/>-->
+        
+    </data>
+</odoo>

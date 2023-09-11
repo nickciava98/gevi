@@ -1,0 +1,49 @@
+<odoo>
+    <record model="ir.actions.act_window" id="action_comuni_italiani_form">
+        <field name="name">Comuni Italiani</field>
+        <field name="res_model">comuni_italiani.comune</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Inserisci un Comune
+            </p>
+        </field>
+    </record>
+
+    <!--Tree Anagrafica Comuni -->
+    <record model="ir.ui.view" id="view_comuni_italiani_tree">
+        <field name="name">Comuni Italiani</field>
+        <field name="model">comuni_italiani.comune</field>
+        <field name="arch" type="xml">
+            <tree string="Lista Comuni Italiani">
+                <field name="name" default_focus="1" />
+                <field name="cap" />
+                <field name="provincia" />
+                <field name="regione" />
+                <field name="priorita" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_comuni_italiani_form">
+        <field name="name">Comuni Italiani</field>
+        <field name="model">comuni_italiani.comune</field>
+
+        <field name="arch" type="xml">
+            <form string="Anagrafica Comune">
+                <sheet>
+                    <group>
+                        <field name="name" default_focus="1" />
+                        <field name="cap" />
+                        <field name="provincia" />
+                        <field name="regione" />
+                        <field name="priorita" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="comuni_italiani_menu" name="Comuni Italiani"
+              parent="base.menu_config" action="action_comuni_italiani_form"/>
+</odoo>

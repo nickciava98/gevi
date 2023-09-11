@@ -1,0 +1,54 @@
+<odoo>
+    <menuitem id="gevi_verbali_top_menu" name="Verbali" web_icon="gevi_verbali,static/description/app_icon.png"/>
+
+    <!-- Side Menu - Applicazione -->
+    <menuitem id="gevi_verbali_side_menu" name="Verbali" parent="gevi_verbali_top_menu"/>
+    <menuitem id="gevi_verbali_tutti_categoria_menu" name="Tutti i Verbali"
+              parent="gevi_verbali_side_menu" action="action_gevi_verbali_verbale_list" sequence="1"/>
+    <menuitem id="gevi_verbali_bozza_categoria_menu" name="Bozza" parent="gevi_verbali_side_menu"
+              action="action_gevi_verbali_verbale_bozza" sequence="2"/>
+    <menuitem id="gevi_verbali_assegnato_categoria_menu" name="Assegnato" parent="gevi_verbali_side_menu"
+              action="action_gevi_verbali_verbale_assegnato" sequence="3"/>
+    <!--START BJ_Edit-->
+    <!--Eliminare   <menuitem id="gevi_verbali_programmato_categoria_menu" name="Programmato" parent="gevi_verbali_side_menu" action="action_gevi_verbali_verbale_programmato" sequence="4"/> -->
+    <!--STOP BJ_Edit-->
+    <menuitem id="gevi_verbali_eseguito_categoria_menu" name="Eseguito" parent="gevi_verbali_side_menu"
+              action="action_gevi_verbali_verbale_eseguito" sequence="5"/>
+    <menuitem id="gevi_verbali_confermato_categoria_menu" name="Confermato" parent="gevi_verbali_side_menu"
+              action="action_gevi_verbali_verbale_confermato" sequence="6"/>
+    <menuitem id="gevi_verbali_validato_categoria_menu" name="Validato" parent="gevi_verbali_side_menu"
+              action="action_gevi_verbali_verbale_validato" sequence="7"/>
+    <menuitem id="gevi_verbali_annullato_categoria_menu" name="Annullato" parent="gevi_verbali_side_menu"
+              action="action_gevi_verbali_verbale_annullato" sequence="8"/>
+
+    <!-- Side Menu - Configurazione Applicazione -->
+    <menuitem id="gevi_verbali_side_menu_configurazione" name="Configurazione"
+              parent="gevi_verbali_top_menu"/>
+    <menuitem id="gevi_verbali_osservazione_menu" name="Osservazioni"
+              parent="gevi_verbali_side_menu_configurazione" action="action_gevi_verbali_osservazione_form"
+              sequence="1"/>
+    <menuitem id="gevi_verbali_osservazione_categoria_menu" name="Categoria Osservazioni"
+              parent="gevi_verbali_side_menu_configurazione"
+              action="action_gevi_verbali_osservazione_categoria_form" sequence="2"/>
+    <menuitem id="gevi_verbali_normeascensori_menu" name="Norme Ascensori"
+              parent="gevi_verbali_side_menu_configurazione"
+              action="action_gevi_verbali_normeascensori_form" sequence="3"/>
+    <menuitem id="gevi_verbali_raccomandazione_menu" name="Raccomandazioni"
+              parent="gevi_verbali_side_menu_configurazione"
+              action="action_gevi_verbali_raccomandazione_form" sequence="4"/>
+    <menuitem id="gevi_verbali_osservazione_mat_menu" name="Osservazioni MAT"
+              parent="gevi_verbali_side_menu_configurazione"
+              action="action_gevi_verbali_osservazione_mat_form" sequence="5"/>
+
+<!--    <menuitem id="gevi_verbali_assegna_menu" name="Assegna Verbale"-->
+<!--              parent="gevi_verbali_top_menu"/>-->
+<!--    <menuitem id="menu_wizard_assegna_isp"-->
+<!--              parent="gevi_verbali_assegna_menu"-->
+<!--              action="action_lancia_wizard_assegna_isp"/>-->
+<!--    <menuitem id="menu_wizard_assegna_rt"-->
+<!--              parent="gevi_verbali_assegna_menu"-->
+<!--              action="action_lancia_wizard_assegna_rt"/>-->
+<!--    <menuitem id="menu_wizard_assegna_conferma_con_pin"-->
+<!--              parent="gevi_verbali_assegna_menu"-->
+<!--              action="action_lancia_wizard_conferma_con_pin"/>-->
+</odoo>
