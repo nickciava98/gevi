@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
         <template id="gevi_report.report_verbale">       
             <t t-name="gevi_report.report_verbale">  
@@ -43,4 +43,4 @@
             </t>  
         </template>  
     </data>
-</openerp>        
+</odoo>

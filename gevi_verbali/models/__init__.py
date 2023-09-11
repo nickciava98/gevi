@@ -3,7 +3,7 @@
 ### Appunti per il nuovo file python ###
 
 # -*- coding: utf-8 -*-
-# from openerp import models, fields, api, exceptions
+# from odoo import models, fields, api, exceptions
 
 # class nomeclasse(models.Model):
 #     _name = 'nomemodulo.nomeclasse'

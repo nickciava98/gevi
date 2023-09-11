@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
     <data>
         <record id="gevi_zupdate20230907_verbale_form_inherit" model="ir.ui.view">
             <field name="name">gevi.zupdate20230907.verbale.form.inherit</field>
@@ -82,4 +82,4 @@
             </field>
         </record>
     </data>
-</openerp>
+</odoo>

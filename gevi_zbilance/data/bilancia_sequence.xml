@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
+<odoo>
 	<data noupdate="1">
 
 		<record model="ir.sequence" id="seq_gevi_zbilance_bilancia">
@@ -22,4 +22,4 @@
             <field name="prefix">BIL %(year)s/</field>
         </record>
 	</data>
-</openerp>
+</odoo>

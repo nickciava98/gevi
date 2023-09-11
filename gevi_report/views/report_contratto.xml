@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
     <template id="gevi_report.report_contratto">
         <t t-name="gevi_report.report_contratto">
             <t t-call="gevi_report.html_container">
@@ -157,4 +157,4 @@
             </t>
         </t>
     </template>
-</openerp> 
+</odoo>
