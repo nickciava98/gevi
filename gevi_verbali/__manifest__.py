@@ -63,8 +63,8 @@
         'views/wizard_conferma.xml',
         # 'views/verbale_workflow.xml',
         # il caricamento della vista dei menu deve essere l'ultima cosa specificata nel contesto data.
-        'views/gevi_menu_verbali.xml',
         'views/verbale.xml',
+        'views/gevi_menu_verbali.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
