@@ -44,9 +44,9 @@
 
         'views/verbale.xml',
 
-        # 'data/bilancia_sequence.xml',
-        # 'data/gevi_zbilance.classe_pesiera.csv',
-        # 'data/gevi_zbilance.classe_strumento.csv',
+        'data/bilancia_sequence.xml',
+        'data/gevi_zbilance.classe_pesiera.csv',
+        'data/gevi_zbilance.classe_strumento.csv',
 
         # il caricamento della vista dei menu deve essere l'ultima cosa specificata nel contesto data.
         'views/gevi_menu_bilance.xml'
