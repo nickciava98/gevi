@@ -1,0 +1,35 @@
+<odoo>
+    <data noupdate="1">
+        <record id="strumento_i" model="gevi_zbilance.classe_strumento">
+            <field name="name">I</field>
+            <field name="campione_massa" ref="gevi_zbilance.pesiera_f1"/>
+            <field name="portata">6</field>
+            <field name="um_portata">kg</field>
+            <field name="tipo">speciale</field>
+        </record>
+
+        <record id="strumento_ii" model="gevi_zbilance.classe_strumento">
+            <field name="name">II</field>
+            <field name="campione_massa" ref="gevi_zbilance.pesiera_f2"/>
+            <field name="portata">6</field>
+            <field name="um_portata">kg</field>
+            <field name="tipo">fine</field>
+        </record>
+
+        <record id="strumento_iii" model="gevi_zbilance.classe_strumento">
+            <field name="name">III</field>
+            <field name="campione_massa" ref="gevi_zbilance.pesiera_m2"/>
+            <field name="portata">150</field>
+            <field name="um_portata">kg</field>
+            <field name="tipo">media</field>
+        </record>
+
+        <record id="strumento_iv" model="gevi_zbilance.classe_strumento">
+            <field name="name">IV</field>
+            <field name="campione_massa" ref="gevi_zbilance.pesiera_m3"/>
+            <field name="portata">6</field>
+            <field name="um_portata">kg</field>
+            <field name="tipo">ordinaria</field>
+        </record>
+    </data>
+</odoo>

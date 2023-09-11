@@ -1,0 +1,31 @@
+<odoo>
+    <data noupdate="1">
+        <record id="pesiera_e1" model="gevi_zbilance.classe_pesiera">
+            <field name="name">E1</field>
+        </record>
+
+        <record id="pesiera_e2" model="gevi_zbilance.classe_pesiera">
+            <field name="name">E2</field>
+        </record>
+
+        <record id="pesiera_f1" model="gevi_zbilance.classe_pesiera">
+            <field name="name">F1</field>
+        </record>
+
+        <record id="pesiera_f2" model="gevi_zbilance.classe_pesiera">
+            <field name="name">F2</field>
+        </record>
+
+        <record id="pesiera_m1" model="gevi_zbilance.classe_pesiera">
+            <field name="name">M1</field>
+        </record>
+
+        <record id="pesiera_m2" model="gevi_zbilance.classe_pesiera">
+            <field name="name">M2</field>
+        </record>
+
+        <record id="pesiera_m3" model="gevi_zbilance.classe_pesiera">
+            <field name="name">M3</field>
+        </record>
+    </data>
+</odoo>
