@@ -1,5 +1,5 @@
 <odoo>
-    <menuitem id="gevi_contratti_top_menu" name="Contratti" sequence="3"
+    <menuitem id="gevi_contratti_top_menu" name="Contratti"
               web_icon="gevi_contratti,static/description/app_icon.png"/>
 
 
