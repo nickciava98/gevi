@@ -179,7 +179,7 @@ class Verbale(models.Model):
     # UPDATE SDC 26/02/2017 per cambio stato revisione
     # inserire ('in_revisione', 'In Revisione'), tra gli stati del verbale
     def action_riconfermato(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -218,7 +218,7 @@ class Verbale(models.Model):
     #        return result
 
     def action_in_revisione(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -467,7 +467,7 @@ class Verbale(models.Model):
     # STOP BJ_Edit
 
     def action_bozza(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -475,7 +475,7 @@ class Verbale(models.Model):
             self.state = 'bozza'
 
     def action_assegnato(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -486,7 +486,7 @@ class Verbale(models.Model):
     # START SDC EDIT 17/12/2016
     def action_eseguito(self):
         for line in self:
-            if line.blocco_amministrativo is True:
+            if line.blocco_amministrativo:
                 raise exceptions.ValidationError(
                     'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                         line.codice_contratto))
@@ -500,7 +500,7 @@ class Verbale(models.Model):
                     line.state = 'eseguito'
 
     def action_confermato(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -521,7 +521,7 @@ class Verbale(models.Model):
 
     # START SDC EDIT 17/12/2016
     def action_validato(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -530,7 +530,7 @@ class Verbale(models.Model):
                 self.timbro_responsabile_tecnico = (self.env.user).timbro_rt
                 # self.data_validazione = fields.Date.context_today(self)
                 self.impianto_id.manutentore_id = self.manutentore_id
-                if self.periodica is True:
+                if self.periodica:
                     self.aggiorna_prossima_verifica()
                     self.aggiorna_contratto()
                 self.state = 'validato'
@@ -563,7 +563,7 @@ class Verbale(models.Model):
     # STOP SDC EDIT 17/12/2016
 
     def action_annullato(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
@@ -605,7 +605,7 @@ class Verbale(models.Model):
             self.impianto_id.provincia
         )
 
-        if self.periodica is True:
+        if self.periodica:
             sigla_periodica += 'P'
             costo = self.contratto_id.costo_verifica_periodica
         else:
@@ -614,7 +614,7 @@ class Verbale(models.Model):
 
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
-        if self.fattura_anticipata is True:
+        if self.fattura_anticipata:
             codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
             codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)

@@ -48,7 +48,7 @@ class Partner(models.Model):
     @api.onchange('split_payment')
     def _onchange_split_payment(self):
         for line in self:
-            if line.split_payment is True:
+            if line.split_payment:
                 line.property_account_position_id = \
                     self.env['account.fiscal.position'].search([('name', 'ilike', 'Split Payment')], limit=1).id
             else:

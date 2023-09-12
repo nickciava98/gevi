@@ -340,7 +340,7 @@ class VerbaleBilance(models.Model):
         self.timbro_responsabile_tecnico = (self.env.user).timbro_rt
         # self.data_validazione = fields.Date.context_today(self)
         self.impianto_id.manutentore_id = self.manutentore_id
-        if self.periodica is True:
+        if self.periodica:
             self.aggiorna_prossima_verifica()
             self.aggiorna_contratto()
         self.state = 'validato'
@@ -495,7 +495,7 @@ class VerbaleBilance(models.Model):
         self._compute_riferimenti_impianto()
 
     def verifica_blocco_amministrativo(self):
-        if self.blocco_amministrativo is True:
+        if self.blocco_amministrativo:
             raise exceptions.ValidationError('Sul contratto {0} è presente un blocco amministrativo e pertanto non è '
                                              'possibile procedere in alcun modo.'.format(self.codice_contratto))
 
@@ -547,7 +547,7 @@ class VerbaleBilance(models.Model):
         costo = 0
         codice_prodotto = ""
 
-        if self.periodica is True:
+        if self.periodica:
             sigla_periodica += 'P'
             costo = self.contratto_id.costo_verifica_periodica
         else:
@@ -556,7 +556,7 @@ class VerbaleBilance(models.Model):
 
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
             [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
-        if self.fattura_anticipata is True:
+        if self.fattura_anticipata:
             codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
             codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)

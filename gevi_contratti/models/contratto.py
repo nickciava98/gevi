@@ -418,7 +418,7 @@ class Contratto(models.Model):
                 if record.causale_blocco == 'fattura_anticipata':
                     fa = True
                 # attributi_descrittivi_obj = self.env['gevi.impianti.impianto_riga_descrizione'].search([('impianto_id', '=', record.impianto_id.id)])
-                if record.verifica_straordinaria is True:
+                if record.verifica_straordinaria:
                     verbale = verbale_obj.create({
                         'impianto_id': record.impianto_id.id,
                         'data_ultima_verifica': record.data_ultima_verifica,
