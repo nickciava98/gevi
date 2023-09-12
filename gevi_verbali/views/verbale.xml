@@ -100,9 +100,9 @@
                                    attrs="{'readonly': [('name', '!=', '/')]}" options="{'no_open': True}"/>
                         </group>
                         <group>
-                            <field name="ispettore_id"
+                            <field name="ispettore_id" readonly="True" force_save="True"
                                    options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
-                            <field name="responsabile_tecnico_id"
+                            <field name="responsabile_tecnico_id" readonly="True" force_save="True"
                                    options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
                         </group>
                         <group>
@@ -146,9 +146,9 @@
                                options="{'no_quick_create': True, 'no_create_edit' : True, 'no_open': True}"/>
                     </group>
 
-                    <group>
+                    <div>
                         <h1>Entrare nell'impianto per modificare gli attributi descrittivi</h1>
-                    </group>
+                    </div>
 
                     <group>
                         <field name="impianto_categoria_name" invisible="1"/>
