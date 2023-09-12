@@ -622,7 +622,7 @@ class Verbale(models.Model):
             codice_prodotto += 'C'
         # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
         prodotto_obj = self.env['product.product'].search([('name', '=', codice_prodotto)], limit=1)
-        data_verbale_formato_it = fields.Date.from_string(line.data_verbale)
+        data_verbale_formato_it = fields.Date.from_string(self.data_verbale)
         ordine = ordine_obj.create({
             # 'name': ,
             'origin': self.name,
