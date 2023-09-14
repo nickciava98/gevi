@@ -1,10 +1,11 @@
 <odoo>
-    <report
-            id="report_gevi_contratti_contratto"
-            string="Accettazione Incarico"
-            model="gevi_contratti.contratto"
-            report_type="qweb-pdf"
-            file="gevi_report.report_contratto"
-            name="gevi_report.report_contratto"
-    />
+    <record id="report_gevi_contratti_contratto" model="ir.actions.report">
+        <field name="name">Accettazione Incarico</field>
+        <field name="model">gevi_contratti.contratto</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gevi_report.report_contratto</field>
+        <field name="report_file">gevi_report.report_contratto</field>
+        <field name="binding_model_id" ref="gevi_contratti.model_gevi_contratti_contratto"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

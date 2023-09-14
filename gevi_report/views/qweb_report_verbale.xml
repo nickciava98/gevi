@@ -1,10 +1,11 @@
 <odoo>
-    <report
-            id="report_gevi_verbali_verbale"
-            string="Verbale"
-            model="gevi_verbali.verbale"
-            report_type="qweb-pdf"
-            file="gevi_report.report_verbale"
-            name="gevi_report.report_verbale"
-    />
+    <record id="report_gevi_verbali_verbale" model="ir.actions.report">
+        <field name="name">Verbale</field>
+        <field name="model">gevi_verbali.verbale</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gevi_report.report_verbale</field>
+        <field name="report_file">gevi_report.report_verbale</field>
+        <field name="binding_model_id" ref="gevi_verbali.model_gevi_verbali_verbale"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

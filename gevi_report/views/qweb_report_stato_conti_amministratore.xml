@@ -1,13 +1,13 @@
 <odoo>
-    <report
-            id="report_gevi_stato_conti_amministratore"
-            string="Stato dei Conti"
-            model="account.invoice"
-            report_type="qweb-pdf"
-            file="gevi_report.stato_conti_amministratore"
-            name="gevi_report.stato_conti_amministratore"
-            attachment_use="True"
-            attachment="(object.state in ('open','paid')) and
-            ('INV'+(object.number or '').replace('/','')+'.pdf')"
-    />
+    <record id="report_gevi_stato_conti_amministratore" model="ir.actions.report">
+        <field name="name">Stato dei Conti</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gevi_report.stato_conti_amministratore</field>
+        <field name="report_file">gevi_report.stato_conti_amministratore</field>
+        <field name="print_report_name">(object.state in ('open','paid')) and
+            ('INV'+(object.number or '').replace('/','')+'.pdf')</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

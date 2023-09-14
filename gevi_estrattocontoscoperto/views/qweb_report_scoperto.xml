@@ -1,20 +1,11 @@
 <odoo>
-    <report
-            id="report_gevi_estrattoconto_scoperto"
-            string="Estratto Conto Scoperto"
-            model="gevi_contatti.referente"
-            report_type="qweb-pdf"
-            file="gevi_estrattocontoscoperto.report_scoperto"
-            name="gevi_estrattocontoscoperto.report_scoperto"
-    />
-    <!--
-            <report
-                id="action_report_elenco_prelievi"
-                string="Elenco Prelievi Super"
-                model="res.partner"
-                report_type="qweb-pdf"
-                name="gelab_report.elenco_prelievi"
-                file="gelab_report.elenco_prelievi"
-                />
-    -->
+    <record id="report_gevi_estrattoconto_scoperto" model="ir.actions.report">
+        <field name="name">Estratto Conto Scoperto</field>
+        <field name="model">gevi_contatti.referente</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gevi_estrattocontoscoperto.report_scoperto</field>
+        <field name="report_file">gevi_estrattocontoscoperto.report_scoperto</field>
+        <field name="binding_model_id" ref="gevi_contatti.model_gevi_contatti_referente"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
