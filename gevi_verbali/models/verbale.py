@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import datetime
 import logging
+
+import dateutil.relativedelta
 
 from odoo import fields, models, api, exceptions
 
@@ -185,8 +188,8 @@ class Verbale(models.Model):
                     self.codice_contratto))
         else:
             for record in self:
-                self.timbro_ispettore = (self.env.user).timbro_isp
-                self.state = 'confermato'
+                record.timbro_ispettore = (self.env.user).timbro_isp
+                record.state = 'confermato'
 
     # Controllo su modifica post validazione
     def write(self, values):
@@ -224,7 +227,7 @@ class Verbale(models.Model):
                     self.codice_contratto))
         else:
             for record in self:
-                self.state = 'in_revisione'
+                record.state = 'in_revisione'
 
     # FINE UPDATE SDC 26/02/2017 per cambio stato revisione
 
@@ -383,27 +386,23 @@ class Verbale(models.Model):
     #     # return attributi_descrittivi_obj
 
     def aggiorna_prossima_verifica(self):
-        for line in self:
-            periodicita_verifica_int = int(line.contratto_id.periodicita_verifica)
-            start = fields.Date.from_string(line.data_verbale)
-            line.data_prossima_verifica = start.replace(year=start.year + periodicita_verifica_int)
-            line.impianto_id.data_ultima_verifica = line.data_verbale
-            line.data_ultima_verifica = line.data_verbale
-            # self.contratto_id.data_ultima_verifica_effettuata = self.data_verbale
-            # self.contratto_id.n_verifiche_effettuate += 1
+        periodicita_verifica_int = int(self.contratto_id.periodicita_verifica)
+        self.data_prossima_verifica = self.data_verbale.replace(years=self.data_verbale + periodicita_verifica_int)
+        self.impianto_id.data_ultima_verifica = self.data_ultima_verifica = self.data_verbale
+        # self.contratto_id.data_ultima_verifica_effettuata = self.data_verbale
+        # self.contratto_id.n_verifiche_effettuate += 1
 
     def aggiorna_contratto(self):
-        for line in self:
-            contratto_obj = self.env['gevi_contratti.contratto'].search([('id', '=', line.contratto_id.id)])
-            contratto_obj.data_ultima_verifica_effettuata = line.data_verbale
-            contratto_obj.n_verifiche_effettuate += 1
-            contratto_obj.data_prossima_verifica = line.data_prossima_verifica
-            contratto_obj.data_ultima_verifica = line.data_verbale
-            # edit 28/05/2018 bug manutentore in contratto
-            contratto_obj.manutentore_id = line.impianto_id.manutentore_id
+        contratto_obj = self.env['gevi_contratti.contratto'].search([('id', '=', self.contratto_id.id)])
+        contratto_obj.data_ultima_verifica_effettuata = self.data_verbale
+        contratto_obj.n_verifiche_effettuate += 1
+        contratto_obj.data_prossima_verifica = self.data_prossima_verifica
+        contratto_obj.data_ultima_verifica = self.data_verbale
+        # edit 28/05/2018 bug manutentore in contratto
+        contratto_obj.manutentore_id = self.impianto_id.manutentore_id
 
-            contratto_obj.aggiorna_stato()
-            contratto_obj._compute_impianto_ubicazione()
+        contratto_obj.aggiorna_stato()
+        contratto_obj._compute_impianto_ubicazione()
 
     @api.model
     def create(self, values):
@@ -480,7 +479,9 @@ class Verbale(models.Model):
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
                     self.codice_contratto))
         else:
-            self.state = 'assegnato'
+            if self.ispettore_id and self.responsabile_tecnico_id:
+                self.state = 'assegnato'
+
             self.data_assegnazione = fields.Date.context_today(self)
 
     # START SDC EDIT 17/12/2016
@@ -506,34 +507,39 @@ class Verbale(models.Model):
                     self.codice_contratto))
         else:
             for record in self:
-                self.data_conferma = fields.Date.context_today(self)
-                self.impianto_id.impianto_categoria_id = self.impianto_categoria_id
+                record.data_conferma = fields.Date.context_today(self)
+                record.impianto_id.impianto_categoria_id = record.impianto_categoria_id
                 # commentato per problema in fase si conferma del verbale su write del res.partner
                 # self.contratto_id.impianto_categoria_id = self.impianto_categoria_id
-                self.timbro_ispettore = (self.env.user).timbro_isp
+                record.timbro_ispettore = (self.env.user).timbro_isp
                 # self.state = 'confermato'
-                if self.name.find('Prog') != -1:
-                    self.name = self.env['ir.sequence'].with_context(ir_sequence_date='2023-01-01').next_by_code(
+                if record.name.find('Prog') != -1:
+                    record.name = self.env['ir.sequence'].with_context(ir_sequence_date='2023-01-01').next_by_code(
                         'gevi_verbali.verbale')
                     # self.name = self.env['ir.sequence'].next_by_code('gevi_verbali.verbale')
-                    self.data_verbale = fields.Date.context_today(self)
-                self.state = 'confermato'
+                    record.data_verbale = fields.Date.context_today(self)
+                record.state = 'confermato'
 
     # START SDC EDIT 17/12/2016
     def action_validato(self):
         if self.blocco_amministrativo:
             raise exceptions.ValidationError(
                 'Sul contratto {0} è presente un blocco amministrativo e pertanto non è possibile procedere in alcun modo.'.format(
-                    self.codice_contratto))
+                    self.codice_contratto
+                )
+            )
         else:
             if self.is_responsabile_tecnico:
-                self.timbro_responsabile_tecnico = (self.env.user).timbro_rt
-                # self.data_validazione = fields.Date.context_today(self)
+                self.timbro_responsabile_tecnico = self.env.user.timbro_rt
+                self.data_validazione = datetime.datetime.today()
                 self.impianto_id.manutentore_id = self.manutentore_id
+
                 if self.periodica:
                     self.aggiorna_prossima_verifica()
                     self.aggiorna_contratto()
+
                 self.state = 'validato'
+
             else:
                 raise exceptions.ValidationError(
                     'Solo il Responsabile Tecnico può validare definitivamente il verbale!')
@@ -557,7 +563,7 @@ class Verbale(models.Model):
         #     if contratto_obj.n_verifiche_contratto == contratto_obj.n_verifiche_effettuate:
         #         contratto_obj.action_scaduto()
 
-        if self.fattura_anticipata is False:
+        if not self.fattura_anticipata:
             self._crea_ordine_vendita()
 
     # STOP SDC EDIT 17/12/2016
@@ -587,19 +593,12 @@ class Verbale(models.Model):
 
     def _crea_ordine_vendita(self):
         # record = self
-        ordine_obj = self.env['sale.order']
-        costo = fields.Float(default=0.0, digits=(12, 2))
-        ubicazione = fields.Char()
-        # if self.impianto_id.indirizzo2 is False:
-        #     self.impianto_indirizzo2 = ' '
-        codice_prodotto = ""
         sigla_periodica = ""
-        sigla_impianto = ""
         ubicazione = '{0} {1}, {2} {3} - {4} {5} ({6})'.format(
             self.customer_id.name.encode('utf-8'),
             self.impianto_id.etichetta.encode('utf-8'),
             self.impianto_id.indirizzo.encode('utf-8'),
-            ' ' if self.impianto_id.indirizzo2 is False else self.impianto_id.indirizzo2,
+            ' ' if not self.impianto_id.indirizzo2 else self.impianto_id.indirizzo2,
             self.impianto_id.cap,
             self.impianto_id.citta,
             self.impianto_id.provincia
@@ -613,32 +612,35 @@ class Verbale(models.Model):
             costo = self.contratto_id.costo_verifica_straordinaria
 
         sigla_impianto = self.env['gevi.impianti.impianto_categoria'].search(
-            [('name', '=', self.impianto_categoria_id.name)], limit=1).descrizione
+            [('name', '=', self.impianto_categoria_id.name)], limit=1
+        ).descrizione
+
         if self.fattura_anticipata:
             codice_prodotto = 'VV{0}-{1}-FA'.format(sigla_periodica, sigla_impianto)
         else:
             codice_prodotto = 'VV{0}-{1}'.format(sigla_periodica, sigla_impianto)
+
         if self.customer_id.tipo_cliente_id.name == "Condominio":
             codice_prodotto += 'C'
-        # _logger.info('******************************** CODICE PRODOTTO: {0}'.format(self.codice_prodotto))
-        prodotto_obj = self.env['product.product'].search([('name', '=', codice_prodotto)], limit=1)
-        data_verbale_formato_it = fields.Date.from_string(self.data_verbale)
-        ordine = ordine_obj.create({
-            # 'name': ,
-            'origin': self.name,
 
-            'date_order': fields.Date.context_today(self),
+        prodotto_obj = self.env['product.product'].search([('name', '=', codice_prodotto)], limit=1)
+        data_verbale_formato_it = self.data_verbale.strftime("%d/%m/%Y")
+        ordine = self.env['sale.order'].create({
+            'origin': self.name,
+            'date_order': datetime.datetime.today(),
             'partner_id': self.customer_id.id,
             'partner_invoice_id': self.customer_id.id,
             'order_line': [(0, 0, {
                 'product_id': prodotto_obj.id,
-                'name': (prodotto_obj.description_sale).format(self.name, data_verbale_formato_it.strftime("%d/%m/%Y"),
-                                                               ubicazione,
-                                                               self.data_ultima_verifica),
+                'name': prodotto_obj.description_sale.format(
+                    self.name,
+                    data_verbale_formato_it,
+                    ubicazione,
+                    self.data_ultima_verifica
+                ),
                 'price_unit': costo,
                 'discount': 0.0,
-                'sequence': 10,
-
+                'sequence': 10
             })],
         })
 
@@ -648,6 +650,7 @@ class Verbale(models.Model):
                 ordine.write({'user_id': self.referente_id.agente_id.user_id.id})
 
         ordine.action_confirm()
+
         return ordine
 
         # ordine_linea_obj = self.env['sale.order.line']

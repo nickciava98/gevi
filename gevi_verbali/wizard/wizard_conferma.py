@@ -12,7 +12,7 @@ class WizardConferma(models.TransientModel):
 
     def conferma_con_pin(self):
         for line in self:
-            verbale = self.verbale_id
+            verbale = line.verbale_id
             if line.pin == self.env.user.pin:
                 if verbale.state in "confermato":
                     verbale.action_validato()

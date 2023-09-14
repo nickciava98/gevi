@@ -24,5 +24,5 @@ class WizardAssegnaISP(models.TransientModel):
                 verbale.ispettore_id = self.ispettore_id
             if verbale.state in "bozza":
                 verbale.ispettore_id = self.ispettore_id
-                verbale.action_assegnato()
+            verbale.action_assegnato()
         return {'type': 'ir.actions.act_window_close'}

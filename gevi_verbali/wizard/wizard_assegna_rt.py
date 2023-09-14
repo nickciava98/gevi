@@ -17,4 +17,5 @@ class WizardAssegnaRT(models.TransientModel):
         verbali = [self.verbale_id]
         for verbale in verbali:
             verbale.responsabile_tecnico_id = self.responsabile_tecnico_id
+            verbale.action_assegnato()
         return {'type': 'ir.actions.act_window_close'}

@@ -313,26 +313,26 @@ class VerbaleBilance(models.Model):
     def action_confermato(self):
         self.verifica_blocco_amministrativo()
         for record in self:
-            self.data_conferma = fields.Date.context_today(self)
-            self.impianto_id.impianto_categoria_id = self.impianto_categoria_id
-            self.timbro_ispettore = (self.env.user).timbro_isp
-            if self.name.find('Prog') != -1:
-                self.name = self.env['ir.sequence'].with_context(
+            record.data_conferma = fields.Date.context_today(self)
+            record.impianto_id.impianto_categoria_id = record.impianto_categoria_id
+            record.timbro_ispettore = (self.env.user).timbro_isp
+            if record.name.find('Prog') != -1:
+                record.name = self.env['ir.sequence'].with_context(
                     ir_sequence_date='2023-01-01').next_by_code('gevi_zbilance.verbale')
                 # self.name = self.env['ir.sequence'].next_by_code('gevi_zbilance.verbale')
-                self.data_verbale = fields.Date.context_today(self)
-            self.state = 'confermato'
+                record.data_verbale = fields.Date.context_today(self)
+            record.state = 'confermato'
 
     def action_in_revisione(self):
         self.verifica_blocco_amministrativo()
         for record in self:
-            self.state = 'in_revisione'
+            record.state = 'in_revisione'
 
     def action_riconfermato(self):
         self.verifica_blocco_amministrativo()
         for record in self:
-            self.timbro_ispettore = (self.env.user).timbro_isp
-            self.state = 'confermato'
+            record.timbro_ispettore = (self.env.user).timbro_isp
+            record.state = 'confermato'
 
     def action_validato(self):
         self.verifica_blocco_amministrativo()
@@ -344,7 +344,7 @@ class VerbaleBilance(models.Model):
             self.aggiorna_prossima_verifica()
             self.aggiorna_contratto()
         self.state = 'validato'
-        if self.fattura_anticipata is False:
+        if not self.fattura_anticipata:
             self._crea_ordine_vendita()
 
     def action_annullato(self):
@@ -500,7 +500,7 @@ class VerbaleBilance(models.Model):
                                              'possibile procedere in alcun modo.'.format(self.codice_contratto))
 
     def verifica_is_responsabile_tecnico(self):
-        if self.is_responsabile_tecnico is False:
+        if not self.is_responsabile_tecnico:
             raise exceptions.ValidationError('Solo il Responsabile Tecnico può validare definitivamente il verbale!')
 
     def aggiorna_prossima_verifica(self):
@@ -538,7 +538,7 @@ class VerbaleBilance(models.Model):
             self.customer_id.name.encode('utf-8'),
             self.impianto_id.etichetta.encode('utf-8'),
             self.impianto_id.indirizzo.encode('utf-8'),
-            ' ' if self.impianto_id.indirizzo2 is False else self.impianto_id.indirizzo2,
+            ' ' if not self.impianto_id.indirizzo2 else self.impianto_id.indirizzo2,
             self.impianto_id.cap,
             self.impianto_id.citta,
             self.impianto_id.provincia
