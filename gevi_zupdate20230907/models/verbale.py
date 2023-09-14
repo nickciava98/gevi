@@ -18,7 +18,7 @@ class Verbale(models.Model):
     )
     gruppo_2 = fields.Boolean(
         default=False,
-        string="Gruppo 1"
+        string="Gruppo 2"
     )
     studio_medico_generico = fields.Boolean(
         default=False,

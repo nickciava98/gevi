@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class VerbaleBilance(models.Model):
     _name = 'gevi_zbilance.verbale'
+    _description = "Verbale Bilance"
 
     name = fields.Char('Nome', default="/", readonly=True)
     codice_verifica = fields.Char(
@@ -113,7 +114,7 @@ class VerbaleBilance(models.Model):
     is_responsabile_tecnico = fields.Boolean("Is Responsabile Tecnico", compute='_compute_is_responsabile_tecnico')
 
     timbro_ispettore = fields.Binary(
-        string='Timbro',
+        string='Timbro Ispettore',
         required=False,
         readonly=False,
         index=False,
@@ -122,7 +123,7 @@ class VerbaleBilance(models.Model):
     )
 
     timbro_responsabile_tecnico = fields.Binary(
-        string='Timbro',
+        string='Timbro Resp. Tecnico',
         required=False,
         readonly=False,
         index=False,
@@ -144,7 +145,7 @@ class VerbaleBilance(models.Model):
     sigilli_regolari = fields.Boolean("Sigilli Regolari", default=False)
     indicazioni_metr_regolari = fields.Boolean("Indicazioni metrologiche regolari", default=False)
     note_sigilli = fields.Char("Note Sigilli", default=False)
-    n_libretto_metr = fields.Char("Sigilli N.", default=False)
+    n_libretto_metr = fields.Char("Libretto Metr. N.", default=False)
     libretto_presente = fields.Boolean("Libretto Presente", default=True)
     rilascio_nuovo_libretto = fields.Boolean("Rilascio di un nuovo SI", default=False)
     anno_marcatura_ce = fields.Char("Anno Marcatura (CE)", default=False)

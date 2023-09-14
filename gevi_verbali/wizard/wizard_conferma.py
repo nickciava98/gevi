@@ -4,6 +4,7 @@ from odoo import fields, models, exceptions
 
 class WizardConferma(models.TransientModel):
     _name = 'gevi_verbali.wizardconferma'
+    _description = "Conferma"
 
     pin = fields.Char(string="Inserire il PIN", help="PIN (4 cifre)", size=4)
     verbale_id = fields.Many2one(
