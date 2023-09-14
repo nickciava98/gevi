@@ -76,4 +76,5 @@
         # 'data/gevi_impianti.valore_attributo.csv',
     ],
     'application': True,
+    'license': 'LGPL-3',
 }

@@ -40,4 +40,5 @@
         # 'demo.xml',
     ],
     'application': True,
+    'license': 'LGPL-3',
 }
