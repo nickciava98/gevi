@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class VerbaleRilievoRiga(models.Model):
     _name = 'gevi_verbali.verbale_rilievo_riga'
+    _description = "Rilievo Riga"
 
     name = fields.Char(string="Nome")
     valore_rilievo = fields.Float(string="Valore Rilievo", digits=(10, 2))

@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class Pesiera(models.Model):
     _name = 'gevi_zbilance.pesiera'
+    _description = "Pesiera"
 
     classe = fields.Many2one(
         'gevi_zbilance.classe_pesiera', string='Classe Pesiera',

@@ -4,6 +4,7 @@ from ..utils import utils
 
 class ClasseStrumento(models.Model):
     _name = 'gevi_zbilance.classe_strumento'
+    _description = "Classe Strumento"
 
     name = fields.Char("Classe strumento")
     campione_massa = fields.Many2one(

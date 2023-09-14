@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 
 class ZonaAgente(models.Model):
     _name = 'gevi_zone.zona_agente'
+    _description = "Zona Agente"
 
     name = fields.Char(string="Nome")
     parent_id = fields.Many2one(

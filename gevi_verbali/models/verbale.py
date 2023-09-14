@@ -2,8 +2,6 @@
 import datetime
 import logging
 
-import dateutil.relativedelta
-
 from odoo import fields, models, api, exceptions
 
 _logger = logging.getLogger(__name__)
@@ -11,6 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class Verbale(models.Model):
     _name = 'gevi_verbali.verbale'
+    _description = "Verbale"
 
     name = fields.Char('Nome', default="/", readonly=True)
     codice_verifica = fields.Char(

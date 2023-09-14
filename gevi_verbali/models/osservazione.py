@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class Osservazione(models.Model):
     _name = 'gevi_verbali.osservazione'
+    _description = "Osservazione"
 
     name = fields.Char('Nome')
     indice_osservazione = fields.Char('Indice')

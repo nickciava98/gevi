@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class ProvaTara(models.Model):
     _name = 'gevi_zbilance.prova_tara'
+    _description = "Prova Tara"
 
     verbale_id = fields.Many2one(
         'gevi_zbilance.verbale', ondelete='cascade', string="Verbale")

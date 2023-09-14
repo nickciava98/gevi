@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class ClasseBilancia(models.Model):
     _name = 'gevi_zbilance.classe_bilancia'
+    _description = "Classe Bilancia"
 
     divisioni = fields.Char("Divisioni")
     classe_strumento = fields.Many2one(

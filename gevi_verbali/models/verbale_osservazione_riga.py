@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class VerbaleOsservazioneRiga(models.Model):
     _name = 'gevi_verbali.verbale_osservazione_riga'
+    _description = "Osservazione Riga"
 
     name = fields.Char(string="Specifica")
     verbale_id = fields.Many2one(

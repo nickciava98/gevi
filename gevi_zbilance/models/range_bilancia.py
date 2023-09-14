@@ -4,6 +4,7 @@ from ..utils import utils
 
 class RangeBilancia(models.Model):
     _name = 'gevi_zbilance.range_bilancia'
+    _description = "Range Bilancia"
 
     p_min = fields.Float("(Pmin) Portata minima", default=0.00, digits=(12, 2), required=True, )
     p_max = fields.Float("(Pmax) Portata massima", default=0.00, digits=(12, 2), required=True, )
