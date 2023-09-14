@@ -10,23 +10,23 @@
 
         Update del 25-05-2017
         Verbali:
-            - Introduzione del flag “Prioritario” per segnalare le verifiche che hanno priorità
-            - Introduzione della dicitura “esercente attività di”, per le sole verifiche di Messa a terra e scariche atmosferiche
-            - Introduzione della periodicità nell’elenco delle verifiche
-            - Per i verbali di terra e scariche atmosferiche è stata introdotto un controllo che, se è vero che il proprietario è diverso dal cliente, stampa il contenuto del campo proprietario_id
+            Introduzione del flag “Prioritario” per segnalare le verifiche che hanno priorità
+            Introduzione della dicitura “esercente attività di”, per le sole verifiche di Messa a terra e scariche atmosferiche
+            Introduzione della periodicità nell’elenco delle verifiche
+            Per i verbali di terra e scariche atmosferiche è stata introdotto un controllo che, se è vero che il proprietario è diverso dal cliente, stampa il contenuto del campo proprietario_id
         Impianti:
-            - Introduzione del proprietario dell’impianto perché potrebbe differire dal cliente di fatturazione, per tutti i tipi di impianto
+            Introduzione del proprietario dell’impianto perché potrebbe differire dal cliente di fatturazione, per tutti i tipi di impianto
         Contabilità:
-            - Introduzione del raggruppamento per amministratore e per zona commerciale
-            - Stampa dell’estratto conto dello scaduto per amministratore
+            Introduzione del raggruppamento per amministratore e per zona commerciale
+            Stampa dell’estratto conto dello scaduto per amministratore
         Commerciale:
-            - Accesso alla schermata dei verbali riferiti agli amministratori associati così da permetterne anche la stampa
+            Accesso alla schermata dei verbali riferiti agli amministratori associati così da permetterne anche la stampa
 
         Sono stati aggiornati i seguenti modelli:
-        - partner: Inserimento campo tipo_attivita = fields.Char
-        - verbale: Inserimento campi prioritario = fields.Boolean, tipo_attivita = fields.Char, periodicita = fields.Selection, utente_assegnato_referente_id = fields.Many2one
-        - impianto: Inserimento campi proprietario_diverso = fields.Boolean, proprietario_id = fields.Many2one
-        - account_invoice: Inserimento campi referente_id = fields.Many2one, zona_commerciale_referente_id = fields.Many2one
+        partner: Inserimento campo tipo_attivita = fields.Char
+        verbale: Inserimento campi prioritario = fields.Boolean, tipo_attivita = fields.Char, periodicita = fields.Selection, utente_assegnato_referente_id = fields.Many2one
+        impianto: Inserimento campi proprietario_diverso = fields.Boolean, proprietario_id = fields.Many2one
+        account_invoice: Inserimento campi referente_id = fields.Many2one, zona_commerciale_referente_id = fields.Many2one
     """,
 
     'author': "Niccolò Ciavarella",

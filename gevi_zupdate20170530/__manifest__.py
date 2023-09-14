@@ -10,11 +10,11 @@
 
         Update del 30-05-2017
         Zone:
-            - Introduzione dei figli per le zone commerciali
-            - Introduzione dei figli per le zone impianto
-            - Computazione della zona commerciale nel referente (computazione _compute_propria_zona_commerciale in implementazione)
-            - Computazione della zona commerciale nel partner (computazione _compute_propria_zona_commerciale in implementazione)
-            - Computazione della zona impianto in impianto (computazione _compute_propria_zona_impianto in implementazione)
+            Introduzione dei figli per le zone commerciali
+            Introduzione dei figli per le zone impianto
+            Computazione della zona commerciale nel referente (computazione _compute_propria_zona_commerciale in implementazione)
+            Computazione della zona commerciale nel partner (computazione _compute_propria_zona_commerciale in implementazione)
+            Computazione della zona impianto in impianto (computazione _compute_propria_zona_impianto in implementazione)
     """,
 
     'author': "Niccolò Ciavarella",
