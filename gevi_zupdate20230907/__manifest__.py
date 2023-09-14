@@ -7,9 +7,7 @@
 
     'description': """
         Gestione delle Verifiche Ispettive per ICOVER S.R.L. - ISTITUTO COLLAUDI VERIFICHE E RICERCHE
-
         Aggiornamento verbali Messa a Terra
-
     """,
 
     'author': "Niccolò Ciavarella",
