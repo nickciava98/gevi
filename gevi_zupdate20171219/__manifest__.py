@@ -7,38 +7,7 @@
 
     'description': """
         Gestione delle Verifiche Ispettive per ICOVER S.R.L. - ISTITUTO COLLAUDI VERIFICHE E RICERCHE
-
         Update del 19-12-2017 operativo il giorno 11-01-2018
-        
-        Fatture:
-            - Introduzione campi related "Tipo Amministratore" e "Tipo Cliente" per Filtri e Raggruppamenti
-            - Introduzione campi related "Utente Amministratore" e "Agente Amministratore" per Filtri e Raggruppamenti
-        
-        Pagamenti:
-            - Introduzione campi related "Amministratore", "Zona Amministratore" e "Tipo Cliente" per Filtri e Raggruppamenti
-            - Introduzione campi related "Utente Amministratore" e "Agente Amministratore" per Filtri e Raggruppamenti
-
-        Contratti:
-            - Introduzione campi related "Zona Amministratore", "Tipo Amministratore" e "Tipo Cliente" per Filtri e Raggruppamenti
-            - Introduzione dello stato "disdetta_uv", ovvero Disdetta in attesa di ultima verifica
-                Note: Attenzione al metodo "aggiorna_stato(self)" di contratto perché deve contemplare la logica della disdetta_uv
-
-        Impianti:
-            - Introduzione del campo One2many "verbali_ids", per permettere la navigazione delle verifiche precedenti attraverso l'impianto
-            - Introduzione del metodo "apri_verbale" richiamabile dalla vista per aprire il verbale non in modalità popup/modale
-
-        Vendite:
-            - Introduzione del campo "verbale_id" per avere relazione tra vendite e verbali. 
-            
-                Note: Attenzione al metodo "_crea_ordine_vendita(self)" di verbale perché deve includere tra i campi 
-                        ...
-                        'origin': self.name,
-                        'verbale_id': self.id,
-                        ...
-
-        Verbali:
-            - Introduzione del campo related "stato_contratto" per avere informazioni sullo stato del contratto nella vista del verbale
-
     """,
 
     'author': "Niccolò Ciavarella",
