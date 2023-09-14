@@ -138,7 +138,7 @@ class Verbale(models.Model):
          ('attivazione', 'attivazione'),
          ]
     )
-    mat_non_conformita = fields.Text("Non Conformità", default='Nessuna')
+    mat_non_conformita = fields.Text("Non Conformità MaT", default='Nessuna')
     # END_BJ_Edit_24/02
     attributi_caricati = fields.Boolean("Attributi Caricati", default=False)
 
@@ -149,7 +149,7 @@ class Verbale(models.Model):
     is_responsabile_tecnico = fields.Boolean("Is Responsabile Tecnico", compute='_compute_is_responsabile_tecnico')
 
     timbro_ispettore = fields.Binary(
-        string='Timbro',
+        string='Timbro Ispettore',
         required=False,
         readonly=False,
         index=False,
@@ -158,7 +158,7 @@ class Verbale(models.Model):
     )
 
     timbro_responsabile_tecnico = fields.Binary(
-        string='Timbro',
+        string='Timbro Resp. Tecnico',
         required=False,
         readonly=False,
         index=False,
@@ -256,7 +256,7 @@ class Verbale(models.Model):
     mat_protezione_propria_cabina = fields.Text("Protezione contro i contatti indiretti")
     mat_formula_protezione_propria_cabina = fields.Char('Formula CEI 99-3',
                                                         default="Ue = Re x If = {0} x {1} = {2} V > Utp {3} V.")
-    mat_progetto = fields.Selection([('si', 'SI'), ('no', 'NO'), ('na', 'Non Applicabile')], string="Progetto")
+    mat_progetto = fields.Selection([('si', 'SI'), ('no', 'NO'), ('na', 'Non Applicabile')], string="Progetto MaT")
 
     mat_progetto_note = fields.Char('Note Progetto')
     mat_dichiarazione = fields.Selection([('si', 'SI'), ('no', 'NO')], string="Progetto")
@@ -270,7 +270,7 @@ class Verbale(models.Model):
     verbale_osservazione_mat_riga_ids = fields.One2many(
         'gevi_verbali.verbale_osservazione_mat_riga',
         'verbale_id',
-        string="Osservazioni")
+        string="Osservazioni MaT")
     verbale_rilievo_mat_riga_ids = fields.One2many(
         'gevi_verbali.verbale_rilievo_mat_riga',
         'verbale_id',
@@ -387,7 +387,7 @@ class Verbale(models.Model):
 
     def aggiorna_prossima_verifica(self):
         periodicita_verifica_int = int(self.contratto_id.periodicita_verifica)
-        self.data_prossima_verifica = self.data_verbale.replace(years=self.data_verbale + periodicita_verifica_int)
+        self.data_prossima_verifica = self.data_verbale.replace(years=self.data_verbale.year + periodicita_verifica_int)
         self.impianto_id.data_ultima_verifica = self.data_ultima_verifica = self.data_verbale
         # self.contratto_id.data_ultima_verifica_effettuata = self.data_verbale
         # self.contratto_id.n_verifiche_effettuate += 1
