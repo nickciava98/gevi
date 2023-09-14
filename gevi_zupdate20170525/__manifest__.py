@@ -23,10 +23,10 @@
             Accesso alla schermata dei verbali riferiti agli amministratori associati così da permetterne anche la stampa
 
         Sono stati aggiornati i seguenti modelli:
-        partner: Inserimento campo tipo_attivita = fields.Char
-        verbale: Inserimento campi prioritario = fields.Boolean, tipo_attivita = fields.Char, periodicita = fields.Selection, utente_assegnato_referente_id = fields.Many2one
-        impianto: Inserimento campi proprietario_diverso = fields.Boolean, proprietario_id = fields.Many2one
-        account_invoice: Inserimento campi referente_id = fields.Many2one, zona_commerciale_referente_id = fields.Many2one
+        partner: Inserimento campo tipo_attivita : fields.Char
+        verbale: Inserimento campi prioritario : fields.Boolean, tipo_attivita : fields.Char, periodicita : fields.Selection, utente_assegnato_referente_id : fields.Many2one
+        impianto: Inserimento campi proprietario_diverso : fields.Boolean, proprietario_id : fields.Many2one
+        account_invoice: Inserimento campi referente_id : fields.Many2one, zona_commerciale_referente_id : fields.Many2one
     """,
 
     'author': "Niccolò Ciavarella",
