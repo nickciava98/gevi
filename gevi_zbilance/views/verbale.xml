@@ -200,7 +200,7 @@
                         </group>
 
                         <group>
-                            <img src="/gevi_zbilance/static/src/img/schema_eccentricita.png"/>
+                            <img alt="Schema Eccentricità" src="/gevi_zbilance/static/src/img/schema_eccentricita.png"/>
                         </group>
                         <group>
                             <field name="schema_eccentricita"/>

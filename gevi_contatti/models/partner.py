@@ -93,7 +93,7 @@ class Partner(models.Model):
         result = super(Partner, self).write(values)
         return result
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         """
             Create a new record for a model Impianto

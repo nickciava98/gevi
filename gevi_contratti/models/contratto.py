@@ -476,7 +476,7 @@ class Contratto(models.Model):
             line.customer_id = line.impianto_id.customer_id
             line.referente_id = line.customer_id.referente_id
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         """
             Create a new record for a model Contratto

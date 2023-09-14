@@ -14,7 +14,7 @@ class NormeAscensori(models.Model):
     norma_collaudo = fields.Char('Norma Collaudo', default="/", required=True)
     norma_straordinaria = fields.Char('Norma Straordinaria', default="/", required=True)
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         values['name'] = values['norma_collaudo'] + " - " + values['norma_straordinaria']
         result = super(NormeAscensori, self).create(values)

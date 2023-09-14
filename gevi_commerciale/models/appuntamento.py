@@ -73,7 +73,7 @@ class Appuntamento(models.Model):
             duration = timedelta(seconds=3600)
             line.fine_appuntamento = start + duration
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         # values['utente_id'] = self.env.uid
         result = super(Appuntamento, self).create(values)

@@ -56,7 +56,7 @@ class Manutentore(models.Model):
         self.provincia = self.comuni_italiani_id.provincia
         self.regione = self.comuni_italiani_id.regione
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         """
             Create a new record for a model Impianto

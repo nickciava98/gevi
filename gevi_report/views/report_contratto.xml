@@ -200,7 +200,7 @@
                                                 _______________________________________________________________________
                                             </span>
                                             <br/>
-                                            <img src="/gevi_report/static/src/img/timbro-test.png"
+                                            <img alt="Timbro Test" src="/gevi_report/static/src/img/timbro-test.png"
                                                  style="max-height:99px; position:absolute; bottom: -20px; left: 210px; z-index:-1;"/>
                                         </p>
                                     </div>

@@ -455,7 +455,7 @@ class VerbaleBilance(models.Model):
             prova_superata = True
         return diff_max_min_p, tot_carico, prova_superata
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         """
              Create a new record for a model Verbale

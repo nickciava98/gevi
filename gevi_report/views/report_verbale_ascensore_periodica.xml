@@ -890,7 +890,7 @@
                                             _______________________________________________________________________
                                         </span>
                                         <br/>
-                                        <img t-if="doc.timbro_ispettore"
+                                        <img alt="Timbro Ispettore" t-if="doc.timbro_ispettore"
                                              t-att-src="'data:image/png;base64,%s' % doc.timbro_ispettore"
                                              style="max-height:180px; position:absolute; bottom: -50px; left: 60px; z-index:-1;"/>
                                     </p>
@@ -908,7 +908,7 @@
                                         <br/>
                                         <span style="font-weight:bold;" t-field="doc.data_validazione"/>
                                         <br/>
-                                        <img t-if="doc.timbro_responsabile_tecnico"
+                                        <img alt="Timbro RT" t-if="doc.timbro_responsabile_tecnico"
                                              t-att-src="'data:image/png;base64,%s' % doc.timbro_responsabile_tecnico"
                                              style="max-width:180px; position:absolute; bottom: 10px; left: 60px; z-index:-1;"/>
                                     </p>

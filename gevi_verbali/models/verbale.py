@@ -404,7 +404,7 @@ class Verbale(models.Model):
         contratto_obj.aggiorna_stato()
         contratto_obj._compute_impianto_ubicazione()
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         """
              Create a new record for a model Verbale

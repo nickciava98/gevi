@@ -86,7 +86,7 @@ class Impianto(models.Model):
     #         self.carica_attributi_descrittivi()
     #     return super(Impianto, self).write(values)
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         """
             Create a new record for a model Impianto

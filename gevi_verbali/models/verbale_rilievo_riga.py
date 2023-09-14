@@ -6,7 +6,7 @@ class VerbaleRilievoRiga(models.Model):
     _name = 'gevi_verbali.verbale_rilievo_riga'
 
     name = fields.Char(string="Nome")
-    valore_rilievo = fields.Float(string="Rilievo", digits=(10, 2))
+    valore_rilievo = fields.Float(string="Valore Rilievo", digits=(10, 2))
     note_rilievo = fields.Char(string="Note")
     impianto_categoria_name = fields.Char(compute='_compute_impianto_categoria_id', string="Categoria Impianto Name",
                                           store=True)
