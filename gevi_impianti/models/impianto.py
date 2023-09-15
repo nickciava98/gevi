@@ -90,7 +90,7 @@ class Impianto(models.Model):
     def create(self, values):
         result = super(Impianto, self).create(values)
         ic_id = result.impianto_categoria_id
-        cat_id = self.env['gevi.impianti.impianto_categoria'].search([('id', '=', ic_id)])
+        cat_id = self.env['gevi.impianti.impianto_categoria'].search([('id', '=', ic_id.id)])
 
         if cat_id.descrizione == 'BIL':
             result.codice_impianto = self.env['ir.sequence'].next_by_code('gevi.impianti.impianto')
