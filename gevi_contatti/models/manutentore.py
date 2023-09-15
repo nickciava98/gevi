@@ -58,12 +58,7 @@ class Manutentore(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-            Create a new record for a model Impianto
-            @param values: provides a data for new record
-            @return: returns a id of new record
-        """
-        values['codice_manutentore'] = self.env['ir.sequence'].next_by_code(
-            'gevi_contatti.manutentore')
         result = super(Manutentore, self).create(values)
+        result.codice_manutentore = self.env['ir.sequence'].next_by_code('gevi_contatti.manutentore')
+
         return result

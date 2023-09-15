@@ -44,7 +44,7 @@ class Comunicazione(models.Model):
         help=False
     )
 
-    @api.model_create_multi
-    def create(self, values):
-        result = super(Comunicazione, self).create(values)
-        return result
+    # @api.model_create_multi
+    # def create(self, values):
+    #     result = super(Comunicazione, self).create(values)
+    #     return result

@@ -48,14 +48,9 @@ class Referente(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-            Create a new record for a model Impianto
-            @param values: provides a data for new record
-            @return: returns a id of new record
-        """
-        values['codice_referente'] = self.env['ir.sequence'].next_by_code(
-            'gevi_contatti.referente')
         result = super(Referente, self).create(values)
+        result.codice_referente = self.env['ir.sequence'].next_by_code('gevi_contatti.referente')
+
         return result
 
     def invia_estratto_conto_scoperto(self):

@@ -478,20 +478,10 @@ class Contratto(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-            Create a new record for a model Contratto
-            @param values: provides a data for new record
-            @return: returns a id of new record
-        """
-        # per l'importazione dei dati, si può modificare il prefisso della
-        # sequence in modo da avere un prefisso tipo c/2016 così si capisce
-        # che è un contratto vecchio.
-
-        values['codice_contratto'] = self.env['ir.sequence'].get(
-            'gevi_contratti.contratto')
-        values['name'] = values['codice_contratto']
-        values['state'] = 'bozza'
         result = super(Contratto, self).create(values)
+        result.codice_contratto = self.env['ir.sequence'].get('gevi_contratti.contratto')
+        result.name = result.codice_contratto
+        result.state = 'bozza'
 
         return result
 

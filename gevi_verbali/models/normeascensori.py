@@ -16,8 +16,9 @@ class NormeAscensori(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        values['name'] = values['norma_collaudo'] + " - " + values['norma_straordinaria']
         result = super(NormeAscensori, self).create(values)
+        result.name = result.norma_collaudo + " - " + result.norma_straordinaria
+
         return result
 
     def write(self, values):

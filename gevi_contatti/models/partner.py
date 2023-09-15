@@ -95,15 +95,9 @@ class Partner(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-            Create a new record for a model Impianto
-            @param values: provides a data for new record
-            @return: returns a id of new record
-        """
-        # self.controllo_esistenza_cliente(values.get('cf'), values.get('piva'))
-        values['codice_cliente'] = self.env['ir.sequence'].next_by_code(
-            'gevi_contatti.partner')
         result = super(Partner, self).create(values)
+        result.codice_cliente = self.env['ir.sequence'].next_by_code('gevi_contatti.partner')
+
         return result
 
     @api.onchange('comuni_italiani_id')

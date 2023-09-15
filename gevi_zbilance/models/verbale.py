@@ -458,17 +458,12 @@ class VerbaleBilance(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-             Create a new record for a model Verbale
-             @param values: provides a data for new record
-             @return: returns a id of new record
-         """
-        values['codice_verifica'] = self.env['ir.sequence'].next_by_code(
-            'gevi_zbilance.verifica')
-        # _logger.info('******************************** CREAZIONE: {0}'.format(values['codice_verifica']))
-        values['name'] = values['codice_verifica']
         result = super(VerbaleBilance, self).create(values)
+        result.codice_verifica = self.env['ir.sequence'].next_by_code('gevi_zbilance.verifica')
+        result.name = result.codice_verifica
+
         result.popola_prove()
+
         return result
 
     def write(self, values):

@@ -88,23 +88,18 @@ class Impianto(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-            Create a new record for a model Impianto
-            @param values: provides a data for new record
-
-            @return: returns a id of new record
-        """
-        ic_id = values['impianto_categoria_id']
-        cat_id = self.env['gevi.impianti.impianto_categoria'].search([('id', '=', ic_id)])
-        if cat_id.descrizione == 'BIL':
-            values['codice_impianto'] = self.env['ir.sequence'].next_by_code(
-                'gevi.impianti.impianto')
-        else:
-            values['codice_impianto'] = self.env['ir.sequence'].next_by_code(
-                'gevi.impianti.impianto')
-        values['name'] = values['codice_impianto']
         result = super(Impianto, self).create(values)
+        ic_id = result.impianto_categoria_id
+        cat_id = self.env['gevi.impianti.impianto_categoria'].search([('id', '=', ic_id)])
+
+        if cat_id.descrizione == 'BIL':
+            result.codice_impianto = self.env['ir.sequence'].next_by_code('gevi.impianti.impianto')
+        else:
+            result.codice_impianto = self.env['ir.sequence'].next_by_code('gevi.impianti.impianto')
+
+        result.name = result.codice_impianto
         result.carica_attributi_descrittivi()
+
         return result
 
     def carica_attributi_descrittivi(self):
