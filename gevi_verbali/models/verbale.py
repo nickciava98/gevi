@@ -405,16 +405,11 @@ class Verbale(models.Model):
 
     @api.model_create_multi
     def create(self, values):
-        """
-             Create a new record for a model Verbale
-             @param values: provides a data for new record
-             @return: returns a id of new record
-         """
-        values['codice_verifica'] = self.env['ir.sequence'].next_by_code(
-            'gevi_verbali.verifica')
+        result = super().create(values)
+        result.codice_verifica = self.env['ir.sequence'].next_by_code('gevi_verbali.verifica')
         # _logger.info('******************************** CREAZIONE: {0}'.format(values['codice_verifica']))
-        values['name'] = values['codice_verifica']
-        result = super(Verbale, self).create(values)
+        result.name = result.codice_verifica
+
         return result
 
     def ricarica_attributi_verbale(self):
