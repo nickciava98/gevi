@@ -308,7 +308,7 @@ class Verbale(models.Model):
     @api.depends('ispettore_id')
     def _compute_is_ispettore(self):
         for line in self:
-            if line.ispettore_id.user_id.id == line.env.uid:
+            if line.ispettore_id.user_id.id == self.env.uid:
                 line.is_ispettore = True
             else:
                 line.is_ispettore = False
@@ -316,7 +316,7 @@ class Verbale(models.Model):
     @api.depends('responsabile_tecnico_id')
     def _compute_is_responsabile_tecnico(self):
         for line in self:
-            if line.responsabile_tecnico_id.user_id.id == line.env.uid:
+            if line.responsabile_tecnico_id.user_id.id == self.env.uid:
                 line.is_responsabile_tecnico = True
             else:
                 line.is_responsabile_tecnico = False
@@ -386,7 +386,7 @@ class Verbale(models.Model):
 
     def aggiorna_prossima_verifica(self):
         periodicita_verifica_int = int(self.contratto_id.periodicita_verifica)
-        self.data_prossima_verifica = self.data_verbale.replace(years=self.data_verbale.year + periodicita_verifica_int)
+        self.data_prossima_verifica = self.data_verbale.replace(year=self.data_verbale.year + periodicita_verifica_int)
         self.impianto_id.data_ultima_verifica = self.data_ultima_verifica = self.data_verbale
         # self.contratto_id.data_ultima_verifica_effettuata = self.data_verbale
         # self.contratto_id.n_verifiche_effettuate += 1
