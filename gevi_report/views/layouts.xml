@@ -50,9 +50,9 @@
             <t t-set="company" t-value="res_company"/>
         </t>
 
-        <t t-call="gevi_report.external_layout_header"/>
+        <t t-call="web.external_layout_header"/>
         <t t-raw="0"/>
-        <t t-call="gevi_report.external_layout_footer"/>
+        <t t-call="web.external_layout_footer"/>
     </template>
 
     <!-- Template per fattura -->

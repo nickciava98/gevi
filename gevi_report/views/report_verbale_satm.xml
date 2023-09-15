@@ -1,9 +1,9 @@
 <odoo>
     <template id="gevi_report.report_verbale_satm">
         <t t-name="gevi_report.report_verbale">
-            <t t-call="gevi_report.html_container">
+            <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="gevi_report.external_layout">
+                    <t t-call="web.external_layout">
                         <div class="page">
                             <p style="text-align: center;">
                                 <span style="font-weight:bold; font-size: 14pt;">VERBALE DI VERIFICA IMPIANTI DI

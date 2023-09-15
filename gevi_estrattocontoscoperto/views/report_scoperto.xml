@@ -1,6 +1,6 @@
 <odoo>
     <template id="gevi_estrattocontoscoperto.report_scoperto_document">
-        <t t-call="gevi_report.html_container">
+        <t t-call="web.html_container">
             <t t-call="report.external_layout">
                 <div class="page" style="margin-left: 30px; margin-right: 30px;">
                     <div class="row">
