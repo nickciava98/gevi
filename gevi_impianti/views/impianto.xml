@@ -26,16 +26,16 @@
                         <group>
                             <label for="indirizzo" string="Indirizzo"/>
                             <div>
-                                <field name="indirizzo" placeholder="Indirizzo"/>
+                                <field name="indirizzo" placeholder="Indirizzo" required="True"/>
                                 <field name="indirizzo2" invisible="1" placeholder="Estensione indirizzo"
                                        attrs="{'invisible': [('indirizzo2', '=', False)]}"/>
                                 <field name="comuni_italiani_id" class="oe_edit_only" placeholder="Scegli il comune"/>
-                                <field name="citta" placeholder="Città"/>
+                                <field name="citta" placeholder="Città" required="True"/>
                                 <field name="localita" placeholder="Località"
                                        attrs="{'invisible': [('localita', '=', False)]}"/>
                                 <div class="address_format">
-                                    <field name="cap" placeholder="CAP"/>
-                                    <field name="provincia" placeholder="Provincia"/>
+                                    <field name="cap" placeholder="CAP" required="True"/>
+                                    <field name="provincia" placeholder="Provincia" required="True"/>
                                 </div>
                             </div>
                         </group>

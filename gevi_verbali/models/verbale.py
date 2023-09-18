@@ -436,7 +436,7 @@ class Verbale(models.Model):
             for linea in self.impianto_categoria_id.impianto_attributo_rilievo_ids:
                 new_linee_attributo.append([0, 0, {
                     'name': linea.name,
-                    'unita_di_misura_id': linea.unita_di_misura_id,
+                    'unita_di_misura_id': linea.unita_di_misura_id.id,
                 }])
             self.verbale_rilievo_riga_ids = new_linee_attributo
             new_linee_attributo = []
