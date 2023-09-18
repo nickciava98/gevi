@@ -71,10 +71,10 @@
                                 <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                     <t t-if="'NR1' in x.name">
                                         <t t-if="'si' in x.valore_attributo">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                         </t>
                                         <t t-if="'no' in x.valore_attributo">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                            <span class="fa fa-square-o" aria-hidden="true"/>
                                         </t>
                                     </t>
                                 </t>
@@ -85,11 +85,11 @@
                                 <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                     <t t-if="'NR2' in x.name">
                                         <t t-if="'si' in x.valore_attributo">
-                                            <span style="margin-left: 2%" class="glyphicon glyphicon-check"
+                                            <span style="margin-left: 2%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>
                                         </t>
                                         <t t-if="'no' in x.valore_attributo">
-                                            <span style="margin-left: 2%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left: 2%" class="fa fa-square-o"
                                                   aria-hidden="true"/>
                                         </t>
                                     </t>
@@ -100,11 +100,11 @@
                                 <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                     <t t-if="'NR3' in x.name">
                                         <t t-if="'si' in x.valore_attributo">
-                                            <span style="margin-left: 2%" class="glyphicon glyphicon-check"
+                                            <span style="margin-left: 2%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>
                                         </t>
                                         <t t-if="'no' in x.valore_attributo">
-                                            <span style="margin-left: 2%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left: 2%" class="fa fa-square-o"
                                                   aria-hidden="true"/>
                                         </t>
                                     </t>
@@ -115,10 +115,10 @@
                                 <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                     <t t-if="'NR4' in x.name">
                                         <t t-if="'si' in x.valore_attributo">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                         </t>
                                         <t t-if="'no' in x.valore_attributo">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                            <span class="fa fa-square-o" aria-hidden="true"/>
                                         </t>
                                     </t>
                                 </t>
@@ -127,10 +127,10 @@
                                 <t t-foreach="doc.impianto_id.impianto_riga_descrizione_ids" t-as="x">
                                     <t t-if="'NR5' in x.name">
                                         <t t-if="'si' in x.valore_attributo">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                         </t>
                                         <t t-if="'no' in x.valore_attributo">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>
+                                            <span class="fa fa-square-o" aria-hidden="true"/>
                                         </t>
                                     </t>
                                 </t>
@@ -278,30 +278,30 @@
                                 <tr>
                                     <td>Progetto:
                                         <t t-if="'si' in doc.mat_progetto">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_progetto"/>
                                             <span style="margin-left:1%; font-weight:bold"
                                                   t-field="doc.mat_progetto_note"/>
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>NO
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>Non Applicabile
                                         </t>
                                         <t t-if="'no' in doc.mat_progetto">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-check"
+                                            <span class="fa fa-square-o" aria-hidden="true"/>SI
+                                            <span style="margin-left:1%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_progetto"/>
                                             <span style="margin-left:1%; font-weight:bold"
                                                   t-field="doc.mat_progetto_note"/>
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>Non Applicabile
                                         </t>
                                         <t t-if="'na' in doc.mat_progetto">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span class="fa fa-square-o" aria-hidden="true"/>SI
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>NO
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-check"
+                                            <span style="margin-left:1%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>Non Applicabile
                                         </t>
                                     </td>
@@ -309,16 +309,16 @@
                                 <tr>
                                     <td>Dichiarazione di conformità:
                                         <t t-if="'si' in doc.mat_dichiarazione">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_dichiarazione"/>
                                             <span style="margin-left:1%; font-weight:bold"
                                                   t-field="doc.mat_dichiarazione_note"/>
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>NO
                                         </t>
                                         <t t-if="'no' in doc.mat_dichiarazione">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-check"
+                                            <span class="fa fa-square-o" aria-hidden="true"/>SI
+                                            <span style="margin-left:1%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_dichiarazione"/>
                                             <span style="margin-left:1%; font-weight:bold"

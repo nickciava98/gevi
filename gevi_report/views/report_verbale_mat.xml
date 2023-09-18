@@ -264,30 +264,30 @@
                                 <tr>
                                     <td>Progetto:
                                         <t t-if="doc.mat_progetto == 'si'">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_progetto"/>
                                             <span style="margin-left:1%; font-weight:bold"
                                                   t-field="doc.mat_progetto_note"/>
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>NO
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>Non Applicabile
                                         </t>
                                         <t t-if="doc.mat_progetto == 'no'">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-check"
+                                            <span class="fa fa-square-o" aria-hidden="true"/>SI
+                                            <span style="margin-left:1%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_progetto"/>
                                             <span style="margin-left:1%; font-weight:bold"
                                                   t-field="doc.mat_progetto_note"/>
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>Non Applicabile
                                         </t>
                                         <t t-if="doc.mat_progetto == 'na'">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span class="fa fa-square-o" aria-hidden="true"/>SI
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>NO
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-check"
+                                            <span style="margin-left:1%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>Non Applicabile
                                         </t>
                                     </td>
@@ -295,16 +295,16 @@
                                 <tr>
                                     <td>Dichiarazione di conformità:
                                         <t t-if="doc.mat_dichiarazione == 'si'">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"/>
+                                            <span class="fa fa-check-square-o" aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_dichiarazione"/>
                                             <span style="margin-left:1%; font-weight:bold"
                                                   t-field="doc.mat_dichiarazione_note"/>
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-unchecked"
+                                            <span style="margin-left:1%" class="fa fa-square-o"
                                                   aria-hidden="true"/>NO
                                         </t>
                                         <t t-if="doc.mat_dichiarazione == 'no'">
-                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"/>SI
-                                            <span style="margin-left:1%" class="glyphicon glyphicon-check"
+                                            <span class="fa fa-square-o" aria-hidden="true"/>SI
+                                            <span style="margin-left:1%" class="fa fa-check-square-o"
                                                   aria-hidden="true"/>
                                             <span style="font-weight:bold" t-field="doc.mat_dichiarazione"/>
                                             <span style="margin-left:1%; font-weight:bold"
