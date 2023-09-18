@@ -23,8 +23,18 @@
 
     <record id="action_wizard_operativi_cambio_categoria_impianto_verbale" model="ir.actions.act_window">
         <field name="name">Cambio categoria Impianto</field>
+        <field name="type">ir.actions.act_window</field>
         <field name="res_model">gevi_wizard_operativi.cambio_categoria_impianto_verbale</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+    </record>
+
+    <record id="cambio_categoria_impianto_verbale_action_server" model="ir.actions.server">
+        <field name="name">Cambio categoria Impianto</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="gevi_verbali.model_gevi_verbali_verbale"/>
+        <field name="binding_model_id" ref="gevi_verbali.model_gevi_verbali_verbale" />
+        <field name="state">code</field>
+        <field name="code">action = record.open_wizard_cambio_categoria_impianto()</field>
     </record>
 </odoo>

@@ -106,13 +106,30 @@ class Impianto(models.Model):
         for r in self:
             if not r.attributi_caricati:
                 new_linee_attributo = []
-                for linea in r.impianto_categoria_id.impianto_attributo_descrittivo_ids:
-                    new_linee_attributo.append([0, 0, {
-                        'name': linea.name,
-                        'unita_di_misura_id': linea.unita_di_misura_id.id,
-                    }])
+
+                if "Ascensore" in r.impianto_categoria_id.name:
+                    ascensore_generico = self.env["gevi.impianti.impianto_categoria"].search(
+                        [("name", "ilike", "Ascensore Generico")], limit=1
+                    )
+                    attr_descr_ag = self.env["gevi.impianti.impianto_attributo_descrittivo"].search(
+                        [("impianto_categoria_id", "=", ascensore_generico.id)]
+                    )
+
+                    for linea in attr_descr_ag:
+                        new_linee_attributo.append([0, 0, {
+                            "name": linea.name,
+                            "unita_di_misura_id": linea.unita_di_misura_id.id
+                        }])
+
+                else:
+                    for linea in r.impianto_categoria_id.impianto_attributo_descrittivo_ids:
+                        new_linee_attributo.append([0, 0, {
+                            'name': linea.name,
+                            'unita_di_misura_id': linea.unita_di_misura_id.id,
+                        }])
+
                 r.attributi_caricati = True
-                self.impianto_riga_descrizione_ids = new_linee_attributo
+                r.impianto_riga_descrizione_ids = new_linee_attributo
 
     def name_get(self):
         res = []

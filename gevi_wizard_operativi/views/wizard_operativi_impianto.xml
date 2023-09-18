@@ -33,9 +33,19 @@
 
     <record id="action_wizard_operativi_carica_attributi_descrittivi" model="ir.actions.act_window">
         <field name="name">Carica attributi descrittivi</field>
+        <field name="type">ir.actions.act_window</field>
         <field name="res_model">gevi_wizard_operativi.carica_attributi_descrittivi</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+    </record>
+
+    <record id="carica_attributi_descrittivi_action_server" model="ir.actions.server">
+        <field name="name">Carica Attributi Descrittivi</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="gevi_impianti.model_gevi_impianti_impianto"/>
+        <field name="binding_model_id" ref="gevi_impianti.model_gevi_impianti_impianto" />
+        <field name="state">code</field>
+        <field name="code">action = record.open_wizard_carica_attributi_descrittivi()</field>
     </record>
 
     <record model="ir.ui.view" id="impianti_cambio_categoria_impianto_form">
@@ -62,8 +72,18 @@
 
     <record id="action_wizard_operativi_cambio_categoria_impianto" model="ir.actions.act_window">
         <field name="name">Cambio categoria Impianto</field>
+        <field name="type">ir.actions.act_window</field>
         <field name="res_model">gevi_wizard_operativi.cambio_categoria_impianto</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+    </record>
+
+    <record id="cambio_categoria_impianto_action_server" model="ir.actions.server">
+        <field name="name">Cambio categoria Impianto</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="gevi_impianti.model_gevi_impianti_impianto"/>
+        <field name="binding_model_id" ref="gevi_impianti.model_gevi_impianti_impianto" />
+        <field name="state">code</field>
+        <field name="code">action = record.open_wizard_cambio_categoria_impianto()</field>
     </record>
 </odoo>
