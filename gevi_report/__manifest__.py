@@ -29,8 +29,6 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/layouts.xml',
         'views/report_contratto.xml',
         'views/qweb_report_contratto.xml',
         'views/report_verbale.xml',

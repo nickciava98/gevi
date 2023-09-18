@@ -1,156 +1,151 @@
 <odoo>
     <template id="gevi_report.stato_conti_amministratore">
-        <t t-name="gevi_report.stato_conti_amministratore">
-            <t t-call="report.html_container">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="report.external_layout">
-                        <div class="page">
-
-                            <div class="col-xs-5 col-xs-offset-7">
-                                <span t-field="o.name"/>
+                    <div class="page">
+                        <div class="col-xs-5 col-xs-offset-7">
+                            <span t-field="o.name"/>
+                            <br/>
+                            <span t-field="o.indirizzo"/>
+                            <br/>
+                            <span t-field="o.cap"/>
+                            <br/>
+                            -
+                            <span t-field="o.citta"/>
+                            (<span t-field="o.provincia"/>)
+                            <br/>
+                            <br/>
+                            <t t-if="o.cf">
+                                <span t-field="o.cf"/>
                                 <br/>
-                                <span t-field="o.indirizzo"/>
-                                <br/>
-                                <span t-field="o.cap"/>
-                                <br/>
-                                -
-                                <span t-field="o.citta"/>
-                                (<span t-field="o.provincia"/>)
-                                <br/>
-                                <br/>
-                                <t t-if="o.cf">
-                                    <span t-field="o.cf"/>
-                                    <br/>
-                                </t>
-                                <t t-if="o.piva">
-                                    <span t-field="o.piva"/>
-                                    <br/>
-                                </t>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <br/>
-                            </div>
-                            <div class="col-xs-1">
-                            </div>
-                            <div class="col-xs-10">
-                                <p>
-                                    Documento: Stato Conti
-                                    <br/>
-                                    Data:
-                                    <span t-esc="Date.strftime('%d %B %Y')"/>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                </p>
-                                <p>
-                                    Gentile Amministratore
-                                    <br/>
-                                </p>
-                                <div style="text-align:justify">
-                                    <p>
-                                        I nostri registri indicano che alcuni pagamenti sul vostro conto ci sono ancora
-                                        dovuti.
-                                        Per favore, vogliate consultare i dettagli di seguito.
-                                        <br/>
-                                        Se il totale dovesse già essere stato saldato, la preghiamo di ignorare la
-                                        seguente notifica.
-                                        Altrimenti, siete pregati di pagarci per intero il seguente totale.
-                                    </p>
-                                    <p>
-                                        Per ogni domanda riguardante il vostro conto, non esitate a contattarci.
-                                        <br/>
-                                    </p>
-                                    <p>
-                                        Vi ringraziamo in anticipo per la vostra collaborazione.
-                                    </p>
-                                    <p>
-                                        Distinti Saluti
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-xs-1">
-                            </div>
-
-                            <!-- PAGE BREAK -->
-                            <p style="page-break-before:always;"></p>
-
-                            <t t-if="Lines[o.id]">
-                                <span t-field="res_company.overdue_msg"/>
-                                <table class="table table-condensed" t-foreach="Lines[o.id]" t-as="currency">
-                                    <thead>
-                                        <tr>
-                                            <th>Numero di rif.</th>
-                                            <th class="text-center">Data</th>
-                                            <th class="text-center">Data Scadenza</th>
-                                            <th>Descrizione</th>
-                                            <th class="text-right">Dovuto</th>
-                                            <th class="text-right">Pagato</th>
-                                        </tr>
-                                    </thead>
-                                    <tr t-foreach="Lines[o.id][currency]" t-as="line">
-                                        <td>
-                                            <span t-esc="line['move_id']"/>
-                                        </td>
-                                        <td>
-                                            <span t-esc="line['date']"/>
-                                        </td>
-                                        <td>
-                                            <span t-esc="line['date_maturity']"/>
-                                        </td>
-                                        <td>
-                                            <t t-if="line['name'] != '/'">
-                                                <span t-esc="line['name']"/>
-                                            </t>
-                                            <span t-esc="line['ref']"/>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="line['debit']"
-                                                  t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="line['credit']"
-                                                  t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"/>
-                                        <td>
-                                            <strong>Totale Movimenti :</strong>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="Totals[o.id][currency]['due']"
-                                                  t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="Totals[o.id][currency]['paid']"
-                                                  t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="Totals[o.id][currency]['mat']"
-                                                  t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
-                                        </td>
-                                        <td/>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"/>
-                                        <td>
-                                            <strong>Scoperto :</strong>
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-esc="Totals[o.id][currency]['due'] - Totals[o.id][currency]['paid']"
-                                                  t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
-                                        </td>
-                                    </tr>
-                                </table>
                             </t>
-                            <p t-if="not Lines[o.id]">
-                                <strong>There is nothing due with this customer.</strong>
-                            </p>
-
-
+                            <t t-if="o.piva">
+                                <span t-field="o.piva"/>
+                                <br/>
+                            </t>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                         </div>
-                    </t>
+                        <div class="col-xs-1">
+                        </div>
+                        <div class="col-xs-10">
+                            <p>
+                                Documento: Stato Conti
+                                <br/>
+                                Data:
+                                <span t-esc="Date.strftime('%d %B %Y')"/>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </p>
+                            <p>
+                                Gentile Amministratore
+                                <br/>
+                            </p>
+                            <div style="text-align:justify">
+                                <p>
+                                    I nostri registri indicano che alcuni pagamenti sul vostro conto ci sono ancora
+                                    dovuti.
+                                    Per favore, vogliate consultare i dettagli di seguito.
+                                    <br/>
+                                    Se il totale dovesse già essere stato saldato, la preghiamo di ignorare la
+                                    seguente notifica.
+                                    Altrimenti, siete pregati di pagarci per intero il seguente totale.
+                                </p>
+                                <p>
+                                    Per ogni domanda riguardante il vostro conto, non esitate a contattarci.
+                                    <br/>
+                                </p>
+                                <p>
+                                    Vi ringraziamo in anticipo per la vostra collaborazione.
+                                </p>
+                                <p>
+                                    Distinti Saluti
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+
+                        <!-- PAGE BREAK -->
+                        <p style="page-break-before:always;"></p>
+
+                        <t t-if="Lines[o.id]">
+                            <span t-field="res_company.overdue_msg"/>
+                            <table class="table table-condensed" t-foreach="Lines[o.id]" t-as="currency">
+                                <thead>
+                                    <tr>
+                                        <th>Numero di rif.</th>
+                                        <th class="text-center">Data</th>
+                                        <th class="text-center">Data Scadenza</th>
+                                        <th>Descrizione</th>
+                                        <th class="text-right">Dovuto</th>
+                                        <th class="text-right">Pagato</th>
+                                    </tr>
+                                </thead>
+                                <tr t-foreach="Lines[o.id][currency]" t-as="line">
+                                    <td>
+                                        <span t-esc="line['move_id']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line['date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line['date_maturity']"/>
+                                    </td>
+                                    <td>
+                                        <t t-if="line['name'] != '/'">
+                                            <span t-esc="line['name']"/>
+                                        </t>
+                                        <span t-esc="line['ref']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="line['debit']"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="line['credit']"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"/>
+                                    <td>
+                                        <strong>Totale Movimenti :</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="Totals[o.id][currency]['due']"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="Totals[o.id][currency]['paid']"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="Totals[o.id][currency]['mat']"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"/>
+                                    <td>
+                                        <strong>Scoperto :</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="Totals[o.id][currency]['due'] - Totals[o.id][currency]['paid']"
+                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                        <p t-if="not Lines[o.id]">
+                            <strong>There is nothing due with this customer.</strong>
+                        </p>
+                    </div>
                 </t>
             </t>
         </t>
