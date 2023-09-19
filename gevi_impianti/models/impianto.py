@@ -4,6 +4,7 @@ from odoo import fields, models, api, exceptions
 
 class Impianto(models.Model):
     _name = 'gevi.impianti.impianto'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Impianto"
 
     # richiesto per openchatter

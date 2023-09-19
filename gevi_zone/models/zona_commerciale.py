@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 
 class ZonaCommerciale(models.Model):
     _name = 'gevi_zone.zona_commerciale'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Zona Commerciale"
 
     name = fields.Char(string="Nome")

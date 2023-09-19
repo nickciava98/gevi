@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class ReportStorico(models.AbstractModel):
     _name = 'report.gevi_estrattoconto.report_storico'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = 'Estratto Conto Storico'
 
     def render_html(self, data=None):

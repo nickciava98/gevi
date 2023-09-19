@@ -4,6 +4,7 @@ from odoo import fields, models, exceptions
 
 class WizardCambioPin(models.TransientModel):
     _name = 'gevi_pin.wizard.cambiopin'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Cambio PIN"
 
     vecchio_pin = fields.Char(string="Vecchio PIN", help="PIN (4 cifre)", size=4)

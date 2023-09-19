@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class ImpiantoCategoria(models.Model):
     _name = 'gevi.impianti.impianto_categoria'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Impianto Categoria"
 
     name = fields.Char(string='name', required=True)

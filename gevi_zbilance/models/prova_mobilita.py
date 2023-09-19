@@ -3,6 +3,7 @@ from odoo import fields, models, api
 
 class ProvaMobilita(models.Model):
     _name = 'gevi_zbilance.prova_mobilita'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Prova Mobilità"
 
     verbale_id = fields.Many2one(

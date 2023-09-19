@@ -11,6 +11,12 @@
                         <field name="impianto_categoria_id" string="Categoria Impianto"/>
                     </group>
                 </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>

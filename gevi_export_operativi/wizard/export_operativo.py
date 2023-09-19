@@ -15,6 +15,7 @@ _logger = logging.getLogger(__name__)
 
 class ExportOperativo(models.TransientModel):
     _name = "gevi_export_operativi.export_operativo"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Export Operativo"
 
     verbale_data_da = fields.Date(string='Data Verbale inizio', default=fields.Date.today)

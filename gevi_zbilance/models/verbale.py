@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class VerbaleBilance(models.Model):
     _name = 'gevi_zbilance.verbale'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Verbale Bilance"
 
     name = fields.Char('Nome', default="/", readonly=True)

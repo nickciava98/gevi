@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class Comunicazione(models.Model):
     _name = 'gevi_commerciale.comunicazione'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Comunicazione"
 
     name = fields.Char(related='referente_id.name', store=True)

@@ -9,6 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class Verbale(models.Model):
     _name = 'gevi_verbali.verbale'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Verbale"
 
     name = fields.Char('Nome', default="/", readonly=True)

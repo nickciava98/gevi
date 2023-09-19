@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class WizardAssegnaISP(models.TransientModel):
     _name = 'gevi_verbali.wizard_assegna_isp'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Assegna Ispettore"
 
     ispettore_id = fields.Many2one(

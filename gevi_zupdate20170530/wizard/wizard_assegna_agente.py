@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class WizardAssegnaAgente(models.TransientModel):
     _name = 'gevi_zupdate20170530.wizard_assegna_agente'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Assegna Agente"
 
     agente_id = fields.Many2one(

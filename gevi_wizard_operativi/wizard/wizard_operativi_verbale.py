@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class CambioCategoriaImpiantoVerbale(models.TransientModel):
     _name = 'gevi_wizard_operativi.cambio_categoria_impianto_verbale'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Cambio Categoria Impianto Verbale"
 
     impianto_categoria_id = fields.Many2one(

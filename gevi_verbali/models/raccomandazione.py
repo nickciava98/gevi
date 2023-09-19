@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class Raccomandazione(models.Model):
     _name = 'gevi_verbali.raccomandazione'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Raccomandazione"
 
     name = fields.Char('Nome')

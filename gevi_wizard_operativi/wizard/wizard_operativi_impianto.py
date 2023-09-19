@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class CaricaAttributiDescrittivi(models.TransientModel):
     _name = 'gevi_wizard_operativi.carica_attributi_descrittivi'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Carica Attributi Descrittivi"
 
     def carica_attributi_descrittivi(self):
@@ -29,6 +30,7 @@ class CaricaAttributiDescrittivi(models.TransientModel):
 
 class CambioCategoriaImpianto(models.TransientModel):
     _name = 'gevi_wizard_operativi.cambio_categoria_impianto'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Cambio Categoria Impianto"
 
     impianto_categoria_id = fields.Many2one(

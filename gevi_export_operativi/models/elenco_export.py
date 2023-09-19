@@ -7,6 +7,7 @@ from odoo import fields, models
 
 class ElencoEsportazioni(models.Model):
     _name = "gevi_export_operativi.elenco_esportazioni"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Elenco Esportazioni"
     _order = "create_date desc"
 

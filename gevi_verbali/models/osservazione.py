@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class Osservazione(models.Model):
     _name = 'gevi_verbali.osservazione'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Osservazione"
 
     name = fields.Char('Nome')

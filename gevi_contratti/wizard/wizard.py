@@ -5,6 +5,7 @@ from odoo import models, fields
 
 class Wizard(models.TransientModel):
     _name = 'openacademy.wizard'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Wizard"
 
     def _default_session(self):

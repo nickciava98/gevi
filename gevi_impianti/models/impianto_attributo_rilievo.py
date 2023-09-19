@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class ImpiantoAttributoRilievo(models.Model):
     _name = 'gevi.impianti.impianto_attributo_rilievo'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Impianto Attributo Rilievo"
 
     name = fields.Char('Nome')

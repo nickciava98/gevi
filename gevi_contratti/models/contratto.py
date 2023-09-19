@@ -10,6 +10,7 @@ _logger = logging.getLogger(__name__)
 
 class Contratto(models.Model):
     _name = 'gevi_contratti.contratto'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Contratto"
 
     name = fields.Char('Nome', default="/", readonly=True)

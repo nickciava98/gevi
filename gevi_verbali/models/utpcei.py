@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class UtpCei(models.Model):
     _name = 'gevi_verbali.utpcei'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "UTP CEI"
 
     name = fields.Char('Valore Tf')

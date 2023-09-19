@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class ComuniItaliani(models.Model):
     _name = 'comuni_italiani.comune'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Comuni Italiani"
 
     name = fields.Char('Comune')

@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class ProvaTara(models.Model):
     _name = 'gevi_zbilance.prova_tara'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Prova Tara"
 
     verbale_id = fields.Many2one(

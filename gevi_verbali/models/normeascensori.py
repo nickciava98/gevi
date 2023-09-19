@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class NormeAscensori(models.Model):
     _name = 'gevi_verbali.normeascensori'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Norme collaudo ascensori"
 
     name = fields.Char('Nome', default="/", readonly=True)

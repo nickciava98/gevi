@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class ClasseBilancia(models.Model):
     _name = 'gevi_zbilance.classe_bilancia'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Classe Bilancia"
 
     divisioni = fields.Char("Divisioni")

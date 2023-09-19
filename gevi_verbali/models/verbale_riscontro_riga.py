@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class VerbaleRiscontroRiga(models.Model):
     _name = 'gevi_verbali.verbale_riscontro_riga'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Riscontro Riga"
 
     name = fields.Char(string="Nome")

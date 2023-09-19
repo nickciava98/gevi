@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class ProvaRipetibilita(models.Model):
     _name = 'gevi_zbilance.prova_ripetibilita'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Prova Ripetibilità"
 
     verbale_id = fields.Many2one(

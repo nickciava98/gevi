@@ -6,6 +6,7 @@ from odoo import fields, models, api
 
 class Appuntamento(models.Model):
     _name = 'gevi_commerciale.appuntamento'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Appuntamento"
 
     name = fields.Char(

@@ -3,6 +3,7 @@ from odoo import fields, models
 
 class Pesiera(models.Model):
     _name = 'gevi_zbilance.pesiera'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Pesiera"
 
     classe = fields.Many2one(

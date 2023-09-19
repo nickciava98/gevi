@@ -4,6 +4,7 @@ from odoo import fields, models, api
 
 class VerbaleRaccomandazioneRiga(models.Model):
     _name = 'gevi_verbali.verbale_raccomandazione_riga'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Raccomandazione Riga"
 
     name = fields.Char(string="Specifica")

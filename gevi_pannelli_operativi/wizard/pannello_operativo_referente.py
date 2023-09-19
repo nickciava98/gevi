@@ -4,6 +4,7 @@ from odoo import fields, models
 
 class PannelloOperativoReferente(models.TransientModel):
     _name = 'gevi_pannelli_operativi.pannello_operativo_referente'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Pannello Operativo Referente"
 
     zona_commerciale_id = fields.Many2one('gevi_zone.zona_commerciale', string="Zona Commerciale")

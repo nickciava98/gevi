@@ -4,6 +4,7 @@ from odoo import fields, models, api, exceptions
 
 class Referente(models.Model):
     _name = 'gevi_contatti.referente'
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Amministratore"
 
     # richiesto per openchatter
