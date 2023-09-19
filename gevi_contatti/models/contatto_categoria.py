@@ -4,11 +4,10 @@ from odoo import fields, models
 
 class ContattoCategoria(models.Model):
     _name = 'gevi_contatti.contatto_categoria'
-    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Categoria di contatto"
 
     # richiesto per openchatter
-    _inherit = ['mail.thread']
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char()
 
