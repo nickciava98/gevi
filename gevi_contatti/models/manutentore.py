@@ -4,11 +4,10 @@ from odoo import fields, models, api
 
 class Manutentore(models.Model):
     _name = 'gevi_contatti.manutentore'
-    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Manutentore"
 
     # richiesto per openchatter
-    _inherit = ['mail.thread']
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char('Nome', required=True)
     codice_manutentore = fields.Char('Codice Manutentore', default="/")
