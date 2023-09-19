@@ -1,9 +1,9 @@
 <odoo>
     <template id="gevi_report.stato_conti_amministratore">
         <t t-call="web.html_container">
-            <t t-call="web.external_layout">
-                <t t-foreach="docs" t-as="o">
-                    <div class="page">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-size: 14pt;">
                         <div class="col-xs-5 col-xs-offset-7">
                             <span t-field="o.name"/>
                             <br/>
@@ -36,7 +36,7 @@
                                 Documento: Stato Conti
                                 <br/>
                                 Data:
-                                <span t-esc="Date.strftime('%d %B %Y')"/>
+                                <span t-out="Date.strftime('%d %B %Y')"/>
                                 <br/>
                                 <br/>
                                 <br/>
@@ -88,27 +88,27 @@
                                 </thead>
                                 <tr t-foreach="Lines[o.id][currency]" t-as="line">
                                     <td>
-                                        <span t-esc="line['move_id']"/>
+                                        <span t-out="line['move_id']"/>
                                     </td>
                                     <td>
-                                        <span t-esc="line['date']"/>
+                                        <span t-out="line['date']"/>
                                     </td>
                                     <td>
-                                        <span t-esc="line['date_maturity']"/>
+                                        <span t-out="line['date_maturity']"/>
                                     </td>
                                     <td>
                                         <t t-if="line['name'] != '/'">
-                                            <span t-esc="line['name']"/>
+                                            <span t-out="line['name']"/>
                                         </t>
-                                        <span t-esc="line['ref']"/>
+                                        <span t-out="line['ref']"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="line['debit']"
-                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        <span t-out="line['debit']"
+                                              t-out-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="line['credit']"
-                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        <span t-out="line['credit']"
+                                              t-out-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -117,16 +117,16 @@
                                         <strong>Totale Movimenti :</strong>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="Totals[o.id][currency]['due']"
-                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        <span t-out="Totals[o.id][currency]['due']"
+                                              t-out-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="Totals[o.id][currency]['paid']"
-                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        <span t-out="Totals[o.id][currency]['paid']"
+                                              t-out-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="Totals[o.id][currency]['mat']"
-                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        <span t-out="Totals[o.id][currency]['mat']"
+                                              t-out-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
                                     </td>
                                     <td/>
                                 </tr>
@@ -136,8 +136,8 @@
                                         <strong>Scoperto :</strong>
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="Totals[o.id][currency]['due'] - Totals[o.id][currency]['paid']"
-                                              t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
+                                        <span t-out="Totals[o.id][currency]['due'] - Totals[o.id][currency]['paid']"
+                                              t-out-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;currency&quot;}"/>
                                     </td>
                                 </tr>
                             </table>

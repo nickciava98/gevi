@@ -1,7 +1,7 @@
 <odoo>
     <template id="gevi_estrattocontoscoperto.report_scoperto_document">
         <t t-call="web.html_container">
-            <t t-call="report.external_layout">
+            <t t-call="web.external_layout">
                 <div class="page" style="margin-left: 30px; margin-right: 30px;">
                     <div class="row">
                         <div class="col-xs-5 col-xs-offset-7">
@@ -23,7 +23,7 @@
                             Documento: Estratto Conto Scoperto
                             <br/>
                             Data:
-                            <span t-esc="oggi"/>
+                            <span t-out="oggi"/>
                             <br/>
 
                         </p>
@@ -124,16 +124,16 @@
                                             <strong>Totale:</strong>
                                         </td>
                                         <td class="text-right">
-                                            <span t-esc="tot_doc"
-                                                  t-esc-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
+                                            <span t-out="tot_doc"
+                                                  t-out-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
                                         </td>
                                         <td class="text-right">
-                                            <span t-esc="tot_pag"
-                                                  t-esc-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
+                                            <span t-out="tot_pag"
+                                                  t-out-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
                                         </td>
                                         <td class="text-right">
-                                            <span t-esc="tot_scad"
-                                                  t-esc-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
+                                            <span t-out="tot_scad"
+                                                  t-out-options='{"widget": "monetary", "display_currency": "c.currency_id"}'/>
                                         </td>
                                     </tr>
                                 </t>
@@ -152,8 +152,8 @@
                             <p>
                                 La informiamo, pertanto, che il totale degli scoperti è di
                                 <strong>
-                                    <span t-esc="tot_amm"
-                                          t-esc-options='{"widget": "monetary", "display_currency": "valuta_c"}'/>
+                                    <span t-out="tot_amm"
+                                          t-out-options='{"widget": "monetary", "display_currency": "valuta_c"}'/>
                                 </strong>
                             </p>
                         </t>
@@ -165,7 +165,7 @@
     </template>
 
     <template id="report_scoperto">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="gevi_estrattocontoscoperto.report_scoperto_document"/>
             </t>
