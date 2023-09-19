@@ -378,7 +378,7 @@
 
                     <!--Page break-->
                     <p style="page-break-before:always;"></p>
-
+                    <br/>
                     <p>VERBALE N.
                         <span style="font-weight:bold" t-field="doc.name"/>
                     </p>
