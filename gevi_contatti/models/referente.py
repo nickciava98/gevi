@@ -4,11 +4,10 @@ from odoo import fields, models, api, exceptions
 
 class Referente(models.Model):
     _name = 'gevi_contatti.referente'
-    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Amministratore"
 
     # richiesto per openchatter
-    _inherit = ['mail.thread']
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     tipo_referente_id = fields.Many2one('gevi_contatti.contatto_categoria',
                                         string='Tipo Referente', domain=[('tipo', 'ilike', 'referente')])
