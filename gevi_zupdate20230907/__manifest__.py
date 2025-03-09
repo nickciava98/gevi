@@ -21,7 +21,8 @@
 
     # any module necessary for this one to work correctly
     'depends': [
-        'gevi_verbali'
+        'gevi_verbali',
+        'web_responsive'
     ],
 
     # always loaded
